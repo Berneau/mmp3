@@ -44,10 +44,14 @@ module.exports = function(router) {
    */
     .get(function(req, res) {
 
-      Product.find(function(err, products) {
+      Product
+      .find(function(err, products) {
         if (err) res.send(err)
         res.json(products)
-      }).sort({name: 1})
+      })
+      .sort({name: 1})
+      .skip(req.params.skip)
+      .limit(req.params.limit)
     })
 
 
