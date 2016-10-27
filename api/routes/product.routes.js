@@ -2,10 +2,10 @@ var Product = require('.././models/product.model')
 
 module.exports = function(router) {
 
-  router.route('/products')
+  router.route('/product')
 
     /**
-     * @api {post} /products Create Product
+     * @api {post} /product Create Product
      * @apiName CreateProduct
      * @apiGroup Product
      *
@@ -13,7 +13,7 @@ module.exports = function(router) {
      * @apiParam {String} description A short description.
      * @apiParam {String} season The availability of the product.
      * @apiParam {String} imageUrl The url to the image.
-     * @apiParam {number} category The id of the category.
+     * @apiParam {Number} category The id of the category.
      *
      * @apiSuccess {Object} product The created product.
    */
@@ -34,9 +34,9 @@ module.exports = function(router) {
     })
 
 
-  router.route('/products')
+  router.route('/products/:skip/:limit')
     /**
-     * @api {get} /products Get all products
+     * @api {get} /products/:skip/:limit Get all products with pagination
      * @apiName GetProducts
      * @apiGroup Product
      *
@@ -51,19 +51,17 @@ module.exports = function(router) {
     })
 
 
-  router.route('/products/:product_id')
+  router.route('/product/:id')
 
     /**
-     * @api {get} /products/:product_id Get product
+     * @api {get} /product/:id Get product
      * @apiName GetProduct
      * @apiGroup Product
-     *
-     * @apiParam {String} id The id of the product.
      *
      * @apiSuccess {Object} product The product for given id.
     */
     .get(function(req, res) {
-      Product.findById(req.params.product_id, function(err, product) {
+      Product.findById(req.params.id, function(err, product) {
         if (err) res.send(err)
         console.log(product)
         res.json(product)
@@ -71,20 +69,21 @@ module.exports = function(router) {
     })
 
     /**
-     * @api {put} /products/:product_id Update product
+     * @api {put} /product/:id Update product
      * @apiName UpdateProduct
      * @apiGroup Product
      *
      * @apiParam {String} name The name of the product.
      * @apiParam {String} description A short description.
+     * @apiParam {String} season The availability of the product.
      * @apiParam {String} imageUrl The url to the image.
-     * @apiParam {number} category The id of the category.
+     * @apiParam {Number} category The id of the category.
      *
      * @apiSuccess {Object} product The updated product.
     */
     .put(function(req, res) {
 
-      Product.findById(req.params.product_id, function(err, product) {
+      Product.findById(req.params.id, function(err, product) {
         if (err) res.send(err)
 
         product.name = req.body.name
@@ -101,17 +100,15 @@ module.exports = function(router) {
     })
 
     /**
-     * @api {delete} /products/:product_id Delete product
+     * @api {delete} /product/:id Delete product
      * @apiName DeleteProduct
      * @apiGroup Product
-     *
-     * @apiParam {String} id The id of the product.
      *
      * @apiSuccess {Object} product The deleted product.
     */
     .delete(function(req, res) {
       Product.remove({
-        _id: req.params.product_id
+        _id: req.params.id
       }, function(err, product) {
         if (err) res.send(err)
         res.json({ message: 'Successfully deleted' })
