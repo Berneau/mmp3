@@ -92,6 +92,7 @@ module.exports = function(router) {
       Product.findById(req.params.id, function(err, product) {
         if (err) res.send(err)
 
+        // TODO: tidy?
         product.name = req.body.name
         product.description = req.body.description
         product.season = req.body.season
@@ -100,7 +101,7 @@ module.exports = function(router) {
 
         product.save(function(err) {
           if (err) res.send(err)
-          res.json({ message: 'Product updated!' })
+          res.json(product)
         })
       })
     })
@@ -110,7 +111,7 @@ module.exports = function(router) {
      * @apiName DeleteProduct
      * @apiGroup Product
      *
-     * @apiSuccess {Object} product The deleted product.
+     * @apiSuccess {String} message Success message.
     */
     .delete(function(req, res) {
       Product.remove({
