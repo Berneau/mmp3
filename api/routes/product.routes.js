@@ -34,18 +34,20 @@ module.exports = function(router) {
     })
 
 
-  router.route('/products/:skip/:limit')
+  router.route('/products/:skip/:limit/:filter?')
     /**
-     * @api {get} /products/:skip/:limit Get all products with pagination
+     * @api {get} /products/:skip/:limit/:filter? Get all products with pagination and optional search
      * @apiName GetProducts
      * @apiGroup Product
      *
-     * @apiSuccess {Array} product Array of all products.
+     * @apiSuccess {Array} product Array of products.
    */
     .get(function(req, res) {
 
+      var filter = req.params.filter ? req.params.filter : ''
+
       Product
-      .find(function(err, products) {
+      .find({ 'name': { '$regex': filter } }, function(err, products) {
         if (err) res.send(err)
         res.json(products)
       })
