@@ -11,7 +11,7 @@ var mongoose = require('mongoose')
 mongoose.connect(mongoPass)
 
 // get routes from routes.js
-var router = require('./routes/routes')
+var router = require('./routes')
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
