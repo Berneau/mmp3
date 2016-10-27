@@ -8,6 +8,7 @@ var port = process.env.PORT || 3000
 
 // set up mongodb
 var mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 mongoose.connect(mongoPass)
 
 // get routes from routes.js
