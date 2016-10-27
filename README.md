@@ -1,25 +1,35 @@
-## Marke Lungau
+# Marke Lungau
 
-### Dev
+## API
 
-**Server**
+**Dev**
 ```
 $ npm install
 $ node
 ```
 
----
-
-**Web**
-
-
----
-
-**App**
+**Doc**
+```
+$ npm run doc
+```
 
 ---
 
-### Team
+## Server
+
+
+---
+
+## Web
+
+
+---
+
+## App
+
+---
+
+## Team
 * Elisa *Gostner*
 * Eva-Maria *Schitter*
 * Bernhard *Steger*
