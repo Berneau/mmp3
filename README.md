@@ -13,21 +13,21 @@ $ node
 $ npm run doc
 ```
 
----
+
 
 ## Server
 
 
----
+
 
 ## Web
 
 
----
+
 
 ## App
 
----
+
 
 ## Team
 * Elisa *Gostner*
