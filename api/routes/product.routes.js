@@ -43,7 +43,7 @@ module.exports = function(router) {
     .post(function(req, res) {
 
       if (!productIsValid(req.body)) {
-        res.status(412).json({ message: "Missing fields" })
+        res.status(412).json({ message: 'Missing fields' })
       } else {
 
         var product = new Product({
@@ -137,12 +137,12 @@ module.exports = function(router) {
             product.imageUrl = req.body.imageUrl
             product.category = req.body.category
 
-            product.save(function(err, product) {
+            product.save(function(err) {
               if (err) res.status(500).end(err)
               res.status(200).json(product)
             })
 
-          } else res.status(412).json({ message: "Missing fields" })
+          } else res.status(412).json({ message: 'Missing fields' })
 
         } else res.status(404).json({ message: 'Product not found'})
       })
@@ -173,7 +173,9 @@ module.exports = function(router) {
 
 
     function productIsValid(product) {
-      if (!product.name || !product.season || !product.category) return false
+      if (!product.name ||
+          !product.season ||
+          !product.category) return false
       else return true
     }
 }
