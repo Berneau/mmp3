@@ -87,7 +87,6 @@ module.exports = function(router) {
 
 
   router.route('/product/:id')
-
     /**
      * @api {get} /product/:id Get product
      * @apiName GetProduct
@@ -130,7 +129,6 @@ module.exports = function(router) {
         if (product) {
           if (productIsValid(req.body)) {
 
-            // TODO: tidy?
             product.name = req.body.name
             product.description = req.body.description
             product.season = req.body.season

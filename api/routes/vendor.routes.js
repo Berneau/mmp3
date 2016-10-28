@@ -100,6 +100,103 @@ module.exports = function(router) {
     })
 
 
+    router.route('/vendor/:id')
+      /**
+       * @api {get} /vendor/:id Get vendor
+       * @apiName GetVendor
+       * @apiGroup Vendor
+       *
+       * @apiSuccess {Object} vendor The vendor for given id.
+       *
+       * @apiUse VendorNotFound
+      */
+      .get(function(req, res) {
+        Vendor.findById(req.params.id, function(err, vendor) {
+          if (err) res.status(500).end(err)
+
+          if (vendor) res.status(200).json(vendor)
+          else res.status(404).json({ message: 'Vendor not found'})
+        })
+      })
+
+      /**
+       * @api {put} /vendor/:id Update vendor
+       * @apiName UpdateVendor
+       * @apiGroup Vendor
+       *
+       * @apiParam {String} name The name of the shop.
+       * @apiParam {String} ownerName The name of the owner.
+       * @apiParam {String} email Email address of the owner.
+       * @apiParam {Number} category The id of the category of the shop.
+       * @apiParam {String} city City of the shop.
+       * @apiParam {Number} [tel] Tel number of the owner.
+       * @apiParam {String} [description] A short description.
+       * @apiParam {String} [street] Street of the shop.
+       * @apiParam {Number} [zip] Postal code of the shop.
+       * @apiParam {String} [imageUrl] The url to the image.
+       * @apiParam {Number} [lat] Latitude of the shop.
+       * @apiParam {Number} [long] Longitude of the shop.
+       *
+       * @apiSuccess {Object} vendor The updated vendor.
+       *
+       * @apiUse MissingFields
+       * @apiUse VendorNotFound
+      */
+      .put(function(req, res) {
+
+        Vendor.findById(req.params.id, function(err, vendor) {
+          if (err) res.status(500).end(err)
+
+          if (vendor) {
+            if (vendorIsValid(req.body)) {
+
+              vendor.name = req.body.name,
+              vendor.ownerName = req.body.ownerName,
+              vendor.email = req.body.email,
+              vendor.category = req.body.category,
+              vendor.city = req.body.city,
+              vendor.tel = req.body.tel,
+              vendor.description = req.body.description,
+              vendor.street = req.body.street,
+              vendor.zip = req.body.zip,
+              vendor.imageUrl = req.body.imageUrl,
+              vendor.lat = req.body.lat,
+              vendor.long = req.body.long
+
+              vendor.save(function(err) {
+                if (err) res.status(500).end(err)
+                res.status(200).json(vendor)
+              })
+
+            } else res.status(412).json({ message: 'Missing fields' })
+
+          } else res.status(404).json({ message: 'Vendor not found'})
+        })
+      })
+
+      /**
+       * @api {delete} /vendor/:id Delete vendor
+       * @apiName DeleteVendor
+       * @apiGroup Vendor
+       *
+       * @apiSuccess {String} message Success message.
+       *
+       * @apiUse VendorNotFound
+      */
+      .delete(function(req, res) {
+        Vendor.findById(req.params.id, function(err, vendor) {
+          if (err) res.status(500).end(err)
+
+          if (vendor) {
+            Vendor.remove({ _id: req.params.id }, function(err, vendor) {
+              if (err) res.status(500).end(err)
+              res.status(200).json({ message: 'Successfully deleted' })
+            })
+          } else res.status(404).json({ message: 'Vendor not found'})
+
+        })
+      })
+
 
     function vendorIsValid(vendor) {
       if (!vendor.name ||
