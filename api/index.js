@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 var database = require('./config').database
+var helmet = require('helmet')
 
 // set port
 var port = process.env.PORT || 3000
@@ -14,7 +15,7 @@ mongoose.connect(database)
 // get routes from routes.js
 var router = require('./routes')
 
-
+app.use(helmet())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
