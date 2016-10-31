@@ -1,18 +1,17 @@
 var express = require('express')
 var router = express.Router()
-require('./routes/product.routes')(router)
-require('./routes/vendor.routes')(router)
 
-// middlewares
+require('./routes/auth.routes')(router)
+
+// auth middleware
 // router.use(function(req, res, next) {
 //   console.log("I'm a Middleware")
 //   next()
 // })
 
-
-router.get('/', function(req, res) {
-  res.json({ message: 'UNICORN' })
-})
+require('./routes/product.routes')(router)
+require('./routes/vendor.routes')(router)
+require('./routes/user.routes')(router)
 
 
 module.exports = router
