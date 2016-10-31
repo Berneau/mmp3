@@ -1,4 +1,4 @@
-var Product = require('.././models/product.model')
+var Product = require('../models/product.model')
 
 /**
  * @apiDefine NoAccessRights

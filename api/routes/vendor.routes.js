@@ -1,4 +1,4 @@
-var Vendor = require('.././models/vendor.model')
+var Vendor = require('../models/vendor.model')
 
 /**
  * @apiDefine NoAccessRights
