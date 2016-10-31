@@ -19,10 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 
-
-
-
-
 // prefix all routes with /api
 app.use('/api', router)
 

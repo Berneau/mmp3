@@ -25,6 +25,14 @@
     "mongoose": "^4.6.5"
   },
   "apidoc": {
-    "title": "Lungau API"
+    "title": "Lungau API",
+    "header": {
+      "title": "Intro",
+      "filename": "header.md"
+    },
+    "footer": {
+      "title": "Issues",
+      "filename": "footer.md"
+    }
   }
 }
