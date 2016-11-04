@@ -57,7 +57,7 @@ gulp.task('libs', () => {
       .pipe(gulp.dest('build/lib'))
 })
 
-// Watch for changes in TypeScript, HTML and CSS files.
+// Watch for changes in TypeScript, HTML and SCSS files.
 gulp.task('watch', function () {
   gulp.watch(['src/**/*.ts'], ['compile'])
   gulp.watch(['src/**/*.scss'], ['styles'])
