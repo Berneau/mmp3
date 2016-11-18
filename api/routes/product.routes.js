@@ -23,74 +23,76 @@ var Product = require('../models/product.model')
 
 module.exports = function(router) {
 
-  router.route('/product')
+  router.route('/products')
+  /**
+   * @api {post} /products Create Product
+   * @apiName CreateProduct
+   * @apiGroup Products
+   *
+   * @apiParam {String} name The name of the product.
+   * @apiParam {String} season The availability of the product.
+   * @apiParam {Number} category The id of the category.
+   * @apiParam {String} [description] A short description.
+   * @apiParam {String} [imageUrl] The url to the image.
+   *
+   * @apiSuccess {Object} product The created product.
+   *
+   * @apiUse MissingFields
+ */
+  .post(function(req, res) {
 
-    /**
-     * @api {post} /product Create Product
-     * @apiName CreateProduct
-     * @apiGroup Product
-     *
-     * @apiParam {String} name The name of the product.
-     * @apiParam {String} season The availability of the product.
-     * @apiParam {Number} category The id of the category.
-     * @apiParam {String} [description] A short description.
-     * @apiParam {String} [imageUrl] The url to the image.
-     *
-     * @apiSuccess {Object} product The created product.
-     *
-     * @apiUse MissingFields
-   */
-    .post(function(req, res) {
+    if (!productIsValid(req.body)) {
+      res.status(412).json({ message: 'Missing fields' })
+    } else {
 
-      if (!productIsValid(req.body)) {
-        res.status(412).json({ message: 'Missing fields' })
-      } else {
-
-        var product = new Product({
-          name: req.body.name,
-          description: req.body.description,
-          season: req.body.season,
-          imageUrl: req.body.imageUrl,
-          category: req.body.category
-        })
-
-        product.save(function(err) {
-          if (err) res.status(500).end(err)
-          res.status(200).json(product)
-        })
-      }
-
-    })
-
-
-  router.route('/products/:skip/:limit/:filter?')
-    /**
-     * @api {get} /products/:skip/:limit/:filter? Get all products with pagination and optional search
-     * @apiName GetProducts
-     * @apiGroup Product
-     *
-     * @apiSuccess {Array} product Array of products.
-   */
-    .get(function(req, res) {
-
-      var filter = req.params.filter ? req.params.filter : ''
-
-      Product
-      .find({ 'name': { '$regex': filter } }, function(err, products) {
-        if (err) res.status(500).end(err)
-        res.json(products)
+      var product = new Product({
+        name: req.body.name,
+        description: req.body.description,
+        season: req.body.season,
+        imageUrl: req.body.imageUrl,
+        category: req.body.category
       })
-      .sort({name: 1})
-      .skip(req.params.skip)
-      .limit(req.params.limit)
+
+      product.save(function(err) {
+        if (err) res.status(500).end(err)
+        res.status(200).json(product)
+      })
+    }
+
+  })
+
+  /**
+   * @api {get} /products?skip=<skip>&limit=<limit>&filter=<filter> Get all products with pagination and optional search
+   * @apiName GetProducts
+   * @apiGroup Products
+   *
+   * @apiParam {Number} [skip] Pages to be skipped.
+   * @apiParam {Number} [limit] Elements to be contained in one page.
+   * @apiParam {String} [filter] The field name will be search by this.
+   *
+   * @apiSuccess {Array} product Array of products.
+ */
+  .get(function(req, res) {
+    var skip = req.query.skip ? req.query.skip : 0
+    var limit = req.query.limit ? req.query.limit : 0
+    var filter = req.query.filter ? req.query.filter : ''
+
+    Product
+    .find({ 'name': { '$regex': filter } }, function(err, products) {
+      if (err) res.status(500).end(err)
+      res.json(products)
     })
+    .sort({name: 1})
+    .skip(skip)
+    .limit(limit)
+  })
 
 
-  router.route('/product/:id')
+  router.route('/products/:id')
     /**
-     * @api {get} /product/:id Get product
+     * @api {get} /products/:id Get product
      * @apiName GetProduct
-     * @apiGroup Product
+     * @apiGroup Products
      *
      * @apiSuccess {Object} product The product for given id.
      *
@@ -106,9 +108,9 @@ module.exports = function(router) {
     })
 
     /**
-     * @api {put} /product/:id Update product
+     * @api {put} /products/:id Update product
      * @apiName UpdateProduct
-     * @apiGroup Product
+     * @apiGroup Products
      *
      * @apiParam {String} name The name of the product.
      * @apiParam {String} description A short description.
@@ -147,9 +149,9 @@ module.exports = function(router) {
     })
 
     /**
-     * @api {delete} /product/:id Delete product
+     * @api {delete} /products/:id Delete product
      * @apiName DeleteProduct
-     * @apiGroup Product
+     * @apiGroup Products
      *
      * @apiSuccess {String} message Success message.
      *

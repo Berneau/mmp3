@@ -23,12 +23,11 @@ var User = require('../models/user.model')
 
 module.exports = function(router) {
 
-  router.route('/user')
-
+  router.route('/users')
   /**
-   * @api {post} /product Create User
+   * @api {post} /users Create User
    * @apiName CreateUser
-   * @apiGroup User
+   * @apiGroup Users
    *
    * @apiParam {String} username The name of the user.
    * @apiParam {String} email The email address of the user.
@@ -57,20 +56,24 @@ module.exports = function(router) {
         res.status(200).json(user)
       })
     }
-
   })
 
-  router.route('/users/:skip/:limit/:filter?')
   /**
-   * @api {get} /users/:skip/:limit/:filter? Get all users with pagination and optional search
+   * @api {get} /users?skip=<skip>&limit=<limit>&filter=<filter> Get all users with pagination and optional search
    * @apiName GetUsers
-   * @apiGroup User
+   * @apiGroup Users
+   *
+   * @apiParam {Number} [skip] Pages to be skipped.
+   * @apiParam {Number} [limit] Elements to be contained in one page.
+   * @apiParam {String} [filter] The field name will be search by this.
    *
    * @apiSuccess {Array} user Array of users.
  */
  .get(function(req, res) {
 
-   var filter = req.params.filter ? req.params.filter : ''
+   var skip = req.query.skip ? req.query.skip : 0
+   var limit = req.query.limit ? req.query.limit : 0
+   var filter = req.query.filter ? req.query.filter : ''
 
    User
    .find({ 'username': { '$regex': filter } }, function(err, users) {
@@ -78,15 +81,15 @@ module.exports = function(router) {
      res.json(users)
    })
    .sort({name: 1})
-   .skip(req.params.skip)
-   .limit(req.params.limit)
+   .skip(skip)
+   .limit(limit)
  })
 
- router.route('/user/:id')
+ router.route('/users/:id')
    /**
-    * @api {get} /user/:id Get user
+    * @api {get} /users/:id Get user
     * @apiName GetUser
-    * @apiGroup User
+    * @apiGroup Users
     *
     * @apiSuccess {Object} user The user for given id.
     *
@@ -102,9 +105,9 @@ module.exports = function(router) {
    })
 
    /**
-    * @api {put} /user/:id Update user
+    * @api {put} /users/:id Update user
     * @apiName UpdateUser
-    * @apiGroup User
+    * @apiGroup Users
     *
     * @apiParam {String} username The name of the user.
     * @apiParam {String} email The email address of the user.
@@ -137,9 +140,9 @@ module.exports = function(router) {
    })
 
    /**
-    * @api {delete} /user/:id Delete user
+    * @api {delete} /users/:id Delete user
     * @apiName DeleteUser
-    * @apiGroup User
+    * @apiGroup Users
     *
     * @apiSuccess {String} message Success message.
     *
