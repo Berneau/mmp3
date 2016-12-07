@@ -25,40 +25,6 @@ module.exports = function(router) {
 
   router.route('/users')
   /**
-   * @api {post} /users Create User
-   * @apiName CreateUser
-   * @apiGroup Users
-   *
-   * @apiParam {String} username The name of the user.
-   * @apiParam {String} email The email address of the user.
-   * @apiParam {String} password The password of the user.
-   * @apiParam {Boolean} isAdmin Flag if the user has admin rights.
-   *
-   * @apiSuccess {Object} user The created user.
-   *
-   * @apiUse MissingFields
- */
-  .post(function(req, res) {
-
-    if (!userIsValid(req.body)) {
-      res.status(412).json({ message: 'Missing fields' })
-    } else {
-
-      var user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        isAdmin: req.body.isAdmin
-      })
-
-      user.save(function(err) {
-        if (err) res.status(500).end(err)
-        res.status(200).json(user)
-      })
-    }
-  })
-
-  /**
    * @api {get} /users?skip=<skip>&limit=<limit>&filter=<filter> Get all users with pagination and optional search
    * @apiName GetUsers
    * @apiGroup Users
