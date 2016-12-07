@@ -100,10 +100,10 @@ module.exports = function(router) {
     */
     .get(function(req, res) {
       Product.findById(req.params.id, function(err, product) {
-        if (err) res.status(500).end(err)
 
-        if (product) res.status(200).json(product)
-        else res.status(404).json({ message: 'Product not found'})
+        if (err && err.name != 'CastError') res.status(404).json(err.message)
+        else if (!err && product) res.status(200).json(product)
+        else res.status(404).json({ message: 'Product not found' })
       })
     })
 

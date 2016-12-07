@@ -12,11 +12,11 @@ router.use(function(req, res, next) {
   if (token) {
     // verifies secret and checks expiration
     jwt.verify(token, secret, function(err, decoded) {
-      if (err) return res.status(403).json({ message: 'Authentication failed.' })
+      if (err) return res.status(403).json({ message: 'Authentication failed' })
       else next()
     })
 
-  } else return res.status(412).json({ message: 'No token provided.' })
+  } else return res.status(412).json({ message: 'No token provided' })
 })
 
 require('./routes/product.routes')(router)
