@@ -16,11 +16,16 @@ describe('Product', () => {
     Product.remove({}, (err) => {
       done()
     })
+  })
 
+  beforeEach((done) => {
     chai.request(server)
       .post('/api/auth')
       .send({ username: 'Berneau', password: 'secret' })
-      .end((err, res) => token = res.body.token)
+      .end((err, res) => {
+        token = res.body.token
+        done()
+      })
   })
 
   describe('GET products', () => {
@@ -170,6 +175,123 @@ describe('Product', () => {
 
   })
   // end POST product
+
+  describe('PUT product', () => {
+
+    it('should UPDATE and return a product', (done) => {
+      let product1 = new Product({
+        name: 'Test',
+        season: 'Winter',
+        category: 2
+      })
+      let product2 = new Product({
+        name: 'Test2',
+        season: 'Autumn',
+        category: 1
+      })
+      product1.save((err, product1) => {
+        chai.request(server)
+        .put('/api/products/' + product1._id)
+        .set('x-access-token', token)
+        .send(product2)
+        .end((err, res) => {
+          res.should.have.status(200)
+          res.body.should.be.a('object')
+          res.body.should.have.property('name').eql('Test2')
+          res.body.should.have.property('season').eql('Autumn')
+          res.body.should.have.property('category').eql(1)
+          done()
+        })
+      })
+    })
+
+    it('should not UPDATE the product if it is not valid', (done) => {
+      let product1 = new Product({
+        name: 'Test',
+        season: 'Winter',
+        category: 2
+      })
+      let product2 = new Product({
+        name: 'Test2',
+        season: 'Autumn'
+      })
+      product1.save((err, product1) => {
+        chai.request(server)
+        .put('/api/products/' + product1._id)
+        .set('x-access-token', token)
+        .send(product2)
+        .end((err, res) => {
+          res.should.have.status(412)
+          res.body.should.be.a('object')
+          res.body.should.have.property('message').eql('Missing fields')
+          done()
+        })
+      })
+    })
+
+    it('should not UPDATE a product if the id is not valid', (done) => {
+      let product1 = new Product({
+        name: 'Test',
+        season: 'Winter',
+        category: 2
+      })
+      let product2 = new Product({
+        name: 'Test2',
+        season: 'Autumn',
+        category: 2
+      })
+      product1.save((err, product1) => {
+        chai.request(server)
+          .put('/api/products/abc')
+          .set('x-access-token', token)
+          .send(product2)
+          .end((err, res) => {
+            res.should.have.status(404)
+            res.body.should.be.a('object')
+            res.body.should.have.property('message').eql('Product not found')
+            done()
+          })
+      })
+    })
+
+  })
+  // end PUT product
+
+  describe('DELETE product', () => {
+
+    it('should DELETE a product if it exists', (done) => {
+      let product1 = new Product({
+        name: 'Test',
+        season: 'Winter',
+        category: 2
+      })
+      product1.save((err, product1) => {
+        chai.request(server)
+          .delete('/api/products/' + product1._id)
+          .set('x-access-token', token)
+          .end((err, res) => {
+            res.should.have.status(200)
+            res.body.should.be.a('object')
+            res.body.should.have.property('message').eql('Successfully deleted')
+            done()
+          })
+      })
+    })
+
+    it('should not DELETE a product with an invalid id', (done) => {
+      chai.request(server)
+        .delete('/api/products/abc')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404)
+          res.body.should.be.a('object')
+          res.body.should.have.property('message').eql('Product not found')
+          done()
+        })
+    })
+
+  })
+  // end DELETE product
 
 })
 // end product
