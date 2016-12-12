@@ -126,9 +126,9 @@ module.exports = function(router) {
     .put(function(req, res) {
 
       Product.findById(req.params.id, function(err, product) {
-        if (err) res.status(500).end(err)
+        if (err && err.name != 'CastError') res.status(404).json(err.message)
 
-        if (product) {
+        else if (!err && product) {
           if (productIsValid(req.body)) {
 
             product.name = req.body.name
@@ -158,10 +158,11 @@ module.exports = function(router) {
      * @apiUse ProductNotFound
     */
     .delete(function(req, res) {
-      Product.findById(req.params.id, function(err, product) {
-        if (err) res.status(500).end(err)
 
-        if (product) {
+      Product.findById(req.params.id, function(err, product) {
+        if (err && err.name != 'CastError') res.status(404).json(err.message)
+
+        else if (!err && product) {
           Product.remove({ _id: req.params.id }, function(err, product) {
             if (err) res.status(500).end(err)
             res.status(200).json({ message: 'Successfully deleted' })
