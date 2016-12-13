@@ -115,9 +115,9 @@ module.exports = function(router) {
       */
       .get(function(req, res) {
         Vendor.findById(req.params.id, function(err, vendor) {
-          if (err) res.status(500).end(err)
 
-          if (vendor) res.status(200).json(vendor)
+          if (err && err.name != 'CastError') res.status(404).json(err.message)
+          else if (!err && vendor) res.status(200).json(vendor)
           else res.status(404).json({ message: 'Vendor not found'})
         })
       })
@@ -148,9 +148,9 @@ module.exports = function(router) {
       .put(function(req, res) {
 
         Vendor.findById(req.params.id, function(err, vendor) {
-          if (err) res.status(500).end(err)
+          if (err && err.name != 'CastError') res.status(404).json(err.message)
 
-          if (vendor) {
+          else if (!err && vendor) {
             if (vendorIsValid(req.body)) {
 
               vendor.name = req.body.name,
@@ -188,9 +188,9 @@ module.exports = function(router) {
       */
       .delete(function(req, res) {
         Vendor.findById(req.params.id, function(err, vendor) {
-          if (err) res.status(500).end(err)
+          if (err && err.name != 'CastError') res.status(404).json(err.message)
 
-          if (vendor) {
+          else if (!err && vendor) {
             Vendor.remove({ _id: req.params.id }, function(err, vendor) {
               if (err) res.status(500).end(err)
               res.status(200).json({ message: 'Successfully deleted' })
