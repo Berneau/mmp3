@@ -4,13 +4,13 @@
 
 **Dev**
 ```
-$ npm install
-$ node
+$ yarn install
+$ nodemon index.js
 ```
 
 **Doc**
 ```
-$ npm run doc
+$ npm doc
 ```
 
 
@@ -25,12 +25,9 @@ $ npm run doc
 
 
 
-## App
-
-
-
 ## Team
 * Elisa *Gostner*
 * Eva-Maria *Schitter*
 * Bernhard *Steger*
+* Sabrina *Stummer*
 * Magdalena *Wimmer*
