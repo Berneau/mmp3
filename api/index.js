@@ -25,6 +25,7 @@ app.use('/api', router)
 
 
 app.listen(port)
-console.log('Magic happens on port ' + port)
-
+console.log(' ---------------------------------------')
+console.log(' | Lungau API is running on port ' + port + '  |')
+console.log(' ---------------------------------------')
 module.exports = app
