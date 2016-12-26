@@ -1,25 +1,4 @@
-var Product = require('../models/product.model')
-
-/**
- * @apiDefine NoAccessRights
- * @apiError (Error 403) NoAccessRights The auth <code>token</code> is not valid or missing.
- */
-
-/**
- * @apiDefine MissingFields
- * @apiError (Error 412) MissingFields Required fields are missing.
- */
-
-/**
- * @apiDefine DatabaseError
- * @apiError (Error 500) DatabaseError Error while altering the database.
- */
-
-/**
- * @apiDefine ProductNotFound
- * @apiError (Error 404) ProductNotFound The product with the given <code>id</code> was not found.
- */
-
+var Product = require('../../models/product.model')
 
 module.exports = function(router) {
 
@@ -36,8 +15,6 @@ module.exports = function(router) {
    * @apiParam {String} [imageUrl] The url to the image.
    *
    * @apiSuccess {Object} product The created product.
-   *
-   * @apiUse MissingFields
  */
   .post(function(req, res) {
 
@@ -61,52 +38,8 @@ module.exports = function(router) {
 
   })
 
-  /**
-   * @api {get} /products?skip=<skip>&limit=<limit>&filter=<filter> Get all products with pagination and optional search
-   * @apiName GetProducts
-   * @apiGroup Products
-   *
-   * @apiParam {Number} [skip] Pages to be skipped.
-   * @apiParam {Number} [limit] Elements to be contained in one page.
-   * @apiParam {String} [filter] The field name will be search by this.
-   *
-   * @apiSuccess {Array} product Array of products.
- */
-  .get(function(req, res) {
-    var skip = req.query.skip ? req.query.skip : 0
-    var limit = req.query.limit ? req.query.limit : 0
-    var filter = req.query.filter ? req.query.filter : ''
-
-    Product
-    .find({ 'name': { '$regex': filter } }, function(err, products) {
-      if (err) res.status(500).end(err)
-      res.json(products)
-    })
-    .sort({name: 1})
-    .skip(skip)
-    .limit(limit)
-  })
-
 
   router.route('/products/:id')
-    /**
-     * @api {get} /products/:id Get product
-     * @apiName GetProduct
-     * @apiGroup Products
-     *
-     * @apiSuccess {Object} product The product for given id.
-     *
-     * @apiUse ProductNotFound
-    */
-    .get(function(req, res) {
-      Product.findById(req.params.id, function(err, product) {
-
-        if (err && err.name != 'CastError') res.status(404).json(err.message)
-        else if (!err && product) res.status(200).json(product)
-        else res.status(404).json({ message: 'Product not found' })
-      })
-    })
-
     /**
      * @api {put} /products/:id Update product
      * @apiName UpdateProduct
@@ -119,9 +52,6 @@ module.exports = function(router) {
      * @apiParam {Number} [category] The id of the category.
      *
      * @apiSuccess {Object} product The updated product.
-     *
-     * @apiUse MissingFields
-     * @apiUse ProductNotFound
     */
     .put(function(req, res) {
 
@@ -148,14 +78,13 @@ module.exports = function(router) {
       })
     })
 
+
     /**
      * @api {delete} /products/:id Delete product
      * @apiName DeleteProduct
      * @apiGroup Products
      *
      * @apiSuccess {String} message Success message.
-     *
-     * @apiUse ProductNotFound
     */
     .delete(function(req, res) {
 

@@ -1,25 +1,4 @@
-var Vendor = require('../models/vendor.model')
-
-/**
- * @apiDefine NoAccessRights
- * @apiError (Error 403) NoAccessRights The auth <code>token</code> is not valid or missing.
- */
-
-/**
- * @apiDefine MissingFields
- * @apiError (Error 412) MissingFields Required fields are missing.
- */
-
-/**
- * @apiDefine DatabaseError
- * @apiError (Error 500) DatabaseError Error while altering the database.
- */
-
-/**
- * @apiDefine VendorNotFound
- * @apiError (Error 404) VendorNotFound The vendor with the given <code>id</code> was not found.
- */
-
+var Vendor = require('../../models/vendor.model')
 
 module.exports = function(router) {
 
@@ -43,8 +22,6 @@ module.exports = function(router) {
    * @apiParam {Number} [long] Longitude of the shop.
    *
    * @apiSuccess {Object} vendor The created vendor.
-   *
-   * @apiUse MissingFields
  */
   .post(function(req, res) {
 
@@ -75,53 +52,7 @@ module.exports = function(router) {
 
   })
 
-  /**
-   * @api {get} /vendors?skip=<skip>&limit=<limit>&filter=<filter> Get all vendors with pagination and optional search
-   * @apiName GetVendors
-   * @apiGroup Vendors
-   *
-   * @apiParam {Number} [skip] Pages to be skipped.
-   * @apiParam {Number} [limit] Elements to be contained in one page.
-   * @apiParam {String} [filter] The field name will be search by this.
-   *
-   * @apiSuccess {Array} vendor Array of vendors.
- */
-  .get(function(req, res) {
-
-    var skip = req.query.skip ? req.query.skip : 0
-    var limit = req.query.limit ? req.query.limit : 0
-    var filter = req.query.filter ? req.query.filter : ''
-
-    Vendor
-    .find({ 'name': { '$regex': filter } }, function(err, vendors) {
-      if (err) res.status(500).end(err)
-      res.json(vendors)
-    })
-    .sort({name: 1})
-    .skip(skip)
-    .limit(limit)
-  })
-
-
     router.route('/vendors/:id')
-      /**
-       * @api {get} /vendors/:id Get vendor
-       * @apiName GetVendor
-       * @apiGroup Vendors
-       *
-       * @apiSuccess {Object} vendor The vendor for given id.
-       *
-       * @apiUse VendorNotFound
-      */
-      .get(function(req, res) {
-        Vendor.findById(req.params.id, function(err, vendor) {
-
-          if (err && err.name != 'CastError') res.status(404).json(err.message)
-          else if (!err && vendor) res.status(200).json(vendor)
-          else res.status(404).json({ message: 'Vendor not found'})
-        })
-      })
-
       /**
        * @api {put} /vendors/:id Update vendor
        * @apiName UpdateVendor
@@ -141,9 +72,6 @@ module.exports = function(router) {
        * @apiParam {Number} [long] Longitude of the shop.
        *
        * @apiSuccess {Object} vendor The updated vendor.
-       *
-       * @apiUse MissingFields
-       * @apiUse VendorNotFound
       */
       .put(function(req, res) {
 
@@ -183,8 +111,6 @@ module.exports = function(router) {
        * @apiGroup Vendors
        *
        * @apiSuccess {String} message Success message.
-       *
-       * @apiUse VendorNotFound
       */
       .delete(function(req, res) {
         Vendor.findById(req.params.id, function(err, vendor) {

@@ -12,16 +12,16 @@ chai.use(chaiHttp)
 
 describe('Vendor', () => {
 
-  beforeEach((done) => {
+  before((done) => {
     Vendor.remove({}, (err) => {
       done()
     })
   })
 
-  beforeEach((done) => {
+  before((done) => {
     chai.request(server)
       .post('/api/auth')
-      .send({ username: 'Berneau', password: 'secret' })
+      .send({ username: 'Berneau', password: 'test' })
       .end((err, res) => {
         token = res.body.token
         done()
@@ -33,22 +33,10 @@ describe('Vendor', () => {
     it('should GET all vendors', (done) => {
       chai.request(server)
         .get('/api/vendors')
-        .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(200)
           res.body.should.be.a('array')
           res.body.length.should.be.eql(0)
-          done()
-        })
-    })
-
-    it('should not GET all vendors without a token', (done) => {
-      chai.request(server)
-        .get('/api/vendors')
-        .end((err, res) => {
-          res.should.have.status(412)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('No token provided')
           done()
         })
     })
@@ -70,7 +58,6 @@ describe('Vendor', () => {
       vendor.save((err, vendor) => {
         chai.request(server)
         .get('/api/vendors/' + vendor._id)
-        .set('x-access-token', token)
         .send(vendor)
         .end((err, res) => {
           res.should.have.status(200)
@@ -84,7 +71,6 @@ describe('Vendor', () => {
     it('should return a message if no vendor with given id is found', (done) => {
       chai.request(server)
         .get('/api/vendors/notavalidid')
-        .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404)
           res.body.should.be.a('object')

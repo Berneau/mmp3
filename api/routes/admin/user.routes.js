@@ -1,55 +1,6 @@
-var User = require('../models/user.model')
-
-/**
- * @apiDefine NoAccessRights
- * @apiError (Error 403) NoAccessRights The auth <code>token</code> is not valid or missing.
- */
-
-/**
- * @apiDefine MissingFields
- * @apiError (Error 412) MissingFields Required fields are missing.
- */
-
-/**
- * @apiDefine DatabaseError
- * @apiError (Error 500) DatabaseError Error while altering the database.
- */
-
-/**
- * @apiDefine UserNotFound
- * @apiError (Error 404) UserNotFound The user with the given <code>id</code> was not found.
- */
-
+var User = require('../../models/user.model')
 
 module.exports = function(router) {
-
-  router.route('/users')
-  /**
-   * @api {get} /users?skip=<skip>&limit=<limit>&filter=<filter> Get all users with pagination and optional search
-   * @apiName GetUsers
-   * @apiGroup Users
-   *
-   * @apiParam {Number} [skip] Pages to be skipped.
-   * @apiParam {Number} [limit] Elements to be contained in one page.
-   * @apiParam {String} [filter] The field name will be search by this.
-   *
-   * @apiSuccess {Array} user Array of users.
- */
- .get(function(req, res) {
-
-   var skip = req.query.skip ? req.query.skip : 0
-   var limit = req.query.limit ? req.query.limit : 0
-   var filter = req.query.filter ? req.query.filter : ''
-
-   User
-   .find({ 'username': { '$regex': filter } }, function(err, users) {
-     if (err) res.status(500).end(err)
-     res.json(users)
-   })
-   .sort({name: 1})
-   .skip(skip)
-   .limit(limit)
- })
 
  router.route('/users/:id')
    /**
@@ -58,8 +9,6 @@ module.exports = function(router) {
     * @apiGroup Users
     *
     * @apiSuccess {Object} user The user for given id.
-    *
-    * @apiUse UserNotFound
    */
    .get(function(req, res) {
      User.findById(req.params.id, function(err, user) {
@@ -79,9 +28,6 @@ module.exports = function(router) {
     * @apiParam {String} email The email address of the user.
     *
     * @apiSuccess {Object} user The updated user.
-    *
-    * @apiUse MissingFields
-    * @apiUse UserNotFound
    */
    .put(function(req, res) {
 
@@ -111,8 +57,6 @@ module.exports = function(router) {
     * @apiGroup Users
     *
     * @apiSuccess {String} message Success message.
-    *
-    * @apiUse UserNotFound
    */
    .delete(function(req, res) {
      User.findById(req.params.id, function(err, user) {

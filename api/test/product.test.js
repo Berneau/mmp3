@@ -12,16 +12,16 @@ chai.use(chaiHttp)
 
 describe('Product', () => {
 
-  beforeEach((done) => {
+  before((done) => {
     Product.remove({}, (err) => {
       done()
     })
   })
 
-  beforeEach((done) => {
+  before((done) => {
     chai.request(server)
       .post('/api/auth')
-      .send({ username: 'Berneau', password: 'secret' })
+      .send({ username: 'Berneau', password: 'test' })
       .end((err, res) => {
         token = res.body.token
         done()
@@ -33,22 +33,10 @@ describe('Product', () => {
     it('should GET all products', (done) => {
       chai.request(server)
         .get('/api/products')
-        .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(200)
           res.body.should.be.a('array')
           res.body.length.should.be.eql(0)
-          done()
-        })
-    })
-
-    it('should not GET all products without a token', (done) => {
-      chai.request(server)
-        .get('/api/products')
-        .end((err, res) => {
-          res.should.have.status(412)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('No token provided')
           done()
         })
     })
@@ -68,7 +56,6 @@ describe('Product', () => {
       product.save((err, product) => {
         chai.request(server)
         .get('/api/products/' + product._id)
-        .set('x-access-token', token)
         .send(product)
         .end((err, res) => {
           res.should.have.status(200)
@@ -82,7 +69,6 @@ describe('Product', () => {
     it('should return a message if no product with given id is found', (done) => {
       chai.request(server)
         .get('/api/products/notavalidid')
-        .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404)
           res.body.should.be.a('object')

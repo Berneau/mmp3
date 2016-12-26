@@ -3,9 +3,14 @@ var jwt = require('jsonwebtoken')
 var secret = require('./config').secret
 var router = express.Router()
 
-require('./routes/auth.routes')(router)
 
-// authentication middleware
+// unauthenticated routes
+require('./routes/unauthenticated/product.routes')(router)
+require('./routes/unauthenticated/vendor.routes')(router)
+require('./routes/unauthenticated/user.routes')(router)
+require('./routes/unauthenticated/auth.routes')(router)
+
+// authentication
 router.use(function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token']
 
@@ -19,9 +24,16 @@ router.use(function(req, res, next) {
   } else return res.status(412).json({ message: 'No token provided' })
 })
 
-require('./routes/product.routes')(router)
-require('./routes/vendor.routes')(router)
-require('./routes/user.routes')(router)
+// authenticated routes
+
+
+// TODO: add admin check
+
+
+// admin routes
+require('./routes/admin/product.routes')(router)
+require('./routes/admin/vendor.routes')(router)
+require('./routes/admin/user.routes')(router)
 
 
 module.exports = router
