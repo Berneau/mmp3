@@ -7,6 +7,7 @@ module.exports = function(router) {
    * @api {post} /vendors Create Vendor
    * @apiName CreateVendor
    * @apiGroup Vendors
+   * @apiPermission admin
    *
    * @apiParam {String} name The name of the shop.
    * @apiParam {String} ownerName The name of the owner.
@@ -57,6 +58,7 @@ module.exports = function(router) {
        * @api {put} /vendors/:id Update vendor
        * @apiName UpdateVendor
        * @apiGroup Vendors
+       * @apiPermission admin
        *
        * @apiParam {String} name The name of the shop.
        * @apiParam {String} ownerName The name of the owner.
@@ -109,6 +111,7 @@ module.exports = function(router) {
        * @api {delete} /vendors/:id Delete vendor
        * @apiName DeleteVendor
        * @apiGroup Vendors
+       * @apiPermission admin
        *
        * @apiSuccess {String} message Success message.
       */

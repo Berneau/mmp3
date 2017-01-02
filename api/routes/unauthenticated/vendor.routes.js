@@ -7,6 +7,7 @@ module.exports = function(router) {
    * @api {get} /vendors?skip=<skip>&limit=<limit>&filter=<filter> Get all vendors with pagination and optional search
    * @apiName GetVendors
    * @apiGroup Vendors
+   * @apiPermission none
    *
    * @apiParam {Number} [skip] Pages to be skipped.
    * @apiParam {Number} [limit] Elements to be contained in one page.
@@ -35,6 +36,7 @@ module.exports = function(router) {
      * @api {get} /vendors/:id Get vendor
      * @apiName GetVendor
      * @apiGroup Vendors
+     * @apiPermission none
      *
      * @apiSuccess {Object} vendor The vendor for given id.
     */

@@ -7,6 +7,7 @@ module.exports = function(router) {
     * @api {get} /users/:id Get user
     * @apiName GetUser
     * @apiGroup Users
+    * @apiPermission admin
     *
     * @apiSuccess {Object} user The user for given id.
    */
@@ -23,6 +24,7 @@ module.exports = function(router) {
     * @api {put} /users/:id Update user
     * @apiName UpdateUser
     * @apiGroup Users
+    * @apiPermission admin
     *
     * @apiParam {String} username The name of the user.
     * @apiParam {String} email The email address of the user.
@@ -55,6 +57,7 @@ module.exports = function(router) {
     * @api {delete} /users/:id Delete user
     * @apiName DeleteUser
     * @apiGroup Users
+    * @apiPermission admin
     *
     * @apiSuccess {String} message Success message.
    */

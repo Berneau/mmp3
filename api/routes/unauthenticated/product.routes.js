@@ -7,6 +7,7 @@ module.exports = function(router) {
    * @api {get} /products?skip=<skip>&limit=<limit>&filter=<filter> Get all products with pagination and optional search
    * @apiName GetProducts
    * @apiGroup Products
+   * @apiPermission none
    *
    * @apiParam {Number} [skip] Pages to be skipped.
    * @apiParam {Number} [limit] Elements to be contained in one page.
@@ -35,6 +36,7 @@ module.exports = function(router) {
    * @api {get} /products/:id Get product
    * @apiName GetProduct
    * @apiGroup Products
+   * @apiPermission none
    *
    * @apiSuccess {Object} product The product for given id.
   */

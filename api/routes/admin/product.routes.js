@@ -7,6 +7,7 @@ module.exports = function(router) {
    * @api {post} /products Create Product
    * @apiName CreateProduct
    * @apiGroup Products
+   * @apiPermission admin
    *
    * @apiParam {String} name The name of the product.
    * @apiParam {String} season The availability of the product.
@@ -44,6 +45,7 @@ module.exports = function(router) {
      * @api {put} /products/:id Update product
      * @apiName UpdateProduct
      * @apiGroup Products
+     * @apiPermission admin
      *
      * @apiParam {String} name The name of the product.
      * @apiParam {String} description A short description.
@@ -83,6 +85,7 @@ module.exports = function(router) {
      * @api {delete} /products/:id Delete product
      * @apiName DeleteProduct
      * @apiGroup Products
+     * @apiPermission admin
      *
      * @apiSuccess {String} message Success message.
     */

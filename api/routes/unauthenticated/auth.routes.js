@@ -10,6 +10,7 @@ module.exports = function(router) {
    * @api {post} /authentication Get JWT
    * @apiName GETJWT
    * @apiGroup Authentication
+   * @apiPermission none
    *
    * @apiParam {String} username The username of the user.
    * @apiParam {String} password The password of the user.

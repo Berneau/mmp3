@@ -9,8 +9,10 @@ $ nodemon index.js
 ```
 
 **Doc**
+
+Documentation is found at [api.berneau.at](http://api.berneau.at).
 ```
-$ npm doc
+$ npm run doc
 ```
 
 

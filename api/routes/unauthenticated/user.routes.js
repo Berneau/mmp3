@@ -7,6 +7,7 @@ module.exports = function(router) {
    * @api {get} /users?skip=<skip>&limit=<limit>&filter=<filter> Get all users with pagination and optional search
    * @apiName GetUsers
    * @apiGroup Users
+   * @apiPermission none
    *
    * @apiParam {Number} [skip] Pages to be skipped.
    * @apiParam {Number} [limit] Elements to be contained in one page.
@@ -35,6 +36,7 @@ module.exports = function(router) {
      * @api {get} /users/:id Get user
      * @apiName GetUser
      * @apiGroup Users
+     * @apiPermission none
      *
      * @apiSuccess {Object} user The user for given id.
     */
@@ -52,6 +54,7 @@ module.exports = function(router) {
      * @api {put} /users/:id Update user
      * @apiName UpdateUser
      * @apiGroup Users
+     * @apiPermission none
      *
      * @apiParam {String} username The name of the user.
      * @apiParam {String} email The email address of the user.
@@ -85,6 +88,7 @@ module.exports = function(router) {
      * @api {post} /users Create User
      * @apiName CreateUser
      * @apiGroup Users
+     * @apiPermission none
      *
      * @apiParam {String} username The name of the user.
      * @apiParam {String} email The email address of the user.
