@@ -5,10 +5,10 @@ var router = express.Router()
 
 
 // unauthenticated routes
-require('./routes/unauthenticated/product.routes')(router)
-require('./routes/unauthenticated/vendor.routes')(router)
 require('./routes/unauthenticated/user.routes')(router)
 require('./routes/unauthenticated/auth.routes')(router)
+require('./routes/unauthenticated/product.routes')(router)
+require('./routes/unauthenticated/vendor.routes')(router)
 
 // authentication
 router.use(function(req, res, next) {
@@ -32,8 +32,8 @@ router.use(function(req, res, next) {
 
 // admin routes
 require('./routes/admin/product.routes')(router)
-require('./routes/admin/vendor.routes')(router)
 require('./routes/admin/user.routes')(router)
+require('./routes/admin/vendor.routes')(router)
 
 
 module.exports = router

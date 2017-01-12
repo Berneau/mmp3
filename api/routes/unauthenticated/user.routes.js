@@ -49,41 +49,6 @@ module.exports = function(router) {
       })
     })
 
-
-    /**
-     * @api {put} /users/:id Update user
-     * @apiName UpdateUser
-     * @apiGroup Users
-     * @apiPermission none
-     *
-     * @apiParam {String} username The name of the user.
-     * @apiParam {String} email The email address of the user.
-     *
-     * @apiSuccess {Object} user The updated user.
-    */
-    .put(function(req, res) {
-
-      User.findById(req.params.id, function(err, user) {
-        if (err) res.status(500).json(err.message)
-
-        if (user) {
-          if (userIsValid(req.body)) {
-
-            user.username = req.body.name
-            user.email = req.body.email
-
-            user.save(function(err) {
-              if (err) res.status(500).json(err.message)
-              res.status(200).json(user)
-            })
-
-          } else res.status(412).json({ message: 'Missing fields' })
-
-        } else res.status(404).json({ message: 'User not found'})
-      })
-    })
-
-
     /**
      * @api {post} /users Create User
      * @apiName CreateUser
