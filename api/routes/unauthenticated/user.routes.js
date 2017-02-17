@@ -15,7 +15,7 @@ module.exports = function(router) {
    *
    * @apiSuccess {Array} user Array of users.
  */
- .get(function(req, res) {
+  .get(function(req, res) {
 
    var skip = req.query.skip ? req.query.skip : 0
    var limit = req.query.limit ? req.query.limit : 0
@@ -29,7 +29,54 @@ module.exports = function(router) {
    .sort({name: 1})
    .skip(skip)
    .limit(limit)
- })
+  })
+
+ /**
+  * @api {post} /users Create User
+  * @apiName CreateUser
+  * @apiGroup Users
+  * @apiPermission none
+  *
+  * @apiParam {String} username The name of the user.
+  * @apiParam {String} email The email address of the user.
+  * @apiParam {String} password The password of the user.
+  * @apiParam {Boolean} isAdmin Flag if the user has admin rights.
+  *
+  * @apiSuccess {Object} user The created user.
+*/
+  .post(function(req, res) {
+
+   if (userIsValid(req.body)) {
+
+    var user = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      isAdmin: req.body.isAdmin
+    })
+
+// TODO: upsert correctly
+     if (userIsFree(req.body)) {
+
+         var user = new User({
+           username: req.body.username,
+           email: req.body.email,
+           password: req.body.password,
+           isAdmin: req.body.isAdmin
+         })
+
+         user.save(function(err) {
+           if (err) res.status(500).json(err.message)
+           res.status(200).json(user)
+         })
+
+     } else {
+       res.status(412).json({ message: 'Username already taken' })
+     }
+   } else {
+     res.status(412).json({ message: 'Missing fields' })
+   }
+  })
 
   router.route('/users/:id')
     /**
@@ -49,44 +96,6 @@ module.exports = function(router) {
       })
     })
 
-    /**
-     * @api {post} /users Create User
-     * @apiName CreateUser
-     * @apiGroup Users
-     * @apiPermission none
-     *
-     * @apiParam {String} username The name of the user.
-     * @apiParam {String} email The email address of the user.
-     * @apiParam {String} password The password of the user.
-     * @apiParam {Boolean} isAdmin Flag if the user has admin rights.
-     *
-     * @apiSuccess {Object} user The created user.
-   */
-    .post(function(req, res) {
-
-      if (userIsValid(req.body)) {
-        if (userIsFree(req.body)) {
-
-            var user = new User({
-              username: req.body.username,
-              email: req.body.email,
-              password: req.body.password,
-              isAdmin: req.body.isAdmin
-            })
-
-            user.save(function(err) {
-              if (err) res.status(500).json(err.message)
-              res.status(200).json(user)
-            })
-
-        } else {
-          res.status(412).json({ message: 'Username already taken' })
-        }
-      } else {
-        res.status(412).json({ message: 'Missing fields' })
-      }
-    })
-
     function userIsValid(user) {
       if (!user.username ||
           !user.password ||
@@ -95,12 +104,14 @@ module.exports = function(router) {
       else return true
     }
 
-    function userIsFree(user) {
-      User.findOne({ username: user.username }, function(err, user) {
+    function userIsFree(userToTest) {
+      User.findOne({ username: userToTest.username }, function(err, user) {
+        console.log(userToTest)
+        console.log(user)
         if (err) res.status(500).json(err.message)
 
-        if (user) return false
-        else return true
+        if (!user || user == null) return true
+        else return false
       })
     }
 

@@ -26,9 +26,18 @@ router.use(function(req, res, next) {
 
 // authenticated routes
 
+// TODO: favorites routes
 
-// TODO: add admin check
+// admin check
+router.use(function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token']
 
+  // TODO: change to simple decoding
+  jwt.verify(token, secret, function(err, decoded) {
+    if (!decoded._doc.isAdmin) return res.status(403).json({ message: 'Admin rights required'})
+    else next()
+  })
+})
 
 // admin routes
 require('./routes/admin/product.routes')(router)
