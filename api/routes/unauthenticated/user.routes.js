@@ -55,24 +55,15 @@ module.exports = function(router) {
       isAdmin: req.body.isAdmin
     })
 
-// TODO: upsert correctly
-     if (userIsFree(req.body)) {
+    user.save(function(err) {
+      if (err) {
+        // Err Code 11000 = duplicate Key in MongoDB
+        if (err.code == 11000) res.status(200).json({ message: 'Email already taken.' })
+        else res.status(500).json(err.message)
+      }
+      else res.status(200).json(user)
+    })
 
-         var user = new User({
-           username: req.body.username,
-           email: req.body.email,
-           password: req.body.password,
-           isAdmin: req.body.isAdmin
-         })
-
-         user.save(function(err) {
-           if (err) res.status(500).json(err.message)
-           res.status(200).json(user)
-         })
-
-     } else {
-       res.status(412).json({ message: 'Username already taken' })
-     }
    } else {
      res.status(412).json({ message: 'Missing fields' })
    }
