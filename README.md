@@ -2,10 +2,20 @@
 
 ## API
 
-**Dev**
+**Install**
 ```
 $ yarn install
-$ nodemon index.js
+```
+
+**Start**
+```
+$ npm start     //local dev environment
+$ npm run prod  //production environment
+```
+
+**Testing**
+```
+$ npm test
 ```
 
 **Doc**
@@ -14,17 +24,6 @@ Documentation is found at [api.berneau.at](http://api.berneau.at).
 ```
 $ npm run doc
 ```
-
-
-
-## Server
-
-
-
-
-## Web
-
-
 
 
 ## Team
