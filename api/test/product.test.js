@@ -46,7 +46,7 @@ describe('Product', () => {
 
   describe('GET product', () => {
 
-    it('should get a product by its id', (done) => {
+    it('should GET a product by its id', (done) => {
       let product = new Product({
         name: 'Test',
         season: 'Winter',
@@ -55,13 +55,13 @@ describe('Product', () => {
 
       product.save((err, product) => {
         chai.request(server)
-        .get('/api/products/' + product._id)
-        .send(product)
-        .end((err, res) => {
-          res.should.have.status(200)
-          res.body.should.be.a('object')
-          res.body.should.have.property('_id').eql(product._id.toString())
-          done()
+          .get('/api/products/' + product._id)
+          .send(product)
+          .end((err, res) => {
+            res.should.have.status(200)
+            res.body.should.be.a('object')
+            res.body.should.have.property('_id').eql(product._id.toString())
+            done()
         })
       })
     })
