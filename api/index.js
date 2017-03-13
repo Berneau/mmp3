@@ -1,8 +1,13 @@
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
-var database = require('./config').database
 var helmet = require('helmet')
+
+// set environment settings
+var database
+if (process.env.NODE_ENV === 'DEVELOPMENT') database = require('./config.dev').database
+else if (process.env.NODE_ENV === 'PRODUCTION') database = require('./config').database
+else console.log('NODE_ENV not set.')
 
 // set port
 var port = process.env.PORT || 3000

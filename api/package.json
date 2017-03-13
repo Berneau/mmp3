@@ -4,7 +4,9 @@
   "description": "json-api for lungau project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "prod": "NODE_ENV=PRODUCTION nodemon",
+    "start": "NODE_ENV=DEVELOPMENT nodemon",
+    "test": "NODE_ENV=DEVELOPMENT mocha --timeout 10000",
     "doc": "apidoc -i routes/ -o apidoc"
   },
   "repository": {
