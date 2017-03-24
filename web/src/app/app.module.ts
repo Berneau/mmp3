@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import 'materialize-css';
-import { MaterializeModule } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -30,8 +28,7 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    MaterializeModule
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
