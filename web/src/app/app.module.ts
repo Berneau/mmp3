@@ -15,10 +15,10 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
 const appRoutes: Routes = [
-  { path: '',           component: LandingPageComponent },
+  { path: '',            component: LandingPageComponent },
   { path: 'produzenten', component: VendorListComponent },
-  { path: 'produkte', component: VendorListComponent },
-  { path: 'rezepte', component: VendorListComponent }
+  { path: 'produkte',    component: ProductListComponent },
+  { path: 'rezepte',     component: RecipeListComponent }
 ];
 
 @NgModule({
