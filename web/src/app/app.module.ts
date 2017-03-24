@@ -18,7 +18,8 @@ const appRoutes: Routes = [
   { path: '',            component: LandingPageComponent },
   { path: 'produzenten', component: VendorListComponent },
   { path: 'produkte',    component: ProductListComponent },
-  { path: 'rezepte',     component: RecipeListComponent }
+  { path: 'rezepte',     component: RecipeListComponent },
+  { path: 'login',       component: LoginComponent }
 ];
 
 @NgModule({
