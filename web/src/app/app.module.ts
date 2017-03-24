@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
+import 'rxjs/add/operator/toPromise'
 
 import 'materialize-css';
 import { MaterializeModule } from "angular2-materialize";

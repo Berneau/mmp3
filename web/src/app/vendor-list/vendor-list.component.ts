@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { VendorService } from './../services/vendor.service'
+
 @Component({
   selector: 'vendor-list',
   templateUrl: './vendor-list.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: VendorService) { }
 
   ngOnInit() {
+    this.store.getVendors()
   }
 
 }
