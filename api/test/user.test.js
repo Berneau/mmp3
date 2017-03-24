@@ -49,4 +49,24 @@ describe('User', () => {
     })
   })
 
+  describe('POST user', () => {
+
+    it('should create a user if no fields are missing', (done) => {
+      let user = new User({
+        username: 'test',
+        password: 'test',
+        email: 'test@test.com',
+        isAdmin: false
+      })
+
+      chai.request(server)
+        .post('/api/users')
+        .send(user)
+        .end((err, res) => {
+          console.log(res.body)
+          res.should.have.status(200)
+        })
+    })
+  })
+
 })
