@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-vendor-list',
+  selector: 'vendor-list',
   templateUrl: './vendor-list.component.html',
   styleUrls: ['./vendor-list.component.sass']
 })

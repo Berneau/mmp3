@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-footer-bar',
+  selector: 'footer-bar',
   templateUrl: './footer-bar.component.html',
   styleUrls: ['./footer-bar.component.sass']
 })
