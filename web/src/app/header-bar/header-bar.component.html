@@ -1,10 +1,10 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Logo</a>
+    <a [routerLink]="['']" class="brand-logo">Logo</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="sass.html">Home</a></li>
-      <li><a href="badges.html">Produzenten</a></li>
-      <li><a href="collapsible.html">Produkete</a></li>
+      <li><a [routerLink]="['produzenten']">Produzenten</a></li>
+      <li><a [routerLink]="['produkte']">Produkte</a></li>
+      <li><a [routerLink]="['rezepte']">Rezepte</a></li>
     </ul>
   </div>
 </nav>
