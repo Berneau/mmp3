@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -15,6 +16,13 @@ import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
+const appRoutes: Routes = [
+  { path: '',           component: LandingPageComponent },
+  { path: 'produzenten', component: VendorListComponent },
+  { path: 'produkte', component: VendorListComponent },
+  { path: 'rezepte', component: VendorListComponent }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +36,7 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
     RecipeListComponent
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -36,4 +45,5 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
