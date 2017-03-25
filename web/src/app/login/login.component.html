@@ -1,17 +1,17 @@
 <div class="row">
-  <form materialize class="col s4 offset-s4">
+  <form materialize class="col s4 offset-s4" [formGroup]="loginForm">
     <div class="row">
       <h4 class="light col s12">Login</h4>
     </div>
     <div class="row">
-      <div class="input-field col s12">
-        <input id="icon_name" type="text" class="validate">
+      <div class="input-field col s12 form-group">
+        <input id="icon_name" type="text" class="validate" formControlName="name">
         <label for="icon_name">Benutzername</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="icon_password" type="tel" class="validate">
+        <input id="icon_password" type="password" class="validate" formControlName="password">
         <label for="icon_password">Passwort</label>
       </div>
     </div>
