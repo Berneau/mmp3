@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 var helmet = require('helmet')
+var cors = require('cors')
 
 // set environment settings
 var database
@@ -21,6 +22,7 @@ mongoose.connect(database)
 var router = require('./routes')
 
 app.use(helmet())
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
