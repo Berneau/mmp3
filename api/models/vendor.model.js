@@ -15,7 +15,8 @@ var VendorSchema = new Schema({
   imageUrl: String,
   // products: [Product],
   lat: Number,
-  long: Number
+  long: Number,
+  userId: String
 })
 
 module.exports = mongoose.model('Vendor', VendorSchema)
