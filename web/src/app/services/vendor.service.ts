@@ -12,16 +12,36 @@ export class VendorService {
   vendors: Vendor[]
   private apiEndpoint = ApiEndpoint
 
-  getVendors(): Promise<any> {
-    let url = `${this.apiEndpoint}/vendors?skip=0?limit=15`
+  // getVendors(): Promise<any> {
+  //   let url = `${this.apiEndpoint}/vendors?skip=0?limit=15`
+  //
+  //   return this.http
+  //     .get(url)
+  //     .toPromise()
+  //     .then((res) => {
+  //       this.vendors = res.json()
+  //       console.log(res.json())
+  //     })
+  //     .catch(this.handleError)
+  // }
 
-    return this.http
-      .get(url)
-      .toPromise()
-      .then((res) => {
-        this.vendors = res.json()
-      })
-      .catch(this.handleError)
+  getVendors() {
+    this.vendors = [
+      {
+        name: 'test',
+        ownerName: 'bla',
+        email: 'inco@gnito.com',
+        category: 1,
+        city: 'Lungau'
+      },
+      {
+        name: 'test',
+        ownerName: 'bla',
+        email: 'inco@gnito.com',
+        category: 1,
+        city: 'Lungau'
+      }
+    ]
   }
 
   private handleError(error: any) {
