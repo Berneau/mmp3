@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RecipeService } from './../services/recipe.service'
+
 @Component({
   selector: 'recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipeListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: RecipeService) { }
 
   ngOnInit() {
+    this.store.getRecipes()
   }
 
 }
