@@ -1,7 +1,16 @@
 <h3>
-  vendor-list works!
+  Produzenten
 </h3>
 
 <ul>
-  <li *ngFor="let vendor of store.vendors">{{ vendor.name }}</li>
+  <li *ngFor="let vendor of store.vendors" class="list-cards">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="assets/dummy_img.jpg">
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">{{vendor.name}}</span>
+      </div>
+    </div>
+  </li>
 </ul>

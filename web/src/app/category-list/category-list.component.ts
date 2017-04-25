@@ -3,16 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from './../services/product.service'
 
 @Component({
-  selector: 'product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.sass']
+  selector: 'category-list',
+  templateUrl: './category-list.component.html',
+  styleUrls: ['./category-list.component.sass']
 })
-
-export class ProductListComponent implements OnInit {
+export class CategoryListComponent implements OnInit {
 
   constructor(private store: ProductService) { }
 
   ngOnInit() {
     this.store.getProducts()
   }
+
 }

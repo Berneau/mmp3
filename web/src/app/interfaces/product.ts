@@ -2,7 +2,7 @@ export class Product {
   _id?: string
   name: string
   season: string
-  category: number
+  category: string
   description?: string
   imageUrl?: string
 }

@@ -10,6 +10,7 @@ export class VendorService {
   constructor(private http: Http) { }
 
   vendors: Vendor[]
+  vendor: Vendor
   private apiEndpoint = ApiEndpoint
 
   // getVendors(): Promise<any> {
@@ -32,16 +33,45 @@ export class VendorService {
         ownerName: 'bla',
         email: 'inco@gnito.com',
         category: 1,
-        city: 'Lungau'
+        city: 'Lungau',
+        _id: '1'
       },
       {
         name: 'test',
         ownerName: 'bla',
         email: 'inco@gnito.com',
         category: 1,
-        city: 'Lungau'
+        city: 'Lungau',
+        _id: '2'
+      },
+      {
+        name: 'test',
+        ownerName: 'bla',
+        email: 'inco@gnito.com',
+        category: 1,
+        city: 'Lungau',
+        _id: '2'
+      },
+      {
+        name: 'test',
+        ownerName: 'bla',
+        email: 'inco@gnito.com',
+        category: 1,
+        city: 'Lungau',
+        _id: '2'
       }
     ]
+  }
+
+  getVendor() {
+    return {
+      name: 'test',
+      ownerName: 'bla',
+      email: 'inco@gnito.com',
+      category: 1,
+      city: 'Lungau',
+      _id: '1'
+    }
   }
 
   private handleError(error: any) {
