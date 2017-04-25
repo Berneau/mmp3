@@ -13,7 +13,6 @@ import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
-import { ProductListComponent } from './product-list/product-list.component';
 import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
@@ -21,11 +20,12 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
 import { RecipeService } from './services/recipe.service';
+import { CategoryListComponent } from './category-list/category-list.component';
 
 const appRoutes: Routes = [
   { path: '',            component: LandingPageComponent },
   { path: 'produzenten', component: VendorListComponent },
-  { path: 'produkte',    component: ProductListComponent },
+  { path: 'produkte',    component: CategoryListComponent },
   { path: 'rezepte',     component: RecipeListComponent },
   { path: 'login',       component: LoginComponent }
 ];
@@ -37,10 +37,10 @@ const appRoutes: Routes = [
     LandingPageComponent,
     LoginComponent,
     FooterBarComponent,
-    ProductListComponent,
     VendorListComponent,
     SearchResultsComponent,
-    RecipeListComponent
+    RecipeListComponent,
+    CategoryListComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
