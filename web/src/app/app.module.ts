@@ -5,8 +5,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/toPromise'
 
-import 'materialize-css';
-import { MaterializeModule } from "angular2-materialize";
+import { MaterializeModule } from 'ng2-materialize';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -47,7 +46,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    MaterializeModule.forRoot()
   ],
   providers: [
     ProductService,
