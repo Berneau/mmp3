@@ -1,10 +1,19 @@
 <nav>
-  <div class="nav-wrapper">
-    <a [routerLink]="['']" class="brand-logo">Logo</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a [routerLink]="['produzenten']">Produzenten</a></li>
-      <li><a [routerLink]="['produkte']">Produkte</a></li>
-      <li><a [routerLink]="['rezepte']">Rezepte</a></li>
-    </ul>
+  <div class="nav-wrapper row">
+    <div class="col s2 m2 hide-on-large-only">
+      <div [id]="'btn-sidenav'" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </div>
+    </div>
+    <div class="col s10 m10 l4">
+      <a [routerLink]="['']" class="brand-logo">Logo</a>
+    </div>
+    <div class="col l8">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a [routerLink]="['produzenten']">Produzenten</a></li>
+        <li><a [routerLink]="['produkte']">Produkte</a></li>
+        <li><a [routerLink]="['rezepte']">Rezepte</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

@@ -1,0 +1,14 @@
+<mz-sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav'">
+  <mz-sidenav-header>
+    <!-- <img src="assets/dummy_img.jpg" alt="img"> -->
+    <h5>Navigation</h5>
+  </mz-sidenav-header>
+  <mz-sidenav-divider></mz-sidenav-divider>
+  <mz-sidenav-link>
+    <ul>
+      <li><a [routerLink]="['produzenten']">Produzenten</a></li>
+      <li><a [routerLink]="['produkte']">Produkte</a></li>
+      <li><a [routerLink]="['rezepte']">Rezepte</a></li>
+    </ul>
+  </mz-sidenav-link>
+</mz-sidenav>

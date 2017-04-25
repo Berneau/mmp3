@@ -21,6 +21,7 @@ import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
 import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
+import { SlideNavComponent } from './slide-nav/slide-nav.component';
 
 const appRoutes: Routes = [
   { path: '',            component: LandingPageComponent },
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     VendorListComponent,
     SearchResultsComponent,
     RecipeListComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    SlideNavComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
