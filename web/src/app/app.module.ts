@@ -15,11 +15,12 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
 import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { CategoryListComponent } from './category-list/category-list.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
 import { RecipeService } from './services/recipe.service';
-import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryService } from './services/category.service';
 
 const appRoutes: Routes = [
   { path: '',            component: LandingPageComponent },
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
   providers: [
     ProductService,
     VendorService,
-    RecipeService
+    RecipeService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

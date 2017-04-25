@@ -29,7 +29,7 @@ export class VendorService {
   getVendors() {
     this.vendors = [
       {
-        name: 'test',
+        name: 'Bauer F.',
         ownerName: 'bla',
         email: 'inco@gnito.com',
         category: 1,
@@ -37,7 +37,7 @@ export class VendorService {
         _id: '1'
       },
       {
-        name: 'test',
+        name: 'Bauer R.',
         ownerName: 'bla',
         email: 'inco@gnito.com',
         category: 1,
@@ -45,27 +45,27 @@ export class VendorService {
         _id: '2'
       },
       {
-        name: 'test',
+        name: 'Bauer X.',
         ownerName: 'bla',
         email: 'inco@gnito.com',
         category: 1,
         city: 'Lungau',
-        _id: '2'
+        _id: '3'
       },
       {
-        name: 'test',
+        name: 'Bauer L.',
         ownerName: 'bla',
         email: 'inco@gnito.com',
         category: 1,
         city: 'Lungau',
-        _id: '2'
+        _id: '4'
       }
     ]
   }
 
   getVendor() {
     return {
-      name: 'test',
+      name: 'Bauer T.',
       ownerName: 'bla',
       email: 'inco@gnito.com',
       category: 1,
