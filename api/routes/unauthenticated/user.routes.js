@@ -37,10 +37,9 @@ module.exports = function(router) {
   * @apiGroup Users
   * @apiPermission none
   *
-  * @apiParam {String} username The name of the user.
   * @apiParam {String} email The email address of the user.
   * @apiParam {String} password The password of the user.
-  * @apiParam {Boolean} isAdmin Flag if the user has admin rights.
+  * @apiParam {Boolean} isAdmin Flag for admin rights.
   *
   * @apiSuccess {Object} user The created user.
 */
@@ -49,7 +48,6 @@ module.exports = function(router) {
    if (userIsValid(req.body)) {
 
     var user = new User({
-      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       isAdmin: req.body.isAdmin
@@ -88,8 +86,7 @@ module.exports = function(router) {
     })
 
     function userIsValid(user) {
-      if (!user.username ||
-          !user.password ||
+      if (!user.password ||
           !user.email ||
           !user.isAdmin) return false
       else return true
