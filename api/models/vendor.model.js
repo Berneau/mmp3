@@ -4,13 +4,12 @@ var Product = require('./product.model')
 
 var VendorSchema = new Schema({
   name: { type: String, required: true },
-  ownerName: { type: String, required: true },
-  email: { type: String, required: true },
-  category: { type: Number, required: true },
   userUid: { type: String, required: true },
-  tel: Number,
+  email: { type: String, required: true },
   description: String,
   imageUrl: String,
+  subName: String,
+  tel: Number,
   address: {
     city: String,
     zip: Number,
