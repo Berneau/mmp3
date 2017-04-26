@@ -91,16 +91,4 @@ module.exports = function(router) {
           !user.isAdmin) return false
       else return true
     }
-
-    function userIsFree(userToTest) {
-      User.findOne({ username: userToTest.username }, function(err, user) {
-        console.log(userToTest)
-        console.log(user)
-        if (err) res.status(500).json(err.message)
-
-        if (!user || user == null) return true
-        else return false
-      })
-    }
-
 }

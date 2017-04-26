@@ -41,7 +41,7 @@ module.exports = function(router) {
      * @apiSuccess {Object} vendor The vendor for given id.
     */
     .get(function(req, res) {
-      Vendor.findById(req.params.id, function(err, vendor) {
+      Vendor.findOne({ 'id': req.params.id }, function(err, vendor) {
 
         if (err && err.name != 'CastError') res.status(404).json(err.message)
         else if (!err && vendor) res.status(200).json(vendor)

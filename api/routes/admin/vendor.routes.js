@@ -10,17 +10,18 @@ module.exports = function(router) {
    * @apiPermission admin
    *
    * @apiParam {String} name The name of the shop.
-   * @apiParam {String} ownerName The name of the owner.
+   * @apiParam {String} userUid The id of the connected user
    * @apiParam {String} email Email address of the owner.
-   * @apiParam {Number} category The id of the category of the shop.
-   * @apiParam {String} city City of the shop.
-   * @apiParam {Number} [tel] Tel number of the owner.
    * @apiParam {String} [description] A short description.
-   * @apiParam {String} [street] Street of the shop.
-   * @apiParam {Number} [zip] Postal code of the shop.
    * @apiParam {String} [imageUrl] The url to the image.
-   * @apiParam {Number} [lat] Latitude of the shop.
-   * @apiParam {Number} [long] Longitude of the shop.
+   * @apiParam {String} [subName] The name of the owner.
+   * @apiParam {Number} [tel] Tel number of the owner.
+   * @apiParam {Object} [address] Address-Wrapper
+   * @apiParam {String} [address.city] Cityname
+   * @apiParam {Number} [address.zip] Postal Code
+   * @apiParam {String} [address.street] Street with Number
+   * @apiParam {Number} [address.lat] Latitude
+   * @apiParam {Number} [address.long] Longitude
    *
    * @apiSuccess {Object} vendor The created vendor.
  */
@@ -32,17 +33,19 @@ module.exports = function(router) {
 
       var vendor = new Vendor({
         name: req.body.name,
-        ownerName: req.body.ownerName,
+        userUid: req.body.userUid,
         email: req.body.email,
-        category: req.body.category,
-        city: req.body.city,
-        tel: req.body.tel,
         description: req.body.description,
-        street: req.body.street,
-        zip: req.body.zip,
         imageUrl: req.body.imageUrl,
-        lat: req.body.lat,
-        long: req.body.long
+        subName: req.body.subName,
+        tel: req.body.tel,
+        address: {
+          city: req.body.city,
+          zip: req.body.zip,
+          street: req.body.street,
+          lat: req.body.lat,
+          long: req.body.long
+        }
       })
 
       vendor.save(function(err) {
@@ -61,17 +64,18 @@ module.exports = function(router) {
        * @apiPermission admin
        *
        * @apiParam {String} name The name of the shop.
-       * @apiParam {String} ownerName The name of the owner.
+       * @apiParam {String} userUid The id of the connected user
        * @apiParam {String} email Email address of the owner.
-       * @apiParam {Number} category The id of the category of the shop.
-       * @apiParam {String} city City of the shop.
-       * @apiParam {Number} [tel] Tel number of the owner.
        * @apiParam {String} [description] A short description.
-       * @apiParam {String} [street] Street of the shop.
-       * @apiParam {Number} [zip] Postal code of the shop.
        * @apiParam {String} [imageUrl] The url to the image.
-       * @apiParam {Number} [lat] Latitude of the shop.
-       * @apiParam {Number} [long] Longitude of the shop.
+       * @apiParam {String} [subName] The name of the owner.
+       * @apiParam {Number} [tel] Tel number of the owner.
+       * @apiParam {Object} [address] Address-Wrapper
+       * @apiParam {String} [address.city] Cityname
+       * @apiParam {Number} [address.zip] Postal Code
+       * @apiParam {String} [address.street] Street with Number
+       * @apiParam {Number} [address.lat] Latitude
+       * @apiParam {Number} [address.long] Longitude
        *
        * @apiSuccess {Object} vendor The updated vendor.
       */
@@ -84,9 +88,8 @@ module.exports = function(router) {
             if (vendorIsValid(req.body)) {
 
               vendor.name = req.body.name,
-              vendor.ownerName = req.body.ownerName,
+              vendor.subName = req.body.subName,
               vendor.email = req.body.email,
-              vendor.category = req.body.category,
               vendor.city = req.body.city,
               vendor.tel = req.body.tel,
               vendor.description = req.body.description,
@@ -132,10 +135,8 @@ module.exports = function(router) {
 
     function vendorIsValid(vendor) {
       if (!vendor.name ||
-          !vendor.ownerName ||
-          !vendor.email ||
-          !vendor.category ||
-          !vendor.city) return false
+          !vendor.userUid ||
+          !vendor.email) return false
       else return true
     }
 }

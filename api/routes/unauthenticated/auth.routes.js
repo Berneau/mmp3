@@ -12,14 +12,14 @@ module.exports = function(router) {
    * @apiGroup Authentication
    * @apiPermission none
    *
-   * @apiParam {String} username The username of the user.
+   * @apiParam {String} email The email of the user.
    * @apiParam {String} password The password of the user.
    *
    * @apiSuccess {String} token The signed JWT.
  */
   .post(function(req, res) {
 
-    User.findOne({ username: req.body.username }, function(err, user) {
+    User.findOne({ email: req.body.email }, function(err, user) {
       if (err) res.status(500).end(err)
 
       if (user) {
