@@ -3,15 +3,15 @@ var Schema = mongoose.Schema
 
 var ProductSchema = new Schema({
   name: { type: String, required: true },
-  description: { type: String, required: true },
-  categoryId: { type: Number, required: true },
-  imageUrl: String,
+  categoryId: { type: String, required: true },
+  vendorId: { type: String, required: true },
   availableAt: {
-    fromPeriod: String,
-    fromMonth: String,
-    toPeriod: String,
-    toMonth: String
-  }
+    fromPeriod: { type: String, required: true },
+    fromMonth: { type: String, required: true },
+    toPeriod: { type: String, required: true },
+    toMonth: { type: String, required: true }
+  },
+  imageUrl: String
 })
 
 module.exports = mongoose.model('Product', ProductSchema)
