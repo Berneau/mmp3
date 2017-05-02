@@ -40,7 +40,7 @@ export class CategoryService {
   }
 
   getCategoryProducts(id): Promise<any> {
-    let url = `${this.apiEndpoint}/categories?categoryId=${id}`
+    let url = `${this.apiEndpoint}/products?categoryId=${id}`
 
     return this.http
       .get(url)

@@ -40,7 +40,7 @@ export class VendorService {
   }
 
   getVendorProducts(id): Promise<any> {
-    let url = `${this.apiEndpoint}/vendors?vendorId=${id}`
+    let url = `${this.apiEndpoint}/products?vendorId=${id}`
 
     return this.http
       .get(url)
