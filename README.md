@@ -7,6 +7,11 @@
 $ yarn install
 ```
 
+**Dummy Data**
+```
+$ npm run dummy
+```
+
 **Start**
 ```
 $ npm start     //local dev environment

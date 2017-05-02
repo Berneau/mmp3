@@ -88,16 +88,17 @@ module.exports = function(router) {
             if (vendorIsValid(req.body)) {
 
               vendor.name = req.body.name,
-              vendor.subName = req.body.subName,
+              vendor.userUid = req.body.userUid,
               vendor.email = req.body.email,
-              vendor.city = req.body.city,
-              vendor.tel = req.body.tel,
               vendor.description = req.body.description,
-              vendor.street = req.body.street,
-              vendor.zip = req.body.zip,
               vendor.imageUrl = req.body.imageUrl,
-              vendor.lat = req.body.lat,
-              vendor.long = req.body.long
+              vendor.subName = req.body.subName,
+              vendor.tel = req.body.tel,
+              vendor.address.city = req.body.city,
+              vendor.address.zip = req.body.zip,
+              vendor.address.street = req.body.street,
+              vendor.address.lat = req.body.lat,
+              vendor.address.long = req.body.long
 
               vendor.save(function(err) {
                 if (err) res.status(500).end(err)
