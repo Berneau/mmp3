@@ -24,4 +24,23 @@ module.exports = function(router) {
    })
    .sort({name: 1})
  })
+
+ router.route('/categories/:id')
+   /**
+    * @api {get} /categories/:id Get category
+    * @apiName GetCategory
+    * @apiGroup Categories
+    * @apiPermission none
+    *
+    * @apiSuccess {Object} category The category for given id.
+   */
+   .get(function(req, res) {
+     Category.findById(req.params.id, function(err, category) {
+
+       if (err && err.name != 'CastError') res.status(404).json(err.message)
+       else if (!err && category) res.status(200).json(category)
+       else res.status(404).json({ message: 'Category not found'})
+     })
+   })
+
 }
