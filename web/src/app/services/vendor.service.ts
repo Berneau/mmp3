@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
 import { Vendor } from './../interfaces/vendor'
-import { ApiEndpoint } from './../app.config';
+import { ApiEndpoint } from './../app.config'
+
+import { Product } from './../interfaces/product'
 
 @Injectable()
 export class VendorService {
@@ -10,6 +12,7 @@ export class VendorService {
   constructor(private http: Http) { }
 
   vendors: Vendor[]
+  vendorProducts: Product[]
   private apiEndpoint = ApiEndpoint
 
   getVendors(): Promise<any> {
@@ -32,6 +35,18 @@ export class VendorService {
       .toPromise()
       .then((res) => {
         return res.json() as Vendor
+      })
+      .catch(this.handleError)
+  }
+
+  getVendorProducts(id): Promise<any> {
+    let url = `${this.apiEndpoint}/vendors?vendorId=${id}`
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        this.vendorProducts = res.json()
       })
       .catch(this.handleError)
   }
