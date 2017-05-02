@@ -10,36 +10,30 @@ export class RecipeService {
   constructor(private http: Http) { }
 
   recipes: Recipe[]
-  recipe: Recipe
   private apiEndpoint = ApiEndpoint
 
-  getRecipes() {
-    this.recipes = [
-      {
-        _id: '1',
-        name: 'Kartoffelknödel',
-        description: 'alles zammanschgan',
-        imageUrl: ''
-      },
-      {
-        _id: '2',
-        name: 'Kartoffelknödel',
-        description: 'alles zammanschgan',
-        imageUrl: ''
-      },
-      {
-        _id: '3',
-        name: 'Kartoffelknödel',
-        description: 'alles zammanschgan',
-        imageUrl: ''
-      },
-      {
-        _id: '4',
-        name: 'Kartoffelknödel',
-        description: 'alles zammanschgan',
-        imageUrl: ''
-      }
-    ]
+  getRecipes(): Promise<any> {
+    let url = `${this.apiEndpoint}/recipes`
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        this.recipes = res.json()
+      })
+      .catch(this.handleError)
+  }
+
+  getRecipe(id): Promise<any> {
+    let url = `${this.apiEndpoint}/recipes/${id}`
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        return res.json() as Recipe
+      })
+      .catch(this.handleError)
   }
 
   private handleError(error: any) {
