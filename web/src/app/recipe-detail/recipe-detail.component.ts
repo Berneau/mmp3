@@ -19,7 +19,7 @@ export class RecipeDetailComponent implements OnInit {
       this.store.getRecipe(id)
       .then(recipe => {
         if (!recipe) {
-          this.location.back()
+          this.location.back() // TODO: is location.back() sinnovoll ?
           Materialize.toast('Es wurde kein Rezept mit dieser ID gefunden.', 2000)
           return
         }
