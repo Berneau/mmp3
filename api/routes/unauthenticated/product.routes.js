@@ -4,26 +4,50 @@ module.exports = function(router) {
 
   router.route('/products')
   /**
-   * @api {get} /products?filter=<filter>&category=<category> Get all products with optional search and category
+   * @api {get} /products?filter=<filter>&categoryId=<categoryId>&<vendorId=<vendorId> Get all products with optional search, vendor or category
    * @apiName GetProducts
    * @apiGroup Products
    * @apiPermission none
    *
-   * @apiParam {String} [categoryId] Id of a category
+   * @apiParam {String} [categoryId] Id of a category (not combinable with vendorId)
+   * @apiParam {String} [vendorId] Id of a vendor (not combinable with categoryId)
    * @apiParam {String} [filter] The field name will be search by this.
    *
    * @apiSuccess {Array} product Array of products.
  */
   .get(function(req, res) {
     var filter = req.query.filter ? req.query.filter : ''
-    var categoryId = req.query.categoryId ? req.query.categoryId : ''
+    var categoryId = req.query.categoryId
+    var vendorId = req.query.vendorId
 
-    Product
-    .find({ 'name': { '$regex': filter } }, function(err, products) {
-      if (err) res.status(500).json(err.message)
-      res.json(products)
-    })
-    .sort({name: 1})
+    if (categoryId && !vendorId) {
+
+      Product
+      .find({ 'categoryId': categoryId }, function(err, products) {
+        if (err) res.status(500).json(err.message)
+        res.json(products)
+      })
+      .sort({name: 1})
+
+    } else if (vendorId && !categoryId) {
+
+      Product
+      .find({ 'vendorId': vendorId }, function(err, products) {
+        if (err) res.status(500).json(err.message)
+        res.json(products)
+      })
+      .sort({name: 1})
+
+    } else {
+
+      Product
+      .find({ 'name': { '$regex': filter } }, function(err, products) {
+        if (err) res.status(500).json(err.message)
+        res.json(products)
+      })
+      .sort({name: 1})
+    }
+
   })
 
 

@@ -13,7 +13,7 @@
   },
   {
     "name": "Kopfsalat",
-    "categoryId": "asd123",
+    "categoryId": "bsd123",
     "vendorId": "asd123",
     "imageUrl": "dev.null",
     "availableAt": {
@@ -26,7 +26,7 @@
   {
     "name": "Hühnerfleisch",
     "categoryId": "asd123",
-    "vendorId": "asd123",
+    "vendorId": "bsd123",
     "imageUrl": "dev.null",
     "availableAt": {
       "fromPeriod": "Anfang",
