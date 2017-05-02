@@ -28,7 +28,7 @@ import { CategoryService } from './services/category.service';
 import { SlideNavComponent } from './slide-nav/slide-nav.component';
 
 const appRoutes: Routes = [
-  { path: '',            component: LandingPageComponent },
+  { path: '', component: LandingPageComponent },
   { path: 'produzenten', component: VendorListComponent },
   {
     path: 'produzenten',
@@ -36,9 +36,28 @@ const appRoutes: Routes = [
       { path: ':id', component: VendorProfileComponent }
     ]
   },
-  { path: 'produkte',    component: CategoryListComponent },
-  { path: 'rezepte',     component: RecipeListComponent },
-  { path: 'login',       component: LoginComponent }
+  { path: 'produkte', component: CategoryListComponent },
+  {
+    path: 'produkte',
+    children: [
+      { path: ':id', component: CategoryDetailComponent }
+    ]
+  },
+  { path: 'produkt', redirectTo: 'produkte' },
+  {
+    path: 'produkt',
+    children: [
+      { path: ':id', component: ProductDetailComponent }
+    ]
+  },
+  { path: 'rezepte', component: RecipeListComponent },
+  {
+    path: 'rezepte',
+    children: [
+      { path: ':id', component: RecipeDetailComponent }
+    ]
+  },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
