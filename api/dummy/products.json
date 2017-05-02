@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Rote Äpfel",
+    "categoryId": "asd123",
+    "vendorId": "asd123",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  },
+  {
+    "name": "Kopfsalat",
+    "categoryId": "asd123",
+    "vendorId": "asd123",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  },
+  {
+    "name": "Hühnerfleisch",
+    "categoryId": "asd123",
+    "vendorId": "asd123",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  }
+]

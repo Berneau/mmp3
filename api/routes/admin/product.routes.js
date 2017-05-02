@@ -10,9 +10,13 @@ module.exports = function(router) {
    * @apiPermission admin
    *
    * @apiParam {String} name The name of the product.
-   * @apiParam {String} season The availability of the product.
-   * @apiParam {Number} category The id of the category.
-   * @apiParam {String} [description] A short description.
+   * @apiParam {String} categoryId The id of the category.
+   * @apiParam {String} vendorId The id of the vendor.
+   * @apiParam {Object} availableAt AvailableAt-Wrapper
+   * @apiParam {String} availableAt.fromPeriod e.g. Anfang
+   * @apiParam {String} availableAt.fromMonth e.g. Mai
+   * @apiParam {String} availableAt.toPeriod e.g. Ende
+   * @apiParam {String} availableAt.toMonth e.g. September
    * @apiParam {String} [imageUrl] The url to the image.
    *
    * @apiSuccess {Object} product The created product.
@@ -25,10 +29,15 @@ module.exports = function(router) {
 
       var product = new Product({
         name: req.body.name,
-        description: req.body.description,
-        season: req.body.season,
-        imageUrl: req.body.imageUrl,
-        category: req.body.category
+        categoryId: req.body.categoryId,
+        vendorId: req.body.vendorId,
+        availableAt: {
+          fromPeriod: req.body.fromPeriod,
+          fromMonth: req.body.fromMonth,
+          toPeriod: req.body.toPeriod,
+          toMonth: req.body.toMonth
+        },
+        imageUrl: req.body.imageUrl
       })
 
       product.save(function(err) {
@@ -48,10 +57,14 @@ module.exports = function(router) {
      * @apiPermission admin
      *
      * @apiParam {String} name The name of the product.
-     * @apiParam {String} description A short description.
-     * @apiParam {String} season The availability of the product.
+     * @apiParam {String} categoryId The id of the category.
+     * @apiParam {String} vendorId The id of the vendor.
+     * @apiParam {Object} availableAt AvailableAt-Wrapper
+     * @apiParam {String} availableAt.fromPeriod e.g. Anfang
+     * @apiParam {String} availableAt.fromMonth e.g. Mai
+     * @apiParam {String} availableAt.toPeriod e.g. Ende
+     * @apiParam {String} availableAt.toMonth e.g. September
      * @apiParam {String} [imageUrl] The url to the image.
-     * @apiParam {Number} [category] The id of the category.
      *
      * @apiSuccess {Object} product The updated product.
     */
@@ -63,11 +76,14 @@ module.exports = function(router) {
         else if (!err && product) {
           if (productIsValid(req.body)) {
 
-            product.name = req.body.name
-            product.description = req.body.description
-            product.season = req.body.season
+            product.name = req.body.name,
+            product.categoryId = req.body.categoryId,
+            product.vendorId = req.body.vendorId,
+            product.availableAt.fromPeriod = req.body.fromPeriod,
+            product.availableAt.fromMonth = req.body.fromMonth,
+            product.availableAt.toPeriod = req.body.toPeriod,
+            product.availableAt.toMonth = req.body.toMonth,
             product.imageUrl = req.body.imageUrl
-            product.category = req.body.category
 
             product.save(function(err) {
               if (err) res.status(500).end(err)
@@ -107,8 +123,12 @@ module.exports = function(router) {
 
     function productIsValid(product) {
       if (!product.name ||
-          !product.season ||
-          !product.category) return false
+          !product.categoryId ||
+          !product.vendorId ||
+          !product.fromPeriod ||
+          !product.fromMonth ||
+          !product.toPeriod ||
+          !product.toMonth) return false
       else return true
     }
 }

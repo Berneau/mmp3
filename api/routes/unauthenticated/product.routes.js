@@ -4,21 +4,19 @@ module.exports = function(router) {
 
   router.route('/products')
   /**
-   * @api {get} /products?skip=<skip>&limit=<limit>&filter=<filter> Get all products with pagination and optional search
+   * @api {get} /products?filter=<filter>&category=<category> Get all products with optional search and category
    * @apiName GetProducts
    * @apiGroup Products
    * @apiPermission none
    *
-   * @apiParam {Number} [skip] Pages to be skipped.
-   * @apiParam {Number} [limit] Elements to be contained in one page.
+   * @apiParam {String} [categoryId] Id of a category
    * @apiParam {String} [filter] The field name will be search by this.
    *
    * @apiSuccess {Array} product Array of products.
  */
   .get(function(req, res) {
-    var skip = req.query.skip ? req.query.skip : 0
-    var limit = req.query.limit ? req.query.limit : 0
     var filter = req.query.filter ? req.query.filter : ''
+    var categoryId = req.query.categoryId ? req.query.categoryId : ''
 
     Product
     .find({ 'name': { '$regex': filter } }, function(err, products) {
@@ -26,8 +24,6 @@ module.exports = function(router) {
       res.json(products)
     })
     .sort({name: 1})
-    .skip(parseInt(skip))
-    .limit(parseInt(limit))
   })
 
 
