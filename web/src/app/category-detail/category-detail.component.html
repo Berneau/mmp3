@@ -1,3 +1,17 @@
-<p>
-  category-detail works!
-</p>
+<div *ngIf="category">
+  <div class="row">
+    <div class="col l6">
+      <h3>
+        {{category.name}}
+      </h3>
+    </div>
+    <div class="col l6">
+      <img class="col l10 right" src="assets/dummy_img.jpg">
+    </div>
+  </div>
+  <div class="row">
+    <h5>Produzenten</h5>
+    <hr>
+    <p class="new badge blue">produzentenliste</p>
+  </div>
+</div>

@@ -13,7 +13,7 @@ export class CategoryService {
   private apiEndpoint = ApiEndpoint
 
   getCategories(): Promise<any> {
-    let url = `${this.apiEndpoint}/products`
+    let url = `${this.apiEndpoint}/categories`
 
     return this.http
       .get(url)
@@ -25,7 +25,7 @@ export class CategoryService {
   }
 
   getCategory(id): Promise<any> {
-    let url = `${this.apiEndpoint}/products/${id}`
+    let url = `${this.apiEndpoint}/categories/${id}`
 
     return this.http
       .get(url)
