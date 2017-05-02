@@ -1,9 +1,9 @@
 <div *ngIf="vendor" class="">
   <div class="row">
-    <div class="col l6 m6 s6">
-      <h3>
+    <div class="col l6 m6 s12">
+      <h4>
         {{vendor.name}}
-      </h3>
+      </h4>
       <p>{{vendor.description}}</p>
       <ul>
         <li>
@@ -17,15 +17,15 @@
         </li>
       </ul>
     </div>
-    <div class="col l6 m6 s6">
-      <img class="col l10 right" src="assets/dummy_img.jpg">
+    <div class="col l6 m6 s12">
+      <img class="col l8 m8 s8 right" src="assets/dummy_img.jpg">
     </div>
   </div>
   <div class="row">
     <h5>Produkte</h5>
     <hr>
     <ul class="row">
-      <li *ngFor="let product of store.vendorProducts" class="col s6 m4 l3 xl3">
+      <li *ngFor="let product of store.vendorProducts" class="col s12 m4 l3 xl2">
         <a [routerLink]="['/produkt', product._id]">
           <div class="card">
             <div class="card-image">
