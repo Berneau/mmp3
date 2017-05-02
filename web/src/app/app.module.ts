@@ -16,6 +16,7 @@ import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     SearchResultsComponent,
     RecipeListComponent,
     CategoryListComponent,
-    SlideNavComponent
+    SlideNavComponent,
+    VendorProfileComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
