@@ -17,6 +17,9 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -50,7 +53,10 @@ const appRoutes: Routes = [
     RecipeListComponent,
     CategoryListComponent,
     SlideNavComponent,
-    VendorProfileComponent
+    VendorProfileComponent,
+    RecipeDetailComponent,
+    ProductDetailComponent,
+    CategoryDetailComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
