@@ -10,7 +10,6 @@ export class VendorService {
   constructor(private http: Http) { }
 
   vendors: Vendor[]
-  vendor: Vendor
   private apiEndpoint = ApiEndpoint
 
   getVendors(): Promise<any> {
@@ -21,7 +20,18 @@ export class VendorService {
       .toPromise()
       .then((res) => {
         this.vendors = res.json()
-        console.log(res.json())
+      })
+      .catch(this.handleError)
+  }
+
+  getVendor(id): Promise<any> {
+    let url = `${this.apiEndpoint}/vendors/${id}`
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        return res.json() as Vendor
       })
       .catch(this.handleError)
   }

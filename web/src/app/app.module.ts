@@ -27,6 +27,12 @@ import { SlideNavComponent } from './slide-nav/slide-nav.component';
 const appRoutes: Routes = [
   { path: '',            component: LandingPageComponent },
   { path: 'produzenten', component: VendorListComponent },
+  {
+    path: 'produzenten',
+    children: [
+      { path: ':id', component: VendorProfileComponent }
+    ]
+  },
   { path: 'produkte',    component: CategoryListComponent },
   { path: 'rezepte',     component: RecipeListComponent },
   { path: 'login',       component: LoginComponent }

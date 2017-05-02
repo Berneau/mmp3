@@ -4,7 +4,7 @@
 
 <ul class="row">
   <li *ngFor="let vendor of store.vendors" class="col s12 m6 l4 xl3">
-    <a [routerLink]="['']">
+    <a [routerLink]="['produzenten', {id: vendor._id}]">
       <div class="card">
         <div class="card-image">
           <img class="activator" src="assets/dummy_img.jpg">
