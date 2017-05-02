@@ -16,6 +16,7 @@ import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -26,6 +27,12 @@ import { SlideNavComponent } from './slide-nav/slide-nav.component';
 const appRoutes: Routes = [
   { path: '',            component: LandingPageComponent },
   { path: 'produzenten', component: VendorListComponent },
+  {
+    path: 'produzenten',
+    children: [
+      { path: ':id', component: VendorProfileComponent }
+    ]
+  },
   { path: 'produkte',    component: CategoryListComponent },
   { path: 'rezepte',     component: RecipeListComponent },
   { path: 'login',       component: LoginComponent }
@@ -42,7 +49,8 @@ const appRoutes: Routes = [
     SearchResultsComponent,
     RecipeListComponent,
     CategoryListComponent,
-    SlideNavComponent
+    SlideNavComponent,
+    VendorProfileComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
