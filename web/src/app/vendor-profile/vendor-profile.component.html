@@ -1,3 +1,29 @@
-<p>
-  vendor-profile works!
-</p>
+<div *ngIf="vendor" class="">
+  <div class="row">
+    <div class="col l6">
+      <h3>
+        {{vendor.name}}
+      </h3>
+      <p>{{vendor.description}}</p>
+      <ul>
+        <li>
+          <i class="material-icons">location_on</i> {{vendor.address.street}}, {{vendor.address.zip}} {{vendor.address.city}}
+        </li>
+        <li>
+          <i class="material-icons">phone</i> {{vendor.tel}}
+        </li>
+        <li>
+          <i class="material-icons">email</i> {{vendor.email}}
+        </li>
+      </ul>
+    </div>
+    <div class="col l6">
+      <img class="col l10 right" src="assets/dummy_img.jpg">
+    </div>
+  </div>
+  <div class="row">
+    <h5>Produkte</h5>
+    <hr>
+    <p class="new badge blue">produktliste</p>
+  </div>
+</div>
