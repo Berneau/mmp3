@@ -1,0 +1,10 @@
+{
+  "email": "admin@dev.at",
+  "password": "secret",
+  "isAdmin": true
+}
+{
+  "email": "noob@dev.at",
+  "password": "secret",
+  "isAdmin": false
+}

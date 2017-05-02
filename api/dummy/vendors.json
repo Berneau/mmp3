@@ -1,0 +1,51 @@
+{
+"name": "Berta Huber",
+"userUid": "1234",
+"email": "hans@huber.at",
+"description": "lorem ipsum",
+"imageUrl": "www.dev.null",
+"subName": "Huabahütte",
+"tel": 123456789,
+"__v": 0,
+"address": {
+  "city": "Lungau",
+  "zip": 1234,
+  "street": "Dorfweg 2",
+  "lat": 1234,
+  "long": 1234
+  }
+}
+{
+"name": "Franz Huber",
+"userUid": "1234",
+"email": "hans@huber.at",
+"description": "lorem ipsum",
+"imageUrl": "www.dev.null",
+"subName": "Huabahütte",
+"tel": 123456789,
+"__v": 0,
+"address": {
+  "city": "Lungau",
+  "zip": 1234,
+  "street": "Dorfweg 2",
+  "lat": 1234,
+  "long": 1234
+  }
+}
+{
+"name": "Hansi Huber",
+"userUid": "1234",
+"email": "hans@huber.at",
+"description": "lorem ipsum",
+"imageUrl": "www.dev.null",
+"subName": "Huabahütte",
+"tel": 123456789,
+"__v": 0,
+"address": {
+  "city": "Lungau",
+  "zip": 1234,
+  "street": "Dorfweg 2",
+  "lat": 1234,
+  "long": 1234
+  }
+}
