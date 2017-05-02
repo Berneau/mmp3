@@ -28,6 +28,8 @@ export class CategoryDetailComponent implements OnInit {
         }
         this.category = category
       })
+
+      this.store.getCategoryProducts(id)
     })
   }
 

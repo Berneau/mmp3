@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
 import { Category } from './../interfaces/category'
-import { ApiEndpoint } from './../app.config';
+import { ApiEndpoint } from './../app.config'
+
+import { Product } from './../interfaces/product'
 
 @Injectable()
 export class CategoryService {
@@ -10,6 +12,7 @@ export class CategoryService {
   constructor(private http: Http) { }
 
   categories: Category[]
+  categoryProducts: Product[]
   private apiEndpoint = ApiEndpoint
 
   getCategories(): Promise<any> {
@@ -32,6 +35,18 @@ export class CategoryService {
       .toPromise()
       .then((res) => {
         return res.json() as Category
+      })
+      .catch(this.handleError)
+  }
+
+  getCategoryProducts(id): Promise<any> {
+    let url = `${this.apiEndpoint}/categories?categoryId=${id}`
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        this.categoryProducts = res.json()
       })
       .catch(this.handleError)
   }
