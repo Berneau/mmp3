@@ -23,14 +23,16 @@ export class VendorProfileComponent implements OnInit {
     this.route.params.forEach((params) => {
       let id = params['id']
       this.store.getVendor(id)
-      .then(vendor => {
-        if (!vendor) {
-          this.location.back() // TODO: is location.back() sinnovoll ?
-          Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
-          return
-        }
-        this.vendor = vendor
-      })
+        .then(vendor => {
+          if (!vendor) {
+            this.location.back() // TODO: is location.back() sinnovoll ?
+            Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
+            return
+          }
+          this.vendor = vendor
+        })
+
+      this.store.getVendorProducts(id)
     })
   }
 
