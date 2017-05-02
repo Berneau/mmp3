@@ -13,66 +13,20 @@ export class VendorService {
   vendor: Vendor
   private apiEndpoint = ApiEndpoint
 
-  // getVendors(): Promise<any> {
-  //   let url = `${this.apiEndpoint}/vendors?skip=0?limit=15`
-  //
-  //   return this.http
-  //     .get(url)
-  //     .toPromise()
-  //     .then((res) => {
-  //       this.vendors = res.json()
-  //       console.log(res.json())
-  //     })
-  //     .catch(this.handleError)
-  // }
+  getVendors(): Promise<any> {
+    let url = `${this.apiEndpoint}/vendors`
 
-  getVendors() {
-    this.vendors = [
-      {
-        name: 'Bauer F.',
-        ownerName: 'bla',
-        email: 'inco@gnito.com',
-        category: 1,
-        city: 'Lungau',
-        _id: '1'
-      },
-      {
-        name: 'Bauer R.',
-        ownerName: 'bla',
-        email: 'inco@gnito.com',
-        category: 1,
-        city: 'Lungau',
-        _id: '2'
-      },
-      {
-        name: 'Bauer X.',
-        ownerName: 'bla',
-        email: 'inco@gnito.com',
-        category: 1,
-        city: 'Lungau',
-        _id: '3'
-      },
-      {
-        name: 'Bauer L.',
-        ownerName: 'bla',
-        email: 'inco@gnito.com',
-        category: 1,
-        city: 'Lungau',
-        _id: '4'
-      }
-    ]
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        this.vendors = res.json()
+        console.log(res.json())
+      })
+      .catch(this.handleError)
   }
 
-  getVendor() {
-    return {
-      name: 'Bauer T.',
-      ownerName: 'bla',
-      email: 'inco@gnito.com',
-      category: 1,
-      city: 'Lungau',
-      _id: '1'
-    }
-  }
+
 
   private handleError(error: any) {
     console.log(error.statusText, 2000)
