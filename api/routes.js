@@ -9,6 +9,7 @@ require('./routes/unauthenticated/user.routes')(router)
 require('./routes/unauthenticated/auth.routes')(router)
 require('./routes/unauthenticated/product.routes')(router)
 require('./routes/unauthenticated/vendor.routes')(router)
+require('./routes/unauthenticated/category.routes')(router)
 
 // authentication
 router.use(function(req, res, next) {

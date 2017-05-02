@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Äpfel",
+    "typeUid": "abc123",
+    "imageUrl": "yesno.wtf"
+  },
+  {
+    "name": "Echtling",
+    "typeUid": "abc123",
+    "imageUrl": "yesno.wtf"
+  },
+  {
+    "name": "Kürbisse",
+    "typeUid": "abc123",
+    "imageUrl": "yesno.wtf"
+  }
+]

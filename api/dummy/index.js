@@ -10,4 +10,9 @@ exec(users, (err, stdout, stderr) => {
   if(err !== null) console.log(err)
 })
 
-// TODO: categories, products, recipes, types
+let categories = 'mongoimport -d lungau_db -c categories --drop --jsonArray --file dummy/categories.json'
+exec(categories, (err, stdout, stderr) => {
+  if(err !== null) console.log(err)
+})
+
+// TODO: products, recipes, types
