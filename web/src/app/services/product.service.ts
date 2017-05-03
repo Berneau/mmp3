@@ -9,17 +9,17 @@ export class ProductService {
 
   constructor(private http: Http) { }
 
-  products: Product[]
   private apiEndpoint = ApiEndpoint
 
-  getProducts(): Promise<any> {
-    let url = `${this.apiEndpoint}/products?skip=0?limit=15`
+  getProduct(id): Promise<any> {
+    let url = `${this.apiEndpoint}/products/${id}`
 
     return this.http
       .get(url)
       .toPromise()
       .then((res) => {
-        this.products = res.json()
+        console.log(res.json())
+        return res.json() as Product
       })
       .catch(this.handleError)
   }

@@ -1,8 +1,8 @@
 [
   {
     "name": "Rote Äpfel",
-    "categoryId": "asd123",
-    "vendorId": "asd123",
+    "categoryId": "äpfel",
+    "vendorId": "huaba",
     "imageUrl": "dev.null",
     "availableAt": {
       "fromPeriod": "Anfang",
@@ -12,9 +12,9 @@
     }
   },
   {
-    "name": "Kopfsalat",
-    "categoryId": "bsd123",
-    "vendorId": "asd123",
+    "name": "Grüne Äpfel",
+    "categoryId": "äpfel",
+    "vendorId": "bauer",
     "imageUrl": "dev.null",
     "availableAt": {
       "fromPeriod": "Anfang",
@@ -24,9 +24,69 @@
     }
   },
   {
-    "name": "Hühnerfleisch",
-    "categoryId": "asd123",
-    "vendorId": "bsd123",
+    "name": "Gelbe Äpfel",
+    "categoryId": "äpfel",
+    "vendorId": "müller",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  },
+  {
+    "name": "Butternut",
+    "categoryId": "kürbisse",
+    "vendorId": "müller",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  },
+  {
+    "name": "Oranger Kürbis",
+    "categoryId": "kürbisse",
+    "vendorId": "bauer",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  },
+  {
+    "name": "Müllner Echtling",
+    "categoryId": "echtling",
+    "vendorId": "huaba",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  },
+  {
+    "name": "Huaba Echtling",
+    "categoryId": "echtling",
+    "vendorId": "bauer",
+    "imageUrl": "dev.null",
+    "availableAt": {
+      "fromPeriod": "Anfang",
+      "fromMonth": "Mai",
+      "toPeriod": "Ende",
+      "toMonth": "September"
+    }
+  },
+  {
+    "name": "Mehlige Echtling",
+    "categoryId": "echtling",
+    "vendorId": "müller",
     "imageUrl": "dev.null",
     "availableAt": {
       "fromPeriod": "Anfang",
