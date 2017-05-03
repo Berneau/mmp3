@@ -25,7 +25,7 @@ export class VendorProfileComponent implements OnInit {
       this.store.getVendor(id)
         .then(vendor => {
           if (!vendor) {
-            this.location.back() // TODO: is location.back() sinnovoll ?
+            this.location.back() // TODO: is location.back() sinnvoll ?
             Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
             return
           }
