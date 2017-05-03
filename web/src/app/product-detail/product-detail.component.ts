@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { Product } from './../interfaces/product'
 import { ProductService } from './../services/product.service'
 
+import { Vendor } from './../interfaces/vendor'
+
 @Component({
   selector: 'product-detail',
   templateUrl: './product-detail.component.html',
@@ -15,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
   constructor(private store: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   product: Product
+  vendor: Vendor
 
   ngOnInit() {
     this.route.params.forEach((params) => {
@@ -27,7 +30,18 @@ export class ProductDetailComponent implements OnInit {
           return
         }
         this.product = product
-        console.log(this.product)
+      })
+      .then(vendor => {
+        this.store.getVendor(this.product.vendorId)
+        .then(v => {
+          if (!v) {
+            this.location.back() // TODO: is location.back() sinnovoll ?
+            Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
+            return
+          }
+          this.vendor = v
+          console.log(this.vendor)
+        })
       })
     })
   }

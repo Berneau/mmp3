@@ -1,12 +1,37 @@
 <div *ngIf="product">
   <div class="row">
     <div class="col l6 m6 s12">
-      <h3>
-        {{product.name}}
-      </h3>
+      <h4>
+        {{product.name}} <br>
+        <small>
+          {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
+        </small>
+      </h4>
     </div>
     <div class="col l6 m6 s12">
       <img class="col l8 m8 s8 right" src="assets/dummy_img.jpg">
     </div>
+  </div>
+  <div *ngIf="vendor" class="row">
+    <a [routerLink]="['/produzenten', vendor._id]">
+      <div class="col l3 m3 s6">
+        <img class="col l12 m12 s12" src="assets/dummy_img.jpg">
+      </div>
+      <div class="col l9 m9 s6">
+        <h5>{{vendor.name}}</h5>
+        <h6>{{vendor.subName}}</h6>
+        <ul>
+          <li>
+            <i class="material-icons">location_on</i> {{vendor.address.street}}, {{vendor.address.zip}} {{vendor.address.city}}
+          </li>
+          <li>
+            <i class="material-icons">phone</i> {{vendor.tel}}
+          </li>
+          <li>
+            <i class="material-icons">email</i> {{vendor.email}}
+          </li>
+        </ul>
+      </div>
+    </a>
   </div>
 </div>

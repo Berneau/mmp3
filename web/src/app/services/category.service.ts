@@ -17,7 +17,6 @@ export class CategoryService {
 
   getCategories(): Promise<any> {
     let url = `${this.apiEndpoint}/categories`
-
     return this.http
       .get(url)
       .toPromise()

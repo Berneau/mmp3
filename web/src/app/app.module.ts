@@ -43,7 +43,7 @@ const appRoutes: Routes = [
       { path: ':id', component: CategoryDetailComponent }
     ]
   },
-  { path: 'produkt', redirectTo: 'produkte' },
+  { path: 'produkt', redirectTo: 'produkte', pathMatch: 'full' },
   {
     path: 'produkt',
     children: [
