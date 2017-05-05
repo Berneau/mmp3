@@ -68,12 +68,14 @@ module.exports = function(router) {
   function stripUserArray(arr) {
    for (var i = 0; i < arr.length; i++) {
      arr[i].password = undefined
+     arr[i].salt = undefined
    }
    return arr
   }
 
   function stripUserObject(user) {
     user.password = undefined
+    user.salt = undefined
     return user
   }
 
