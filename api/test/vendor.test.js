@@ -10,7 +10,7 @@ let token = null
 
 chai.use(chaiHttp)
 
-describe('Vendor', () => {
+describe.skip('Vendor', () => {
 
   before((done) => {
     Vendor.remove({}, (err) => {
