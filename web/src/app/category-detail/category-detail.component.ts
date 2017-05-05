@@ -22,7 +22,7 @@ export class CategoryDetailComponent implements OnInit {
       this.store.getCategory(id)
       .then(category => {
         if (!category) {
-          this.location.back() // TODO: is location.back() sinnovoll ?
+          this.location.back() // TODO: is location.back() sinnvoll ?
           Materialize.toast('Es wurde keine Produktkategorie mit dieser ID gefunden.', 2000)
           return
         }

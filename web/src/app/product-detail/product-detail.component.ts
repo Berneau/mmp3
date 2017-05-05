@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
       this.store.getProduct(id)
       .then(product => {
         if (!product) {
-          this.location.back() // TODO: is location.back() sinnovoll ?
+          this.location.back() // TODO: is location.back() sinnvoll ?
           Materialize.toast('Es wurde kein Produkt mit dieser ID gefunden.', 2000)
           return
         }
@@ -35,7 +35,7 @@ export class ProductDetailComponent implements OnInit {
         this.store.getVendor(this.product.vendorId)
         .then(v => {
           if (!v) {
-            this.location.back() // TODO: is location.back() sinnovoll ?
+            this.location.back() // TODO: is location.back() sinnvoll ?
             Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
             return
           }
