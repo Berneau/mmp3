@@ -29,7 +29,6 @@ describe('User', () => {
 
     it('should GET a user by id', (done) => {
       let user = new User({
-        username: 'noob',
         password: 'noob',
         email: 'noob@boon.com',
         isAdmin: false
@@ -53,9 +52,8 @@ describe('User', () => {
 
     it('should create a user if no fields are missing', (done) => {
       let user = new User({
-        username: 'test',
+        email: 'test@null.com',
         password: 'test',
-        email: 'test@test.com',
         isAdmin: false
       })
 

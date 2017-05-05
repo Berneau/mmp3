@@ -22,7 +22,6 @@ describe('Auth', () => {
 
     it('should POST a user and return a token if user and password is correct', (done) => {
       let user = new User({
-        username: 'Berneau',
         email: 'ico@gnito.at',
         password: 'test',
         isAdmin: true

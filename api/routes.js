@@ -25,10 +25,6 @@ router.use(function(req, res, next) {
   } else return res.status(412).json({ message: 'No token provided' })
 })
 
-// authenticated routes
-
-// TODO: favorites routes
-
 // admin check
 router.use(function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token']

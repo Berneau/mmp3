@@ -2,11 +2,13 @@
   {
     "email": "admin@dev.at",
     "password": "secret",
+    "salt": "asd",
     "isAdmin": true
   },
   {
     "email": "noob@dev.at",
     "password": "secret",
+    "salt": "asd",
     "isAdmin": false
   }
 ]
