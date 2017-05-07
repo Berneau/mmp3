@@ -39,15 +39,25 @@ module.exports = function(router) {
               expiresIn: '24h'
             })
 
+            // return token and user
             res.status(200).json({
               ok: true,
               token: token,
               user: user
             })
 
-          } else res.status(403).json({ message: 'Authentication failed.' })
+            // email and password doesn't match
+          } else res.status(403).json({
+            ok: false,
+            message: 'Authentication failed.'
+          })
         })
-      } else res.status(403).json({ message: 'Authentication failed.' })
+
+        // user with this email was not found
+      } else res.status(403).json({
+        ok: false,
+        message: 'Authentication failed.'
+      })
     })
   })
 

@@ -22,6 +22,8 @@ module.exports = function(router) {
    if (userIsValid(req.body)) {
 
      password.hash(req.body.password, function(err, salt, hash) {
+
+       // error during hashing
        if (err) res.status(500).json(err.message)
        else {
          var user = new User({
@@ -33,19 +35,34 @@ module.exports = function(router) {
 
          user.save(function(err) {
            if (err) {
-             // Err Code 11000 = duplicate Key in MongoDB
-             if (err.code == 11000) res.status(200).json({ message: 'Email already taken.' })
-             else res.status(500).json(err.message)
+
+             // Err Code 11000 = duplicate Key in MongoDB, email already exists
+             if (err.code == 11000) res.status(200).json({
+               ok: false,
+               message: 'Email already taken.'
+             })
+
+             // internal server error
+             else res.status(500).json({
+               ok: false,
+               err: err.message
+             })
            }
-           else res.status(200).json(stripUserObject(user))
+
+           // return created user object
+           else res.status(200).json({
+             ok: true,
+             user: stripUserObject(user)
+           })
          })
        }
 
      })
 
-   } else {
-     res.status(412).json({ message: 'Missing fields' })
-   }
+   } else res.status(412).json({
+     ok: false,
+     message: 'Missing fields'
+   })
   })
 
   function userIsValid(user) {

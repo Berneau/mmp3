@@ -19,8 +19,18 @@ module.exports = function(router) {
 
     Vendor
     .find({ 'name': { '$regex': filter } }, function(err, vendors) {
-      if (err) res.status(500).end(err)
-      res.json(vendors)
+
+      // internal server error
+      if (err) res.status(500).end({
+        ok: false,
+        err: err
+      })
+
+      // return vendor list
+      res.status(200).json({
+        ok: true,
+        vendors: vendors
+      })
     })
     .sort({name: 1})
   })
@@ -37,9 +47,23 @@ module.exports = function(router) {
     .get(function(req, res) {
       Vendor.findById(req.params.id, function(err, vendor) {
 
-        if (err && err.name != 'CastError') res.status(404).json(err.message)
-        else if (!err && vendor) res.status(200).json(vendor)
-        else res.status(404).json({ message: 'Vendor not found'})
+        // internal server err
+        if (err && err.name != 'CastError') res.status(404).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return found vendor object
+        else if (!err && vendor) res.status(200).json({
+          ok: true,
+          vendor: vendor
+        })
+
+        // no vendor was found
+        else res.status(404).json({
+          ok: false,
+          message: 'Vendor not found'
+        })
       })
     })
 

@@ -19,8 +19,18 @@ module.exports = function(router) {
 
    Category
    .find({ 'name': { '$regex': filter } }, function(err, categories) {
-     if (err) res.status(500).end(err)
-     res.json(categories)
+
+     // internal server error
+     if (err) res.status(500).end({
+       ok: false,
+       err: err
+     })
+
+     // return category list
+     res.status(200).json({
+       ok: true,
+       categories: categories
+     })
    })
    .sort({name: 1})
  })
@@ -37,9 +47,23 @@ module.exports = function(router) {
    .get(function(req, res) {
      Category.findById(req.params.id, function(err, category) {
 
-       if (err && err.name != 'CastError') res.status(404).json(err.message)
-       else if (!err && category) res.status(200).json(category)
-       else res.status(404).json({ message: 'Category not found'})
+       // internal server err
+       if (err && err.name != 'CastError') res.status(404).json({
+         ok: false,
+         err: err.message
+       })
+
+       // return found category object
+       else if (!err && category) res.status(200).json({
+         ok: true,
+         category: category
+       })
+
+       // no category was found
+       else res.status(404).json({
+         ok: false,
+         message: 'Category not found'
+       })
      })
    })
 
