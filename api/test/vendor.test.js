@@ -10,7 +10,7 @@ let token = null
 
 chai.use(chaiHttp)
 
-describe.skip('Vendor', () => {
+describe('Vendor', () => {
 
   before((done) => {
     Vendor.remove({}, (err) => {
@@ -21,7 +21,7 @@ describe.skip('Vendor', () => {
   before((done) => {
     chai.request(server)
       .post('/api/auth')
-      .send({ username: 'Berneau', password: 'test' })
+      .send({ email: 'ico@gnito.at', password: 'test' })
       .end((err, res) => {
         token = res.body.token
         done()
@@ -35,8 +35,9 @@ describe.skip('Vendor', () => {
         .get('/api/vendors')
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('array')
-          res.body.length.should.be.eql(0)
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('vendors').be.a('array')
+          res.body.vendors.length.should.be.equal(0)
           done()
         })
     })
@@ -44,7 +45,7 @@ describe.skip('Vendor', () => {
   })
   // end GET vendors
 
-  describe('GET vendor', () => {
+  describe.skip('GET vendor', () => {
 
     it('should get a vendor by its id', (done) => {
       let vendor = new Vendor({
@@ -82,7 +83,7 @@ describe.skip('Vendor', () => {
   })
   // end GET vendor
 
-  describe('POST vendor', () => {
+  describe.skip('POST vendor', () => {
 
     it('should POST a valid vendor', (done) => {
       let vendor = new Vendor({
@@ -164,7 +165,7 @@ describe.skip('Vendor', () => {
   })
   // end POST vendor
 
-  describe('PUT vendor', () => {
+  describe.skip('PUT vendor', () => {
 
     it('should UPDATE and return a vendor', (done) => {
       let vendor1 = new Vendor({
@@ -257,7 +258,7 @@ describe.skip('Vendor', () => {
   })
   // end PUT vendor
 
-  describe('DELETE vendor', () => {
+  describe.skip('DELETE vendor', () => {
 
     it('should DELETE a vendor if it exists', (done) => {
       let vendor = new Vendor({

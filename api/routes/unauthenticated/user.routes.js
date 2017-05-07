@@ -61,14 +61,14 @@ module.exports = function(router) {
 
    } else res.status(412).json({
      ok: false,
-     message: 'Missing fields'
+     message: 'Not a valid user object'
    })
   })
 
   function userIsValid(user) {
     if (!user.password ||
         !user.email ||
-        !user.isAdmin) return false
+        !user.hasOwnProperty('isAdmin')) return false
     else return true
   }
 
