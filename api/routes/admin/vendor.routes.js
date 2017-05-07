@@ -28,7 +28,12 @@ module.exports = function(router) {
   .post(function(req, res) {
 
     if (!vendorIsValid(req.body)) {
-      res.status(412).json({ message: 'Missing fields' })
+
+      // not a valid vendor object
+      res.status(412).json({
+        ok: false,
+        message: 'Missing fields'
+      })
     } else {
 
       var vendor = new Vendor({
@@ -40,17 +45,27 @@ module.exports = function(router) {
         subName: req.body.subName,
         tel: req.body.tel,
         address: {
-          city: req.body.city,
-          zip: req.body.zip,
-          street: req.body.street,
-          lat: req.body.lat,
-          long: req.body.long
+          city: req.body.address ? req.body.address : undefined,
+          zip: req.body.address ? req.body.address : undefined,
+          street: req.body.address ? req.body.address : undefined,
+          lat: req.body.address ? req.body.address : undefined,
+          long: req.body.address ? req.body.address : undefined
         }
       })
 
       vendor.save(function(err) {
-        if (err) res.status(500).end(err)
-        res.status(200).json(vendor)
+
+        // internal server error
+        if (err) res.status(500).end({
+          ok: false,
+          err: err
+        })
+
+        // return created vendor
+        res.status(200).json({
+          ok: true,
+          vendor: vendor
+        })
       })
     }
 
@@ -82,7 +97,12 @@ module.exports = function(router) {
       .put(function(req, res) {
 
         Vendor.findById(req.params.id, function(err, vendor) {
-          if (err && err.name != 'CastError') res.status(404).json(err.message)
+
+          // not a valid id
+          if (err && err.name != 'CastError') res.status(404).json({
+            ok: false,
+            err: err.message
+          })
 
           else if (!err && vendor) {
             if (vendorIsValid(req.body)) {
@@ -94,20 +114,38 @@ module.exports = function(router) {
               vendor.imageUrl = req.body.imageUrl,
               vendor.subName = req.body.subName,
               vendor.tel = req.body.tel,
-              vendor.address.city = req.body.city,
-              vendor.address.zip = req.body.zip,
-              vendor.address.street = req.body.street,
-              vendor.address.lat = req.body.lat,
-              vendor.address.long = req.body.long
+              vendor.address.city = req.body.address ? req.body.address.city : undefined,
+              vendor.address.zip = req.body.address ? req.body.address.zip : undefined,
+              vendor.address.street = req.body.address ? req.body.address.street : undefined,
+              vendor.address.lat = req.body.address ? req.body.address.lat : undefined,
+              vendor.address.long = req.body.address ? req.body.address.long : undefined
 
               vendor.save(function(err) {
-                if (err) res.status(500).end(err)
-                res.status(200).json(vendor)
+
+                // internal server error
+                if (err) res.status(500).end({
+                  ok: false,
+                  err: err
+                })
+
+                // return the updated vendor
+                res.status(200).json({
+                  ok: true,
+                  vendor: vendor
+                })
               })
 
-            } else res.status(412).json({ message: 'Missing fields' })
+              // not a valid vendor
+            } else res.status(412).json({
+              ok: false,
+              message: 'Missing fields'
+            })
 
-          } else res.status(404).json({ message: 'Vendor not found'})
+            // no vendor with this id
+          } else res.status(404).json({
+            ok: false,
+            message: 'Vendor not found'
+          })
         })
       })
 
@@ -121,18 +159,36 @@ module.exports = function(router) {
       */
       .delete(function(req, res) {
         Vendor.findById(req.params.id, function(err, vendor) {
-          if (err && err.name != 'CastError') res.status(404).json(err.message)
+
+          // not a valid id
+          if (err && err.name != 'CastError') res.status(404).json({
+            ok: false,
+            err: err.message
+          })
 
           else if (!err && vendor) {
             Vendor.remove({ _id: req.params.id }, function(err, vendor) {
-              if (err) res.status(500).end(err)
-              res.status(200).json({ message: 'Successfully deleted' })
-            })
-          } else res.status(404).json({ message: 'Vendor not found'})
 
+              // internal server error
+              if (err) res.status(500).end({
+                ok: false,
+                err: err
+              })
+
+              // successfully deleted
+              res.status(200).json({
+                ok: true,
+                message: 'Successfully deleted'
+              })
+            })
+
+            // no vendor with this id
+          } else res.status(404).json({
+            ok: false,
+            message: 'Vendor not found'
+          })
         })
       })
-
 
     function vendorIsValid(vendor) {
       if (!vendor.name ||
