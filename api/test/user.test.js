@@ -56,7 +56,7 @@ describe('User', () => {
             res.should.have.status(200)
             res.body.should.have.property('ok').equal(true)
             res.body.should.have.property('user')
-            res.body.user.should.have.property('_id').eql(user._id.toString())
+            res.body.user.should.have.property('_id').equal(user._id.toString())
             done()
           })
       })
