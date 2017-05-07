@@ -24,7 +24,13 @@ module.exports = function(router) {
   .post(function(req, res) {
 
     if (!productIsValid(req.body)) {
-      res.status(412).json({ message: 'Missing fields' })
+
+      // not a valid product
+      res.status(412).json({
+        ok: false,
+        message: 'Missing fields'
+      })
+
     } else {
 
       var product = new Product({
@@ -32,20 +38,29 @@ module.exports = function(router) {
         categoryId: req.body.categoryId,
         vendorId: req.body.vendorId,
         availableAt: {
-          fromPeriod: req.body.fromPeriod,
-          fromMonth: req.body.fromMonth,
-          toPeriod: req.body.toPeriod,
-          toMonth: req.body.toMonth
+          fromPeriod: req.body.availableAt.fromPeriod,
+          fromMonth: req.body.availableAt.fromMonth,
+          toPeriod: req.body.availableAt.toPeriod,
+          toMonth: req.body.availableAt.toMonth
         },
         imageUrl: req.body.imageUrl
       })
 
       product.save(function(err) {
-        if (err) res.status(500).end(err)
-        res.status(200).json(product)
+
+        // internal server error
+        if (err) res.status(500).end({
+          ok: false,
+          err: err
+        })
+
+        // return the created product
+        res.status(200).json({
+          ok: true,
+          product: product
+        })
       })
     }
-
   })
 
 
@@ -71,7 +86,12 @@ module.exports = function(router) {
     .put(function(req, res) {
 
       Product.findById(req.params.id, function(err, product) {
-        if (err && err.name != 'CastError') res.status(404).json(err.message)
+
+        // not a valid id
+        if (err && err.name != 'CastError') res.status(404).json({
+          ok: false,
+          err: err.message
+        })
 
         else if (!err && product) {
           if (productIsValid(req.body)) {
@@ -79,20 +99,38 @@ module.exports = function(router) {
             product.name = req.body.name,
             product.categoryId = req.body.categoryId,
             product.vendorId = req.body.vendorId,
-            product.availableAt.fromPeriod = req.body.fromPeriod,
-            product.availableAt.fromMonth = req.body.fromMonth,
-            product.availableAt.toPeriod = req.body.toPeriod,
-            product.availableAt.toMonth = req.body.toMonth,
+            product.availableAt.fromPeriod = req.body.availableAt.fromPeriod,
+            product.availableAt.fromMonth = req.body.availableAt.fromMonth,
+            product.availableAt.toPeriod = req.body.availableAt.toPeriod,
+            product.availableAt.toMonth = req.body.availableAt.toMonth,
             product.imageUrl = req.body.imageUrl
 
             product.save(function(err) {
-              if (err) res.status(500).end(err)
-              res.status(200).json(product)
+
+              // internal server error
+              if (err) res.status(500).end({
+                ok: false,
+                err: err
+              })
+
+              // return the updated product
+              res.status(200).json({
+                ok: true,
+                product: product
+              })
             })
 
-          } else res.status(412).json({ message: 'Missing fields' })
+            // not a valid product
+          } else res.status(412).json({
+            ok: false,
+            message: 'Missing fields'
+          })
 
-        } else res.status(404).json({ message: 'Product not found'})
+          // product with this id is not available
+        } else res.status(404).json({
+          ok: false,
+          message: 'Product not found'
+        })
       })
     })
 
@@ -108,27 +146,46 @@ module.exports = function(router) {
     .delete(function(req, res) {
 
       Product.findById(req.params.id, function(err, product) {
-        if (err && err.name != 'CastError') res.status(404).json(err.message)
+
+        // not a valid id
+        if (err && err.name != 'CastError') res.status(404).json({
+          ok: false,
+          err: err.message
+        })
 
         else if (!err && product) {
           Product.remove({ _id: req.params.id }, function(err, product) {
-            if (err) res.status(500).end(err)
-            res.status(200).json({ message: 'Successfully deleted' })
+
+            // internal server error
+            if (err) res.status(500).end({
+              ok: false,
+              err: err
+            })
+
+            // successfully deleted
+            res.status(200).json({
+              ok: true,
+              message: 'Successfully deleted'
+            })
           })
-        } else res.status(404).json({ message: 'Product not found'})
+
+          // no product with this id found
+        } else res.status(404).json({
+          ok: false,
+          message: 'Product not found'
+        })
 
       })
     })
-
 
     function productIsValid(product) {
       if (!product.name ||
           !product.categoryId ||
           !product.vendorId ||
-          !product.fromPeriod ||
-          !product.fromMonth ||
-          !product.toPeriod ||
-          !product.toMonth) return false
+          !product.availableAt.fromPeriod ||
+          !product.availableAt.fromMonth ||
+          !product.availableAt.toPeriod ||
+          !product.availableAt.toMonth) return false
       else return true
     }
 }

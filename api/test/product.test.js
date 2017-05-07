@@ -35,8 +35,9 @@ describe('Product', () => {
         .get('/api/products')
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('array')
-          res.body.length.should.be.eql(0)
+          res.body.should.have.property('products').be.a('array')
+          res.body.should.have.property('ok').equal(true)
+          res.body.products.length.should.be.equal(0)
           done()
         })
     })
@@ -66,8 +67,9 @@ describe('Product', () => {
           .send(product)
           .end((err, res) => {
             res.should.have.status(200)
-            res.body.should.be.a('object')
-            res.body.should.have.property('_id').eql(product._id.toString())
+            res.body.should.have.property('product')
+            res.body.should.have.property('ok').equal(true)
+            res.body.product.should.have.property('_id').eql(product._id.toString())
             done()
         })
       })
@@ -78,7 +80,6 @@ describe('Product', () => {
         .get('/api/products/notavalidid')
         .end((err, res) => {
           res.should.have.status(404)
-          res.body.should.be.a('object')
           res.body.should.have.property('message').eql('Product not found')
           done()
         })
@@ -95,10 +96,12 @@ describe('Product', () => {
         categoryId: 'asd123',
         vendorId: 'asd123',
         imageUrl: 'dev.null',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       }
       chai.request(server)
         .post('/api/products')
@@ -106,8 +109,8 @@ describe('Product', () => {
         .send(product)
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('object')
-          res.body.should.have.property('_id')
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('product')
           done()
         })
     })
@@ -117,10 +120,12 @@ describe('Product', () => {
         categoryId: 'asd123',
         vendorId: 'asd123',
         imageUrl: 'dev.null',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       }
       chai.request(server)
         .post('/api/products')
@@ -128,7 +133,7 @@ describe('Product', () => {
         .send(product)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
+          res.body.should.have.property('ok').equal(false)
           res.body.should.have.property('message').eql('Missing fields')
           done()
         })
@@ -139,10 +144,12 @@ describe('Product', () => {
         name: 'Rote Äpfel',
         vendorId: 'asd123',
         imageUrl: 'dev.null',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       }
       chai.request(server)
         .post('/api/products')
@@ -150,7 +157,7 @@ describe('Product', () => {
         .send(product)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
+          res.body.should.have.property('ok').equal(false)
           res.body.should.have.property('message').eql('Missing fields')
           done()
         })
@@ -161,10 +168,12 @@ describe('Product', () => {
         name: 'Rote Äpfel',
         categoryId: 'asd123',
         imageUrl: 'dev.null',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       }
       chai.request(server)
         .post('/api/products')
@@ -172,7 +181,7 @@ describe('Product', () => {
         .send(product)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
+          res.body.should.have.property('ok').equal(false)
           res.body.should.have.property('message').eql('Missing fields')
           done()
         })
@@ -183,26 +192,30 @@ describe('Product', () => {
 
   describe('PUT product', () => {
 
-    it.skip('should UPDATE and return a product', (done) => {
+    it('should UPDATE and return a product', (done) => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
         vendorId: 'asd123',
         imageUrl: 'dev.eins',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       })
       let product2 = new Product({
         name: 'Grüne Äpfel',
         categoryId: 'qwe123',
         vendorId: 'qwe123',
         imageUrl: 'dev.null',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       })
       product1.save((err, product1) => {
         chai.request(server)
@@ -211,35 +224,40 @@ describe('Product', () => {
         .send(product2)
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('object')
-          res.body.should.have.property('name').eql('Grüne Äpfel')
-          res.body.should.have.property('imageUrl').eql('dev.null')
-          res.body.should.have.property('categoryId').eql('qwe123')
-          res.body.should.have.property('vendorId').eql('qwe123')
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('product')
+          res.body.product.should.have.property('name').eql('Grüne Äpfel')
+          res.body.product.should.have.property('imageUrl').eql('dev.null')
+          res.body.product.should.have.property('categoryId').eql('qwe123')
+          res.body.product.should.have.property('vendorId').eql('qwe123')
           done()
         })
       })
     })
 
-    it.skip('should not UPDATE the product if it is not valid', (done) => {
+    it('should not UPDATE the product if it is not valid', (done) => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
         vendorId: 'asd123',
         imageUrl: 'dev.eins',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       })
       let product2 = new Product({
         categoryId: 'qwe123',
         vendorId: 'qwe123',
         imageUrl: 'dev.null',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       })
       product1.save((err, product1) => {
         chai.request(server)
@@ -248,33 +266,37 @@ describe('Product', () => {
         .send(product2)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
+          res.body.should.have.property('ok').equal(false)
           res.body.should.have.property('message').eql('Missing fields')
           done()
         })
       })
     })
 
-    it.skip('should not UPDATE a product if the id is not valid', (done) => {
+    it('should not UPDATE a product if the id is not valid', (done) => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
         vendorId: 'asd123',
         imageUrl: 'dev.eins',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       })
       let product2 = new Product({
-        name: 'Rote Äpfel',
+        name: 'Grüne Äpfel',
         categoryId: 'qwe123',
         vendorId: 'qwe123',
         imageUrl: 'dev.null',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       })
       product1.save((err, product1) => {
         chai.request(server)
@@ -283,7 +305,7 @@ describe('Product', () => {
           .send(product2)
           .end((err, res) => {
             res.should.have.status(404)
-            res.body.should.be.a('object')
+            res.body.should.have.property('ok').equal(false)
             res.body.should.have.property('message').eql('Product not found')
             done()
           })
@@ -295,16 +317,18 @@ describe('Product', () => {
 
   describe('DELETE product', () => {
 
-    it.skip('should DELETE a product if it exists', (done) => {
+    it('should DELETE a product if it exists', (done) => {
       let product = new Product ({
-        name: 'Rote Äpfel',
-        categoryId: 'asd123',
-        vendorId: 'asd123',
-        imageUrl: 'dev.eins',
-        fromPeriod: 'Anfang',
-        fromMonth: 'Mai',
-        toPeriod: 'Ende',
-        toMonth: 'September'
+        name: 'Grüne Äpfel',
+        categoryId: 'qwe123',
+        vendorId: 'qwe123',
+        imageUrl: 'dev.null',
+        availableAt: {
+          fromPeriod: 'Anfang',
+          fromMonth: 'Mai',
+          toPeriod: 'Ende',
+          toMonth: 'September'
+        }
       })
       product.save((err, product) => {
         chai.request(server)
@@ -312,7 +336,7 @@ describe('Product', () => {
           .set('x-access-token', token)
           .end((err, res) => {
             res.should.have.status(200)
-            res.body.should.be.a('object')
+            res.body.should.have.property('ok').equal(true)
             res.body.should.have.property('message').eql('Successfully deleted')
             done()
           })
@@ -325,7 +349,7 @@ describe('Product', () => {
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404)
-          res.body.should.be.a('object')
+          res.body.should.have.property('ok').equal(false)
           res.body.should.have.property('message').eql('Product not found')
           done()
         })
