@@ -21,6 +21,7 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { SlideNavComponent } from './slide-nav/slide-nav.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
       { path: ':id', component: RecipeDetailComponent }
     ]
   },
+  { path: 'admin', component: AdminDashboardComponent },
   { path: 'login', component: LoginComponent }
 ];
 
@@ -76,7 +78,8 @@ const appRoutes: Routes = [
     VendorProfileComponent,
     RecipeDetailComponent,
     ProductDetailComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    AdminDashboardComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

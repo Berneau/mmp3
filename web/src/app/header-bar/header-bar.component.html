@@ -10,6 +10,7 @@
     </div>
     <div class="col l8">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li *ngIf="this.LoginStore.isAdmin()"><a [routerLink]="['admin']">Admin-Dashboard</a></li>
         <li><a [routerLink]="['produzenten']">Produzenten</a></li>
         <li><a [routerLink]="['produkte']">Produkte</a></li>
         <li><a [routerLink]="['rezepte']">Rezepte</a></li>

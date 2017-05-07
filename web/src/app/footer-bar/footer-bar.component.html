@@ -8,8 +8,8 @@
       </div>
       <div class="col l6 m6 s12">
         <p>
-          <button *ngIf="!this.store.isLoggedIn()" class="waves-effect waves-light btn right" [routerLink]="['login']">Login</button>
-          <button *ngIf="this.store.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.store.logout()">Logout</button>
+          <button *ngIf="!this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" [routerLink]="['login']">Login</button>
+          <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout()">Logout</button>
         </p>
       </div>
     </div>
