@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prod": "NODE_ENV=PRODUCTION nodemon",
-    "start": "NODE_ENV=DEVELOPMENT nodemon",
+    "start": "NODE_ENV=DEVELOPMENT nodemon --no-deprecation",
     "test": "NODE_ENV=DEVELOPMENT mocha --timeout 10000",
     "doc": "apidoc -i routes/ -o apidoc",
     "dummy": "node ./dummy/"
