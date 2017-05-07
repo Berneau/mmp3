@@ -1,11 +1,11 @@
 <div class="row">
-  <form materialize class="col s4 offset-s4" [formGroup]="loginForm">
+  <form materialize class="col s4 offset-s4" [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="row">
       <h4 class="light col s12">Login</h4>
     </div>
     <div class="row">
       <div class="input-field col s12 form-group">
-        <input id="icon_name" type="text" class="validate" formControlName="name">
+        <input id="icon_name" type="text" class="validate" formControlName="email">
         <label for="icon_name">Benutzername</label>
       </div>
     </div>
@@ -20,7 +20,5 @@
         <i class="material-icons right">send</i>
       </button>
     </div>
-    <!-- <h5><small>name:</small> {{ loginForm.get('name').value }}</h5>
-    <h5><small>password:</small> {{ loginForm.get('password').value }}</h5> -->
   </form>
 </div>

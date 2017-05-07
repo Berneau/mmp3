@@ -20,12 +20,13 @@ import { VendorProfileComponent } from './vendor-profile/vendor-profile.componen
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { SlideNavComponent } from './slide-nav/slide-nav.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
 import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
-import { SlideNavComponent } from './slide-nav/slide-nav.component';
+import { LoginService } from './services/login.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -89,7 +90,8 @@ const appRoutes: Routes = [
     ProductService,
     VendorService,
     RecipeService,
-    CategoryService
+    CategoryService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
