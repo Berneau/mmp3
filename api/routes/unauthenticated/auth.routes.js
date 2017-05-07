@@ -24,6 +24,7 @@ module.exports = function(router) {
    * @apiParam {String} password The password of the user.
    *
    * @apiSuccess {String} token The signed JWT.
+   * @apiSuccess {Object} user The user for the login.
  */
   .post(function(req, res) {
 
@@ -38,7 +39,12 @@ module.exports = function(router) {
               expiresIn: '24h'
             })
 
-            res.status(200).json({ token: token })
+            res.status(200).json({
+              ok: true,
+              token: token,
+              user: user
+            })
+
           } else res.status(403).json({ message: 'Authentication failed.' })
         })
       } else res.status(403).json({ message: 'Authentication failed.' })
