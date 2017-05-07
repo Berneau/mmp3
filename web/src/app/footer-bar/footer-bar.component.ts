@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LoginService } from './../services/login.service'
+
 @Component({
   selector: 'footer-bar',
   templateUrl: './footer-bar.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: LoginService) { }
 
   ngOnInit() {
+    console.log(this.store.currentUser)
   }
 
 }
