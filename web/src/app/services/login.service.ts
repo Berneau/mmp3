@@ -11,6 +11,7 @@ export class LoginService {
   private headers = new Headers({ 'Content-Type': 'application/json' })
   private url = `${this.apiEndpoint}/auth`
   currentUser: User
+  currentUserIsAdmin: boolean
 
 
   constructor(private http: Http) {
@@ -24,19 +25,17 @@ export class LoginService {
       .post(this.url, JSON.stringify({ email, password }), { headers: this.headers })
       .toPromise()
       .then((response: Response) => {
-        console.log(response.json())
         // login successful if there's a jwt token in the response
         let token = response.json() && response.json().token
-        let isAdmin = response.json() && response.json().user.admin
+        let isAdmin = response.json() && response.json().user.isAdmin
 
-        if (token && isAdmin) {
+        this.currentUserIsAdmin = isAdmin
+
+        if (token) {
           // set token property
           this.token = token
-
           //store username and jwt in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }))
-
-          console.log(response.json())
 
           // return true to indicate successful login
           return true
@@ -50,11 +49,17 @@ export class LoginService {
 
   logout(): void {
     this.token = null
+    this.currentUserIsAdmin = false
     localStorage.removeItem('currentUser')
   }
 
   isLoggedIn(): boolean {
     if (this.token) return true
+    else return false
+  }
+
+  isAdmin(): boolean {
+    if (this.currentUserIsAdmin) return true
     else return false
   }
 
