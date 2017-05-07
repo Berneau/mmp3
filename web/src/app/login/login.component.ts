@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.store.login(this.loginForm.value.email, this.loginForm.value.password)
       .then(result => {
+        console.log(result)
         if (result === true) {
           // login successful
           this.router.navigate(['/'])

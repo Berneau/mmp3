@@ -9,7 +9,7 @@ export class LoginService {
   public token: string
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({ 'Content-Type': 'application/json' })
-  private url = `${this.apiEndpoint}/user/login`
+  private url = `${this.apiEndpoint}/auth`
   currentUser: User
 
 
@@ -21,9 +21,10 @@ export class LoginService {
 
   login(email, password) {
     return this.http
-      .post(this.apiEndpoint, JSON.stringify({ email, password }), { headers: this.headers })
+      .post(this.url, JSON.stringify({ email, password }), { headers: this.headers })
       .toPromise()
       .then((response: Response) => {
+        console.log(response.json())
         // login successful if there's a jwt token in the response
         let token = response.json() && response.json().token
         let isAdmin = response.json() && response.json().user.admin
