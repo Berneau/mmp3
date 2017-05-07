@@ -246,7 +246,7 @@ describe('Vendor', () => {
         userUid: 'asd123',
         email: 'bauern@hof.at'
       })
-      vendor.save((err, vendor1) => {
+      vendor.save((err, vendor) => {
         chai.request(server)
           .delete('/api/vendors/' + vendor._id)
           .set('x-access-token', token)

@@ -11,7 +11,7 @@ module.exports = function(router) {
    *
    * @apiParam {String} [filter] The field name will be search by this.
    *
-   * @apiSuccess {Array} vendor Array of categories.
+   * @apiSuccess {Array} category Array of categories.
  */
  .get(function(req, res) {
 
