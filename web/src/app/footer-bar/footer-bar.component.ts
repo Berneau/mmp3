@@ -9,10 +9,9 @@ import { LoginService } from './../services/login.service'
 })
 export class FooterBarComponent implements OnInit {
 
-  constructor(private store: LoginService) { }
+  constructor(public LoginStore: LoginService) { }
 
   ngOnInit() {
-    console.log(this.store.currentUser)
   }
 
 }
