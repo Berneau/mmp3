@@ -20,7 +20,7 @@ describe('Auth', () => {
 
   describe('POST token', () => {
 
-    it('should POST a user and return a token if user and password is correct', (done) => {
+    it('should POST a user and return a token plus user if email and password is correct', (done) => {
       let user = new User({
         email: 'ico@gnito.at',
         password: 'test',
@@ -33,8 +33,9 @@ describe('Auth', () => {
         .send(user)
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('object')
+          res.body.should.have.property('ok').equal(true)
           res.body.should.have.property('token')
+          res.body.should.have.property('user')
           done()
         })
       })
