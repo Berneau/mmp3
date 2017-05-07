@@ -38,10 +38,10 @@ module.exports = function(router) {
         categoryId: req.body.categoryId,
         vendorId: req.body.vendorId,
         availableAt: {
-          fromPeriod: req.body.availableAt.fromPeriod,
-          fromMonth: req.body.availableAt.fromMonth,
-          toPeriod: req.body.availableAt.toPeriod,
-          toMonth: req.body.availableAt.toMonth
+          fromPeriod: req.body.availableAt ? req.body.availableAt.fromPeriod : undefined,
+          fromMonth: req.body.availableAt ? req.body.availableAt.fromMonth : undefined,
+          toPeriod: req.body.availableAt ? req.body.availableAt.toPeriod : undefined,
+          toMonth: req.body.availableAt ? req.body.availableAt.toMonth : undefined
         },
         imageUrl: req.body.imageUrl
       })
