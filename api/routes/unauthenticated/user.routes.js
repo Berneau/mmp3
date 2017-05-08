@@ -24,7 +24,11 @@ module.exports = function(router) {
      password.hash(req.body.password, function(err, salt, hash) {
 
        // error during hashing
-       if (err) res.status(500).json(err.message)
+       if (err) res.status(500).json({
+         ok: false,
+         err: err.message
+       })
+
        else {
          var user = new User({
            email: req.body.email,

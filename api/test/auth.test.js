@@ -27,23 +27,28 @@ describe('Auth', () => {
         isAdmin: true
       })
 
-      user.save((err, user) => {
-        chai.request(server)
-        .post('/api/auth')
+      chai.request(server)
+        .post('/api/users')
         .send(user)
         .end((err, res) => {
-          res.should.have.status(200)
-          res.body.should.have.property('ok').equal(true)
-          res.body.should.have.property('token')
-          res.body.should.have.property('user')
-          done()
+
+          chai.request(server)
+          .post('/api/auth')
+          .send(user)
+          .end((err, res) => {
+            res.should.have.status(200)
+            res.body.should.have.property('ok').equal(true)
+            res.body.should.have.property('token')
+            res.body.should.have.property('user')
+            done()
+          })
+
         })
-      })
     })
 
     it('should not return a token if the password and email dont match', (done) => {
       let user = new User({
-        email: 'b@s.at',
+        email: 'ico@gnito.at',
         password: 'secret',
         isAdmin: false
       })

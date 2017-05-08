@@ -29,12 +29,17 @@ module.exports = function(router) {
   .post(function(req, res) {
 
     User.findOne({ email: req.body.email }, function(err, user) {
-      if (err) res.status(500).end(err)
+
+      // internal server error
+      if (err) res.status(500).end({
+        ok: false,
+        err: err
+      })
 
       if (user) {
 
-        password.compare(user.password, user.salt, function(err, hash) {
-          if (user.hash === hash) {
+        password.compare(req.body.password, user.salt, function(err, hash) {
+          if (user.password === hash) {
             var token = jwt.sign(user, secret, {
               expiresIn: '24h'
             })
@@ -43,7 +48,7 @@ module.exports = function(router) {
             res.status(200).json({
               ok: true,
               token: token,
-              user: user
+              user: stripUserObject(user)
             })
 
             // email and password doesn't match
@@ -60,5 +65,11 @@ module.exports = function(router) {
       })
     })
   })
+
+  function stripUserObject(user) {
+    user.password = undefined
+    user.salt = undefined
+    return user
+  }
 
 }

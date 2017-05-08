@@ -47,19 +47,25 @@ describe('User', () => {
         isAdmin: false
       })
 
-      user.save((err, user) => {
-        chai.request(server)
-          .get('/api/users/' + user._id)
-          .set('x-access-token', token)
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(200)
-            res.body.should.have.property('ok').equal(true)
-            res.body.should.have.property('user')
-            res.body.user.should.have.property('_id').equal(user._id.toString())
-            done()
-          })
-      })
+      chai.request(server)
+        .post('/api/users')
+        .send(user)
+        .end((err, res) => {
+          let id = res.body.user._id
+
+          chai.request(server)
+            .get('/api/users/' + id)
+            .set('x-access-token', token)
+            .send(user)
+            .end((err, res) => {
+              res.should.have.status(200)
+              res.body.should.have.property('ok').equal(true)
+              res.body.should.have.property('user')
+              res.body.user.should.have.property('_id').equal(id.toString())
+              done()
+            })
+
+        })
     })
   })
 

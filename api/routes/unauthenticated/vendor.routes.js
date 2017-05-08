@@ -1,4 +1,5 @@
 var Vendor = require('../../models/vendor.model')
+var Product = require('../../models/product.model')
 
 module.exports = function(router) {
 
@@ -54,10 +55,17 @@ module.exports = function(router) {
         })
 
         // return found vendor object
-        else if (!err && vendor) res.status(200).json({
-          ok: true,
-          vendor: vendor
-        })
+        else if (!err && vendor) {
+          Product.find({ 'vendorId': vendor._id }, function(err, products) {
+
+            console.log(products)
+            res.status(200).json({
+              ok: true,
+              vendor: vendor
+            })
+          })
+        }
+
 
         // no vendor was found
         else res.status(404).json({
