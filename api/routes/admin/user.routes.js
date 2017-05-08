@@ -21,13 +21,13 @@ module.exports = function(router) {
   .find({ 'email': { '$regex': filter } }, function(err, users) {
 
     // internal server error
-    if (err) res.status(500).end({
+    if (err) res.status(500).json({
       ok: false,
-      err: err
+      err: err.message
     })
 
     // return user list
-    res.json({
+    else res.json({
       ok: true,
       users: stripUserArray(users)
     })
@@ -48,13 +48,13 @@ module.exports = function(router) {
    User.findById(req.params.id, function(err, user) {
 
      // internal server error
-     if (err) res.status(500).end({
+     if (err) res.status(500).json({
        ok: false,
-       err: err
+       err: err.message
      })
 
      // return user object
-     if (user) res.status(200).json({
+     else if (user) res.status(200).json({
        ok: true,
        user: stripUserObject(user)
      })

@@ -83,13 +83,13 @@ module.exports = function(router) {
             category.save(function(err) {
 
               // internal server error
-              if (err) res.status(500).end({
+              if (err) res.status(500).json({
                 ok: false,
-                err: err
+                err: err.message
               })
 
               // return the updated category
-              res.status(200).json({
+              else res.status(200).json({
                 ok: true,
                 category: category
               })
@@ -130,13 +130,13 @@ module.exports = function(router) {
            Category.remove({ _id: req.params.id }, function(err, category) {
 
              // internal server error
-             if (err) res.status(500).end({
+             if (err) res.status(500).json({
                ok: false,
-               err: err
+               err: err.message
              })
 
              // successfully deleted
-             res.status(200).json({
+             else res.status(200).json({
                ok: true,
                message: 'Successfully deleted'
              })

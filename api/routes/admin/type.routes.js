@@ -31,13 +31,13 @@ module.exports = function(router) {
       type.save(function(err) {
 
         // internal server error
-        if (err) res.status(500).end({
+        if (err) res.status(500).json({
           ok: false,
-          err: err
+          err: err.message
         })
 
         // return created type
-        res.status(200).json({
+        else res.status(200).json({
           ok: true,
           type: type
         })
@@ -122,13 +122,13 @@ module.exports = function(router) {
         Type.remove({ _id: req.params.id }, function(err, type) {
 
           // internal server error
-          if (err) res.status(500).end({
+          if (err) res.status(500).json({
             ok: false,
-            err: err
+            err: err.message
           })
 
           // successfully deleted
-          res.status(200).json({
+          else res.status(200).json({
             ok: true,
             message: 'Successfully deleted'
           })

@@ -31,12 +31,12 @@ module.exports = function(router) {
     User.findOne({ email: req.body.email }, function(err, user) {
 
       // internal server error
-      if (err) res.status(500).end({
+      if (err) res.status(500).json({
         ok: false,
-        err: err
+        err: err.message
       })
 
-      if (user) {
+      else if (user) {
 
         password.compare(req.body.password, user.salt, function(err, hash) {
           if (user.password === hash) {

@@ -49,13 +49,13 @@ module.exports = function(router) {
       product.save(function(err) {
 
         // internal server error
-        if (err) res.status(500).end({
+        if (err) res.status(500).json({
           ok: false,
-          err: err
+          err: err.message
         })
 
         // return the created product
-        res.status(200).json({
+        else res.status(200).json({
           ok: true,
           product: product
         })
@@ -99,22 +99,22 @@ module.exports = function(router) {
             product.name = req.body.name,
             product.categoryId = req.body.categoryId,
             product.vendorId = req.body.vendorId,
-            product.availableAt.fromPeriod = req.body.availableAt.fromPeriod,
-            product.availableAt.fromMonth = req.body.availableAt.fromMonth,
-            product.availableAt.toPeriod = req.body.availableAt.toPeriod,
-            product.availableAt.toMonth = req.body.availableAt.toMonth,
+            product.availableAt.fromPeriod = req.body.availableAt ? req.body.availableAt.fromPeriod : undefined,
+            product.availableAt.fromMonth = req.body.availableAt ? req.body.availableAt.fromMonth : undefined,
+            product.availableAt.toPeriod = req.body.availableAt ? req.body.availableAt.toPeriod : undefined,
+            product.availableAt.toMonth = req.body.availableAt ? req.body.availableAt.toMonth : undefined,
             product.imageUrl = req.body.imageUrl
 
             product.save(function(err) {
 
               // internal server error
-              if (err) res.status(500).end({
+              if (err) res.status(500).json({
                 ok: false,
-                err: err
+                err: err.message
               })
 
               // return the updated product
-              res.status(200).json({
+              else res.status(200).json({
                 ok: true,
                 product: product
               })
@@ -157,13 +157,13 @@ module.exports = function(router) {
           Product.remove({ _id: req.params.id }, function(err, product) {
 
             // internal server error
-            if (err) res.status(500).end({
+            if (err) res.status(500).json({
               ok: false,
-              err: err
+              err: err.message
             })
 
             // successfully deleted
-            res.status(200).json({
+            else res.status(200).json({
               ok: true,
               message: 'Successfully deleted'
             })
@@ -182,10 +182,13 @@ module.exports = function(router) {
       if (!product.name ||
           !product.categoryId ||
           !product.vendorId ||
-          !product.availableAt.fromPeriod ||
+          !product.availableAt) return false
+
+      if (!product.availableAt.fromPeriod ||
           !product.availableAt.fromMonth ||
           !product.availableAt.toPeriod ||
           !product.availableAt.toMonth) return false
+
       else return true
     }
 }

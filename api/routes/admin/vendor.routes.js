@@ -56,13 +56,13 @@ module.exports = function(router) {
       vendor.save(function(err) {
 
         // internal server error
-        if (err) res.status(500).end({
+        if (err) res.status(500).json({
           ok: false,
-          err: err
+          err: err.message
         })
 
         // return created vendor
-        res.status(200).json({
+        else res.status(200).json({
           ok: true,
           vendor: vendor
         })
@@ -123,13 +123,13 @@ module.exports = function(router) {
               vendor.save(function(err) {
 
                 // internal server error
-                if (err) res.status(500).end({
+                if (err) res.status(500).json({
                   ok: false,
-                  err: err
+                  err: err.message
                 })
 
                 // return the updated vendor
-                res.status(200).json({
+                else res.status(200).json({
                   ok: true,
                   vendor: vendor
                 })
@@ -170,13 +170,13 @@ module.exports = function(router) {
             Vendor.remove({ _id: req.params.id }, function(err, vendor) {
 
               // internal server error
-              if (err) res.status(500).end({
+              if (err) res.status(500).json({
                 ok: false,
-                err: err
+                err: err.message
               })
 
               // successfully deleted
-              res.status(200).json({
+              else res.status(200).json({
                 ok: true,
                 message: 'Successfully deleted'
               })

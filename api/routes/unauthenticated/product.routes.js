@@ -32,7 +32,7 @@ module.exports = function(router) {
         })
 
         // return product list
-        res.status(200).json({
+        else res.status(200).json({
           ok: true,
           products: products
         })
@@ -51,7 +51,7 @@ module.exports = function(router) {
         })
 
         // return product list
-        res.status(200).json({
+        else res.status(200).json({
           ok: true,
           products: products
         })
@@ -69,7 +69,7 @@ module.exports = function(router) {
         })
 
         // return product list
-        res.status(200).json({
+        else res.status(200).json({
           ok: true,
           products: products
         })

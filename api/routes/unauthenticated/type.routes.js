@@ -17,13 +17,13 @@ module.exports = function(router) {
    .find({}, function(err, types) {
 
      // internal server error
-     if (err) res.status(500).end({
+     if (err) res.status(500).json({
        ok: false,
-       err: err
+       err: err.message
      })
 
      // return type list
-     res.status(200).json({
+     else res.status(200).json({
        ok: true,
        types: types
      })

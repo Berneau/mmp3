@@ -22,13 +22,13 @@ module.exports = function(router) {
     .find({ 'name': { '$regex': filter } }, function(err, vendors) {
 
       // internal server error
-      if (err) res.status(500).end({
+      if (err) res.status(500).json({
         ok: false,
-        err: err
+        err: err.message
       })
 
       // return vendor list
-      res.status(200).json({
+      else res.status(200).json({
         ok: true,
         vendors: vendors
       })
