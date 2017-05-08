@@ -58,14 +58,13 @@ module.exports = function(router) {
         else if (!err && vendor) {
           Product.find({ 'vendorId': vendor._id }, function(err, products) {
 
-            console.log(products)
             res.status(200).json({
               ok: true,
-              vendor: vendor
+              vendor: vendor,
+              products: products
             })
           })
         }
-
 
         // no vendor was found
         else res.status(404).json({
