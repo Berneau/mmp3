@@ -40,5 +40,23 @@ describe('Auth', () => {
         })
       })
     })
+
+    it('should not return a token if the password and email dont match', (done) => {
+      let user = new User({
+        email: 'b@s.at',
+        password: 'secret',
+        isAdmin: false
+      })
+
+      chai.request(server)
+        .post('/api/auth')
+        .send(user)
+        .end((err, res) => {
+          res.should.have.status(403)
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Authentication failed.')
+          done()
+        })
+    })
   })
 })
