@@ -65,5 +65,17 @@ describe('Auth', () => {
           done()
         })
     })
+
+    it('should return missing token if no token is provided', (done) => {
+      chai.request(server)
+        .get('/api/users')
+        .end((err, res) => {
+          res.should.have.status(412)
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('No token provided')
+          done()
+        })
+
+    })
   })
 })

@@ -19,11 +19,17 @@ router.use(function(req, res, next) {
   if (token) {
     // verifies secret and checks expiration
     jwt.verify(token, secret, function(err, decoded) {
-      if (err) return res.status(403).json({ message: 'Authentication failed' })
+      if (err) return res.status(403).json({
+        ok: false,
+        message: 'Authentication failed'
+      })
       else next()
     })
 
-  } else return res.status(412).json({ message: 'No token provided' })
+  } else return res.status(412).json({
+    ok: false,
+    message: 'No token provided'
+  })
 })
 
 // authenticated routes
@@ -35,7 +41,10 @@ router.use(function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token']
 
   jwt.verify(token, secret, function(err, decoded) {
-    if (!decoded._doc.isAdmin) return res.status(403).json({ message: 'Admin rights required'})
+    if (!decoded._doc.isAdmin) return res.status(403).json({
+      ok: false,
+      message: 'Admin rights required'
+    })
     else next()
   })
 })
