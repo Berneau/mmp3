@@ -51,6 +51,10 @@ export class VendorService {
       .catch(this.handleError)
   }
 
+  updateVendor(v) {
+    console.log("update", v)
+  }
+
 
 
   private handleError(error: any) {
