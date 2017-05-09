@@ -25,20 +25,16 @@ export class LoginService {
     return this.http
       .post(this.url, JSON.stringify({ email, password }), { headers: this.headers })
       .toPromise()
-      .then((response: Response) => {
-        // login successful if there's a jwt token in the response
-        let token = response.json() && response.json().token
+      .then((res: Response) => {
+        console.log(res.json())
+        let token = res.json() && res.json().token
 
         if (token) {
-          // set token property
           this.token = token
-          //store username and jwt in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ email: email,  _id: response.json().user._id, isAdmin: response.json().user.isAdmin, token: token}))
+          localStorage.setItem('currentUser', JSON.stringify({ email: email,  _id: res.json().user._id, isAdmin: res.json().user.isAdmin, token: token}))
 
-          // return true to indicate successful login
           return true
         } else {
-          // return false to indicate failed login
           return false
         }
       })
@@ -61,18 +57,6 @@ export class LoginService {
     if (this.currentUserIsAdmin) return true
     else return false
   }
-
-  // getUser(id): Promise<any> {
-  //   let url = `${this.apiEndpoint}/users/${id}`
-  //
-  //   return this.http
-  //     .get(url)
-  //     .toPromise()
-  //     .then((res) => {
-  //       return res.json() as User
-  //     })
-  //     .catch(this.handleError)
-  // }
 
   handleError(err) {
     Materialize.toast(err.message, 2000)
