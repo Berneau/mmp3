@@ -53,29 +53,27 @@ export class VendorService {
   }
 
   updateVendor(v) {
+    console.log(v)
     let url = `${this.apiEndpoint}/vendors/${v.vendor._id}`
-    let name = v.editForm.value.name
-    let userUID = v.vendor.userUID
-    let email = v.vendor.email
-    let description = v.editForm.value.description
-    let imageUrl = v.editForm.value.imageUrl
-    let subName = v.editForm.value.subName
-    let tel = v.editForm.value.tel
-    let city = v.editForm.value.city
-    let zip = v.editForm.value.zip
-    let street = v.editForm.value.street
-    let lat = v.editForm.value.lat
-    let long = v.editForm.value.long
-    let address = {
-      city: city,
-      zip: zip,
-      street: street,
-      lat: lat,
-      long: long
+    let vendor = {
+      name: v.editForm.value.name,
+      userUid: v.vendor.userUid,
+      email: v.vendor.email,
+      description: v.editForm.value.description,
+      imageUrl: v.editForm.value.imageUrl,
+      subName: v.editForm.value.subName,
+      tel: v.editForm.value.tel,
+      address: {
+        city: v.editForm.value.city,
+        zip: v.editForm.value.zip,
+        street: v.editForm.value.street,
+        lat: v.editForm.value.lat,
+        long: v.editForm.value.long
+      }
     }
 
     return this.http
-      .put(url, JSON.stringify({ name, userUID, email, description, imageUrl, subName, tel, address }), { headers: this.headers })
+      .put(url, JSON.stringify(vendor), { headers: this.headers })
       .toPromise()
       .then((res: Response) => {
         console.log(res.json())
