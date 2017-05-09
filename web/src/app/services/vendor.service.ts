@@ -15,8 +15,7 @@ export class VendorService {
   vendorProducts: Product[]
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({
-    'Content-Type': 'application/json',
-    'x-access-token': token
+    'Content-Type': 'application/json'
   })
 
   getVendors(): Promise<any> {
@@ -58,7 +57,10 @@ export class VendorService {
   updateVendor(v) {
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let url = `${this.apiEndpoint}/vendors/${v.vendor._id}`
-    let authHeaders =  new Headers({'Content-Type': 'application/json', 'x-access-token': `${token}`})
+    let authHeaders =  new Headers({
+      'Content-Type': 'application/json',    'x-access-token': token
+    })
+
     let vendor = {
       name: v.editForm.value.name,
       userUid: v.vendor.userUid,
@@ -77,7 +79,7 @@ export class VendorService {
     }
 
     return this.http
-      .put(url, JSON.stringify(vendor), { headers: this.headers })
+      .put(url, JSON.stringify(vendor), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
         console.log(res.json())
