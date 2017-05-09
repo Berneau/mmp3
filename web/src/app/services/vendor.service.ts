@@ -57,8 +57,8 @@ export class VendorService {
   updateVendor(vendor, form) {
     let url = `${this.apiEndpoint}/vendors/${vendor._id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
-    let authHeaders =  new Headers({
-      'Content-Type': 'application/json',    'x-access-token': token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
     })
 
     let v = {
@@ -83,6 +83,36 @@ export class VendorService {
       .toPromise()
       .then((res: Response) => {
         return res.json().vendor as Vendor
+      })
+      .catch(this.handleError)
+  }
+
+  addProduct(vendor, form) {
+    let url = `${this.apiEndpoint}/products`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let p = {
+      name: form.name,
+      categoryId: form.categoryId,
+      vendorId: vendor._id,
+      availableAt: {
+        fromPeriod: form.fromPeriod,
+        fromMonth: form.fromMonth,
+        toPeriod: form.toPeriod,
+        toMonth: form.toMonth
+      },
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .post(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.vendorProducts.push(res.json().product)
+        return res.json().product as Product
       })
       .catch(this.handleError)
   }
