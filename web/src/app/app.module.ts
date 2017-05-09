@@ -23,6 +23,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { SlideNavComponent } from './slide-nav/slide-nav.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -81,7 +82,8 @@ const appRoutes: Routes = [
     ProductDetailComponent,
     CategoryDetailComponent,
     AdminDashboardComponent,
-    VendorFormComponent
+    VendorFormComponent,
+    ProductFormComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

@@ -8,7 +8,7 @@ import { CategoryService } from './../services/category.service'
 @Component({
   selector: 'category-detail',
   templateUrl: './category-detail.component.html',
-  styleUrls: ['./category-detail.component.sass']
+  styleUrls: ['./category-detail.component.less']
 })
 export class CategoryDetailComponent implements OnInit {
 

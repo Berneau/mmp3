@@ -15,8 +15,7 @@ export class VendorService {
   vendorProducts: Product[]
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({
-    'Content-Type': 'application/json',
-    'x-access-token': token
+    'Content-Type': 'application/json'
   })
 
   getVendors(): Promise<any> {
@@ -55,31 +54,65 @@ export class VendorService {
       .catch(this.handleError)
   }
 
-  updateVendor(v) {
-    console.log(v)
-    let url = `${this.apiEndpoint}/vendors/${v.vendor._id}`
-    let vendor = {
-      name: v.editForm.value.name,
-      userUid: v.vendor.userUid,
-      email: v.vendor.email,
-      description: v.editForm.value.description,
-      imageUrl: v.editForm.value.imageUrl,
-      subName: v.editForm.value.subName,
-      tel: v.editForm.value.tel,
+  updateVendor(vendor, form) {
+    let url = `${this.apiEndpoint}/vendors/${vendor._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let v = {
+      name: form.name,
+      userUid: vendor.userUid,
+      email: vendor.email,
+      description: form.description,
+      imageUrl: form.imageUrl,
+      subName: form.subName,
+      tel: form.tel,
       address: {
-        city: v.editForm.value.city,
-        zip: v.editForm.value.zip,
-        street: v.editForm.value.street,
-        lat: v.editForm.value.lat,
-        long: v.editForm.value.long
+        city: form.city,
+        zip: form.zip,
+        street: form.street,
+        lat: form.lat,
+        long: form.long
       }
     }
 
     return this.http
-      .put(url, JSON.stringify(vendor), { headers: this.headers })
+      .put(url, JSON.stringify(v), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
-        console.log(res.json())
+        return res.json().vendor as Vendor
+      })
+      .catch(this.handleError)
+  }
+
+  addProduct(vendor, form) {
+    let url = `${this.apiEndpoint}/products`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let p = {
+      name: form.name,
+      categoryId: form.categoryId,
+      vendorId: vendor._id,
+      availableAt: {
+        fromPeriod: form.fromPeriod,
+        fromMonth: form.fromMonth,
+        toPeriod: form.toPeriod,
+        toMonth: form.toMonth
+      },
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .post(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.vendorProducts.push(res.json().product)
+        return res.json().product as Product
       })
       .catch(this.handleError)
   }

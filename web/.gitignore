@@ -23,6 +23,8 @@
 !.vscode/extensions.json
 
 # misc
+/.less-cache
+/.scss-cache
 /.sass-cache
 /connect.lock
 /coverage/*

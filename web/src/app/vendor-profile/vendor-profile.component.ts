@@ -11,12 +11,11 @@ import { Product } from './../interfaces/product'
 @Component({
   selector: 'vendor-profile',
   templateUrl: './vendor-profile.component.html',
-  styleUrls: ['./vendor-profile.component.sass']
+  styleUrls: ['./vendor-profile.component.less']
 })
 export class VendorProfileComponent implements OnInit {
 
   vendor: Vendor
-  products: Product
 
   constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService) {
 
@@ -37,6 +36,29 @@ export class VendorProfileComponent implements OnInit {
 
       this.store.getVendorProducts(id)
     })
+  }
+
+  updateVendor(v) {
+    this.store.updateVendor(v.vendor, v.vendorForm.value)
+      .then(vendor => {
+        if (!vendor) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        this.vendor = vendor
+        Materialize.toast('Produzent gespeichert.', 2000)
+      })
+  }
+
+  newProduct(p) {
+    this.store.addProduct(p.vendor, p.productForm.value)
+      .then(product => {
+        if (!product) {
+          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Produkt gespeichert.', 2000)
+      })
   }
 
 }

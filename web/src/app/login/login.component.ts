@@ -7,7 +7,7 @@ import { LoginService } from './../services/login.service'
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

@@ -1,6 +1,6 @@
 <div *ngIf="vendor">
   <div *ngIf="this.LoginStore.isLoggedIn()" class="row">
-    <button mz-button (click)="edit.open()">bearbeiten
+    <button mz-button (click)="editVendor.open()">bearbeiten
       <i class="material-icons right">mode_edit</i></button>
   </div>
   <div class="row">
@@ -27,6 +27,10 @@
   </div>
   <div class="row">
     <h5>Produkte</h5>
+    <div *ngIf="this.LoginStore.isLoggedIn()" class="row">
+      <button mz-button (click)="addProduct.open()">neues Produkt
+        <i class="material-icons right">mode_edit</i></button>
+    </div>
     <hr>
     <ul class="row">
       <li *ngFor="let product of store.vendorProducts" class="col s12 m4 l3 xl2">
@@ -44,7 +48,7 @@
     </ul>
   </div>
   <!-- Modal Structure -->
-  <mz-modal #edit [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal #editVendor [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
     <mz-modal-header>
       Bearbeiten
     </mz-modal-header>
@@ -52,7 +56,20 @@
       <vendor-form #vendorForm [vendor]="vendor"></vendor-form>
     </mz-modal-content>
     <mz-modal-footer>
-      <button mz-button [flat]="true" (click)="this.store.updateVendor(vendorForm)" mz-modal-close>Speichern</button>
+      <button mz-button [flat]="true" (click)="this.updateVendor(vendorForm)" mz-modal-close>Speichern</button>
+      <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+    </mz-modal-footer>
+  </mz-modal>
+
+  <mz-modal #addProduct [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+    <mz-modal-header>
+      Neues Produkt hinzufügen
+    </mz-modal-header>
+    <mz-modal-content>
+      <product-form #productForm [vendor]="vendor"></product-form>
+    </mz-modal-content>
+    <mz-modal-footer>
+      <button mz-button [flat]="true" (click)="this.newProduct(productForm)" mz-modal-close>Speichern</button>
       <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
     </mz-modal-footer>
   </mz-modal>
