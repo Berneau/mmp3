@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Vendor } from './../interfaces/vendor'
 import { VendorService } from './../services/vendor.service'
+import { LoginService } from './../services/login.service'
 
+import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
 
 @Component({
@@ -14,10 +15,12 @@ import { Product } from './../interfaces/product'
 })
 export class VendorProfileComponent implements OnInit {
 
-  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location) { }
-
   vendor: Vendor
   products: Product
+
+  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService) {
+
+  }
 
   ngOnInit() {
     this.route.params.forEach((params) => {

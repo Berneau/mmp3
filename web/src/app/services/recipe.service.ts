@@ -19,7 +19,7 @@ export class RecipeService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.recipes = res.json()
+        this.recipes = res.json().recipes
       })
       .catch(this.handleError)
   }
@@ -31,7 +31,7 @@ export class RecipeService {
       .get(url)
       .toPromise()
       .then((res) => {
-        return res.json() as Recipe
+        return res.json().recipe as Recipe
       })
       .catch(this.handleError)
   }

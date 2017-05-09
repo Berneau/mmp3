@@ -1,15 +1,16 @@
 export class Vendor {
   _id?: string
   name: string
-  ownerName: string
+  subName: string
   email: string
-  category: number
-  city: string
-  tel?: number
-  description?: string
-  street?: string
-  zip?: number
   imageUrl?: string
-  lat?: number
-  long?: number
+  description?: string
+  tel?: number
+  address: {
+    city: string
+    street?: string
+    zip?: number
+    lat?: number
+    long?: number
+  }
 }

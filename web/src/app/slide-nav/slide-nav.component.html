@@ -9,8 +9,8 @@
       <li><a [routerLink]="['produzenten']">Produzenten</a></li>
       <li><a [routerLink]="['produkte']">Produkte</a></li>
       <li><a [routerLink]="['rezepte']">Rezepte</a></li>
-      <hr *ngIf="this.LoginStore.isAdmin()">
-      <li *ngIf="this.LoginStore.isAdmin()"><a [routerLink]="['admin']">Admin-Dashboard</a></li>
+      <hr *ngIf="this.LoginStore.isLoggedIn()">
+      <li *ngIf="this.LoginStore.isLoggedIn()"><a [routerLink]="['admin']">Admin-Dashboard</a></li>
     </ul>
   </mz-sidenav-link>
 </mz-sidenav>

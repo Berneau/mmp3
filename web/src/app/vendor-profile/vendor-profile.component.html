@@ -1,9 +1,13 @@
-<div *ngIf="vendor" class="">
+<div *ngIf="vendor">
+  <div *ngIf="this.LoginStore.isLoggedIn()" class="row">
+    <button mz-button (click)="edit.open()">bearbeiten
+      <i class="material-icons right">mode_edit</i></button>
+  </div>
   <div class="row">
     <div class="col l6 m6 s12">
       <h4>
-        {{vendor.name}}
-      </h4>
+          {{vendor.name}}
+        </h4>
       <p>{{vendor.description}}</p>
       <ul>
         <li>
@@ -39,4 +43,17 @@
       </li>
     </ul>
   </div>
+  <!-- Modal Structure -->
+  <mz-modal #edit [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+    <mz-modal-header>
+      Bearbeiten
+    </mz-modal-header>
+    <mz-modal-content>
+      <vendor-form [vendor]="vendor"></vendor-form>
+    </mz-modal-content>
+    <mz-modal-footer>
+      <button mz-button [flat]="true" (click)="this.store.updateVendor(vendor)" mz-modal-close>Speichern</button>
+      <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+    </mz-modal-footer>
+  </mz-modal>
 </div>

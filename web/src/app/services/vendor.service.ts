@@ -22,7 +22,7 @@ export class VendorService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.vendors = res.json()
+        this.vendors = res.json().vendors
       })
       .catch(this.handleError)
   }
@@ -34,7 +34,7 @@ export class VendorService {
       .get(url)
       .toPromise()
       .then((res) => {
-        return res.json() as Vendor
+        return res.json().vendor as Vendor
       })
       .catch(this.handleError)
   }
@@ -46,9 +46,13 @@ export class VendorService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.vendorProducts = res.json()
+        this.vendorProducts = res.json().products
       })
       .catch(this.handleError)
+  }
+
+  updateVendor(v) {
+    console.log("update", v)
   }
 
 

@@ -19,7 +19,7 @@ export class ProductService {
       .get(url)
       .toPromise()
       .then((res) => {
-        return res.json() as Product
+        return res.json().product as Product
       })
       .catch(this.handleError)
   }
@@ -31,7 +31,7 @@ export class ProductService {
       .get(url)
       .toPromise()
       .then((res) => {
-        return res.json() as Vendor
+        return res.json().vendor as Vendor
       })
       .catch(this.handleError)
   }
