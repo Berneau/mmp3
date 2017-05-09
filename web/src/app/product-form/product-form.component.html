@@ -1,0 +1,48 @@
+<div>
+  <form materialize [formGroup]="productForm">
+    <div class="row">
+      <h6>Bild</h6>
+      <div class="input-field col s12 form-group">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" formControlName="imageUrl" type="text">
+          </div>
+        </div>
+      </div>
+      <h6>Grunddaten</h6>
+      <div class="input-field col s12 m12 form-group">
+        <input id="product-name" type="text" class="validate" formControlName="name">
+        <label for="product-name">Name</label>
+      </div>
+      <div class="input-field col s12 m6 form-group">
+        <input id="product-categoryId" type="text" class="validate" formControlName="categoryId">
+        <label for="product-categoryId">Kategorie</label>
+      </div>
+      <div class="input-field col s12 m6 form-group">
+        <input id="product-vendorId" type="text" class="validate" formControlName="vendorId">
+        <label for="product-vendorId">Produzent</label>
+      </div>
+      <h6>Verfügbarkeit</h6>
+      <div class="input-field col s6 m3 form-group">
+        <input id="product-fromPeriod" type="text" class="validate" formControlName="fromPeriod">
+        <label for="product-fromPeriod">Periode</label>
+      </div>
+      <div class="input-field col s6 m3 form-group">
+        <input id="product-fromMonth" type="text" class="validate" formControlName="fromMonth">
+        <label for="product-fromMonth">Monat</label>
+      </div>
+      <div class="input-field col s6 m3 form-group">
+        <input id="product-toPeriod" type="text" class="validate" formControlName="toPeriod">
+        <label for="product-toPeriod">Periode</label>
+      </div>
+      <div class="input-field col s6 m3 form-group">
+        <input id="product-toMonth" type="text" class="validate" formControlName="toMonth">
+        <label for="product-toMonth">Monat</label>
+      </div>
+    </div>
+  </form>
+</div>
