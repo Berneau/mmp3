@@ -39,4 +39,16 @@ export class VendorProfileComponent implements OnInit {
     })
   }
 
+  updateVendor(v) {
+    this.store.updateVendor(v.vendor, v.editForm.value)
+      .then(vendor => {
+        if (!vendor) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        this.vendor = vendor
+        Materialize.toast('Produzent gespeichert.', 2000)
+      })
+  }
+
 }

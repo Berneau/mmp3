@@ -52,7 +52,7 @@
       <vendor-form #vendorForm [vendor]="vendor"></vendor-form>
     </mz-modal-content>
     <mz-modal-footer>
-      <button mz-button [flat]="true" (click)="this.store.updateVendor(vendorForm)" mz-modal-close>Speichern</button>
+      <button mz-button [flat]="true" (click)="this.updateVendor(vendorForm)" mz-modal-close>Speichern</button>
       <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
     </mz-modal-footer>
   </mz-modal>
