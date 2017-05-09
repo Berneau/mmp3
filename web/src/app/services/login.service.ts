@@ -26,7 +26,6 @@ export class LoginService {
       .post(this.url, JSON.stringify({ email, password }), { headers: this.headers })
       .toPromise()
       .then((res: Response) => {
-        console.log(res.json())
         let token = res.json() && res.json().token
 
         if (token) {
