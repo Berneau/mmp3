@@ -11,7 +11,7 @@ import { Product } from './../interfaces/product'
 @Component({
   selector: 'vendor-profile',
   templateUrl: './vendor-profile.component.html',
-  styleUrls: ['./vendor-profile.component.sass']
+  styleUrls: ['./vendor-profile.component.less']
 })
 export class VendorProfileComponent implements OnInit {
 

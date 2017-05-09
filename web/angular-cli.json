@@ -17,7 +17,7 @@
     "prefix": "app",
     "mobile": false,
     "styles": [
-      "styles.sass",
+      "styles.less",
       "../node_modules/materialize-css/dist/css/materialize.css"
     ],
     "scripts": [
@@ -43,7 +43,7 @@
     }
   },
   "defaults": {
-    "styleExt": "sass",
+    "styleExt": "less",
     "prefixInterfaces": false,
     "inline": {
       "style": false,

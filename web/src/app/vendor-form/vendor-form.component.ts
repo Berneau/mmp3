@@ -6,7 +6,7 @@ import { Vendor } from './../interfaces/vendor'
 @Component({
   selector: 'vendor-form',
   templateUrl: './vendor-form.component.html',
-  styleUrls: ['./vendor-form.component.sass']
+  styleUrls: ['./vendor-form.component.less']
 })
 export class VendorFormComponent implements OnInit {
 

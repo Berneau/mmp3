@@ -5,7 +5,7 @@ import { LoginService } from './../services/login.service'
 @Component({
   selector: 'header-bar',
   templateUrl: './header-bar.component.html',
-  styleUrls: ['./header-bar.component.sass']
+  styleUrls: ['./header-bar.component.less']
 })
 export class HeaderBarComponent implements OnInit {
 

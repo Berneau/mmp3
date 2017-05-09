@@ -5,7 +5,7 @@ import { LoginService } from './../services/login.service'
 @Component({
   selector: 'slide-nav',
   templateUrl: './slide-nav.component.html',
-  styleUrls: ['./slide-nav.component.sass']
+  styleUrls: ['./slide-nav.component.less']
 })
 export class SlideNavComponent implements OnInit {
 

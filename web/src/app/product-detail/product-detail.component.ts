@@ -10,7 +10,7 @@ import { Vendor } from './../interfaces/vendor'
 @Component({
   selector: 'product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.sass']
+  styleUrls: ['./product-detail.component.less']
 })
 export class ProductDetailComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import { RecipeService } from './../services/recipe.service'
 @Component({
   selector: 'recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.sass']
+  styleUrls: ['./recipe-detail.component.less']
 })
 export class RecipeDetailComponent implements OnInit {
 
