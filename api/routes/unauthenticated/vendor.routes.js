@@ -1,4 +1,5 @@
 var Vendor = require('../../models/vendor.model')
+var Product = require('../../models/product.model')
 
 module.exports = function(router) {
 
@@ -19,8 +20,18 @@ module.exports = function(router) {
 
     Vendor
     .find({ 'name': { '$regex': filter } }, function(err, vendors) {
-      if (err) res.status(500).end(err)
-      res.json(vendors)
+
+      // internal server error
+      if (err) res.status(500).json({
+        ok: false,
+        err: err.message
+      })
+
+      // return vendor list
+      else res.status(200).json({
+        ok: true,
+        vendors: vendors
+      })
     })
     .sort({name: 1})
   })
@@ -33,13 +44,34 @@ module.exports = function(router) {
      * @apiPermission none
      *
      * @apiSuccess {Object} vendor The vendor for given id.
+     * @apiSuccess {Array} products The products of the vendor.
     */
     .get(function(req, res) {
       Vendor.findById(req.params.id, function(err, vendor) {
 
-        if (err && err.name != 'CastError') res.status(404).json(err.message)
-        else if (!err && vendor) res.status(200).json(vendor)
-        else res.status(404).json({ message: 'Vendor not found'})
+        // internal server err
+        if (err && err.name != 'CastError') res.status(404).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return found vendor object
+        else if (!err && vendor) {
+          Product.find({ 'vendorId': vendor._id }, function(err, products) {
+
+            res.status(200).json({
+              ok: true,
+              vendor: vendor,
+              products: products
+            })
+          })
+        }
+
+        // no vendor was found
+        else res.status(404).json({
+          ok: false,
+          message: 'Vendor not found'
+        })
       })
     })
 

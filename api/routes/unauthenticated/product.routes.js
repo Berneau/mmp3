@@ -24,8 +24,18 @@ module.exports = function(router) {
 
       Product
       .find({ 'categoryId': categoryId }, function(err, products) {
-        if (err) res.status(500).json(err.message)
-        res.json(products)
+
+        // internal server error
+        if (err) res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return product list
+        else res.status(200).json({
+          ok: true,
+          products: products
+        })
       })
       .sort({name: 1})
 
@@ -33,8 +43,18 @@ module.exports = function(router) {
 
       Product
       .find({ 'vendorId': vendorId }, function(err, products) {
-        if (err) res.status(500).json(err.message)
-        res.json(products)
+
+        // internal server error
+        if (err) res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return product list
+        else res.status(200).json({
+          ok: true,
+          products: products
+        })
       })
       .sort({name: 1})
 
@@ -42,14 +62,21 @@ module.exports = function(router) {
 
       Product
       .find({ 'name': { '$regex': filter } }, function(err, products) {
-        if (err) res.status(500).json(err.message)
-        res.json(products)
+        // internal server error
+        if (err) res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return product list
+        else res.status(200).json({
+          ok: true,
+          products: products
+        })
       })
       .sort({name: 1})
     }
-
   })
-
 
   router.route('/products/:id')
   /**
@@ -63,9 +90,23 @@ module.exports = function(router) {
   .get(function(req, res) {
     Product.findById(req.params.id, function(err, product) {
 
-      if (err && err.name != 'CastError') res.status(404).json(err.message)
-      else if (!err && product) res.status(200).json(product)
-      else res.status(404).json({ message: 'Product not found' })
+      // internal server err
+      if (err && err.name != 'CastError') res.status(404).json({
+        ok: false,
+        err: err.message
+      })
+
+      // return found product object
+      else if (!err && product) res.status(200).json({
+        ok: true,
+        product: product
+      })
+
+      // no product was found
+      else res.status(404).json({
+        ok: false,
+        message: 'Product not found'
+      })
     })
   })
 

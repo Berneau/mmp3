@@ -10,7 +10,7 @@ let token = null
 
 chai.use(chaiHttp)
 
-describe.skip('Vendor', () => {
+describe('Vendor', () => {
 
   before((done) => {
     Vendor.remove({}, (err) => {
@@ -21,7 +21,7 @@ describe.skip('Vendor', () => {
   before((done) => {
     chai.request(server)
       .post('/api/auth')
-      .send({ username: 'Berneau', password: 'test' })
+      .send({ email: 'ico@gnito.at', password: 'test' })
       .end((err, res) => {
         token = res.body.token
         done()
@@ -35,8 +35,9 @@ describe.skip('Vendor', () => {
         .get('/api/vendors')
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('array')
-          res.body.length.should.be.eql(0)
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('vendors').be.a('array')
+          res.body.vendors.length.should.be.equal(0)
           done()
         })
     })
@@ -49,10 +50,8 @@ describe.skip('Vendor', () => {
     it('should get a vendor by its id', (done) => {
       let vendor = new Vendor({
         name: 'Bauernhof',
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
 
       vendor.save((err, vendor) => {
@@ -61,8 +60,9 @@ describe.skip('Vendor', () => {
         .send(vendor)
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('object')
-          res.body.should.have.property('_id').eql(vendor._id.toString())
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('vendor')
+          res.body.vendor.should.have.property('_id').equal(vendor._id.toString())
           done()
         })
       })
@@ -73,8 +73,8 @@ describe.skip('Vendor', () => {
         .get('/api/vendors/notavalidid')
         .end((err, res) => {
           res.should.have.status(404)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('Vendor not found')
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Vendor not found')
           done()
         })
     })
@@ -87,10 +87,8 @@ describe.skip('Vendor', () => {
     it('should POST a valid vendor', (done) => {
       let vendor = new Vendor({
         name: 'Bauernhof',
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       chai.request(server)
         .post('/api/vendors')
@@ -98,18 +96,16 @@ describe.skip('Vendor', () => {
         .send(vendor)
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('object')
-          res.body.should.have.property('_id')
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('vendor')
           done()
         })
     })
 
     it('should not POST a vendor without a name', (done) => {
       let vendor = new Vendor({
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       chai.request(server)
         .post('/api/vendors')
@@ -117,18 +113,16 @@ describe.skip('Vendor', () => {
         .send(vendor)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('Missing fields')
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Missing fields')
           done()
         })
     })
 
-    it('should not POST a vendor without a ownerName', (done) => {
+    it('should not POST a vendor without a userUid', (done) => {
       let vendor = new Vendor({
         name: 'Bauernhof',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        email: 'bauern@hof.at'
       })
       chai.request(server)
         .post('/api/vendors')
@@ -136,18 +130,16 @@ describe.skip('Vendor', () => {
         .send(vendor)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('Missing fields')
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Missing fields')
           done()
         })
     })
 
-    it('should not POST a vendor without a category', (done) => {
+    it('should not POST a vendor without a email', (done) => {
       let vendor = new Vendor({
         name: 'Bauernhof',
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        city: 'Lungau'
+        userUid: 'asd123'
       })
       chai.request(server)
         .post('/api/vendors')
@@ -155,8 +147,8 @@ describe.skip('Vendor', () => {
         .send(vendor)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('Missing fields')
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Missing fields')
           done()
         })
     })
@@ -169,17 +161,13 @@ describe.skip('Vendor', () => {
     it('should UPDATE and return a vendor', (done) => {
       let vendor1 = new Vendor({
         name: 'Bauernhof',
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       let vendor2 = new Vendor({
-        name: 'Hütte',
-        ownerName: 'Bubi',
-        email: 'bauer@hof.at',
-        category: 2,
-        city: 'Lungau'
+        name: 'Hüttn',
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       vendor1.save((err, vendor1) => {
         chai.request(server)
@@ -188,10 +176,11 @@ describe.skip('Vendor', () => {
         .send(vendor2)
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('object')
-          res.body.should.have.property('name').eql(vendor2.name)
-          res.body.should.have.property('ownerName').eql(vendor2.ownerName)
-          res.body.should.have.property('category').eql(vendor2.category)
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('vendor')
+          res.body.vendor.should.have.property('name').equal(vendor2.name)
+          res.body.vendor.should.have.property('userUid').equal(vendor2.userUid)
+          res.body.vendor.should.have.property('email').equal(vendor2.email)
           done()
         })
       })
@@ -200,16 +189,12 @@ describe.skip('Vendor', () => {
     it('should not UPDATE the vendor if it is not valid', (done) => {
       let vendor1 = new Vendor({
         name: 'Bauernhof',
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       let vendor2 = new Vendor({
-        name: 'Hütte',
-        email: 'bauer@hof.at',
-        category: 2,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       vendor1.save((err, vendor1) => {
         chai.request(server)
@@ -218,8 +203,8 @@ describe.skip('Vendor', () => {
         .send(vendor2)
         .end((err, res) => {
           res.should.have.status(412)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('Missing fields')
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Missing fields')
           done()
         })
       })
@@ -228,17 +213,13 @@ describe.skip('Vendor', () => {
     it('should not UPDATE a vendor if the id is not valid', (done) => {
       let vendor1 = new Vendor({
         name: 'Bauernhof',
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       let vendor2 = new Vendor({
-        name: 'Hütte',
-        ownerName: 'Bubi',
-        email: 'bauer@hof.at',
-        category: 2,
-        city: 'Lungau'
+        name: 'Hüttn',
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
       vendor1.save((err, vendor1) => {
         chai.request(server)
@@ -247,8 +228,8 @@ describe.skip('Vendor', () => {
           .send(vendor2)
           .end((err, res) => {
             res.should.have.status(404)
-            res.body.should.be.a('object')
-            res.body.should.have.property('message').eql('Vendor not found')
+            res.body.should.have.property('ok').equal(false)
+            res.body.should.have.property('message').equal('Vendor not found')
             done()
           })
       })
@@ -262,19 +243,17 @@ describe.skip('Vendor', () => {
     it('should DELETE a vendor if it exists', (done) => {
       let vendor = new Vendor({
         name: 'Bauernhof',
-        ownerName: 'Bauer',
-        email: 'bauer@hof.at',
-        category: 1,
-        city: 'Lungau'
+        userUid: 'asd123',
+        email: 'bauern@hof.at'
       })
-      vendor.save((err, vendor1) => {
+      vendor.save((err, vendor) => {
         chai.request(server)
           .delete('/api/vendors/' + vendor._id)
           .set('x-access-token', token)
           .end((err, res) => {
             res.should.have.status(200)
-            res.body.should.be.a('object')
-            res.body.should.have.property('message').eql('Successfully deleted')
+            res.body.should.have.property('ok').equal(true)
+            res.body.should.have.property('message').equal('Successfully deleted')
             done()
           })
       })
@@ -286,8 +265,8 @@ describe.skip('Vendor', () => {
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404)
-          res.body.should.be.a('object')
-          res.body.should.have.property('message').eql('Vendor not found')
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Vendor not found')
           done()
         })
     })

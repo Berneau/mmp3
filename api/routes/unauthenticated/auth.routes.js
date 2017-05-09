@@ -29,26 +29,47 @@ module.exports = function(router) {
   .post(function(req, res) {
 
     User.findOne({ email: req.body.email }, function(err, user) {
-      if (err) res.status(500).end(err)
 
-      if (user) {
+      // internal server error
+      if (err) res.status(500).json({
+        ok: false,
+        err: err.message
+      })
 
-        password.compare(user.password, user.salt, function(err, hash) {
-          if (user.hash === hash) {
+      else if (user) {
+
+        password.compare(req.body.password, user.salt, function(err, hash) {
+          if (user.password === hash) {
             var token = jwt.sign(user, secret, {
               expiresIn: '24h'
             })
 
+            // return token and user
             res.status(200).json({
               ok: true,
               token: token,
-              user: user
+              user: stripUserObject(user)
             })
 
-          } else res.status(403).json({ message: 'Authentication failed.' })
+            // email and password doesn't match
+          } else res.status(403).json({
+            ok: false,
+            message: 'Authentication failed.'
+          })
         })
-      } else res.status(403).json({ message: 'Authentication failed.' })
+
+        // user with this email was not found
+      } else res.status(403).json({
+        ok: false,
+        message: 'Authentication failed.'
+      })
     })
   })
+
+  function stripUserObject(user) {
+    user.password = undefined
+    user.salt = undefined
+    return user
+  }
 
 }

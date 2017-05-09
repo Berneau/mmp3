@@ -12,14 +12,27 @@ chai.use(chaiHttp)
 
 describe('User', () => {
 
+  before((done) => {
+    chai.request(server)
+      .post('/api/auth')
+      .send({ email: 'ico@gnito.at', password: 'test' })
+      .end((err, res) => {
+        token = res.body.token
+        done()
+      })
+  })
+
   describe('GET users', () => {
 
     it('should GET all users', (done) => {
       chai.request(server)
         .get('/api/users')
+        .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(200)
-          res.body.should.be.a('array')
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('users')
+          res.body.users.should.be.a('array')
           done()
         })
     })
@@ -29,22 +42,30 @@ describe('User', () => {
 
     it('should GET a user by id', (done) => {
       let user = new User({
-        password: 'noob',
         email: 'noob@boon.com',
+        password: 'noob',
         isAdmin: false
       })
 
-      user.save((err, user) => {
-        chai.request(server)
-          .get('/api/users/' + user._id)
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(200)
-            res.body.should.be.a('object')
-            res.body.should.have.property('_id').eql(user._id.toString())
-            done()
-          })
-      })
+      chai.request(server)
+        .post('/api/users')
+        .send(user)
+        .end((err, res) => {
+          let id = res.body.user._id
+
+          chai.request(server)
+            .get('/api/users/' + id)
+            .set('x-access-token', token)
+            .send(user)
+            .end((err, res) => {
+              res.should.have.status(200)
+              res.body.should.have.property('ok').equal(true)
+              res.body.should.have.property('user')
+              res.body.user.should.have.property('_id').equal(id.toString())
+              done()
+            })
+
+        })
     })
   })
 
@@ -61,8 +82,10 @@ describe('User', () => {
         .post('/api/users')
         .send(user)
         .end((err, res) => {
-          console.log(res.body)
           res.should.have.status(200)
+          res.body.should.have.property('ok').equal(true)
+          res.body.should.have.property('user')
+          done()
         })
     })
   })

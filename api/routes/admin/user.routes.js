@@ -19,8 +19,18 @@ module.exports = function(router) {
 
   User
   .find({ 'email': { '$regex': filter } }, function(err, users) {
-    if (err) res.status(500).end(err)
-    res.json(stripUserArray(users))
+
+    // internal server error
+    if (err) res.status(500).json({
+      ok: false,
+      err: err.message
+    })
+
+    // return user list
+    else res.json({
+      ok: true,
+      users: stripUserArray(users)
+    })
   })
   .sort({email: 1})
   })
@@ -36,10 +46,24 @@ module.exports = function(router) {
   */
   .get(function(req, res) {
    User.findById(req.params.id, function(err, user) {
-     if (err) res.status(500).end(err)
 
-     if (user) res.status(200).json(stripUserObject(user))
-     else res.status(404).json({ message: 'User not found'})
+     // internal server error
+     if (err) res.status(500).json({
+       ok: false,
+       err: err.message
+     })
+
+     // return user object
+     else if (user) res.status(200).json({
+       ok: true,
+       user: stripUserObject(user)
+     })
+
+     // no user with this id
+     else res.status(404).json({
+       ok: false,
+       message: 'User not found'
+     })
    })
   })
 

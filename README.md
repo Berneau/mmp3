@@ -18,7 +18,7 @@ $ npm start     //local dev environment
 $ npm run prod  //production environment
 ```
 
-**Testing**
+**API Testing**
 ```
 $ npm test
 ```
