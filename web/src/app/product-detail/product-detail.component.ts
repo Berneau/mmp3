@@ -40,7 +40,6 @@ export class ProductDetailComponent implements OnInit {
             return
           }
           this.vendor = v
-          console.log(this.vendor)
         })
       })
     })

@@ -21,7 +21,7 @@ export class CategoryService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.categories = res.json()
+        this.categories = res.json().categories
       })
       .catch(this.handleError)
   }
@@ -33,7 +33,7 @@ export class CategoryService {
       .get(url)
       .toPromise()
       .then((res) => {
-        return res.json() as Category
+        return res.json().category as Category
       })
       .catch(this.handleError)
   }
@@ -45,7 +45,7 @@ export class CategoryService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.categoryProducts = res.json()
+        this.categoryProducts = res.json().products
       })
       .catch(this.handleError)
   }
