@@ -10,7 +10,7 @@ import { Vendor } from './../interfaces/vendor'
 })
 export class VendorFormComponent implements OnInit {
 
-  editForm: FormGroup
+  vendorForm: FormGroup
   @Input() vendor: Vendor
 
   constructor(private fb: FormBuilder) {
@@ -22,7 +22,7 @@ export class VendorFormComponent implements OnInit {
 
   createForm() {
     if (this.vendor) {
-      this.editForm = this.fb.group({
+      this.vendorForm = this.fb.group({
         name: this.vendor.name,
         subName: this.vendor.subName,
         email: { value: this.vendor.email, disabled: true },
@@ -37,7 +37,7 @@ export class VendorFormComponent implements OnInit {
       });
     }
     else {
-      this.editForm = this.fb.group({
+      this.vendorForm = this.fb.group({
         name: '',
         subName: '',
         email: '',
