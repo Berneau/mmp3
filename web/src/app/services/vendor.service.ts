@@ -53,8 +53,9 @@ export class VendorService {
   }
 
   updateVendor(v) {
-    console.log(v)
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
     let url = `${this.apiEndpoint}/vendors/${v.vendor._id}`
+    let authHeaders =  new Headers({'Content-Type': 'application/json', 'x-access-token': `${token}`})
     let vendor = {
       name: v.editForm.value.name,
       userUid: v.vendor.userUid,
