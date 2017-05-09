@@ -14,7 +14,10 @@ export class VendorService {
   vendors: Vendor[]
   vendorProducts: Product[]
   private apiEndpoint = ApiEndpoint
-  private headers = new Headers({ 'Content-Type': 'application/json' })
+  private headers = new Headers({
+    'Content-Type': 'application/json',
+    'x-access-token': token
+  })
 
   getVendors(): Promise<any> {
     let url = `${this.apiEndpoint}/vendors`
