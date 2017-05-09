@@ -22,13 +22,13 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { SlideNavComponent } from './slide-nav/slide-nav.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { VendorFormComponent } from './vendor-form/vendor-form.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
 import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
 import { LoginService } from './services/login.service';
-import { VendorFormComponent } from './vendor-form/vendor-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
