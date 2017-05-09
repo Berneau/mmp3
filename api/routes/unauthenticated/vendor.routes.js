@@ -44,6 +44,7 @@ module.exports = function(router) {
      * @apiPermission none
      *
      * @apiSuccess {Object} vendor The vendor for given id.
+     * @apiSuccess {Array} products The products of the vendor.
     */
     .get(function(req, res) {
       Vendor.findById(req.params.id, function(err, vendor) {
