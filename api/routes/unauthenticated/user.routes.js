@@ -1,6 +1,8 @@
 var password = require('s-salt-pepper')
 
 var User = require('../../models/user.model')
+var userIsValid = require('../../helpers/helpers').userIsValid
+var stripUserObject = require('../../helpers/helpers').stripUserObject
 
 module.exports = function(router) {
 
@@ -69,16 +71,4 @@ module.exports = function(router) {
    })
   })
 
-  function userIsValid(user) {
-    if (!user.password ||
-        !user.email ||
-        !user.hasOwnProperty('isAdmin')) return false
-    else return true
-  }
-
-  function stripUserObject(user) {
-    user.password = undefined
-    user.salt = undefined
-    return user
-  }
 }

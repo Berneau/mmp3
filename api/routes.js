@@ -27,6 +27,7 @@ router.use(function(req, res, next) {
 })
 
 // authenticated routes
+require('./routes/authenticated/product.routes')(router)
 
 
 // admin check

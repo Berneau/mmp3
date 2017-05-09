@@ -1,4 +1,5 @@
 var Vendor = require('../../models/vendor.model')
+var vendorIsValid = require('../../helpers/helpers').vendorIsValid
 
 module.exports = function(router) {
 
@@ -190,10 +191,4 @@ module.exports = function(router) {
         })
       })
 
-    function vendorIsValid(vendor) {
-      if (!vendor.name ||
-          !vendor.userUid ||
-          !vendor.email) return false
-      else return true
-    }
 }

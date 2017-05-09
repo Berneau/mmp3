@@ -1,4 +1,7 @@
 var User = require('../../models/user.model')
+var userIsValid = require('../../helpers/helpers').userIsValid
+var stripUserObject = require('../../helpers/helpers').stripUserObject
+var stripUserArray = require('../../helpers/helpers').stripUserArray
 
 module.exports = function(router) {
 
@@ -89,24 +92,4 @@ module.exports = function(router) {
    })
   })
 
-  function stripUserArray(arr) {
-   for (var i = 0; i < arr.length; i++) {
-     arr[i].password = undefined
-     arr[i].salt = undefined
-   }
-   return arr
-  }
-
-  function stripUserObject(user) {
-    user.password = undefined
-    user.salt = undefined
-    return user
-  }
-
-  function userIsValid(user) {
-    if (!user.password ||
-        !user.email ||
-        !user.isAdmin) return false
-    else return true
-  }
 }

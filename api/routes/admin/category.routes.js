@@ -1,4 +1,5 @@
 var Category = require('../../models/category.model')
+var categoryIsValid = require('../../helpers/helpers').categoryIsValid
 
 module.exports = function(router) {
 
@@ -150,9 +151,4 @@ module.exports = function(router) {
        })
      })
 
-  function categoryIsValid(category) {
-    if (!category.name ||
-        !category.typeUid) return false
-    else return true
-  }
 }

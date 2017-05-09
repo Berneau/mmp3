@@ -4,6 +4,7 @@ var secret = require('../../config').secret
 var pepper = require('../../config').pepper
 
 var User = require('../../models/user.model')
+var stripUserObject = require('../../helpers/helpers').stripUserObject
 
 // set up pepper
 password.configure({
@@ -65,11 +66,5 @@ module.exports = function(router) {
       })
     })
   })
-
-  function stripUserObject(user) {
-    user.password = undefined
-    user.salt = undefined
-    return user
-  }
 
 }
