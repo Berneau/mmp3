@@ -16,7 +16,6 @@ import { Product } from './../interfaces/product'
 export class VendorProfileComponent implements OnInit {
 
   vendor: Vendor
-  products: Product
 
   constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService) {
 
@@ -40,7 +39,7 @@ export class VendorProfileComponent implements OnInit {
   }
 
   updateVendor(v) {
-    this.store.updateVendor(v.vendor, v.editForm.value)
+    this.store.updateVendor(v.vendor, v.vendorForm.value)
       .then(vendor => {
         if (!vendor) {
           Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
@@ -48,6 +47,17 @@ export class VendorProfileComponent implements OnInit {
         }
         this.vendor = vendor
         Materialize.toast('Produzent gespeichert.', 2000)
+      })
+  }
+
+  newProduct(p) {
+    this.store.addProduct(p.vendor, p.productForm.value)
+      .then(product => {
+        if (!product) {
+          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Produkt gespeichert.', 2000)
       })
   }
 
