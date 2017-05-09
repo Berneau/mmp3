@@ -49,10 +49,10 @@
       Bearbeiten
     </mz-modal-header>
     <mz-modal-content>
-      <vendor-form [vendor]="vendor"></vendor-form>
+      <vendor-form #vendorForm [vendor]="vendor"></vendor-form>
     </mz-modal-content>
     <mz-modal-footer>
-      <button mz-button [flat]="true" (click)="this.store.updateVendor(vendor)" mz-modal-close>Speichern</button>
+      <button mz-button [flat]="true" (click)="this.store.updateVendor(vendorForm)" mz-modal-close>Speichern</button>
       <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
     </mz-modal-footer>
   </mz-modal>
