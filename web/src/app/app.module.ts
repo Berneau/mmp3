@@ -28,6 +28,7 @@ import { VendorService } from './services/vendor.service';
 import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
 import { LoginService } from './services/login.service';
+import { VendorFormComponent } from './vendor-form/vendor-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -79,7 +80,8 @@ const appRoutes: Routes = [
     RecipeDetailComponent,
     ProductDetailComponent,
     CategoryDetailComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    VendorFormComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
