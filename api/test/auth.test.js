@@ -40,6 +40,8 @@ describe('Auth', () => {
             res.body.should.have.property('ok').equal(true)
             res.body.should.have.property('token')
             res.body.should.have.property('user')
+            res.body.user.should.not.have.property('password')
+            res.body.user.should.not.have.property('hash')
             done()
           })
 
