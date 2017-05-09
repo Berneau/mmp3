@@ -15,7 +15,7 @@ module.exports = function(router) {
   router.route('/auth')
 
   /**
-   * @api {post} /authentication Get JWT
+   * @api {post} /auth Get JWT
    * @apiName GETJWT
    * @apiGroup Authentication
    * @apiPermission none
