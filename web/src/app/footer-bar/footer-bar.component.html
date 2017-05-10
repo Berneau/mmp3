@@ -1,16 +1,22 @@
 <footer class="page-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 m6 s12">
+  <div class="row footer-contact">
+    <div class="container">
+      <div class="divider"></div>
+      <div class="col s12">
         <p>
-          © 2017 Dachmarke Lungau
+          Roswita Prodinger <br> 9020 Tamsweg <br> Lungau <br><br> Tel: 0676/7248930
         </p>
       </div>
-      <div class="col l6 m6 s12">
-        <p>
-          <button *ngIf="!this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" [routerLink]="['login']">Login</button>
-          <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout()">Logout</button>
-        </p>
+    </div>
+  </div>
+  <div class="row footer-copyright">
+    <div class="container">
+      <div class="">
+
+      </div>
+      <div class="">
+        <button *ngIf="!this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" [routerLink]="['login']">Login</button>
+        <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout()">Logout</button>
       </div>
     </div>
   </div>

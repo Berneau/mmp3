@@ -1,9 +1,17 @@
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+@import "../assets/variables";
 
-  div.main {
-    flex: 1 0 auto;
+body {
+  background-color: @background-color;
+  font-family: @primary-font normal;
+  height: 100%;
+  margin: 0;
+
+  .main {
+    padding: 20px 60px auto;
+  }
+
+  div.divider {
+    background-color: @linegrey-color;
+    height: 1px;
   }
 }

@@ -1,15 +1,15 @@
 <nav>
   <div class="nav-wrapper row">
-    <div class="col s2 m2 hide-on-large-only">
+    <div class="col s2 m1 hide-on-large-only">
       <div [id]="'btn-sidenav'" class="button-collapse">
-        <i class="material-icons">menu</i>
+        <i class="large material-icons">menu</i>
       </div>
     </div>
-    <div class="col s10 m10 l4">
-      <a [routerLink]="['']" class="brand-logo">Logo</a>
+    <div class="col s10 m11 l2">
+      <img src="assets/logo.png" alt="Logo" class="logo s2" [routerLink]="['']">
     </div>
-    <div class="col l8">
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <div class="col l10 hide-on-med-and-down">
+      <ul id="nav-mobile" class="right">
         <li *ngIf="this.LoginStore.isLoggedIn()"><a [routerLink]="['admin']">Admin-Dashboard</a></li>
         <li><a [routerLink]="['produzenten']">Produzenten</a></li>
         <li><a [routerLink]="['produkte']">Produkte</a></li>
