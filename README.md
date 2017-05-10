@@ -7,9 +7,9 @@
 $ yarn install
 ```
 
-**Dummy Data**
+**Seed mongoDB**
 ```
-$ npm run dummy
+$ npm run setup
 ```
 
 **Start**

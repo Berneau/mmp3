@@ -1,4 +1,5 @@
 var Type = require('../../models/type.model')
+var typeIsValid = require('../../helpers/helpers').typeIsValid
 
 module.exports = function(router) {
 
@@ -142,8 +143,4 @@ module.exports = function(router) {
     })
   })
 
-  function typeIsValid(type) {
-    if (!type.name) return false
-    else return true
-  }
 }
