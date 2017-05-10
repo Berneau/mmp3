@@ -34,26 +34,34 @@ let user3 = new User({
 let vendor1 = new Vendor({
   name: 'Elfriede Hackl',
   userUid: '',
-  email: 'elfriede@hof.at'
-  // address: {
-  //   city: 'Salzburg',
-  //   zip: 5020,
-  //   street: 'Landstraße 2',
-  //   lat: 47.123123,
-  //   long: 13.123123
-  // }
+  email: 'elfriede@hof.at',
+  description: 'Sonniges Platzal',
+  imageUrl: 'image.url',
+  subName: 'Hacklhof',
+  tel: 0815123123,
+  address: {
+    city: 'Salzburg',
+    zip: 5020,
+    street: 'Landstraße 2',
+    lat: 47.123123,
+    long: 13.123123
+  }
 })
 let vendor2 = new Vendor({
   name: 'Herbert Schmid',
   userUid: '',
-  email: 'bertl@hof.at'
-  // address: {
-  //   city: 'Salzburg',
-  //   zip: 5020,
-  //   street: 'Landstraße 2',
-  //   lat: 47.123123,
-  //   long: 13.123123
-  // }
+  email: 'bertl@hof.at',
+  description: 'Direkt am Fluß',
+  imageUrl: 'image.url',
+  subName: 'Schmittnhüttn',
+  tel: 0815123123,
+  address: {
+    city: 'Salzburg',
+    zip: 5020,
+    street: 'Landstraße 2',
+    lat: 47.123123,
+    long: 13.123123
+  }
 })
 
 let type1 = new Type({
@@ -91,7 +99,8 @@ let product1 = new Product({
     fromMonth: 'April',
     toPeriod: 'Ende',
     toMonth: 'September'
-  }
+  },
+  imageUrl: 'image.url'
 })
 let product2 = new Product({
   name: 'Hokkaido Kürbis',
@@ -102,7 +111,8 @@ let product2 = new Product({
     fromMonth: 'April',
     toPeriod: 'Ende',
     toMonth: 'September'
-  }
+  },
+  imageUrl: 'image.url'
 })
 let product3 = new Product({
   name: 'Liselotte',
@@ -113,7 +123,8 @@ let product3 = new Product({
     fromMonth: 'April',
     toPeriod: 'Ende',
     toMonth: 'September'
-  }
+  },
+  imageUrl: 'image.url'
 })
 
 setupUsers()
