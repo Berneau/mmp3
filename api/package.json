@@ -8,7 +8,7 @@
     "start": "NODE_ENV=DEVELOPMENT nodemon --no-deprecation",
     "test": "NODE_ENV=DEVELOPMENT mocha --timeout 10000",
     "doc": "apidoc -i routes/ -o apidoc",
-    "dummy": "node ./dummy/"
+    "setup": "NODE_ENV=DEVELOPMENT node ./setup/"
   },
   "repository": {
     "type": "git",
