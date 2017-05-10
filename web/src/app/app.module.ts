@@ -7,6 +7,8 @@ import 'rxjs/add/operator/toPromise'
 
 import { MaterializeModule } from 'ng2-materialize';
 
+import { AdminGuard } from './guards/admin.guard';
+
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -62,6 +64,7 @@ const appRoutes: Routes = [
     ]
   },
   { path: 'admin', component: AdminDashboardComponent },
+  // { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] },
   { path: 'login', component: LoginComponent }
 ];
 
@@ -98,7 +101,8 @@ const appRoutes: Routes = [
     VendorService,
     RecipeService,
     CategoryService,
-    LoginService
+    LoginService,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })
