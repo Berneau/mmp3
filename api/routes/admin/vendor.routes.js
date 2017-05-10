@@ -46,11 +46,11 @@ module.exports = function(router) {
         subName: req.body.subName,
         tel: req.body.tel,
         address: {
-          city: req.body.address ? req.body.address : undefined,
-          zip: req.body.address ? req.body.address : undefined,
-          street: req.body.address ? req.body.address : undefined,
-          lat: req.body.address ? req.body.address : undefined,
-          long: req.body.address ? req.body.address : undefined
+          city: req.body.address ? req.body.address.city : undefined,
+          zip: req.body.address ? req.body.address.zip : undefined,
+          street: req.body.address ? req.body.address.street : undefined,
+          lat: req.body.address ? req.body.address.lat : undefined,
+          long: req.body.address ? req.body.address.long : undefined
         }
       })
 
