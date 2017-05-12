@@ -30,7 +30,12 @@ module.exports = function(router) {
       var event = new Event({
         name: req.body.name,
         date: req.body.date,
-        description: req.body.description
+        description: req.body.description,
+        location: {
+          name: req.body.location ? req.body.location.name : undefined,
+          lat: req.body.location ? req.body.location.lat : undefined,
+          long: req.body.location ? req.body.location.long : undefined
+        }
       })
 
       event.save(function(err) {
@@ -77,9 +82,12 @@ module.exports = function(router) {
       else if (!err && event) {
         if (eventIsValid(req.body)) {
 
-          event.name = req.body.name,
-          event.date = req.body.date,
+          event.name = req.body.name
+          event.date = req.body.date
           event.description = req.body.description
+          event.location.name = req.body.location ? req.body.location.name : undefined
+          event.location.lat = req.body.location ? req.body.location.lat : undefined
+          event.location.long = req.body.location ? req.body.location.long : undefined
 
           event.save(function(err) {
 
