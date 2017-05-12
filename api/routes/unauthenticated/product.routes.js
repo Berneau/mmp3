@@ -19,6 +19,7 @@ module.exports = function(router) {
     var filter = req.query.filter ? req.query.filter : ''
     var categoryId = req.query.categoryId
     var vendorId = req.query.vendorId
+    var regex = new RegExp(filter, 'i')
 
     if (categoryId && !vendorId) {
 
@@ -61,7 +62,7 @@ module.exports = function(router) {
     } else {
 
       Product
-      .find({ 'name': { '$regex': filter } }, function(err, products) {
+      .find({ name: regex }, function(err, products) {
         // internal server error
         if (err) res.status(500).json({
           ok: false,

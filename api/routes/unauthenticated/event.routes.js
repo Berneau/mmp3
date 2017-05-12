@@ -4,17 +4,27 @@ module.exports = function(router) {
 
   router.route('/events')
   /**
-   * @api {get} /events Get all the events
+   * @api {get} /events?filter=<filter> Get all the events with optional search
    * @apiName GetEvents
    * @apiGroup Events
    * @apiPermission none
+   *
+   * @apiParam {String} [filter] The fields name and location will be searched by this
    *
    * @apiSuccess {Array} event Array of events.
   */
   .get(function(req, res) {
 
+    var filter = req.query.filter ? req.query.filter : ''
+    var regex = new RegExp(filter, 'i')
+
     Event
-    .find({}, function(err, events) {
+    .find({
+      $or: [
+        { name: regex },
+        { 'location.name': regex }
+      ]
+    }, function(err, events) {
 
       // internal server error
       if (err) res.status(500).json({

@@ -10,18 +10,28 @@ module.exports = function(router) {
    * @apiGroup Vendors
    * @apiPermission none
    *
-   * @apiParam {String} [filter] The field name will be search by this.
+   * @apiParam {String} [filter] The fields name, subName, address.city and address.zip will be search by this.
    *
    * @apiSuccess {Array} vendor Array of vendors.
  */
   .get(function(req, res) {
 
     var filter = req.query.filter ? req.query.filter : ''
+    var regex = new RegExp(filter, 'i')
+    var zip
+
+    if (Number.isInteger(parseInt(filter))) zip = parseInt(filter)
+    else zip = undefined
 
     Vendor
-    .find({ 'name': { '$regex': filter },
-            'address.city': { '$regex': filter },
-            'address.city': filter }, function(err, vendors) {
+    .find({
+      $or: [
+        { name: regex },
+        { subName: regex },
+        { 'address.city': regex },
+        { 'address.zip': zip }
+      ]
+    }, function(err, vendors) {
 
       // internal server error
       if (err) res.status(500).json({

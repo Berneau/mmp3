@@ -57,9 +57,9 @@ let vendor2 = new Vendor({
   subName: 'Schmittnhüttn',
   tel: 0815123123,
   address: {
-    city: 'Salzburg',
-    zip: 5020,
-    street: 'Landstraße 2',
+    city: 'Bergheim',
+    zip: 5101,
+    street: 'Hauptstraße 25',
     lat: 47.123123,
     long: 13.123123
   }
