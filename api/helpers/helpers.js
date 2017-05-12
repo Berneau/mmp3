@@ -27,6 +27,11 @@ module.exports = {
     if (!type.name) return false
     else return true
   },
+  eventIsValid: function (event) {
+    if (!event.name ||
+        !event.date) return false
+    else return true
+  },
   userIsValid: function (user) {
     if (!user.password ||
         !user.email ||
