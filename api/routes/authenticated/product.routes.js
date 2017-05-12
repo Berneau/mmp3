@@ -97,13 +97,13 @@ module.exports = function(router) {
       else if (!err && product) {
         if (productIsValid(req.body)) {
 
-          product.name = req.body.name,
-          product.categoryId = req.body.categoryId,
-          product.vendorId = req.body.vendorId,
-          product.availableAt.fromPeriod = req.body.availableAt ? req.body.availableAt.fromPeriod : undefined,
-          product.availableAt.fromMonth = req.body.availableAt ? req.body.availableAt.fromMonth : undefined,
-          product.availableAt.toPeriod = req.body.availableAt ? req.body.availableAt.toPeriod : undefined,
-          product.availableAt.toMonth = req.body.availableAt ? req.body.availableAt.toMonth : undefined,
+          product.name = req.body.name
+          product.categoryId = req.body.categoryId
+          product.vendorId = req.body.vendorId
+          product.availableAt.fromPeriod = req.body.availableAt ? req.body.availableAt.fromPeriod : undefined
+          product.availableAt.fromMonth = req.body.availableAt ? req.body.availableAt.fromMonth : undefined
+          product.availableAt.toPeriod = req.body.availableAt ? req.body.availableAt.toPeriod : undefined
+          product.availableAt.toMonth = req.body.availableAt ? req.body.availableAt.toMonth : undefined
           product.imageUrl = req.body.imageUrl
 
           product.save(function(err) {

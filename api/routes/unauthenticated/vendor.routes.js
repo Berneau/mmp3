@@ -19,7 +19,9 @@ module.exports = function(router) {
     var filter = req.query.filter ? req.query.filter : ''
 
     Vendor
-    .find({ 'name': { '$regex': filter } }, function(err, vendors) {
+    .find({ 'name': { '$regex': filter },
+            'address.city': { '$regex': filter },
+            'address.city': filter }, function(err, vendors) {
 
       // internal server error
       if (err) res.status(500).json({

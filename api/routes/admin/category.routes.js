@@ -77,8 +77,8 @@ module.exports = function(router) {
         else if (!err && category) {
           if (categoryIsValid(req.body)) {
 
-            category.name = req.body.name,
-            category.typeUid = req.body.typeUid,
+            category.name = req.body.name
+            category.typeUid = req.body.typeUid
             category.imageUrl = req.body.imageUrl
 
             category.save(function(err) {
