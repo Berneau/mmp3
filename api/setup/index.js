@@ -10,6 +10,7 @@ let Vendor = require('../models/vendor.model')
 let Type = require('../models/type.model')
 let Category = require('../models/category.model')
 let Product = require('../models/product.model')
+let Event = require('../models/event.model')
 
 chai.use(chaiHttp)
 
@@ -125,6 +126,26 @@ let product3 = new Product({
     toMonth: 'September'
   },
   imageUrl: 'image.url'
+})
+let event1 = new Event({
+  name: 'Schranne',
+  date: new Date(),
+  description: 'Moakt füa ois',
+  location: {
+    name: 'Mirabellplatz',
+    lat: 47.123123,
+    long: 13.123123
+  }
+})
+let event2 = new Event({
+  name: 'Grünmarkt',
+  date: new Date(),
+  description: 'Grüner Moakt',
+  location: {
+    name: 'Salzburg Altstadt',
+    lat: 47.123123,
+    long: 13.123123
+  }
 })
 
 setupUsers()
@@ -345,6 +366,34 @@ function setupProducts() {
 
   Promise.all([p1, p2, p3]).then(values => {
     console.log('Products: ' + values)
+    setupEvents()
+  })
+}
+
+function setupEvents() {
+  let e1 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/events')
+      .set('x-access-token', token)
+      .send(event1)
+      .end((err, res) => {
+        if(err) reject('e1')
+        else resolve(res.body.ok)
+      })
+  })
+  let e2 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/events')
+      .set('x-access-token', token)
+      .send(event2)
+      .end((err, res) => {
+        if(err) reject('e2')
+        else resolve(res.body.ok)
+      })
+  })
+
+  Promise.all([e1, e2]).then(values => {
+    console.log('Events: ' + values)
     process.exit(0)
   })
 }
