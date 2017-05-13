@@ -6,4 +6,4 @@ A token is required for admin and protected routes. e.g. as Header: x-access-tok
 
 To access admin routes in addition to the token also the user has to be an admin. (admin flag in user object). These routes are only used to maintain the application.
 
-Every response is wrapped in an object with an additional "ok"-attribute.
+Every response is wrapped in an object with an additional "ok"-attribute which is either true or false.
