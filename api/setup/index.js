@@ -11,6 +11,7 @@ let Type = require('../models/type.model')
 let Category = require('../models/category.model')
 let Product = require('../models/product.model')
 let Event = require('../models/event.model')
+let Postit = require('../models/postit.model')
 
 chai.use(chaiHttp)
 
@@ -146,6 +147,16 @@ let event2 = new Event({
     lat: 47.123123,
     long: 13.123123
   }
+})
+let postit1 = new Postit({
+  name: 'Wild',
+  description: 'Nur für kurze Zeit',
+  imageUrl: 'image.url'
+})
+let postit2 = new Postit({
+  name: 'Eier',
+  description: 'Überschuss an Eiern',
+  imageUrl: 'image.url'
 })
 
 setupUsers()
@@ -394,6 +405,34 @@ function setupEvents() {
 
   Promise.all([e1, e2]).then(values => {
     console.log('Events: ' + values)
+    setupPostits()
+  })
+}
+
+function setupPostits() {
+  let p1 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/postits')
+      .set('x-access-token', token)
+      .send(postit1)
+      .end((err, res) => {
+        if(err) reject('e1')
+        else resolve(res.body.ok)
+      })
+  })
+  let p2 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/postits')
+      .set('x-access-token', token)
+      .send(postit2)
+      .end((err, res) => {
+        if(err) reject('e1')
+        else resolve(res.body.ok)
+      })
+  })
+
+  Promise.all([p1, p2]).then(values => {
+    console.log('Postits: ' + values)
     process.exit(0)
   })
 }
