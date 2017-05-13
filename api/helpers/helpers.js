@@ -32,6 +32,10 @@ module.exports = {
         !event.date) return false
     else return true
   },
+  postitIsValid: function (postit) {
+    if (!postit.name) return false
+    else return true
+  },
   userIsValid: function (user) {
     if (!user.password ||
         !user.email ||
