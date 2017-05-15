@@ -5,6 +5,7 @@ import { Category } from './../interfaces/category'
 import { ApiEndpoint } from './../app.config'
 
 import { Product } from './../interfaces/product'
+import { Type } from './../interfaces/type'
 
 @Injectable()
 export class CategoryService {
@@ -46,6 +47,18 @@ export class CategoryService {
       .toPromise()
       .then((res) => {
         this.categoryProducts = res.json().products
+      })
+      .catch(this.handleError)
+  }
+
+  getCategoryType(id): Promise<any> {
+    let url = `${this.apiEndpoint}/types/${id}`
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        return res.json().type as Type
       })
       .catch(this.handleError)
   }

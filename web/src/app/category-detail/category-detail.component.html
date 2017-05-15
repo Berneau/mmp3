@@ -4,7 +4,7 @@
       <h3>
         {{category.name}}
       </h3>
-      <h5>Typ</h5>
+      <h5 *ngIf="type">{{type.name}}</h5>
     </div>
     <div class="col l6 m6 s12">
       <img class="col l8 m8 s8 right" src="assets/dummy_img.jpg">
