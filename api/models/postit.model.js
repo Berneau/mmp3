@@ -4,6 +4,7 @@ var Schema = mongoose.Schema
 var PostitSchema = new Schema({
   name: { type: String, required: true },
   description: String,
+  vendorId: String,
   imageUrl: String
 })
 

@@ -151,11 +151,13 @@ let event2 = new Event({
 let postit1 = new Postit({
   name: 'Wild',
   description: 'Nur für kurze Zeit',
+  vendorId: '',
   imageUrl: 'image.url'
 })
 let postit2 = new Postit({
   name: 'Eier',
   description: 'Überschuss an Eiern',
+  vendorId: '',
   imageUrl: 'image.url'
 })
 
@@ -229,6 +231,7 @@ function setupVendors() {
         else {
           product1.vendorId = res.body.vendor._id
           product2.vendorId = res.body.vendor._id
+          postit1.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }
       })
@@ -242,6 +245,7 @@ function setupVendors() {
         if(err) reject('v2')
         else {
           product3.vendorId = res.body.vendor._id
+          postit2.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }
       })
