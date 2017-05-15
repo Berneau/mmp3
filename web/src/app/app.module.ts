@@ -31,6 +31,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { PostitFormComponent } from './postit-form/postit-form.component';
+import { VendorShortInfoComponent } from './vendor-short-info/vendor-short-info.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -113,7 +114,8 @@ const appRoutes: Routes = [
     ProductFormComponent,
     PostitListComponent,
     PostitDetailComponent,
-    PostitFormComponent
+    PostitFormComponent,
+    VendorShortInfoComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
