@@ -1,18 +1,19 @@
-<h4>
-  Schlachtbrett
-</h4>
-
-<ul class="row">
-  <li *ngFor="let postit of store.postits" class="col s12 m4 l3 xl2">
-    <a [routerLink]="['/schlachtbrett', postit._id]" >
-      <div class="card">
-        <div class="card-image">
-          <img class="activator" src="assets/dummy_img.jpg">
+<div *ngIf="store.postits" class="row">
+  <ul class="row">
+    <li *ngFor="let postit of store.postits" class="col s12 m4 l3 xl2">
+      <a [routerLink]="['/schlachtbrett', postit._id]" >
+        <div class="card">
+          <div class="card-image">
+            <img class="activator" src="assets/dummy_img.jpg">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{postit.name}}</span>
+          </div>
         </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{postit.name}}</span>
-        </div>
-      </div>
-    </a>
-  </li>
-</ul>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="!store.postits" class="row">
+  <p>Keine neuen Schlachtbrett-Einträge</p>
+</div>
