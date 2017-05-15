@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { EventService } from './../services/event.service'
+import { VendorService } from './../services/vendor.service'
 
 import { Event } from './../interfaces/event'
+import { Vendor } from './../interfaces/vendor'
 
 @Component({
   selector: 'event-detail',
@@ -14,8 +16,9 @@ import { Event } from './../interfaces/event'
 export class EventDetailComponent implements OnInit {
 
   event: Event
+  vendor: Vendor
 
-  constructor(private store: EventService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private store: EventService, private VendorStore: VendorService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit() {
     this.route.params.forEach((params) => {
@@ -28,6 +31,21 @@ export class EventDetailComponent implements OnInit {
             return
           }
           this.event = event
+        })
+        .then(vendor => {
+          if (this.event.vendorId) {
+            this.VendorStore.getVendor(this.event.vendorId)
+              .then(v => {
+                if (!v) {
+                  Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
+                  return
+                }
+                this.vendor = v
+              })
+          }
+          else {
+            this.vendor = undefined
+          }
         })
     })
   }
