@@ -9,7 +9,10 @@
     </div>
   </div>
   <div class="row">
-    <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout()">Bestätigen</button>
-    <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout()">Löschen</button>
+    <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn" (click)="this.deletePostit(postit)">Löschen</button>
+    <button *ngIf="this.LoginStore.isLoggedIn() && !postit.confirmed" class="waves-effect waves-light btn" (click)="this.confirmPostit(postit)">Bestätigen</button>
+  </div>
+  <div *ngIf="vendor" class="row">
+    <vendor-short-info [vendor]="vendor"></vendor-short-info>
   </div>
 </div>
