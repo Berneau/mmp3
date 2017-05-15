@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { Category } from './../interfaces/category'
 import { CategoryService } from './../services/category.service'
 
+import { Type } from './../interfaces/type'
+
 @Component({
   selector: 'category-detail',
   templateUrl: './category-detail.component.html',
@@ -15,6 +17,7 @@ export class CategoryDetailComponent implements OnInit {
   constructor(private store: CategoryService, private route: ActivatedRoute, private location: Location) { }
 
   category: Category
+  type: Type
 
   ngOnInit() {
     this.route.params.forEach((params) => {
@@ -27,6 +30,16 @@ export class CategoryDetailComponent implements OnInit {
           return
         }
         this.category = category
+
+        this.store.getCategoryType(this.category.typeUid)
+        .then(type => {
+          if (!type) {
+            this.location.back() // TODO: is location.back() sinnvoll ?
+            Materialize.toast('Es wurde keine Typ mit dieser ID gefunden.', 2000)
+            return
+          }
+          this.type = type
+        })
       })
 
       this.store.getCategoryProducts(id)

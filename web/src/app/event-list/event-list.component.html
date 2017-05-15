@@ -1,0 +1,18 @@
+<h4>
+  Events
+</h4>
+
+<ul class="row">
+  <li *ngFor="let event of store.events" class="col s12 m4 l3 xl2">
+    <a [routerLink]="['/events', event._id]" >
+      <div class="card">
+        <div class="card-image">
+          <img class="activator" src="assets/dummy_img.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{event.name}}</span>
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>

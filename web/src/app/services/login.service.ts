@@ -47,6 +47,7 @@ export class LoginService {
   }
 
   isLoggedIn(): boolean {
+    // console.log('isloggedin')
     if (this.token) return true
     else return false
   }

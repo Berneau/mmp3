@@ -1,0 +1,16 @@
+<div *ngIf="event">
+  <div class="row">
+    <div class="col l6 m6 s12">
+      <h4>{{event.name}}</h4>
+      <h6>{{event.date}}</h6>
+      <p>{{event.description}}</p>
+      <p>
+        <i class="material-icons">location_on</i> {{event.location.name}}
+        [{{event.location.lat}} {{event.location.long}}]
+      </p>
+    </div>
+    <div class="col l6 m6 s12">
+      <img class="col l8 m8 s8 right" src="assets/dummy_img.jpg">
+    </div>
+  </div>
+</div>
