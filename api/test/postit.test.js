@@ -50,6 +50,7 @@ describe('Postit', () => {
       let postit = new Postit({
         name: 'Wild',
         description: 'Nur für kurze Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
 
@@ -86,6 +87,7 @@ describe('Postit', () => {
       let postit = new Postit({
         name: 'Wild',
         description: 'Nur für kurze Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       chai.request(server)
@@ -103,6 +105,7 @@ describe('Postit', () => {
     it('should not POST a postit without a name', (done) => {
       let postit = new Postit({
         description: 'Nur für kurze Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       chai.request(server)
@@ -126,11 +129,13 @@ describe('Postit', () => {
       let postit1 = new Postit({
         name: 'Wild',
         description: 'Nur für kurze Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       let postit2 = new Postit({
         name: 'Schwein',
         description: 'Nur für lange Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       postit1.save((err, postit1) => {
@@ -153,10 +158,12 @@ describe('Postit', () => {
       let postit1 = new Postit({
         name: 'Wild',
         description: 'Nur für kurze Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       let postit2 = new Postit({
         description: 'Nur für lange Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       postit1.save((err, postit1) => {
@@ -177,11 +184,13 @@ describe('Postit', () => {
       let postit1 = new Postit({
         name: 'Wild',
         description: 'Nur für kurze Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       let postit2 = new Postit({
         name: 'Schwein',
         description: 'Nur für lange Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       postit1.save((err, postit1) => {
@@ -206,6 +215,7 @@ describe('Postit', () => {
       let postit = new Postit({
         name: 'Wild',
         description: 'Nur für kurze Zeit',
+        vendorId: '123123',
         imageUrl: 'image.url'
       })
       postit.save((err, postit) => {

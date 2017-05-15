@@ -12,6 +12,7 @@ module.exports = function(router) {
    *
    * @apiParam {String} name The name of the postit
    * @apiParam {String} [description] The description of the postit.
+   * @apiParam {String} [vendorId] The id to the referred vendor.
    * @apiParam {String} [imageUrl] Url to the image of the postit
    *
    * @apiSuccess {Object} postit The created postit
@@ -30,6 +31,7 @@ module.exports = function(router) {
       var postit = new Postit({
         name: req.body.name,
         description: req.body.description,
+        vendorId: req.body.vendorId,
         imageUrl: req.body.imageUrl
       })
 
@@ -60,6 +62,7 @@ module.exports = function(router) {
      *
      * @apiParam {String} name The name of the postit
      * @apiParam {String} [description] The description of the postit.
+     * @apiParam {String} [vendorId] The id to the referred vendor.
      * @apiParam {String} [imageUrl] Url to the image of the postit
      *
      * @apiSuccess {Object} postit The updated postit
@@ -79,6 +82,7 @@ module.exports = function(router) {
 
             postit.name = req.body.name
             postit.description = req.body.description
+            postit.vendorId = req.body.vendorId
             postit.imageUrl = req.body.imageUrl
 
             postit.save(function(err) {
