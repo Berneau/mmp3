@@ -22,7 +22,7 @@ export class PostitService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.postits = res.json().postits.filter(p => {p.confirmed = confirm})
+        this.postits = res.json().postits.filter(p => {return p.confirmed === confirm})
       })
       .catch(this.handleError)
   }
@@ -34,6 +34,24 @@ export class PostitService {
       .get(url)
       .toPromise()
       .then((res) => {
+        return res.json().postit as Postit
+      })
+      .catch(this.handleError)
+  }
+
+  confirmPostit(p) {
+    let url = `${this.apiEndpoint}/postits/${p._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    p.confirmed = true
+
+    return this.http
+      .put(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
         return res.json().postit as Postit
       })
       .catch(this.handleError)
