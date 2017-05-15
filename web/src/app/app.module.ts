@@ -11,18 +11,20 @@ import { AdminGuard } from './guards/admin.guard';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
+import { FooterBarComponent } from './footer-bar/footer-bar.component';
+import { SlideNavComponent } from './slide-nav/slide-nav.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
-import { FooterBarComponent } from './footer-bar/footer-bar.component';
-import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
-import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { CategoryListComponent } from './category-list/category-list.component';
+import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
+import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
-import { SlideNavComponent } from './slide-nav/slide-nav.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
@@ -32,6 +34,7 @@ import { VendorService } from './services/vendor.service';
 import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
 import { LoginService } from './services/login.service';
+import { EventService } from './services/event.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -56,13 +59,20 @@ const appRoutes: Routes = [
       { path: ':id', component: ProductDetailComponent }
     ]
   },
-  { path: 'rezepte', component: RecipeListComponent },
+  { path: 'events', component: EventListComponent },
   {
-    path: 'rezepte',
+    path: 'events',
     children: [
-      { path: ':id', component: RecipeDetailComponent }
+      { path: ':id', component: EventDetailComponent }
     ]
   },
+  // { path: 'rezepte', component: RecipeListComponent },
+  // {
+  //   path: 'rezepte',
+  //   children: [
+  //     { path: ':id', component: RecipeDetailComponent }
+  //   ]
+  // },
   { path: 'admin', component: AdminDashboardComponent },
   // { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] },
   { path: 'login', component: LoginComponent }
@@ -72,18 +82,20 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HeaderBarComponent,
+    FooterBarComponent,
+    SlideNavComponent,
     LandingPageComponent,
     LoginComponent,
-    FooterBarComponent,
-    VendorListComponent,
     SearchResultsComponent,
-    RecipeListComponent,
-    CategoryListComponent,
-    SlideNavComponent,
+    VendorListComponent,
     VendorProfileComponent,
+    RecipeListComponent,
     RecipeDetailComponent,
-    ProductDetailComponent,
+    EventListComponent,
+    EventDetailComponent,
+    CategoryListComponent,
     CategoryDetailComponent,
+    ProductDetailComponent,
     AdminDashboardComponent,
     VendorFormComponent,
     ProductFormComponent
@@ -102,7 +114,8 @@ const appRoutes: Routes = [
     RecipeService,
     CategoryService,
     LoginService,
-    AdminGuard
+    AdminGuard,
+    EventService
   ],
   bootstrap: [AppComponent]
 })

@@ -8,7 +8,8 @@
     <ul>
       <li><a [routerLink]="['produzenten']">Produzenten</a></li>
       <li><a [routerLink]="['produkte']">Produkte</a></li>
-      <li><a [routerLink]="['rezepte']">Rezepte</a></li>
+      <li><a [routerLink]="['events']">Events</a></li>
+      <!-- <li><a [routerLink]="['rezepte']">Rezepte</a></li> -->
       <hr *ngIf="this.LoginStore.isLoggedIn()">
       <li *ngIf="this.LoginStore.isLoggedIn()"><a [routerLink]="['admin']">Admin-Dashboard</a></li>
     </ul>
