@@ -15,14 +15,14 @@ export class PostitService {
     'Content-Type': 'application/json'
   })
 
-  getPostits(): Promise<any> {
+  getPostits(confirm): Promise<any> {
     let url = `${this.apiEndpoint}/postits`
 
     return this.http
       .get(url)
       .toPromise()
       .then((res) => {
-        this.postits = res.json().postits
+        this.postits = res.json().postits.filter(p => {p.confirmed = confirm})
       })
       .catch(this.handleError)
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { PostitService } from './../services/postit.service'
+import { LoginService } from './../services/login.service'
 
 import { Postit } from './../interfaces/postit'
 
@@ -15,7 +16,7 @@ export class PostitDetailComponent implements OnInit {
 
   postit: Postit
 
-  constructor(private store: PostitService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private store: PostitService, private LoginStore: LoginService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit() {
     this.route.params.forEach((params) => {
@@ -30,6 +31,14 @@ export class PostitDetailComponent implements OnInit {
           this.postit = postit
         })
     })
+  }
+
+  confirmPostit() {
+    console.log("confirm")
+  }
+
+  deletePostit() {
+    console.log("delete")
   }
 
 }

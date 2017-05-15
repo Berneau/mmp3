@@ -125,6 +125,7 @@ export class VendorService {
     })
     let p = {
       name: form.name,
+      confirmed: form.confirmed,
       description: form.description,
       imageUrl: form.imageUrl
     }

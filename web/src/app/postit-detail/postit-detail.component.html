@@ -8,4 +8,8 @@
       <img class="col l8 m8 s8 right" src="assets/dummy_img.jpg">
     </div>
   </div>
+  <div class="row">
+    <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout()">Bestätigen</button>
+    <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout()">Löschen</button>
+  </div>
 </div>
