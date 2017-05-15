@@ -88,6 +88,7 @@ const appRoutes: Routes = [
   // },
   { path: 'admin', component: AdminDashboardComponent },
   // { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] },
+  { path: 'suche', component: SearchResultsComponent },
   { path: 'login', component: LoginComponent }
 ];
 
