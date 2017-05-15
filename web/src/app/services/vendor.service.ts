@@ -5,6 +5,7 @@ import { Vendor } from './../interfaces/vendor'
 import { ApiEndpoint } from './../app.config'
 
 import { Product } from './../interfaces/product'
+import { Postit } from './../interfaces/postit'
 
 @Injectable()
 export class VendorService {
@@ -112,6 +113,27 @@ export class VendorService {
       .then((res: Response) => {
         this.vendorProducts.push(res.json().product)
         return res.json().product as Product
+      })
+      .catch(this.handleError)
+  }
+
+  addPostit(vendor, form) {
+    let url = `${this.apiEndpoint}/postits`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+    let p = {
+      name: form.name,
+      description: form.description,
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .post(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        return res.json().postit as Postit
       })
       .catch(this.handleError)
   }

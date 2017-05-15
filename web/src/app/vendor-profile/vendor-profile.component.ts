@@ -61,4 +61,15 @@ export class VendorProfileComponent implements OnInit {
       })
   }
 
+  newPostit(p) {
+    this.store.addPostit(p.vendor, p.postitForm.value)
+      .then(postit => {
+        if (!postit) {
+          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Eintrag gespeichert.', 2000)
+      })
+  }
+
 }

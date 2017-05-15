@@ -30,6 +30,7 @@ import { PostitDetailComponent } from './postit-detail/postit-detail.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { PostitFormComponent } from './postit-form/postit-form.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -111,7 +112,8 @@ const appRoutes: Routes = [
     VendorFormComponent,
     ProductFormComponent,
     PostitListComponent,
-    PostitDetailComponent
+    PostitDetailComponent,
+    PostitFormComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

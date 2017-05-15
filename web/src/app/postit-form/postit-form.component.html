@@ -1,3 +1,27 @@
-<p>
-  postit-form works!
-</p>
+<div>
+  <form materialize [formGroup]="postitForm">
+    <div class="row">
+      <h6>Bild</h6>
+      <div class="input-field col s12 form-group">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" formControlName="imageUrl" type="text">
+          </div>
+        </div>
+      </div>
+      <h6>Grunddaten</h6>
+      <div class="input-field col s12 form-group">
+        <input id="postit-name" type="text" class="validate" formControlName="name">
+        <label for="postit-name">Name</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="postit-description" class="materialize-textarea" formControlName="description"></textarea>
+        <label for="postit-description">Beschreibung</label>
+      </div>
+    </div>
+  </form>
+</div>
