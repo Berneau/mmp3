@@ -26,9 +26,15 @@
   </div>
   <div class="row">
     <h5>Produkte</h5>
-    <div *ngIf="this.LoginStore.isLoggedIn()" class="row">
-      <button mz-button (click)="addProduct.open()">neues Produkt
-        <i class="material-icons right">mode_edit</i></button>
+    <div class="row">
+      <div *ngIf="this.LoginStore.isLoggedIn()" class="col s6">
+        <button mz-button (click)="addProduct.open()">neues Produkt
+          <i class="material-icons right">mode_edit</i></button>
+      </div>
+      <div *ngIf="this.LoginStore.isLoggedIn()" class="col s6">
+        <button mz-button (click)="addPostit.open()">neuer Schlachtbrett-Eintrag
+            <i class="material-icons right">mode_edit</i></button>
+      </div>
     </div>
     <hr>
     <ul class="row">
@@ -69,6 +75,19 @@
     </mz-modal-content>
     <mz-modal-footer>
       <button mz-button [flat]="true" (click)="this.newProduct(productForm)" mz-modal-close>Speichern</button>
+      <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+    </mz-modal-footer>
+  </mz-modal>
+
+  <mz-modal #addPostit [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+    <mz-modal-header>
+      Neuen Schlachtbrett-Eintrag erstellen
+    </mz-modal-header>
+    <mz-modal-content>
+      <postit-form #postitForm [vendor]="vendor"></postit-form>
+    </mz-modal-content>
+    <mz-modal-footer>
+      <button mz-button [flat]="true" (click)="this.newPostit(postitForm)" mz-modal-close>Speichern</button>
       <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
     </mz-modal-footer>
   </mz-modal>

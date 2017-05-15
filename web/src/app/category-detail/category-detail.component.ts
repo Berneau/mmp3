@@ -6,6 +6,7 @@ import { Category } from './../interfaces/category'
 import { CategoryService } from './../services/category.service'
 
 import { Type } from './../interfaces/type'
+import { TypeService } from './../services/type.service'
 
 @Component({
   selector: 'category-detail',
@@ -14,7 +15,7 @@ import { Type } from './../interfaces/type'
 })
 export class CategoryDetailComponent implements OnInit {
 
-  constructor(private store: CategoryService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private store: CategoryService, private TypeStore: TypeService, private route: ActivatedRoute, private location: Location) { }
 
   category: Category
   type: Type
@@ -23,24 +24,25 @@ export class CategoryDetailComponent implements OnInit {
     this.route.params.forEach((params) => {
       let id = params['id']
       this.store.getCategory(id)
-      .then(category => {
-        if (!category) {
-          this.location.back() // TODO: is location.back() sinnvoll ?
-          Materialize.toast('Es wurde keine Produktkategorie mit dieser ID gefunden.', 2000)
-          return
-        }
-        this.category = category
-
-        this.store.getCategoryType(this.category.typeUid)
-        .then(type => {
-          if (!type) {
+        .then(category => {
+          if (!category) {
             this.location.back() // TODO: is location.back() sinnvoll ?
-            Materialize.toast('Es wurde keine Typ mit dieser ID gefunden.', 2000)
+            Materialize.toast('Es wurde keine Produktkategorie mit dieser ID gefunden.', 2000)
             return
           }
-          this.type = type
+          this.category = category
         })
-      })
+        .then(type => {
+          this.TypeStore.getType(this.category.typeUid)
+            .then(type => {
+              if (!type) {
+                this.location.back() // TODO: is location.back() sinnvoll ?
+                Materialize.toast('Es wurde keine Typ mit dieser ID gefunden.', 2000)
+                return
+              }
+              this.type = type
+            })
+        })
 
       this.store.getCategoryProducts(id)
     })

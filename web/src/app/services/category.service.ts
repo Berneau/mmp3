@@ -51,18 +51,6 @@ export class CategoryService {
       .catch(this.handleError)
   }
 
-  getCategoryType(id): Promise<any> {
-    let url = `${this.apiEndpoint}/types/${id}`
-
-    return this.http
-      .get(url)
-      .toPromise()
-      .then((res) => {
-        return res.json().type as Type
-      })
-      .catch(this.handleError)
-  }
-
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }
