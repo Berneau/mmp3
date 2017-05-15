@@ -38,6 +38,7 @@ import { CategoryService } from './services/category.service';
 import { LoginService } from './services/login.service';
 import { EventService } from './services/event.service';
 import { PostitService } from './services/postit.service';
+import { TypeService } from './services/type.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -128,7 +129,8 @@ const appRoutes: Routes = [
     LoginService,
     AdminGuard,
     EventService,
-    PostitService
+    PostitService,
+    TypeService
   ],
   bootstrap: [AppComponent]
 })
