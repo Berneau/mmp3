@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Product } from './../interfaces/product'
 import { Vendor } from './../interfaces/vendor'
+import { Category } from './../interfaces/category'
+
+import { CategoryService } from './../services/category.service'
 
 @Component({
   selector: 'product-form',
@@ -15,10 +18,11 @@ export class ProductFormComponent implements OnInit {
   @Input() product: Product
   @Input() vendor: Vendor
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private CategoryStore: CategoryService) { }
 
   ngOnInit() {
     this.createForm()
+    this.CategoryStore.getCategories()
   }
 
   createForm() {

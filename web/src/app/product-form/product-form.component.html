@@ -14,18 +14,15 @@
         </div>
       </div>
       <h6>Grunddaten</h6>
-      <div class="input-field col s12 m12 form-group">
+      <div class="input-field col s12 m6 form-group">
         <input id="product-name" type="text" class="validate" formControlName="name">
         <label for="product-name">Name</label>
       </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="product-categoryId" type="text" class="validate" formControlName="categoryId">
-        <label for="product-categoryId">Kategorie</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="product-vendorId" type="text" class="validate" formControlName="vendorId">
-        <label for="product-vendorId">Produzent</label>
-      </div>
+      <mz-select-container  class="input-field col s12 m6 form-group">
+        <select mz-select [placeholder]="'Kategorie'" id="product-categoryId" formControlName="categoryId">
+            <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" data-icon="assets/dummy_img.jpg" class="left circle">{{category.name}}</option>
+        </select>
+      </mz-select-container>
       <h6>Verfügbarkeit</h6>
       <div class="input-field col s6 m3 form-group">
         <input id="product-fromPeriod" type="text" class="validate" formControlName="fromPeriod">
