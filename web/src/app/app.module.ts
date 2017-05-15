@@ -25,6 +25,8 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { PostitListComponent } from './postit-list/postit-list.component';
+import { PostitDetailComponent } from './postit-detail/postit-detail.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
@@ -35,6 +37,7 @@ import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
 import { LoginService } from './services/login.service';
 import { EventService } from './services/event.service';
+import { PostitService } from './services/postit.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -64,6 +67,13 @@ const appRoutes: Routes = [
     path: 'events',
     children: [
       { path: ':id', component: EventDetailComponent }
+    ]
+  },
+  { path: 'schlachtbrett', component: PostitListComponent },
+  {
+    path: 'schlachtbrett',
+    children: [
+      { path: ':id', component: PostitDetailComponent }
     ]
   },
   // { path: 'rezepte', component: RecipeListComponent },
@@ -98,7 +108,9 @@ const appRoutes: Routes = [
     ProductDetailComponent,
     AdminDashboardComponent,
     VendorFormComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    PostitListComponent,
+    PostitDetailComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -115,7 +127,8 @@ const appRoutes: Routes = [
     CategoryService,
     LoginService,
     AdminGuard,
-    EventService
+    EventService,
+    PostitService
   ],
   bootstrap: [AppComponent]
 })
