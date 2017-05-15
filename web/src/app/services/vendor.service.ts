@@ -93,7 +93,6 @@ export class VendorService {
     let authHeaders = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
     })
-
     let p = {
       name: form.name,
       categoryId: form.categoryId,
