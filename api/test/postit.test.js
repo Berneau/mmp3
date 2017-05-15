@@ -49,6 +49,7 @@ describe('Postit', () => {
     it('should get a postit by its id', (done) => {
       let postit = new Postit({
         name: 'Wild',
+        confirmed: true,
         description: 'Nur für kurze Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
@@ -86,6 +87,7 @@ describe('Postit', () => {
     it('should POST a valid postit', (done) => {
       let postit = new Postit({
         name: 'Wild',
+        confirmed: true,
         description: 'Nur für kurze Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
@@ -104,6 +106,26 @@ describe('Postit', () => {
 
     it('should not POST a postit without a name', (done) => {
       let postit = new Postit({
+        confirmed: true,
+        description: 'Nur für kurze Zeit',
+        vendorId: '123123',
+        imageUrl: 'image.url'
+      })
+      chai.request(server)
+        .post('/api/postits')
+        .set('x-access-token', token)
+        .send(postit)
+        .end((err, res) => {
+          res.should.have.status(412)
+          res.body.should.have.property('ok').equal(false)
+          res.body.should.have.property('message').equal('Missing fields')
+          done()
+        })
+    })
+
+    it('should not POST a postit without a confirmed field', (done) => {
+      let postit = new Postit({
+        name: 'Wild',
         description: 'Nur für kurze Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
@@ -128,12 +150,14 @@ describe('Postit', () => {
     it('should UPDATE and return a postit', (done) => {
       let postit1 = new Postit({
         name: 'Wild',
+        confirmed: true,
         description: 'Nur für kurze Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
       })
       let postit2 = new Postit({
         name: 'Schwein',
+        confirmed: true,
         description: 'Nur für lange Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
@@ -157,11 +181,13 @@ describe('Postit', () => {
     it('should not UPDATE the postit if it is not valid', (done) => {
       let postit1 = new Postit({
         name: 'Wild',
+        confirmed: true,
         description: 'Nur für kurze Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
       })
       let postit2 = new Postit({
+        confirmed: true,
         description: 'Nur für lange Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
@@ -183,12 +209,14 @@ describe('Postit', () => {
     it('should not UPDATE a postit if the id is not valid', (done) => {
       let postit1 = new Postit({
         name: 'Wild',
+        confirmed: true,
         description: 'Nur für kurze Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
       })
       let postit2 = new Postit({
         name: 'Schwein',
+        confirmed: true,
         description: 'Nur für lange Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'
@@ -214,6 +242,7 @@ describe('Postit', () => {
     it('should DELETE a postit if it exists', (done) => {
       let postit = new Postit({
         name: 'Wild',
+        confirmed: true,
         description: 'Nur für kurze Zeit',
         vendorId: '123123',
         imageUrl: 'image.url'

@@ -150,12 +150,14 @@ let event2 = new Event({
 })
 let postit1 = new Postit({
   name: 'Wild',
+  confirmed: true,
   description: 'Nur für kurze Zeit',
   vendorId: '',
   imageUrl: 'image.url'
 })
 let postit2 = new Postit({
   name: 'Eier',
+  confirmed: false,
   description: 'Überschuss an Eiern',
   vendorId: '',
   imageUrl: 'image.url'

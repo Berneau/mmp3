@@ -33,7 +33,8 @@ module.exports = {
     else return true
   },
   postitIsValid: function (postit) {
-    if (!postit.name) return false
+    if (!postit.name ||
+        !postit.hasOwnProperty('confirmed')) return false
     else return true
   },
   userIsValid: function (user) {

@@ -11,6 +11,7 @@ module.exports = function(router) {
    * @apiPermission admin
    *
    * @apiParam {String} name The name of the postit
+   * @apiParam {Boolean} confirmed Shows if the post is reviewed or not.
    * @apiParam {String} [description] The description of the postit.
    * @apiParam {String} [vendorId] The id to the referred vendor.
    * @apiParam {String} [imageUrl] Url to the image of the postit
@@ -30,6 +31,7 @@ module.exports = function(router) {
 
       var postit = new Postit({
         name: req.body.name,
+        confirmed: req.body.confirmed,
         description: req.body.description,
         vendorId: req.body.vendorId,
         imageUrl: req.body.imageUrl
@@ -61,6 +63,7 @@ module.exports = function(router) {
      * @apiPermission admin
      *
      * @apiParam {String} name The name of the postit
+     * @apiParam {Boolean} confirmed Shows if the post is reviewed or not.
      * @apiParam {String} [description] The description of the postit.
      * @apiParam {String} [vendorId] The id to the referred vendor.
      * @apiParam {String} [imageUrl] Url to the image of the postit
@@ -81,6 +84,7 @@ module.exports = function(router) {
           if (postitIsValid(req.body)) {
 
             postit.name = req.body.name
+            postit.confirmed = req.body.confirmed
             postit.description = req.body.description
             postit.vendorId = req.body.vendorId
             postit.imageUrl = req.body.imageUrl
