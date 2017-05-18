@@ -161,6 +161,7 @@ let postit2 = new Postit({
   name: 'Eier',
   confirmed: false,
   description: 'Überschuss an Eiern',
+  location: 'Lungau',
   vendorId: '',
   imageUrl: 'image.url'
 })

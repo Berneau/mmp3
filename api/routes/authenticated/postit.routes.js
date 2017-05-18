@@ -13,6 +13,7 @@ module.exports = function(router) {
    * @apiParam {String} name The name of the postit
    * @apiParam {Boolean} confirmed Shows if the post is reviewed or not.
    * @apiParam {String} [description] The description of the postit.
+   * @apiParam {String} [location] The location of the event.
    * @apiParam {String} [vendorId] The id to the referred vendor.
    * @apiParam {String} [imageUrl] Url to the image of the postit
    *
@@ -33,6 +34,7 @@ module.exports = function(router) {
         name: req.body.name,
         confirmed: req.body.confirmed,
         description: req.body.description,
+        location: req.body.location,
         vendorId: req.body.vendorId,
         imageUrl: req.body.imageUrl
       })
