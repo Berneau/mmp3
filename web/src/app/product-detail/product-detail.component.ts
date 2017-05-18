@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Product } from './../interfaces/product'
 import { ProductService } from './../services/product.service'
 import { CategoryService } from './../services/category.service'
+import { VendorService } from './../services/vendor.service'
 
 import { Vendor } from './../interfaces/vendor'
 import { Category } from './../interfaces/category'
@@ -16,7 +17,7 @@ import { Category } from './../interfaces/category'
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor(private store: ProductService, private CategoryStore: CategoryService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private store: ProductService, private CategoryStore: CategoryService, private VendorStore: VendorService, private route: ActivatedRoute, private location: Location) { }
 
   product: Product
   vendor: Vendor
@@ -35,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
         this.product = product
       })
       .then(vendor => {
-        this.store.getVendor(this.product.vendorId)
+        this.VendorStore.getVendor(this.product.vendorId)
         .then(v => {
           if (!v) {
             Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)

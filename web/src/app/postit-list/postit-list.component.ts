@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { PostitService } from './../services/postit.service'
 
@@ -11,8 +11,10 @@ export class PostitListComponent implements OnInit {
 
   constructor(private store: PostitService) { }
 
+  @Input() confirm: false
+
   ngOnInit() {
-    this.store.getPostits()
+    this.store.getPostits(this.confirm)
   }
 
 }

@@ -24,18 +24,6 @@ export class ProductService {
       .catch(this.handleError)
   }
 
-  getVendor(id): Promise<any> {
-    let url = `${this.apiEndpoint}/vendors/${id}`
-
-    return this.http
-      .get(url)
-      .toPromise()
-      .then((res) => {
-        return res.json().vendor as Vendor
-      })
-      .catch(this.handleError)
-  }
-
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }

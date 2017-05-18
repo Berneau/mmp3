@@ -25,6 +25,8 @@ export class PostitFormComponent implements OnInit {
     if (this.postit) {
       this.postitForm = this.fb.group({
         name: this.postit.name,
+        confirmed: false,
+        vendorId: { value: this.vendor._id, disabled: true },
         description: this.postit.description,
         imageUrl: this.vendor.tel
       });
@@ -32,6 +34,8 @@ export class PostitFormComponent implements OnInit {
     else {
       this.postitForm = this.fb.group({
         name: '',
+        confirmed: false,
+        vendorId: { value: this.vendor._id, disabled: true },
         description: '',
         imageUrl: ''
       });
