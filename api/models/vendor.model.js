@@ -9,6 +9,7 @@ var VendorSchema = new Schema({
   description: String,
   imageUrl: String,
   subName: String,
+  website: String,
   tel: Number,
   address: {
     city: String,

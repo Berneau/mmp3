@@ -16,6 +16,7 @@ module.exports = function(router) {
    * @apiParam {String} [description] A short description.
    * @apiParam {String} [imageUrl] The url to the image.
    * @apiParam {String} [subName] The name of the owner.
+   * @apiParam {String} [website] The website of the vendor.
    * @apiParam {Number} [tel] Tel number of the owner.
    * @apiParam {Object} [address] Address-Wrapper
    * @apiParam {String} [address.city] Cityname
@@ -44,6 +45,7 @@ module.exports = function(router) {
         description: req.body.description,
         imageUrl: req.body.imageUrl,
         subName: req.body.subName,
+        website: req.body.website,
         tel: req.body.tel,
         address: {
           city: req.body.address ? req.body.address.city : undefined,
@@ -85,6 +87,7 @@ module.exports = function(router) {
        * @apiParam {String} [description] A short description.
        * @apiParam {String} [imageUrl] The url to the image.
        * @apiParam {String} [subName] The name of the owner.
+       * @apiParam {String} [website] The website of the vendor.
        * @apiParam {Number} [tel] Tel number of the owner.
        * @apiParam {Object} [address] Address-Wrapper
        * @apiParam {String} [address.city] Cityname
@@ -114,6 +117,7 @@ module.exports = function(router) {
               vendor.description = req.body.description
               vendor.imageUrl = req.body.imageUrl
               vendor.subName = req.body.subName
+              vendor.website = req.body.website
               vendor.tel = req.body.tel
               vendor.address.city = req.body.address ? req.body.address.city : undefined
               vendor.address.zip = req.body.address ? req.body.address.zip : undefined

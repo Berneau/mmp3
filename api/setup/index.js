@@ -40,6 +40,7 @@ let vendor1 = new Vendor({
   description: 'Sonniges Platzal',
   imageUrl: 'image.url',
   subName: 'Hacklhof',
+  website: 'abc.com',
   tel: 0815123123,
   address: {
     city: 'Salzburg',
@@ -56,6 +57,7 @@ let vendor2 = new Vendor({
   description: 'Direkt am Fluß',
   imageUrl: 'image.url',
   subName: 'Schmittnhüttn',
+  website: 'abc.com',
   tel: 0815123123,
   address: {
     city: 'Bergheim',
