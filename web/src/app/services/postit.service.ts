@@ -63,10 +63,11 @@ export class PostitService {
     let authHeaders = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
     })
+
     let p = {
       name: form.name,
       confirmed: form.confirmed,
-      vendorId: vendor._id,
+      vendorId: vendor ? vendor._id : null,
       description: form.description,
       imageUrl: form.imageUrl
     }

@@ -36,7 +36,7 @@ export class ProductService {
     let p = {
       name: form.name,
       categoryId: form.categoryId,
-      vendorId: vendor._id,
+      vendorId: vendor ? vendor._id : null,
       availableAt: {
         fromPeriod: form.fromPeriod,
         fromMonth: form.fromMonth,

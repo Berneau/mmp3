@@ -57,6 +57,7 @@ export class VendorService {
       imageUrl: form.imageUrl,
       subName: form.subName,
       tel: form.tel,
+      website: form.website,
       address: {
         city: form.city,
         zip: form.zip,
