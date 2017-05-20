@@ -1,16 +1,105 @@
 <h4>Admin Dahsboard</h4>
+<div class="row">
+  <div class="col s3">
+    Jasmin
 
-<h5>Schlachtbrett-Anfragen</h5>
-<postit-list [confirm]="false"></postit-list>
+    <ul>
+      <li>link</li>
+      <li>link</li>
+      <li>link</li>
+    </ul>
 
-<div class="fixed-action-btn">
-  <a class="btn-floating btn-large red">
-    <i class="large material-icons">mode_edit</i>
-  </a>
-  <ul>
-    <li><a class="btn-floating red"><i class="material-icons">perm_identity</i></a></li>
-    <li><a class="btn-floating yellow darken-1"><i class="material-icons">bookmark_border</i></a></li>
-    <li><a class="btn-floating green"><i class="material-icons">label_outline</i></a></li>
-    <li><a class="btn-floating green"><i class="material-icons">event</i></a></li>
-  </ul>
+    <button mz-button (click)="addVendor.open()">Produzent
+      <i class="material-icons left">add</i>
+    </button>
+    <button mz-button (click)="addCategory.open()">Kategorie
+      <i class="material-icons left">add</i>
+    </button>
+    <button mz-button (click)="addType.open()">Typ
+      <i class="material-icons left">add</i>
+    </button>
+    <button mz-button (click)="addPostit.open()">Schlachtbretteintrag
+      <i class="material-icons left">add</i>
+    </button>
+    <button mz-button (click)="addEvent.open()">Event
+      <i class="material-icons left">add</i>
+    </button>
+
+  </div>
+  <div class="col s9">
+    <h5>Schlachtbrett-Anfragen</h5>
+    <postit-list [confirm]="false"></postit-list>
+    <h5>Schlachtbrett-Liste</h5>
+    <postit-list [confirm]="true"></postit-list>
+    <h5>Event-Liste</h5>
+    <event-list></event-list>
+  </div>
 </div>
+
+
+
+<!-- Modal Structure -->
+<mz-modal #addVendor [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    Produzent hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <vendor-form></vendor-form>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="this.newVendor()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #addCategory [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    Kategorie hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <vendor-form></vendor-form>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="this.newCategory()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #addType [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    Typ hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <vendor-form></vendor-form>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="this.newType()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #addPostit [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    Schlachtbrett-Eintrag hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <postit-form></postit-form>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="this.newPostit()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #addEvent [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    Event hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <vendor-form></vendor-form>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="this.newEvent()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
