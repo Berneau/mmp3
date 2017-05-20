@@ -29,9 +29,7 @@ export class SearchResultsComponent implements OnInit {
             this.vendorResults = []
             return
           }
-          console.log(vendorResults)
           this.vendorResults = vendorResults
-          console.log(this.vendorResults)
         })
       this.SearchStore.getCategoryResults(word)
         .then(categoryResults => {
@@ -39,9 +37,7 @@ export class SearchResultsComponent implements OnInit {
             this.categoryResults = []
             return
           }
-          console.log(categoryResults)
           this.categoryResults = categoryResults
-          console.log(this.categoryResults)
         })
       this.SearchStore.getEventResults(word)
         .then(eventResults => {
@@ -49,9 +45,7 @@ export class SearchResultsComponent implements OnInit {
             this.eventResults = []
             return
           }
-          console.log(eventResults)
           this.eventResults = eventResults
-          console.log(this.eventResults)
         })
     })
   }
