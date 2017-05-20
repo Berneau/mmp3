@@ -7,21 +7,17 @@ module.exports = function(router) {
 
   router.route('/users')
   /**
-  * @api {get} /users?filter=<filter> Get all users with optional search
+  * @api {get} /users Get all users
   * @apiName GetUsers
   * @apiGroup Users
   * @apiPermission admin
-  *
-  * @apiParam {String} [filter] The field name will be search by this.
   *
   * @apiSuccess {Array} user Array of users.
   */
   .get(function(req, res) {
 
-  var filter = req.query.filter ? req.query.filter : ''
-
   User
-  .find({ 'email': { '$regex': filter } }, function(err, users) {
+  .find({}, function(err, users) {
 
     // internal server error
     if (err) res.status(500).json({

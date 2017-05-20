@@ -4,27 +4,24 @@ module.exports = function(router) {
 
   router.route('/products')
   /**
-   * @api {get} /products?filter=<filter>&categoryId=<categoryId>&<vendorId=<vendorId> Get all products with optional search, vendor or category
+   * @api {get} /products?categoryId=<categoryId>&<vendorId=<vendorId> Get all products by optional vendor or category
    * @apiName GetProducts
    * @apiGroup Products
    * @apiPermission none
    *
    * @apiParam {String} [categoryId] Id of a category (not combinable with vendorId)
    * @apiParam {String} [vendorId] Id of a vendor (not combinable with categoryId)
-   * @apiParam {String} [filter] The field name will be search by this.
    *
    * @apiSuccess {Array} product Array of products.
  */
   .get(function(req, res) {
-    var filter = req.query.filter ? req.query.filter : ''
     var categoryId = req.query.categoryId
     var vendorId = req.query.vendorId
-    var regex = new RegExp(filter, 'i')
 
     if (categoryId && !vendorId) {
 
       Product
-      .find({ 'categoryId': categoryId }, function(err, products) {
+      .find({ categoryId: categoryId }, function(err, products) {
 
         // internal server error
         if (err) res.status(500).json({
@@ -43,7 +40,7 @@ module.exports = function(router) {
     } else if (vendorId && !categoryId) {
 
       Product
-      .find({ 'vendorId': vendorId }, function(err, products) {
+      .find({ vendorId: vendorId }, function(err, products) {
 
         // internal server error
         if (err) res.status(500).json({
@@ -62,7 +59,7 @@ module.exports = function(router) {
     } else {
 
       Product
-      .find({ name: regex }, function(err, products) {
+      .find({}, function(err, products) {
         // internal server error
         if (err) res.status(500).json({
           ok: false,
