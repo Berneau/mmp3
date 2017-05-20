@@ -1,11 +1,11 @@
 <h4>Suchergebnisse</h4>
 
-<h6>Produzenten</h6>
-<p *ngIf="vendorResults?.length == 0">Es wurden keine Produzenten gefunden.</p>
-<div *ngIf="vendorResults?.length > 0" class="row">
+<h6>Produkte</h6>
+<p *ngIf="productResults?.length == 0">Es wurden keine Produkte gefunden.</p>
+<div *ngIf="productResults?.length > 0" class="row">
   <ul class="row">
-    <li *ngFor="let result of vendorResults" class="col s12 m4 l3 xl2">
-      <a [routerLink]="['/produzenten', result._id]">
+    <li *ngFor="let result of productResults" class="col s12 m4 l3 xl2">
+      <a [routerLink]="['/produkte', result._id]">
         <div class="card">
           <div class="card-image">
             <img class="activator" src="assets/dummy_img.jpg">
@@ -19,12 +19,12 @@
   </ul>
 </div>
 
-<h6>Produktkategorien</h6>
-<p *ngIf="categoryResults?.length == 0">Es wurden keine Produktkategorien gefunden.</p>
-<div *ngIf="categoryResults?.length > 0" class="row">
+<h6>Produzenten</h6>
+<p *ngIf="vendorResults?.length == 0">Es wurden keine Produzenten gefunden.</p>
+<div *ngIf="vendorResults?.length > 0" class="row">
   <ul class="row">
-    <li *ngFor="let result of categoryResults" class="col s12 m4 l3 xl2">
-      <a [routerLink]="['/produkte', result._id]">
+    <li *ngFor="let result of vendorResults" class="col s12 m4 l3 xl2">
+      <a [routerLink]="['/produzenten', result._id]">
         <div class="card">
           <div class="card-image">
             <img class="activator" src="assets/dummy_img.jpg">
