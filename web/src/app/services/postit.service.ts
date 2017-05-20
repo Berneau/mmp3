@@ -57,6 +57,29 @@ export class PostitService {
       .catch(this.handleError)
   }
 
+  addPostit(vendor, form) {
+    let url = `${this.apiEndpoint}/postits`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+    let p = {
+      name: form.name,
+      confirmed: form.confirmed,
+      vendorId: vendor._id,
+      description: form.description,
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .post(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        return res.json().postit as Postit
+      })
+      .catch(this.handleError)
+  }
+
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }

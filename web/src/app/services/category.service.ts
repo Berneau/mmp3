@@ -39,18 +39,6 @@ export class CategoryService {
       .catch(this.handleError)
   }
 
-  getCategoryProducts(id): Promise<any> {
-    let url = `${this.apiEndpoint}/products?categoryId=${id}`
-
-    return this.http
-      .get(url)
-      .toPromise()
-      .then((res) => {
-        this.categoryProducts = res.json().products
-      })
-      .catch(this.handleError)
-  }
-
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }
