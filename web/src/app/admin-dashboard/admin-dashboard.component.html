@@ -9,7 +9,7 @@
       <li>link</li>
     </ul>
 
-    <button mz-button (click)="addVendor.open()">Produzent
+    <button mz-button (click)="addUser.open()">Produzent
       <i class="material-icons left">add</i>
     </button>
     <button mz-button (click)="addCategory.open()">Kategorie
@@ -39,6 +39,19 @@
 
 
 <!-- Modal Structure -->
+<mz-modal #addUser [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    Produzent hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <user-form #addUserForm></user-form>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" data-target="addVendor" (click)="this.newUser(addUserForm)" mz-modal-close>Weiter</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
+
 <mz-modal #addVendor [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
   <mz-modal-header>
     Produzent hinzufügen
