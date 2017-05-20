@@ -9,7 +9,6 @@ export class PostitService {
 
   constructor(private http: Http) { }
 
-  postits: Postit[]
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({
     'Content-Type': 'application/json'
@@ -22,7 +21,7 @@ export class PostitService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.postits = res.json().postits.filter(p => {return p.confirmed === confirm})
+        return res.json().postits.filter(p => {return p.confirmed === confirm})
       })
       .catch(this.handleError)
   }

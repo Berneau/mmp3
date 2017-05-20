@@ -1,6 +1,6 @@
-<div *ngIf="store.postits" class="row">
+<div *ngIf="postits" class="row">
   <ul class="row">
-    <li *ngFor="let postit of store.postits" class="col s12 m4 l3 xl2">
+    <li *ngFor="let postit of postits" class="col s12 m4 l3 xl2">
       <a [routerLink]="['/schlachtbrett', postit._id]" >
         <div class="card">
           <div class="card-image">
@@ -13,7 +13,4 @@
       </a>
     </li>
   </ul>
-</div>
-<div *ngIf="!store.postits" class="row">
-  <p>Keine neuen Schlachtbrett-Einträge</p>
 </div>
