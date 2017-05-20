@@ -7,6 +7,7 @@ import { CategoryService } from './../services/category.service'
 
 import { Type } from './../interfaces/type'
 import { TypeService } from './../services/type.service'
+import { ProductService } from './../services/product.service'
 
 @Component({
   selector: 'category-detail',
@@ -15,7 +16,7 @@ import { TypeService } from './../services/type.service'
 })
 export class CategoryDetailComponent implements OnInit {
 
-  constructor(private store: CategoryService, private TypeStore: TypeService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private store: CategoryService, private TypeStore: TypeService, private route: ActivatedRoute, private location: Location, private ProductStore: ProductService) { }
 
   category: Category
   type: Type
@@ -44,7 +45,7 @@ export class CategoryDetailComponent implements OnInit {
             })
         })
 
-      this.store.getCategoryProducts(id)
+      this.ProductStore.getCategoryProducts(id)
     })
   }
 }
