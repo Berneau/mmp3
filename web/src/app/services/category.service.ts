@@ -39,6 +39,28 @@ export class CategoryService {
       .catch(this.handleError)
   }
 
+  addCategory(form) {
+    let url = `${this.apiEndpoint}/categories`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let c = {
+      name: form.name,
+      typeUid: form.typeUid,
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .post(url, JSON.stringify(c), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        return res.json().category as Category
+      })
+      .catch(this.handleError)
+  }
+
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }
