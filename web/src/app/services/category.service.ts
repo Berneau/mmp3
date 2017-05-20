@@ -61,6 +61,22 @@ export class CategoryService {
       .catch(this.handleError)
   }
 
+  deleteCategory(id): Promise<any> {
+    let url = `${this.apiEndpoint}/categories/${id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    return this.http
+      .delete(url, { headers: authHeaders })
+      .toPromise()
+      .then((res) => {
+        // TODO: message for success return
+      })
+      .catch(this.handleError)
+  }
+
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }
