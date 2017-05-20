@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Category } from './../interfaces/category'
+import { Type } from './../interfaces/type'
+
+import { TypeService } from './../services/type.service'
 
 @Component({
   selector: 'category-form',
@@ -7,9 +13,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryFormComponent implements OnInit {
 
-  constructor() { }
+  categoryForm: FormGroup
+  @Input() category: Category
+
+  constructor(private fb: FormBuilder, private TypeStore: TypeService) { }
 
   ngOnInit() {
+    this.createForm()
+    this.TypeStore.getTypes()
+  }
+
+  createForm() {
+    if (this.category) {
+      this.categoryForm = this.fb.group({
+        name: this.category.name,
+        typeUid: this.category.typeUid,
+        imageUrl: this.category.imageUrl
+      });
+    }
+    else {
+      this.categoryForm = this.fb.group({
+        name: '',
+        typeUid: '',
+        imageUrl: ''
+      });
+    }
   }
 
 }
