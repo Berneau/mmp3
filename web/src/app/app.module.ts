@@ -32,6 +32,7 @@ import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { PostitFormComponent } from './postit-form/postit-form.component';
 import { VendorShortInfoComponent } from './vendor-short-info/vendor-short-info.component';
+import { SearchFieldComponent } from './search-field/search-field.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -41,6 +42,7 @@ import { LoginService } from './services/login.service';
 import { EventService } from './services/event.service';
 import { PostitService } from './services/postit.service';
 import { TypeService } from './services/type.service';
+import { SearchService } from './services/search.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -116,7 +118,8 @@ const appRoutes: Routes = [
     PostitListComponent,
     PostitDetailComponent,
     PostitFormComponent,
-    VendorShortInfoComponent
+    VendorShortInfoComponent,
+    SearchFieldComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -135,7 +138,8 @@ const appRoutes: Routes = [
     AdminGuard,
     EventService,
     PostitService,
-    TypeService
+    TypeService,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })
