@@ -18,8 +18,25 @@ export class EventFormComponent implements OnInit {
   ngOnInit() {
     this.createForm()
     $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15 // Creates a dropdown of 15 years to control year
+      selectMonths: true,
+      selectYears: 15,
+      today: 'heute',
+      clear: '❌',
+      close: '✔',
+      format: 'dd. mmmm yyyy',
+      formatSubmit: 'yyyy/mm/dd',
+      monthsFull: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+      monthsShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+      weekdaysFull: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+      weekdaysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+      showMonthsShort: undefined,
+      showWeekdaysFull: undefined,
+      labelMonthNext: 'Nächster Monat',
+      labelMonthPrev: 'Vorheriger Monat',
+      labelMonthSelect: 'Monat auswählen',
+      labelYearSelect: 'Jahr auswählen',
+      firstDay: 1,
+      min: true
     });
   }
 

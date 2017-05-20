@@ -39,6 +39,33 @@ export class EventService {
       .catch(this.handleError)
   }
 
+  addEvent(date, form) {
+    let url = `${this.apiEndpoint}/events`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let e = {
+      name: form.name,
+      date: date,
+      description: form.description,
+      location: {
+        name: form.location.name,
+        lat: form.location.lat,
+        long: form.location.long
+      }
+    }
+
+    return this.http
+      .post(url, JSON.stringify(e), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        return res.json().event as Event
+      })
+      .catch(this.handleError)
+  }
+
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }

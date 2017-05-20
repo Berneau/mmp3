@@ -20,15 +20,15 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  newUser(form){
+  newUser(form) {
     console.log("add User", form)
   }
 
-  newVendor(form){
+  newVendor(form) {
     console.log("add Vendor", form)
   }
 
-  newCategory(form){
+  newCategory(form) {
     this.CategoryStore.addCategory(form.categoryForm.value)
       .then(category => {
         if (!category) {
@@ -39,7 +39,7 @@ export class AdminDashboardComponent implements OnInit {
       })
   }
 
-  newType(form){
+  newType(form) {
     this.TypeStore.addType(form.typeForm.value)
       .then(type => {
         if (!type) {
@@ -50,7 +50,7 @@ export class AdminDashboardComponent implements OnInit {
       })
   }
 
-  newPostit(form){
+  newPostit(form) {
     this.PostitStore.addPostit(null, form.postitForm.value)
       .then(postit => {
         if (!postit) {
@@ -61,8 +61,15 @@ export class AdminDashboardComponent implements OnInit {
       })
   }
 
-  newEvent(form){
-    console.log("add Event", form)
+  newEvent(form) {
+    this.EventStore.addEvent($('#event-date').val(), form.eventForm.value)
+      .then(event => {
+        if (!event) {
+          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Event gespeichert.', 2000)
+      })
   }
 
 }
