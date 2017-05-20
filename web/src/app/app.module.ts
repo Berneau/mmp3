@@ -47,6 +47,7 @@ import { EventService } from './services/event.service';
 import { PostitService } from './services/postit.service';
 import { TypeService } from './services/type.service';
 import { SearchService } from './services/search.service';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -147,7 +148,8 @@ const appRoutes: Routes = [
     EventService,
     PostitService,
     TypeService,
-    SearchService
+    SearchService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
