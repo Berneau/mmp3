@@ -16,9 +16,10 @@ module.exports = function(router) {
  .get(function(req, res) {
 
    var filter = req.query.filter ? req.query.filter : ''
+   var regex = new RegExp(filter, 'i')
 
    Category
-   .find({ 'name': { '$regex': filter } }, function(err, categories) {
+   .find({ name : filter }, function(err, categories) {
 
      // internal server error
      if (err) res.status(500).json({
