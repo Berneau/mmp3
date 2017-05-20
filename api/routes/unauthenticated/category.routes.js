@@ -19,7 +19,7 @@ module.exports = function(router) {
    var regex = new RegExp(filter, 'i')
 
    Category
-   .find({ name : filter }, function(err, categories) {
+   .find({ name : regex }, function(err, categories) {
 
      // internal server error
      if (err) res.status(500).json({
