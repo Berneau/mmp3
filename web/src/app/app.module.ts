@@ -31,6 +31,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { PostitFormComponent } from './postit-form/postit-form.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
+import { TypeFormComponent } from './type-form/type-form.component';
 import { VendorShortInfoComponent } from './vendor-short-info/vendor-short-info.component';
 import { SearchFieldComponent } from './search-field/search-field.component';
 
@@ -118,6 +121,9 @@ const appRoutes: Routes = [
     PostitListComponent,
     PostitDetailComponent,
     PostitFormComponent,
+    UserFormComponent,
+    CategoryFormComponent,
+    TypeFormComponent,
     VendorShortInfoComponent,
     SearchFieldComponent
   ],
