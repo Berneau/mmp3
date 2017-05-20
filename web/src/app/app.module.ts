@@ -34,6 +34,7 @@ import { PostitFormComponent } from './postit-form/postit-form.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { TypeFormComponent } from './type-form/type-form.component';
+import { EventFormComponent } from './event-form/event-form.component';
 import { VendorShortInfoComponent } from './vendor-short-info/vendor-short-info.component';
 import { SearchFieldComponent } from './search-field/search-field.component';
 
@@ -124,6 +125,7 @@ const appRoutes: Routes = [
     UserFormComponent,
     CategoryFormComponent,
     TypeFormComponent,
+    EventFormComponent,
     VendorShortInfoComponent,
     SearchFieldComponent
   ],
