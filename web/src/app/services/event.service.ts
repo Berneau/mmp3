@@ -39,7 +39,7 @@ export class EventService {
       .catch(this.handleError)
   }
 
-  addEvent(date, form) {
+  addEvent(form) {
     let url = `${this.apiEndpoint}/events`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -48,7 +48,7 @@ export class EventService {
 
     let e = {
       name: form.name,
-      date: date,
+      date: new Date(form.date),
       description: form.description,
       location: {
         name: form.location.name,

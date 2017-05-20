@@ -23,7 +23,7 @@ export class EventFormComponent implements OnInit {
       today: 'heute',
       clear: '❌',
       close: '✔',
-      format: 'dd. mmmm yyyy',
+      format: 'yyyy/mm/dd',
       formatSubmit: 'yyyy/mm/dd',
       monthsFull: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
       monthsShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
@@ -38,6 +38,11 @@ export class EventFormComponent implements OnInit {
       firstDay: 1,
       min: true
     });
+
+    $('.datepicker').change('input', (e) => {
+      let date = $(e.target).val()
+      this.eventForm.patchValue({date: date})
+    })
   }
 
   createForm() {

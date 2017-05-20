@@ -62,7 +62,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   newEvent(form) {
-    this.EventStore.addEvent($('#event-date').val(), form.eventForm.value)
+    this.EventStore.addEvent(form.eventForm.value)
       .then(event => {
         if (!event) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
