@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Type } from './../interfaces/type'
 
 @Component({
   selector: 'type-form',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypeFormComponent implements OnInit {
 
-  constructor() { }
+  typeForm: FormGroup
+  @Input() type: Type
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.createForm()
+  }
+
+  createForm() {
+    if (this.type) {
+      this.typeForm = this.fb.group({
+        name: this.type.name
+      });
+    }
+    else {
+      this.typeForm = this.fb.group({
+        name: ''
+      });
+    }
   }
 
 }
