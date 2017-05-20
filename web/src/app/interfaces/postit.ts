@@ -4,6 +4,6 @@ export class Postit {
   confirmed: boolean
   description?: string
   location?: string
-  vendorId: string
+  vendorId?: string
   imageUrl?: string
 }
