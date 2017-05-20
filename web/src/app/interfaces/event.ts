@@ -2,11 +2,10 @@ export class Event {
   _id?: string
   name: string
   date: Date
-  vendorId?: string
-  description?: String
+  description?: string
   location?: {
-    name: String
-    lat: Number
-    long: Number
+    name: string
+    lat: number
+    long: number
   }
 }
