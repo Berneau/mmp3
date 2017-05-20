@@ -28,7 +28,8 @@ export class PostitFormComponent implements OnInit {
         confirmed: false,
         vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         description: this.postit.description,
-        imageUrl: this.vendor.tel
+        location: this.postit.location,
+        imageUrl: this.vendor.imageUrl
       });
     }
     else {
@@ -37,6 +38,7 @@ export class PostitFormComponent implements OnInit {
         confirmed: false,
         vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         description: '',
+        location: '',
         imageUrl: ''
       });
     }
