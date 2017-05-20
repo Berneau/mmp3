@@ -1,3 +1,58 @@
-<p>
-  search-results works!
-</p>
+<h4>Suchergebnisse</h4>
+
+<h6>Produzenten</h6>
+<p *ngIf="vendorResults?.length == 0">Es wurden keine Produzenten gefunden.</p>
+<div *ngIf="vendorResults?.length > 0" class="row">
+  <ul class="row">
+    <li *ngFor="let result of vendorResults" class="col s12 m4 l3 xl2">
+      <a [routerLink]="['/produzenten', result._id]">
+        <div class="card">
+          <div class="card-image">
+            <img class="activator" src="assets/dummy_img.jpg">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<h6>Produktkategorien</h6>
+<p *ngIf="categoryResults?.length == 0">Es wurden keine Produktkategorien gefunden.</p>
+<div *ngIf="categoryResults?.length > 0" class="row">
+  <ul class="row">
+    <li *ngFor="let result of categoryResults" class="col s12 m4 l3 xl2">
+      <a [routerLink]="['/produkte', result._id]">
+        <div class="card">
+          <div class="card-image">
+            <img class="activator" src="assets/dummy_img.jpg">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<h6>Events</h6>
+<p *ngIf="eventResults?.length == 0">Es wurden keine Events gefunden.</p>
+<div *ngIf="eventResults?.length > 0" class="row">
+  <ul class="row">
+    <li *ngFor="let result of eventResults" class="col s12 m4 l3 xl2">
+      <a [routerLink]="['/events', result._id]">
+        <div class="card">
+          <div class="card-image">
+            <img class="activator" src="assets/dummy_img.jpg">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
