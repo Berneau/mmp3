@@ -12,24 +12,24 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  newVendor(){
-    console.log("add Vendor")
+  newVendor(form){
+    console.log("add Vendor", form)
   }
 
-  newCategory(){
-    console.log("add Category")
+  newCategory(form){
+    console.log("add Category", form)
   }
 
-  newType(){
-    console.log("add Type")
+  newType(form){
+    console.log("add Type", form)
   }
 
-  newPostit(){
-    console.log("add Postit")
+  newPostit(form){
+    console.log("add Postit", form)
   }
 
-  newEvent(){
-    console.log("add Event")
+  newEvent(form){
+    console.log("add Event", form)
   }
 
 }

@@ -44,10 +44,10 @@
     Produzent hinzufügen
   </mz-modal-header>
   <mz-modal-content>
-    <vendor-form></vendor-form>
+    <vendor-form #addVendorForm [vendor]=null></vendor-form>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newVendor()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" (click)="this.newVendor(addVendorForm)" mz-modal-close>Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>
@@ -57,10 +57,10 @@
     Kategorie hinzufügen
   </mz-modal-header>
   <mz-modal-content>
-    <category-form></category-form>
+    <category-form #addCategoryForm></category-form>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newCategory()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" (click)="this.newCategory(addCategoryForm)" mz-modal-close>Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>
@@ -70,10 +70,10 @@
     Typ hinzufügen
   </mz-modal-header>
   <mz-modal-content>
-    <type-form></type-form>
+    <type-form #addTypeForm></type-form>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newType()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" (click)="this.newType(addTypeForm)" mz-modal-close>Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>
@@ -83,10 +83,10 @@
     Schlachtbrett-Eintrag hinzufügen
   </mz-modal-header>
   <mz-modal-content>
-    <postit-form></postit-form>
+    <postit-form #addPostitForm></postit-form>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newPostit()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" (click)="this.newPostit(addPostitForm)" mz-modal-close>Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>
@@ -96,10 +96,10 @@
     Event hinzufügen
   </mz-modal-header>
   <mz-modal-content>
-    <event-form></event-form>
+    <event-form #addEventForm></event-form>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newEvent()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" (click)="this.newEvent(addEventForm)" mz-modal-close>Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>
