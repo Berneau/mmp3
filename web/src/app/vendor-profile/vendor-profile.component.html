@@ -1,5 +1,5 @@
 <div *ngIf="vendor">
-  <div *ngIf="this.LoginStore.isLoggedIn()" class="row">
+  <div *ngIf="this.LoginStore.isAdmin()" class="row">
     <button mz-button (click)="editVendor.open()">bearbeiten
       <i class="material-icons right">mode_edit</i></button>
   </div>
