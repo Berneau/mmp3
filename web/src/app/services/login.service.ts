@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Headers, Http, Response } from '@angular/http';
 
 import { User } from './../interfaces/user'
@@ -14,7 +14,7 @@ export class LoginService {
   private url = `${this.apiEndpoint}/auth`
   currentUser: User
 
-  constructor(private http: Http, private route: ActivatedRoute) {
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
     // set token if saved in local storage
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
     this.token = this.currentUser && this.currentUser.token
@@ -44,6 +44,10 @@ export class LoginService {
     this.token = null
     this.currentUserIsAdmin = false
     localStorage.removeItem('currentUser')
+  }
+
+  navigateToLandingPage() {
+      this.router.navigate(['/'])
   }
 
   isLoggedIn(): boolean {
