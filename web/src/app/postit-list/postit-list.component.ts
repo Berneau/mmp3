@@ -12,22 +12,13 @@ import { PostitDetailComponent } from './../postit-detail/postit-detail.componen
 })
 export class PostitListComponent implements OnInit {
 
-  @Input() confirm: false
-  postits: Postit[]
   selectedPostit: Postit
 
   constructor(private store: PostitService, private modalService: MzModalService) { }
 
 
   ngOnInit() {
-    this.store.getPostits(this.confirm)
-    .then(postits => {
-      if (!postits) {
-        Materialize.toast('Es wurde keine Schlachtbretteinträge gefunden.', 2000)
-        return
-      }
-      this.postits = postits
-    })
+    this.store.getPostits()
   }
 
   selectPostit(postit: Postit) {
