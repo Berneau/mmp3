@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col l6 m6 s12">
       <h4>{{event.name}}</h4>
-      <h6>{{event.date}}</h6>
+      <h6>{{event.date | date:'dd. MMMM yyyy'}}</h6>
       <p>{{event.description}}</p>
       <p>
         <i class="material-icons">location_on</i> {{event.location.name}}

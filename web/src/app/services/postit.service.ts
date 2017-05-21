@@ -9,7 +9,6 @@ export class PostitService {
 
   constructor(private http: Http) { }
 
-  postits: Postit[]
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({
     'Content-Type': 'application/json'
@@ -22,7 +21,7 @@ export class PostitService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.postits = res.json().postits.filter(p => {return p.confirmed === confirm})
+        return res.json().postits.filter(p => {return p.confirmed === confirm})
       })
       .catch(this.handleError)
   }
@@ -53,6 +52,46 @@ export class PostitService {
       .toPromise()
       .then((res: Response) => {
         return res.json().postit as Postit
+      })
+      .catch(this.handleError)
+  }
+
+  addPostit(vendor, form) {
+    let url = `${this.apiEndpoint}/postits`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let p = {
+      name: form.name,
+      confirmed: form.confirmed,
+      vendorId: vendor ? vendor._id : null,
+      description: form.description,
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .post(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        return res.json().postit as Postit
+      })
+      .catch(this.handleError)
+  }
+
+  deletePostit(id): Promise<any> {
+    let url = `${this.apiEndpoint}/postits/${id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    return this.http
+      .delete(url, { headers: authHeaders })
+      .toPromise()
+      .then((res) => {
+            // TODO: message for success return
       })
       .catch(this.handleError)
   }

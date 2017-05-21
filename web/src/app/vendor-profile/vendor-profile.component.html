@@ -16,6 +16,9 @@
           <i class="material-icons">phone</i> {{vendor.tel}}
         </li>
         <li>
+          <i class="material-icons">language</i> {{vendor.website}}
+        </li>
+        <li>
           <i class="material-icons">email</i> {{vendor.email}}
         </li>
       </ul>
@@ -38,7 +41,7 @@
     </div>
     <hr>
     <ul class="row">
-      <li *ngFor="let product of store.vendorProducts" class="col s12 m4 l3 xl2">
+      <li *ngFor="let product of ProductStore.vendorProducts" class="col s12 m4 l3 xl2">
         <a [routerLink]="['/produkt', product._id]">
           <div class="card">
             <div class="card-image">

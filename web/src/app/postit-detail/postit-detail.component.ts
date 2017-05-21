@@ -62,11 +62,17 @@ export class PostitDetailComponent implements OnInit {
         this.location.back() // TODO: is location.back() sinnvoll ?
         Materialize.toast('Eintrag gespeichert.', 2000)
       })
-
   }
 
   deletePostit(p) {
-    console.log("delete")
+    this.store.deletePostit(p._id)
+      .then(success => {
+        if (!success) {
+          Materialize.toast('Fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Eintrag gelöscht.', 2000)
+      })
   }
 
 }

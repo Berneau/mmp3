@@ -1,61 +1,63 @@
-<div *ngIf="vendor">
-  <form materialize #vendor [formGroup]="vendorForm">
-    <div class="row">
-      <h6>Profilbild</h6>
-      <div class="input-field col s12 form-group">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>File</span>
-            <input type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" formControlName="imageUrl" type="text">
-          </div>
+<form materialize #vendor [formGroup]="vendorForm">
+  <div class="row">
+    <h6>Profilbild</h6>
+    <div class="input-field col s12 form-group">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" formControlName="imageUrl" type="text">
         </div>
       </div>
-      <h6>Kontaktdaten</h6>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-name" type="text" class="validate" formControlName="name">
-        <label for="vendor-name">Name</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-subName" type="text" class="validate" formControlName="subName">
-        <label for="vendor-subName">Hofname</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-email" type="text" class="validate" formControlName="email">
-        <label for="vendor-email">Email</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-tel" type="text" class="validate" formControlName="tel">
-        <label for="vendor-tel">Telefonnummer</label>
-      </div>
-      <h6>Adresse</h6>
-      <div class="input-field col s12 form-group">
-        <input id="vendor-street" type="text" class="validate" formControlName="street">
-        <label for="vendor-street">Straße / Nr.</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-zip" type="text" class="validate" formControlName="zip">
-        <label for="vendor-zip">Postleitzahl</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-city" type="text" class="validate" formControlName="city">
-        <label for="vendor-city">Stadt</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-lat" type="text" class="validate" formControlName="lat">
-        <label for="vendor-lat">Breitengrad</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-long" type="text" class="validate" formControlName="long">
-        <label for="vendor-long">Längengrad</label>
-      </div>
-      <h6>Beschreibung</h6>
-      <div class="input-field col s12">
-        <textarea id="vendor-description" class="materialize-textarea" formControlName="description"></textarea>
-        <label for="vendor-description">Beschreibung</label>
-      </div>
     </div>
-  </form>
-</div>
+    <h6>Kontaktdaten</h6>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-name" type="text" class="validate" formControlName="name">
+      <label for="vendor-name">Name</label>
+    </div>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-subName" type="text" class="validate" formControlName="subName">
+      <label for="vendor-subName">Hofname</label>
+    </div>
+    <div class="input-field col s12 form-group">
+      <input id="vendor-email" type="text" class="validate" formControlName="email">
+      <label for="vendor-email">Email</label>
+    </div>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-tel" type="text" class="validate" formControlName="tel">
+      <label for="vendor-tel">Telefonnummer</label>
+    </div>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-website" type="text" class="validate" formControlName="website">
+      <label for="vendor-website">Website</label>
+    </div>
+    <h6>Adresse</h6>
+    <div class="input-field col s12 form-group">
+      <input id="vendor-street" type="text" class="validate" formControlName="street">
+      <label for="vendor-street">Straße / Nr.</label>
+    </div>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-zip" type="text" class="validate" formControlName="zip">
+      <label for="vendor-zip">Postleitzahl</label>
+    </div>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-city" type="text" class="validate" formControlName="city">
+      <label for="vendor-city">Stadt</label>
+    </div>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-lat" type="text" class="validate" formControlName="lat">
+      <label for="vendor-lat">Breitengrad</label>
+    </div>
+    <div class="input-field col s12 m6 form-group">
+      <input id="vendor-long" type="text" class="validate" formControlName="long">
+      <label for="vendor-long">Längengrad</label>
+    </div>
+    <h6>Beschreibung</h6>
+    <div class="input-field col s12">
+      <textarea id="vendor-description" class="materialize-textarea" formControlName="description"></textarea>
+      <label for="vendor-description">Beschreibung</label>
+    </div>
+  </div>
+</form>

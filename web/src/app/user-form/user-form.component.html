@@ -1,0 +1,30 @@
+<div>
+  <form materialize [formGroup]="userForm">
+    <div class="row">
+      <h6>Grunddaten</h6>
+      <div class="input-field col s12 form-group">
+        <input id="user-email" type="text" class="validate" formControlName="email">
+        <label for="user-email">Email</label>
+      </div>
+      <div class="input-field col s12 form-group">
+        <input id="user-password" type="password" class="validate" formControlName="password">
+        <label for="user-password">Passwort</label>
+      </div>
+      <div class="input-field col s12 form-group">
+        <input id="user-passwordConfirm" type="password" class="validate" formControlName="passwordConfirm">
+        <label for="user-passwordConfirm">Passwort bestätigen</label>
+      </div>
+      <h6>Admin-Rechte (nicht bei Produzenten!!)</h6>
+      <div class="input-field col s12 form-group">
+        <div class="switch">
+          <label>
+            Off
+            <input type="checkbox" formControlName="isAdmin">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

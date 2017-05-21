@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { Postit } from './../interfaces/postit'
 import { PostitService } from './../services/postit.service'
 
 @Component({
@@ -9,12 +10,21 @@ import { PostitService } from './../services/postit.service'
 })
 export class PostitListComponent implements OnInit {
 
+  @Input() confirm: false
+  postits: Postit[]
+
   constructor(private store: PostitService) { }
 
-  @Input() confirm: false
 
   ngOnInit() {
     this.store.getPostits(this.confirm)
+    .then(postits => {
+      if (!postits) {
+        Materialize.toast('Es wurde keine Schlachtbretteinträge gefunden.', 2000)
+        return
+      }
+      this.postits = postits
+    })
   }
 
 }

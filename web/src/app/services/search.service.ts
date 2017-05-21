@@ -33,14 +33,14 @@ export class SearchService {
       .catch(this.handleError)
   }
 
-  getCategoryResults(word): Promise<any> {
-    let url = `${this.apiEndpoint}/categories?filter=${word}`
+  getProductResults(word): Promise<any> {
+    let url = `${this.apiEndpoint}/products?filter=${word}`
 
     return this.http
       .get(url)
       .toPromise()
       .then((res) => {
-        return res.json().categories
+        return res.json().products
       })
       .catch(this.handleError)
   }

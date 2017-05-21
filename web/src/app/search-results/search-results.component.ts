@@ -15,7 +15,7 @@ import { Event } from './../interfaces/event'
 export class SearchResultsComponent implements OnInit {
 
   vendorResults: Vendor[]
-  categoryResults: Category[]
+  productResults: Category[]
   eventResults: Event[]
 
   constructor(private SearchStore: SearchService, private route: ActivatedRoute) { }
@@ -31,13 +31,13 @@ export class SearchResultsComponent implements OnInit {
           }
           this.vendorResults = vendorResults
         })
-      this.SearchStore.getCategoryResults(word)
-        .then(categoryResults => {
-          if (!categoryResults) {
-            this.categoryResults = []
+      this.SearchStore.getProductResults(word)
+        .then(productResults => {
+          if (!productResults) {
+            this.productResults = []
             return
           }
-          this.categoryResults = categoryResults
+          this.productResults = productResults
         })
       this.SearchStore.getEventResults(word)
         .then(eventResults => {

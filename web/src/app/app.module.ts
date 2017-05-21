@@ -31,6 +31,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { PostitFormComponent } from './postit-form/postit-form.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
+import { TypeFormComponent } from './type-form/type-form.component';
+import { EventFormComponent } from './event-form/event-form.component';
 import { VendorShortInfoComponent } from './vendor-short-info/vendor-short-info.component';
 import { SearchFieldComponent } from './search-field/search-field.component';
 
@@ -43,6 +47,7 @@ import { EventService } from './services/event.service';
 import { PostitService } from './services/postit.service';
 import { TypeService } from './services/type.service';
 import { SearchService } from './services/search.service';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -118,6 +123,10 @@ const appRoutes: Routes = [
     PostitListComponent,
     PostitDetailComponent,
     PostitFormComponent,
+    UserFormComponent,
+    CategoryFormComponent,
+    TypeFormComponent,
+    EventFormComponent,
     VendorShortInfoComponent,
     SearchFieldComponent
   ],
@@ -139,7 +148,8 @@ const appRoutes: Routes = [
     EventService,
     PostitService,
     TypeService,
-    SearchService
+    SearchService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

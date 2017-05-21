@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 
 import { VendorService } from './../services/vendor.service'
 import { LoginService } from './../services/login.service'
+import { ProductService } from './../services/product.service'
+import { PostitService } from './../services/postit.service'
 
 import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
@@ -17,7 +19,7 @@ export class VendorProfileComponent implements OnInit {
 
   vendor: Vendor
 
-  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService) {
+  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService, private ProductStore: ProductService, private PostitStore: PostitService) {
 
   }
 
@@ -34,7 +36,7 @@ export class VendorProfileComponent implements OnInit {
           this.vendor = vendor
         })
 
-      this.store.getVendorProducts(id)
+      this.ProductStore.getVendorProducts(id)
     })
   }
 
@@ -51,7 +53,7 @@ export class VendorProfileComponent implements OnInit {
   }
 
   newProduct(p) {
-    this.store.addProduct(p.vendor, p.productForm.value)
+    this.ProductStore.addProduct(p.vendor, p.productForm.value)
       .then(product => {
         if (!product) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
@@ -62,7 +64,7 @@ export class VendorProfileComponent implements OnInit {
   }
 
   newPostit(p) {
-    this.store.addPostit(p.vendor, p.postitForm.value)
+    this.PostitStore.addPostit(p.vendor, p.postitForm.value)
       .then(postit => {
         if (!postit) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)

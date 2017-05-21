@@ -30,7 +30,7 @@ export class ProductFormComponent implements OnInit {
       this.productForm = this.fb.group({
         name: this.product.name,
         categoryId: this.product.categoryId,
-        vendorId: { value: this.vendor._id, disabled: true },
+        vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         fromPeriod: this.product.availableAt.fromPeriod,
         fromMonth: this.product.availableAt.fromMonth,
         toPeriod: this.product.availableAt.toPeriod,
@@ -42,7 +42,7 @@ export class ProductFormComponent implements OnInit {
       this.productForm = this.fb.group({
         name: '',
         categoryId: '',
-        vendorId: { value: this.vendor._id, disabled: true },
+        vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         fromPeriod: '',
         fromMonth: '',
         toPeriod: '',
