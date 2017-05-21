@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
 
 import { PostitService } from './../services/postit.service'
 import { LoginService } from './../services/login.service'
@@ -14,41 +14,26 @@ import { Vendor } from './../interfaces/vendor'
   templateUrl: './postit-detail.component.html',
   styleUrls: ['./postit-detail.component.less']
 })
-export class PostitDetailComponent implements OnInit {
+export class PostitDetailComponent extends MzBaseModal {
 
   postit: Postit
   vendor: Vendor
 
-  constructor(private store: PostitService, private LoginStore: LoginService, private VendorStore: VendorService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private store: PostitService, private LoginStore: LoginService, private VendorStore: VendorService, private route: ActivatedRoute) {
+    super()
+  }
 
   ngOnInit() {
-    this.route.params.forEach((params) => {
-      let id = params['id']
-      this.store.getPostit(id)
-        .then(postit => {
-          if (!postit) {
-            this.location.back() // TODO: is location.back() sinnvoll ?
-            Materialize.toast('Es wurde kein Schlachtbrett-Eintrag mit dieser ID gefunden.', 2000)
+    if (this.postit.vendorId) {
+      this.VendorStore.getVendor(this.postit.vendorId)
+        .then(v => {
+          if (!v) {
+            this.vendor = null
             return
           }
-          this.postit = postit
+          this.vendor = v
         })
-        .then(vendor => {
-          if (this.postit.vendorId) {
-            this.VendorStore.getVendor(this.postit.vendorId)
-              .then(v => {
-                if (!v) {
-                  Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
-                  return
-                }
-                this.vendor = v
-              })
-          }
-          else {
-            this.vendor = undefined
-          }
-        })
-    })
+    }
   }
 
   confirmPostit(p) {
@@ -59,7 +44,6 @@ export class PostitDetailComponent implements OnInit {
           return
         }
         this.postit = postit
-        this.location.back() // TODO: is location.back() sinnvoll ?
         Materialize.toast('Eintrag gespeichert.', 2000)
       })
   }

@@ -1,18 +1,31 @@
-<div *ngIf="postit">
-  <div class="row">
-    <div class="col l6 m6 s12">
-      <h4>{{postit.name}}</h4>
-      <p>{{postit.description}}</p>
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    {{postit.name}}
+  </mz-modal-header>
+  <mz-modal-content>
+    <div class="row">
+      <div class="col s12">
+        <img src="assets/{{postit.imageUrl}}" alt="image">
+      </div>
     </div>
-    <div class="col l6 m6 s12">
-      <img class="col l8 m8 s8 right" src="assets/dummy_img.jpg">
+    <div class="row">
+      <div class="col s12">
+        <p>{{postit.description}}</p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn" (click)="this.deletePostit(postit)">Löschen</button>
-    <button *ngIf="this.LoginStore.isLoggedIn() && !postit.confirmed" class="waves-effect waves-light btn" (click)="this.confirmPostit(postit)">Bestätigen</button>
-  </div>
-  <div *ngIf="vendor" class="row">
-    <vendor-short-info [vendor]="vendor"></vendor-short-info>
-  </div>
-</div>
+    <div *ngIf="vendor" class="row">
+      <h5>Veranstalter</h5>
+      <div class="">
+        {{vendor.name}}
+      </div>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close><i class="material-icons right">close</i></button>
+    <div *ngIf="this.LoginStore.isAdmin()" class="left">
+      <button mz-button *ngIf="!postit.confirmed" [flat]="true" mz-modal-close (click)="this.confirmPostit(postit)"><i class="material-icons right">done</i></button>
+      <button mz-button [flat]="true" mz-modal-close><i class="material-icons right">mode_edit</i></button>
+      <button mz-button [flat]="true" mz-modal-close (click)="this.deletePostit(postit)"><i class="material-icons right">delete</i></button>
+    </div>
+  </mz-modal-footer>
+</mz-modal>
