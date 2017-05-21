@@ -4,22 +4,19 @@ module.exports = function(router) {
 
   router.route('/categories')
   /**
-   * @api {get} /categories?filter=<filter> Get all categories with optional search
+   * @api {get} /categories Get all categories
    * @apiName GetCategories
    * @apiGroup Categories
    * @apiPermission none
-   *
-   * @apiParam {String} [filter] The field name will be search by this.
    *
    * @apiSuccess {Array} category Array of categories.
  */
  .get(function(req, res) {
 
    var filter = req.query.filter ? req.query.filter : ''
-   var regex = new RegExp(filter, 'i')
 
    Category
-   .find({ name : regex }, function(err, categories) {
+   .find({}, function(err, categories) {
 
      // internal server error
      if (err) res.status(500).json({

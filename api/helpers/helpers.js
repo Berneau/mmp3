@@ -56,7 +56,21 @@ module.exports = {
    return arr
  },
   emailIsValid: function (email) {
-    var re = /\S+@\S+\.\S+/
-    return re.test(email)
-}
+    var regex = /\S+@\S+\.\S+/
+    return regex.test(email)
+},
+  clearDupes: function(arr) {
+    var noDupes = {}
+    var result = []
+
+    for (var i = 0; i < arr.length; i++) {
+      var item = arr[i]
+      noDupes[item.name] = item
+    }
+
+    for (var item in noDupes) {
+      result.push(noDupes[item])
+    }
+    return result
+  }
 }
