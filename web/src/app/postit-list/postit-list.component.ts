@@ -12,6 +12,7 @@ import { PostitDetailComponent } from './../postit-detail/postit-detail.componen
 })
 export class PostitListComponent implements OnInit {
 
+  @Input() confirmed: boolean
   selectedPostit: Postit
 
   constructor(private store: PostitService, private modalService: MzModalService) { }

@@ -74,6 +74,7 @@ export class PostitService {
       .post(url, JSON.stringify(p), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
+        this.postits.push(res.json().postit)
         return res.json().postit as Postit
       })
       .catch(this.handleError)

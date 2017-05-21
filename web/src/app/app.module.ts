@@ -49,6 +49,8 @@ import { TypeService } from './services/type.service';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 
+import { PostitConfirmedPipePipe } from './pipes/postit-confirmed-pipe.pipe';
+
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'produzenten', component: VendorListComponent },
@@ -128,7 +130,8 @@ const appRoutes: Routes = [
     TypeFormComponent,
     EventFormComponent,
     VendorShortInfoComponent,
-    SearchFieldComponent
+    SearchFieldComponent,
+    PostitConfirmedPipePipe
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
