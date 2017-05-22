@@ -18,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductVendorListComponent } from './product-vendor-list/product-vendor-list.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { EventListComponent } from './event-list/event-list.component';
@@ -122,7 +124,9 @@ const appRoutes: Routes = [
     AdminPostitListComponent,
     AdminCategoryListComponent,
     AdminTypeListComponent,
-    AdminEventListComponent
+    AdminEventListComponent,
+    ProductListComponent,
+    ProductVendorListComponent
   ],
   entryComponents: [
     PostitFormComponent,

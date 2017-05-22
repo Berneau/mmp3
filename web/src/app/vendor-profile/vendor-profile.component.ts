@@ -37,6 +37,7 @@ export class VendorProfileComponent implements OnInit {
             return
           }
           this.vendor = vendor
+          console.log(this.vendor)
         })
 
       this.ProductStore.getVendorProducts(id)
