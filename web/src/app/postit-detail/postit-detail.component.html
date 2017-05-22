@@ -10,13 +10,13 @@
     </div>
     <div class="row">
       <div class="col s12">
-        <p>{{postit.description}}</p>
+        <p *ngIf="vendor"><b>Wer: </b>{{vendor.name}}</p>
+        <p><b>Wo:  </b>{{postit.location}}</p>
       </div>
     </div>
-    <div *ngIf="vendor" class="row">
-      <h5>Veranstalter</h5>
-      <div class="">
-        {{vendor.name}}
+    <div class="row">
+      <div class="col s12">
+        <p>{{postit.description}}</p>
       </div>
     </div>
   </mz-modal-content>
