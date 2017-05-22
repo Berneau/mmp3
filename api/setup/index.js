@@ -15,6 +15,12 @@ let Postit = require('../models/postit.model')
 
 chai.use(chaiHttp)
 
+mongoose.connect('mongodb://127.0.0.1:27017/lungau_db', function() {
+  mongoose.connection.once('connected', function() {
+    mongoose.connection.db.dropDatabase(console.log('lungau_db dropped'))
+  })
+})
+
 let token = null
 
 let user1 = new User({
@@ -39,6 +45,7 @@ let vendor1 = new Vendor({
   email: 'elfriede@hof.at',
   description: 'Sonniges Platzal',
   imageUrl: 'image.url',
+  farmImageUrl: 'farm.image.url',
   subName: 'Hacklhof',
   website: 'abc.com',
   tel: 0815123123,
@@ -56,6 +63,7 @@ let vendor2 = new Vendor({
   email: 'bertl@hof.at',
   description: 'Direkt am Fluß',
   imageUrl: 'image.url',
+  farmImageUrl: 'farm.image.url',
   subName: 'Schmittnhüttn',
   website: 'abc.com',
   tel: 0815123123,
