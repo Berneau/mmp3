@@ -44,7 +44,7 @@ export class TypeFormComponent extends MzBaseModal {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
           return
         }
-        Materialize.toast('Kategorie gespeichert.', 2000)
+        Materialize.toast('Typ gespeichert.', 2000)
       })
   }
 
