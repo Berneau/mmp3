@@ -61,6 +61,52 @@ export class EventService {
       .post(url, JSON.stringify(e), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
+        this.getEvents()
+        return res.json().event as Event
+      })
+      .catch(this.handleError)
+  }
+
+  deleteEvent(id): Promise<any> {
+    let url = `${this.apiEndpoint}/events/${id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    return this.http
+      .delete(url, { headers: authHeaders })
+      .toPromise()
+      .then((res) => {
+        this.getEvents()
+        return res.json()
+      })
+      .catch(this.handleError)
+  }
+
+  updateEvent(event, form) {
+    let url = `${this.apiEndpoint}/events/${event._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let e = {
+      name: form.name,
+      date: new Date(form.date),
+      description: form.description,
+      location: {
+        name: form.location.name,
+        lat: form.location.lat,
+        long: form.location.long
+      }
+    }
+
+    return this.http
+      .put(url, JSON.stringify(e), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getEvents()
         return res.json().event as Event
       })
       .catch(this.handleError)

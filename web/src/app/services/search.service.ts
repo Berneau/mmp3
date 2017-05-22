@@ -18,7 +18,7 @@ export class SearchService {
   constructor(private router: Router, private http: Http) { }
 
   search(word) {
-    this.router.navigate(['suche', { search: word }]);
+    this.router.navigate(['suche', { search: word }])
   }
 
   getVendorResults(word): Promise<any> {

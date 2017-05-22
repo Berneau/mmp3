@@ -1,34 +1,48 @@
-<div>
-  <form materialize [formGroup]="eventForm">
-    <div class="row">
-      <h6>Grunddaten</h6>
-      <div class="input-field col s8 form-group">
-        <input id="event-name" type="text" class="validate" formControlName="name">
-        <label for="event-name">Name</label>
-      </div>
-      <div class="input-field col s4 form-group">
-        <input id="event-date" type="date" class="datepicker" formControlName="date">
-        <label for="event-date">Datum</label>
-      </div>
-      <div class="input-field col s12">
-        <textarea id="event-description" class="materialize-textarea" formControlName="description"></textarea>
-        <label for="event-description">Beschreibung</label>
-      </div>
-      <h6>Location</h6>
-      <div formGroupName="location">
-        <div class="input-field col s12 form-group">
-          <input id="event-location-name" type="text" class="validate" formControlName="name">
-          <label for="event-location-name">Name</label>
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header *ngIf="category">
+    Event bearbeiten
+  </mz-modal-header>
+  <mz-modal-header *ngIf="!category">
+    Event hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <div>
+      <form materialize [formGroup]="eventForm">
+        <div class="row">
+          <h6>Grunddaten</h6>
+          <div class="input-field col s8 form-group">
+            <input id="event-name" type="text" class="validate" formControlName="name">
+            <label for="event-name">Name</label>
+          </div>
+          <div class="input-field col s4 form-group">
+            <input id="event-date" type="date" class="datepicker" formControlName="date">
+            <label for="event-date">Datum</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="event-description" class="materialize-textarea" formControlName="description"></textarea>
+            <label for="event-description">Beschreibung</label>
+          </div>
+          <h6>Location</h6>
+          <div formGroupName="location">
+            <div class="input-field col s12 form-group">
+              <input id="event-location-name" type="text" class="validate" formControlName="name">
+              <label for="event-location-name">Name</label>
+            </div>
+            <div class="input-field col s6 form-group">
+              <input id="event-location-lat" type="text" class="validate" formControlName="lat">
+              <label for="event-location-lat">Latitude</label>
+            </div>
+            <div class="input-field col s6 form-group">
+              <input id="event-location-long" type="text" class="validate" formControlName="long">
+              <label for="event-location-long">Longitude</label>
+            </div>
+          </div>
         </div>
-        <div class="input-field col s6 form-group">
-          <input id="event-location-lat" type="text" class="validate" formControlName="lat">
-          <label for="event-location-lat">Latitude</label>
-        </div>
-        <div class="input-field col s6 form-group">
-          <input id="event-location-long" type="text" class="validate" formControlName="long">
-          <label for="event-location-long">Longitude</label>
-        </div>
-      </div>
+      </form>
     </div>
-  </form>
-</div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="event ? this.updateEvent(event) : this.newEvent()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>

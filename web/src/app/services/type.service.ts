@@ -56,6 +56,44 @@ export class TypeService {
       .catch(this.handleError)
   }
 
+  deleteType(id): Promise<any> {
+    let url = `${this.apiEndpoint}/types/${id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    return this.http
+      .delete(url, { headers: authHeaders })
+      .toPromise()
+      .then((res) => {
+        this.getTypes()
+        return res.json()
+      })
+      .catch(this.handleError)
+  }
+
+  updateType(type, form) {
+    let url = `${this.apiEndpoint}/types/${type._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let t = {
+      name: form.name
+    }
+
+    return this.http
+      .put(url, JSON.stringify(t), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getTypes()
+        return res.json().type as Type
+      })
+      .catch(this.handleError)
+  }
+
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }

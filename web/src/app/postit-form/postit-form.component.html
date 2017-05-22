@@ -1,31 +1,45 @@
-<div>
-  <form materialize [formGroup]="postitForm">
-    <div class="row">
-      <h6>Bild</h6>
-      <div class="input-field col s12 form-group">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>File</span>
-            <input type="file">
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header *ngIf="postit">
+    Schlachtbrett-Eintrag bearbeiten
+  </mz-modal-header>
+  <mz-modal-header *ngIf="!postit">
+    Schlachtbrett-Eintrag hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <div>
+      <form materialize [formGroup]="postitForm">
+        <div class="row">
+          <h6>Bild</h6>
+          <div class="input-field col s12 form-group">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input id="postit-image" class="file-path validate"  type="text" formControlName="imageUrl">
+              </div>
+            </div>
           </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" formControlName="imageUrl" type="text">
+          <h6>Grunddaten</h6>
+          <div class="input-field col s12 form-group">
+            <input id="postit-name" type="text" class="validate" formControlName="name">
+            <label for="postit-name">Name</label>
+          </div>
+          <div class="input-field col s12 form-group">
+            <input id="postit-location" type="text" class="validate" formControlName="location">
+            <label for="postit-location">Location</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="postit-description" class="materialize-textarea" formControlName="description"></textarea>
+            <label for="postit-description">Beschreibung</label>
           </div>
         </div>
-      </div>
-      <h6>Grunddaten</h6>
-      <div class="input-field col s12 form-group">
-        <input id="postit-name" type="text" class="validate" formControlName="name">
-        <label for="postit-name">Name</label>
-      </div>
-      <div class="input-field col s12 form-group">
-        <input id="postit-location" type="text" class="validate" formControlName="location">
-        <label for="postit-location">Location</label>
-      </div>
-      <div class="input-field col s12">
-        <textarea id="postit-description" class="materialize-textarea" formControlName="description"></textarea>
-        <label for="postit-description">Beschreibung</label>
-      </div>
+      </form>
     </div>
-  </form>
-</div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="postit ? this.updatePostit(postit) : this.newPostit()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>

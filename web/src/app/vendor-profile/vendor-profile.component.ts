@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MzModalService } from 'ng2-materialize';
 
 import { VendorService } from './../services/vendor.service'
 import { LoginService } from './../services/login.service'
@@ -9,6 +10,10 @@ import { PostitService } from './../services/postit.service'
 
 import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
+
+import { PostitFormComponent } from './../postit-form/postit-form.component'
+import { ProductFormComponent } from './../product-form/product-form.component'
+import { VendorFormComponent } from './../vendor-form/vendor-form.component'
 
 @Component({
   selector: 'vendor-profile',
@@ -19,7 +24,7 @@ export class VendorProfileComponent implements OnInit {
 
   vendor: Vendor
 
-  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService, private ProductStore: ProductService, private PostitStore: PostitService) {
+  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService, private ProductStore: ProductService, private PostitStore: PostitService, private modalService: MzModalService) {
 
   }
 
@@ -35,43 +40,18 @@ export class VendorProfileComponent implements OnInit {
           }
           this.vendor = vendor
         })
-
-      this.ProductStore.getVendorProducts(id)
     })
   }
 
-  updateVendor(v) {
-    this.store.updateVendor(v.vendor, v.vendorForm.value)
-      .then(vendor => {
-        if (!vendor) {
-          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
-          return
-        }
-        this.vendor = vendor
-        Materialize.toast('Produzent gespeichert.', 2000)
-      })
+  openNewPostitModal() {
+    this.modalService.open(PostitFormComponent, {vendor: this.vendor});
   }
 
-  newProduct(p) {
-    this.ProductStore.addProduct(p.vendor, p.productForm.value)
-      .then(product => {
-        if (!product) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Produkt gespeichert.', 2000)
-      })
+  openNewProductModal() {
+    this.modalService.open(ProductFormComponent, {vendor: this.vendor});
   }
 
-  newPostit(p) {
-    this.PostitStore.addPostit(p.vendor, p.postitForm.value)
-      .then(postit => {
-        if (!postit) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Eintrag gespeichert.', 2000)
-      })
+  openUpdateVendorModal() {
+    this.modalService.open(VendorFormComponent, {vendor: this.vendor});
   }
-
 }

@@ -16,7 +16,6 @@ import { Vendor } from './../interfaces/vendor'
 export class EventDetailComponent implements OnInit {
 
   event: Event
-  vendor: Vendor
 
   constructor(private store: EventService, private VendorStore: VendorService, private route: ActivatedRoute, private location: Location) { }
 
@@ -31,21 +30,6 @@ export class EventDetailComponent implements OnInit {
             return
           }
           this.event = event
-        })
-        .then(vendor => {
-          if (this.event.vendorId) {
-            this.VendorStore.getVendor(this.event.vendorId)
-              .then(v => {
-                if (!v) {
-                  Materialize.toast('Es wurde kein Produzent mit dieser ID gefunden.', 2000)
-                  return
-                }
-                this.vendor = v
-              })
-          }
-          else {
-            this.vendor = undefined
-          }
         })
     })
   }

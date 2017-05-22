@@ -3,19 +3,18 @@
     <img class="responsive-img" src="assets/dummy_img_long.jpg">
   </div>
 </div>
-
 <div class="row">
   <div class="col l12">
     <search-field></search-field>
   </div>
 </div>
-
 <div class="row">
   <h4>Schlachtbrett</h4>
-  <postit-list [confirm]="true"></postit-list>
+  <postit-list [confirmed]="true"></postit-list>
 </div>
-
 <div class="row">
   <h4>Events</h4>
   <event-list></event-list>
 </div>
+<button class="btn" [routerLink]="['produkte']">Zu den Produkten</button>
+<button class="btn" [routerLink]="['produzenten']">Zu den Produzenten</button>

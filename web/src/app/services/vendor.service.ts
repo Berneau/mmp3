@@ -42,6 +42,58 @@ export class VendorService {
       .catch(this.handleError)
   }
 
+  addVendor(user, form) {
+    let url = `${this.apiEndpoint}/vendors`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let v = {
+      name: form.name,
+      userUid: user._id,
+      email: form.email,
+      description: form.description,
+      imageUrl: form.imageUrl,
+      subName: form.subName,
+      website: form.website,
+      tel: form.tel,
+      address: {
+        city: form.city,
+        street: form.street,
+        zip: form.zip,
+        lat: form.lat,
+        long: form.long
+      }
+    }
+
+    return this.http
+      .post(url, JSON.stringify(v), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getVendors()
+        return res.json().vendor as Vendor
+      })
+      .catch(this.handleError)
+  }
+
+  deleteVendor(id): Promise<any> {
+    let url = `${this.apiEndpoint}/vendors/${id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    return this.http
+      .delete(url, { headers: authHeaders })
+      .toPromise()
+      .then((res) => {
+        this.getVendors()
+        return res.json()
+      })
+      .catch(this.handleError)
+  }
+
   updateVendor(vendor, form) {
     let url = `${this.apiEndpoint}/vendors/${vendor._id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token

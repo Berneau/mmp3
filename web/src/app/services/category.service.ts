@@ -56,6 +56,7 @@ export class CategoryService {
       .post(url, JSON.stringify(c), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
+        this.getCategories()
         return res.json().category as Category
       })
       .catch(this.handleError)
@@ -72,7 +73,31 @@ export class CategoryService {
       .delete(url, { headers: authHeaders })
       .toPromise()
       .then((res) => {
-        // TODO: message for success return
+        this.getCategories()
+        return res.json()
+      })
+      .catch(this.handleError)
+  }
+
+  updateCategory(category, form) {
+    let url = `${this.apiEndpoint}/categories/${category._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let c = {
+      name: form.name,
+      typeUid: form.typeUid,
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .put(url, JSON.stringify(c), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getCategories()
+        return res.json().category as Category
       })
       .catch(this.handleError)
   }

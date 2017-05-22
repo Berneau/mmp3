@@ -2,7 +2,7 @@ export class Product {
   _id?: string
   name: string
   categoryId: string
-  vendorId: string
+  vendor: {}
   availableAt: {
     fromPeriod: string
     fromMonth: string

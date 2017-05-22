@@ -9,19 +9,18 @@ export class PostitService {
 
   constructor(private http: Http) { }
 
+  postits: Postit[]
   private apiEndpoint = ApiEndpoint
-  private headers = new Headers({
-    'Content-Type': 'application/json'
-  })
+  private headers = new Headers({ 'Content-Type': 'application/json' })
 
-  getPostits(confirm): Promise<any> {
+  getPostits(): Promise<any> {
     let url = `${this.apiEndpoint}/postits`
 
     return this.http
       .get(url)
       .toPromise()
       .then((res) => {
-        return res.json().postits.filter(p => {return p.confirmed === confirm})
+        this.postits = res.json().postits
       })
       .catch(this.handleError)
   }
@@ -51,6 +50,7 @@ export class PostitService {
       .put(url, JSON.stringify(p), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
+        this.getPostits()
         return res.json().postit as Postit
       })
       .catch(this.handleError)
@@ -68,6 +68,7 @@ export class PostitService {
       confirmed: form.confirmed,
       vendorId: vendor ? vendor._id : null,
       description: form.description,
+      location: form.location,
       imageUrl: form.imageUrl
     }
 
@@ -75,6 +76,7 @@ export class PostitService {
       .post(url, JSON.stringify(p), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
+        this.getPostits()
         return res.json().postit as Postit
       })
       .catch(this.handleError)
@@ -91,7 +93,34 @@ export class PostitService {
       .delete(url, { headers: authHeaders })
       .toPromise()
       .then((res) => {
-            // TODO: message for success return
+        this.getPostits()
+        return res.json()
+      })
+      .catch(this.handleError)
+  }
+
+  updatePostit(vendor, postit, form) {
+    let url = `${this.apiEndpoint}/postits/${postit._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let p = {
+      name: form.name,
+      confirmed: form.confirmed,
+      vendorId: vendor ? vendor._id : null,
+      description: form.description,
+      location: form.location,
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .put(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getPostits()
+        return res.json().postit as Postit
       })
       .catch(this.handleError)
   }

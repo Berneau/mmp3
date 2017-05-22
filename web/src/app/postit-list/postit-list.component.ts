@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MzModalService } from 'ng2-materialize';
 
 import { Postit } from './../interfaces/postit'
 import { PostitService } from './../services/postit.service'
+import { PostitDetailComponent } from './../postit-detail/postit-detail.component'
 
 @Component({
   selector: 'postit-list',
@@ -10,21 +12,19 @@ import { PostitService } from './../services/postit.service'
 })
 export class PostitListComponent implements OnInit {
 
-  @Input() confirm: false
-  postits: Postit[]
+  @Input() confirmed: boolean
+  selectedPostit: Postit
 
-  constructor(private store: PostitService) { }
+  constructor(private store: PostitService, private modalService: MzModalService) { }
 
 
   ngOnInit() {
-    this.store.getPostits(this.confirm)
-    .then(postits => {
-      if (!postits) {
-        Materialize.toast('Es wurde keine Schlachtbretteinträge gefunden.', 2000)
-        return
-      }
-      this.postits = postits
-    })
+    this.store.getPostits()
+  }
+
+  selectPostit(postit: Postit) {
+    this.selectedPostit = postit
+    this.modalService.open(PostitDetailComponent, {postit: this.selectedPostit});
   }
 
 }

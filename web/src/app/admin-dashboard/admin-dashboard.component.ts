@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MzModalService } from 'ng2-materialize';
 
-import { UserService } from './../services/user.service'
-import { VendorService } from './../services/vendor.service'
-import { CategoryService } from './../services/category.service'
-import { TypeService } from './../services/type.service'
-import { PostitService } from './../services/postit.service'
-import { EventService } from './../services/event.service'
-
+import { UserFormComponent } from './../user-form/user-form.component'
+import { CategoryFormComponent } from './../category-form/category-form.component'
+import { TypeFormComponent } from './../type-form/type-form.component'
+import { PostitFormComponent } from './../postit-form/postit-form.component'
+import { EventFormComponent } from './../event-form/event-form.component'
 
 @Component({
   selector: 'admin-dashboard',
@@ -15,61 +14,29 @@ import { EventService } from './../services/event.service'
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor(private UserStore: UserService, private VendorStore: VendorService, private CategoryStore: CategoryService, private TypeStore: TypeService, private PostitStore: PostitService, private EventStore: EventService, ) { }
+  constructor(private modalService: MzModalService) { }
 
   ngOnInit() {
   }
 
-  newUser(form) {
-    console.log("add User", form)
+  openNewUserModal() {
+    this.modalService.open(PostitFormComponent);
+    // TODO: change
   }
 
-  newVendor(form) {
-    console.log("add Vendor", form)
+  openNewCategoryModal() {
+    this.modalService.open(CategoryFormComponent);
   }
 
-  newCategory(form) {
-    this.CategoryStore.addCategory(form.categoryForm.value)
-      .then(category => {
-        if (!category) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Kategorie gespeichert.', 2000)
-      })
+  openNewTypeModal() {
+    this.modalService.open(TypeFormComponent);
   }
 
-  newType(form) {
-    this.TypeStore.addType(form.typeForm.value)
-      .then(type => {
-        if (!type) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Typ gespeichert.', 2000)
-      })
+  openNewPostitModal() {
+    this.modalService.open(PostitFormComponent);
   }
 
-  newPostit(form) {
-    this.PostitStore.addPostit(null, form.postitForm.value)
-      .then(postit => {
-        if (!postit) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Schlachtbrett-Eintrag gespeichert.', 2000)
-      })
+  openNewEventModal() {
+    this.modalService.open(EventFormComponent);
   }
-
-  newEvent(form) {
-    this.EventStore.addEvent(form.eventForm.value)
-      .then(event => {
-        if (!event) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Event gespeichert.', 2000)
-      })
-  }
-
 }

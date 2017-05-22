@@ -1,0 +1,10 @@
+<div class="row" *ngIf="(store.postits | postitConfirmedPipe: confirmed)">
+  <ul class="row collection">
+    <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="collection-item avatar">
+        <img class="circle" src="assets/dummy_img.jpg">
+        <span class="title">{{postit.name}}</span>
+        <p>{{postit.location}}</p>
+        <a (click)="selectPostit(postit)" class="secondary-content"><i class="material-icons">settings</i></a>
+    </li>
+  </ul>
+</div>
