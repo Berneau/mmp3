@@ -24,7 +24,6 @@ import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { PostitListComponent } from './postit-list/postit-list.component';
 import { PostitDetailComponent } from './postit-detail/postit-detail.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -71,25 +70,11 @@ const appRoutes: Routes = [
       { path: ':id', component: CategoryDetailComponent }
     ]
   },
-  { path: 'produkt', redirectTo: 'produkte', pathMatch: 'full' },
-  {
-    path: 'produkt',
-    children: [
-      { path: ':id', component: ProductDetailComponent }
-    ]
-  },
   { path: 'events', component: EventListComponent },
   {
     path: 'events',
     children: [
       { path: ':id', component: EventDetailComponent }
-    ]
-  },
-  { path: 'schlachtbrett', component: PostitListComponent },
-  {
-    path: 'schlachtbrett',
-    children: [
-      { path: ':id', component: PostitDetailComponent }
     ]
   },
   // { path: 'rezepte', component: RecipeListComponent },
@@ -99,8 +84,7 @@ const appRoutes: Routes = [
   //     { path: ':id', component: RecipeDetailComponent }
   //   ]
   // },
-  { path: 'admin', component: AdminDashboardComponent },
-  // { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] },
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] },
   { path: 'suche', component: SearchResultsComponent },
   { path: 'login', component: LoginComponent }
 ];
@@ -122,7 +106,6 @@ const appRoutes: Routes = [
     EventDetailComponent,
     CategoryListComponent,
     CategoryDetailComponent,
-    ProductDetailComponent,
     AdminDashboardComponent,
     VendorFormComponent,
     ProductFormComponent,
