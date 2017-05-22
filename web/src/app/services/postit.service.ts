@@ -91,7 +91,7 @@ export class PostitService {
       .delete(url, { headers: authHeaders })
       .toPromise()
       .then((res) => {
-            // TODO: message for success return
+            return res.json()
       })
       .catch(this.handleError)
   }
