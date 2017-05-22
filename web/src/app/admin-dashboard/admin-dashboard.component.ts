@@ -34,11 +34,9 @@ export class AdminDashboardComponent implements OnInit {
 
   openNewPostitModal() {
     this.modalService.open(PostitFormComponent);
-    // TODO: change
   }
 
   openNewEventModal() {
-    this.modalService.open(PostitFormComponent);
-    // TODO: change
+    this.modalService.open(EventFormComponent);
   }
 }
