@@ -26,7 +26,7 @@ export class ProductListComponent implements OnInit {
 
   selectProduct(product: Product) {
     this.selectedProduct = product
-    this.modalService.open(ProductFormComponent, {product: this.selectedProduct});
+    this.modalService.open(ProductFormComponent, {product: this.selectedProduct, vendor: this.vendor});
   }
 
   deleteProduct(p) {

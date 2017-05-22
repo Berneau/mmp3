@@ -37,7 +37,7 @@ export class ProductService {
     let p = {
       name: form.name,
       categoryId: form.categoryId,
-      vendorId: vendor ? vendor._id : null,
+      vendor: vendor,
       availableAt: {
         fromPeriod: form.fromPeriod,
         fromMonth: form.fromMonth,
@@ -74,7 +74,7 @@ export class ProductService {
       .catch(this.handleError)
   }
 
-  updateProduct(product, form) {
+  updateProduct(vendor, product, form) {
     let url = `${this.apiEndpoint}/products/${product._id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -84,7 +84,7 @@ export class ProductService {
     let p = {
       name: form.name,
       categoryId: form.categoryId,
-      vendorId: product.vendorId,
+      vendor: vendor,
       availableAt: {
         fromPeriod: form.fromPeriod,
         fromMonth: form.fromMonth,
@@ -98,7 +98,7 @@ export class ProductService {
       .put(url, JSON.stringify(p), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
-        this.getVendorProducts(product.vendorId)
+        this.getVendorProducts(product.vendor._id)
         return res.json().product as Product
       })
       .catch(this.handleError)

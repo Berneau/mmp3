@@ -38,7 +38,7 @@ export class ProductFormComponent extends MzBaseModal {
       this.productForm = this.fb.group({
         name: this.product.name,
         categoryId: this.product.categoryId,
-        vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
+        vendor: { value: this.vendor != undefined ? this.vendor : null, disabled: true },
         fromPeriod: this.product.availableAt.fromPeriod,
         fromMonth: this.product.availableAt.fromMonth,
         toPeriod: this.product.availableAt.toPeriod,
@@ -50,7 +50,7 @@ export class ProductFormComponent extends MzBaseModal {
       this.productForm = this.fb.group({
         name: '',
         categoryId: '',
-        vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
+        vendor: { value: this.vendor != undefined ? this.vendor : null, disabled: true },
         fromPeriod: '',
         fromMonth: '',
         toPeriod: '',
@@ -72,7 +72,7 @@ export class ProductFormComponent extends MzBaseModal {
   }
 
   updateProduct(p) {
-    this.store.updateProduct(p, this.productForm.value)
+    this.store.updateProduct(this.vendor, p, this.productForm.value)
     .then(product => {
       if (!product) {
         Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
