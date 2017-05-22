@@ -8,6 +8,7 @@ var VendorSchema = new Schema({
   email: { type: String, required: true },
   description: String,
   imageUrl: String,
+  farmImageUrl: String,
   subName: String,
   website: String,
   tel: Number,

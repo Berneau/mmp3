@@ -15,6 +15,7 @@ module.exports = function(router) {
    * @apiParam {String} email Email address of the owner.
    * @apiParam {String} [description] A short description.
    * @apiParam {String} [imageUrl] The url to the image.
+   * @apiParam {String} [farmImageUrl] The url of the farm image.
    * @apiParam {String} [subName] The name of the owner.
    * @apiParam {String} [website] The website of the vendor.
    * @apiParam {Number} [tel] Tel number of the owner.
@@ -44,6 +45,7 @@ module.exports = function(router) {
         email: req.body.email,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
+        farmImageUrl: req.body.farmImageUrl,
         subName: req.body.subName,
         website: req.body.website,
         tel: req.body.tel,
@@ -86,6 +88,7 @@ module.exports = function(router) {
        * @apiParam {String} email Email address of the owner.
        * @apiParam {String} [description] A short description.
        * @apiParam {String} [imageUrl] The url to the image.
+       * @apiParam {String} [farmImageUrl] The url of the farm image.
        * @apiParam {String} [subName] The name of the owner.
        * @apiParam {String} [website] The website of the vendor.
        * @apiParam {Number} [tel] Tel number of the owner.
@@ -116,6 +119,7 @@ module.exports = function(router) {
               vendor.email = req.body.email
               vendor.description = req.body.description
               vendor.imageUrl = req.body.imageUrl
+              vendor.farmImageUrl = req.body.farmImageUrl
               vendor.subName = req.body.subName
               vendor.website = req.body.website
               vendor.tel = req.body.tel
