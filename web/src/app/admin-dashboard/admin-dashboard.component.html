@@ -9,30 +9,34 @@
       <li>link</li>
     </ul>
 
-    <button mz-button (click)="addUser.open()">Produzent
+    <button mz-button (click)="this.openNewUserModal()">Produzent
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="addCategory.open()">Kategorie
+    <button mz-button (click)="this.openNewCategoryModal()">Kategorie
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="addType.open()">Typ
+    <button mz-button (click)="this.openNewTypeModal()">Typ
       <i class="material-icons left">add</i>
     </button>
     <button mz-button (click)="this.openNewPostitModal()">Schlachtbretteintrag
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="addEvent.open()">Event
+    <button mz-button (click)="this.openNewEventModal()">Event
       <i class="material-icons left">add</i>
     </button>
 
   </div>
   <div class="col s9">
     <h5>Schlachtbrett-Anfragen</h5>
-    <postit-list [confirmed]="false"></postit-list>
+    <admin-postit-list [confirmed]="false"></admin-postit-list>
     <h5>Schlachtbrett-Liste</h5>
-    <postit-list [confirmed]="true"></postit-list>
+    <admin-postit-list [confirmed]="true"></admin-postit-list>
     <h5>Event-Liste</h5>
     <event-list></event-list>
+    <h5>Kategorie-Liste</h5>
+    <category-list></category-list>
+    <h5>Typ-Liste</h5>
+    <!-- TODO: add typelist -->
   </div>
 </div>
 

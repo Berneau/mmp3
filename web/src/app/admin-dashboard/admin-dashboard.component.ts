@@ -3,12 +3,14 @@ import { MzModalService } from 'ng2-materialize';
 
 import { UserService } from './../services/user.service'
 import { VendorService } from './../services/vendor.service'
-import { CategoryService } from './../services/category.service'
 import { TypeService } from './../services/type.service'
 import { EventService } from './../services/event.service'
-import { PostitService } from './../services/postit.service'
 
+import { UserFormComponent } from './../user-form/user-form.component'
+import { CategoryFormComponent } from './../category-form/category-form.component'
+import { TypeFormComponent } from './../type-form/type-form.component'
 import { PostitFormComponent } from './../postit-form/postit-form.component'
+import { EventFormComponent } from './../event-form/event-form.component'
 
 @Component({
   selector: 'admin-dashboard',
@@ -17,13 +19,32 @@ import { PostitFormComponent } from './../postit-form/postit-form.component'
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor(private UserStore: UserService, private VendorStore: VendorService, private CategoryStore: CategoryService, private TypeStore: TypeService, private EventStore: EventService, private PostitStore: PostitService, private modalService: MzModalService) { }
+  constructor(private UserStore: UserService, private VendorStore: VendorService, private TypeStore: TypeService, private EventStore: EventService, private modalService: MzModalService) { }
 
   ngOnInit() {
   }
 
+  openNewUserModal() {
+    this.modalService.open(PostitFormComponent);
+    // TODO: change
+  }
+
+  openNewCategoryModal() {
+    this.modalService.open(CategoryFormComponent);
+  }
+
+  openNewTypeModal() {
+    this.modalService.open(PostitFormComponent);
+  }
+
   openNewPostitModal() {
     this.modalService.open(PostitFormComponent);
+    // TODO: change
+  }
+
+  openNewEventModal() {
+    this.modalService.open(PostitFormComponent);
+    // TODO: change
   }
 
   newUser(form) {
@@ -32,17 +53,6 @@ export class AdminDashboardComponent implements OnInit {
 
   newVendor(form) {
     console.log("add Vendor", form)
-  }
-
-  newCategory(form) {
-    this.CategoryStore.addCategory(form.categoryForm.value)
-      .then(category => {
-        if (!category) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Kategorie gespeichert.', 2000)
-      })
   }
 
   newType(form) {
