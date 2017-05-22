@@ -1,11 +1,25 @@
-<div>
-  <form materialize [formGroup]="typeForm">
-    <div class="row">
-      <h6>Grunddaten</h6>
-      <div class="input-field col s12 form-group">
-        <input id="type-name" type="text" class="validate" formControlName="name">
-        <label for="type-name">Name</label>
-      </div>
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header *ngIf="type">
+    Typ bearbeiten
+  </mz-modal-header>
+  <mz-modal-header *ngIf="!type">
+    Typ hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <div>
+      <form materialize [formGroup]="typeForm">
+        <div class="row">
+          <h6>Grunddaten</h6>
+          <div class="input-field col s12 form-group">
+            <input id="type-name" type="text" class="validate" formControlName="name">
+            <label for="type-name">Name</label>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="type ? this.updateType(type) : this.newType()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>

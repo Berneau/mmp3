@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MzModalService } from 'ng2-materialize';
+
+import { Type } from './../interfaces/type'
+
+import { TypeService } from './../services/type.service'
+
+import { TypeFormComponent } from './../type-form/type-form.component'
 
 @Component({
   selector: 'admin-type-list',
@@ -7,9 +14,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminTypeListComponent implements OnInit {
 
-  constructor() { }
+  selectedType: Type
+
+  constructor(private store: TypeService, private modalService: MzModalService) { }
 
   ngOnInit() {
+    this.store.getTypes()
+  }
+
+  selectType(type: Type) {
+    this.selectedType = type
+    this.modalService.open(TypeFormComponent, {type: this.selectedType});
+  }
+
+  deleteType(t) {
+    this.store.deleteType(t._id)
+      .then(success => {
+        if (!success) {
+          Materialize.toast('Fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Eintrag gelöscht.', 2000)
+      })
   }
 
 }
