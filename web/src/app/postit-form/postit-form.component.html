@@ -1,5 +1,8 @@
 <mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
-  <mz-modal-header>
+  <mz-modal-header *ngIf="postit">
+    Schlachtbrett-Eintrag bearbeiten
+  </mz-modal-header>
+  <mz-modal-header *ngIf="!postit">
     Schlachtbrett-Eintrag hinzufügen
   </mz-modal-header>
   <mz-modal-content>
