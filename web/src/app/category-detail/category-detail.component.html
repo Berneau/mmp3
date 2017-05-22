@@ -13,19 +13,6 @@
   <div class="row">
     <h5>Produkte von Produzenten</h5>
     <hr>
-    <ul class="row">
-      <li *ngFor="let product of ProductStore.categoryProducts" class="col s12 m4 l3 xl2">
-        <a [routerLink]="['/produkt', product._id]">
-          <div class="card">
-            <div class="card-image">
-              <img class="activator" src="assets/dummy_img.jpg">
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{product.name}}</span>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+    <product-vendor-list [category]="category"></product-vendor-list>
   </div>
 </div>
