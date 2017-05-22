@@ -33,6 +33,7 @@ export class ProductService {
     let authHeaders = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
     })
+
     let p = {
       name: form.name,
       categoryId: form.categoryId,
@@ -50,7 +51,54 @@ export class ProductService {
       .post(url, JSON.stringify(p), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
-        this.vendorProducts.push(res.json().product)
+        this.getVendorProducts(vendor._id)
+        return res.json().product as Product
+      })
+      .catch(this.handleError)
+  }
+
+  deleteProduct(id, vendorId): Promise<any> {
+    let url = `${this.apiEndpoint}/products/${id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    return this.http
+      .delete(url, { headers: authHeaders })
+      .toPromise()
+      .then((res) => {
+        this.getVendorProducts(vendorId)
+        return res.json()
+      })
+      .catch(this.handleError)
+  }
+
+  updateProduct(product, form) {
+    let url = `${this.apiEndpoint}/products/${product._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let p = {
+      name: form.name,
+      categoryId: form.categoryId,
+      vendorId: product.vendorId,
+      availableAt: {
+        fromPeriod: form.fromPeriod,
+        fromMonth: form.fromMonth,
+        toPeriod: form.toPeriod,
+        toMonth: form.toMonth
+      },
+      imageUrl: form.imageUrl
+    }
+
+    return this.http
+      .put(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getVendorProducts(product.vendorId)
         return res.json().product as Product
       })
       .catch(this.handleError)

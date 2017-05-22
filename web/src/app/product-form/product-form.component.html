@@ -1,45 +1,63 @@
-<div>
-  <form materialize [formGroup]="productForm">
-    <div class="row">
-      <h6>Bild</h6>
-      <div class="input-field col s12 form-group">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>File</span>
-            <input type="file">
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header *ngIf="product">
+    Produkt bearbeiten
+  </mz-modal-header>
+  <mz-modal-header *ngIf="!product">
+    Produkt hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <div>
+      <form materialize [formGroup]="productForm">
+        <div class="row">
+          <h6>Bild</h6>
+          <div class="input-field col s12 form-group">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" formControlName="imageUrl" type="text">
+              </div>
+            </div>
           </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" formControlName="imageUrl" type="text">
+          <h6>Grunddaten</h6>
+          <div class="input-field col s12 m6 form-group">
+            <input id="product-name" type="text" class="validate" formControlName="name">
+            <label for="product-name">Name</label>
           </div>
-        </div>
-      </div>
-      <h6>Grunddaten</h6>
-      <div class="input-field col s12 m6 form-group">
-        <input id="product-name" type="text" class="validate" formControlName="name">
-        <label for="product-name">Name</label>
-      </div>
-      <mz-select-container  class="input-field col s12 m6 form-group">
-        <select mz-select [placeholder]="'Kategorie'" id="product-categoryId" formControlName="categoryId">
+          <mz-select-container class="input-field col s12 m6 form-group">
+            <select mz-select [placeholder]="'Kategorie'" id="product-categoryId" formControlName="categoryId">
             <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" data-icon="assets/dummy_img.jpg" class="left circle">{{category.name}}</option>
         </select>
-      </mz-select-container>
-      <h6>Verfügbarkeit</h6>
-      <div class="input-field col s6 m3 form-group">
-        <input id="product-fromPeriod" type="text" class="validate" formControlName="fromPeriod">
-        <label for="product-fromPeriod">Periode</label>
-      </div>
-      <div class="input-field col s6 m3 form-group">
-        <input id="product-fromMonth" type="text" class="validate" formControlName="fromMonth">
-        <label for="product-fromMonth">Monat</label>
-      </div>
-      <div class="input-field col s6 m3 form-group">
-        <input id="product-toPeriod" type="text" class="validate" formControlName="toPeriod">
-        <label for="product-toPeriod">Periode</label>
-      </div>
-      <div class="input-field col s6 m3 form-group">
-        <input id="product-toMonth" type="text" class="validate" formControlName="toMonth">
-        <label for="product-toMonth">Monat</label>
-      </div>
+          </mz-select-container>
+          <h6>Verfügbarkeit</h6>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'Periode'" id="product-fromPeriod" formControlName="fromPeriod">
+                <option *ngFor="let p of periods">{{p}}</option>
+            </select>
+          </mz-select-container>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'Monat'" id="product-fromMonth" formControlName="fromMonth">
+                <option *ngFor="let m of months">{{m}}</option>
+            </select>
+          </mz-select-container>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'Periode'" id="product-toPeriod" formControlName="toPeriod">
+                <option *ngFor="let p of periods">{{p}}</option>
+            </select>
+          </mz-select-container>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'Monat'" id="product-toMonth" formControlName="toMonth">
+                <option *ngFor="let m of months">{{m}}</option>
+            </select>
+          </mz-select-container>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="product ? this.updateProduct(product) : this.newProduct()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
