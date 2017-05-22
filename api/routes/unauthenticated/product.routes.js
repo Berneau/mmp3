@@ -60,7 +60,7 @@ module.exports = function(router) {
       else if (vendorId && !categoryId) {
 
         Product
-        .find({ vendorId: vendorId }, function(err, products) {
+        .find({ 'vendor._id': vendorId }, function(err, products) {
 
           // internal server error
           if (err) res.status(500).json({

@@ -105,7 +105,7 @@ let category3 = new Category({
 let product1 = new Product({
   name: 'Grüne Äpfel',
   categoryId: '',
-  vendorId: '',
+  vendor: '',
   availableAt: {
     fromPeriod: 'Anfang',
     fromMonth: 'April',
@@ -117,7 +117,7 @@ let product1 = new Product({
 let product2 = new Product({
   name: 'Hokkaido Kürbis',
   categoryId: '',
-  vendorId: '',
+  vendor: '',
   availableAt: {
     fromPeriod: 'Anfang',
     fromMonth: 'April',
@@ -129,7 +129,7 @@ let product2 = new Product({
 let product3 = new Product({
   name: 'Liselotte',
   categoryId: '',
-  vendorId: '',
+  vendor: '',
   availableAt: {
     fromPeriod: 'Anfang',
     fromMonth: 'April',
@@ -242,8 +242,8 @@ function setupVendors() {
       .end((err, res) => {
         if(err) reject('v1')
         else {
-          product1.vendorId = res.body.vendor._id
-          product2.vendorId = res.body.vendor._id
+          product1.vendor = res.body.vendor
+          product2.vendor = res.body.vendor
           postit1.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }
@@ -257,7 +257,7 @@ function setupVendors() {
       .end((err, res) => {
         if(err) reject('v2')
         else {
-          product3.vendorId = res.body.vendor._id
+          product3.vendor = res.body.vendor
           postit2.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }

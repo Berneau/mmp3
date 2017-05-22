@@ -4,7 +4,7 @@ var Schema = mongoose.Schema
 var ProductSchema = new Schema({
   name: { type: String, required: true },
   categoryId: { type: String, required: true },
-  vendorId: { type: String, required: true },
+  vendor: Object,
   availableAt: {
     fromPeriod: { type: String, required: true },
     fromMonth: { type: String, required: true },

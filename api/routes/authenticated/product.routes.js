@@ -13,7 +13,7 @@ module.exports = function(router) {
    *
    * @apiParam {String} name The name of the product.
    * @apiParam {String} categoryId The id of the category.
-   * @apiParam {String} vendorId The id of the vendor.
+   * @apiParam {Object} vendor The vendor object.
    * @apiParam {Object} availableAt AvailableAt-Wrapper
    * @apiParam {String} availableAt.fromPeriod e.g. Anfang
    * @apiParam {String} availableAt.fromMonth e.g. Mai
@@ -38,7 +38,7 @@ module.exports = function(router) {
       var product = new Product({
         name: req.body.name,
         categoryId: req.body.categoryId,
-        vendorId: req.body.vendorId,
+        vendor: req.body.vendor,
         availableAt: {
           fromPeriod: req.body.availableAt ? req.body.availableAt.fromPeriod : undefined,
           fromMonth: req.body.availableAt ? req.body.availableAt.fromMonth : undefined,
@@ -74,7 +74,7 @@ module.exports = function(router) {
    *
    * @apiParam {String} name The name of the product.
    * @apiParam {String} categoryId The id of the category.
-   * @apiParam {String} vendorId The id of the vendor.
+   * @apiParam {Object} vendor The vendor object.
    * @apiParam {Object} availableAt AvailableAt-Wrapper
    * @apiParam {String} availableAt.fromPeriod e.g. Anfang
    * @apiParam {String} availableAt.fromMonth e.g. Mai
@@ -99,7 +99,7 @@ module.exports = function(router) {
 
           product.name = req.body.name
           product.categoryId = req.body.categoryId
-          product.vendorId = req.body.vendorId
+          product.vendor = req.body.vendor
           product.availableAt.fromPeriod = req.body.availableAt ? req.body.availableAt.fromPeriod : undefined
           product.availableAt.fromMonth = req.body.availableAt ? req.body.availableAt.fromMonth : undefined
           product.availableAt.toPeriod = req.body.availableAt ? req.body.availableAt.toPeriod : undefined

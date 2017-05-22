@@ -51,7 +51,7 @@ describe('Product', () => {
       let product = new Product({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendorId: 'asd123',
+        vendor: {},
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -94,7 +94,7 @@ describe('Product', () => {
       let product = {
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendorId: 'asd123',
+        vendor: {},
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -118,7 +118,7 @@ describe('Product', () => {
     it('should not POST a product without a name', (done) => {
       let product = {
         categoryId: 'asd123',
-        vendorId: 'asd123',
+        vendor: {},
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -142,7 +142,7 @@ describe('Product', () => {
     it('should not POST a product without a categoryId', (done) => {
       let product = {
         name: 'Rote Äpfel',
-        vendorId: 'asd123',
+        vendor: {},
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -163,7 +163,7 @@ describe('Product', () => {
         })
     })
 
-    it('should not POST a product without a vendorId', (done) => {
+    it('should not POST a product without a vendor', (done) => {
       let product = {
         name: 'Rote Äpfel',
         categoryId: 'asd123',
@@ -196,7 +196,9 @@ describe('Product', () => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendorId: 'asd123',
+        vendor: {
+          name: 'Generic Farmer Name'
+        },
         imageUrl: 'dev.eins',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -208,7 +210,9 @@ describe('Product', () => {
       let product2 = new Product({
         name: 'Grüne Äpfel',
         categoryId: 'qwe123',
-        vendorId: 'qwe123',
+        vendor: {
+          name: 'Generic Farmer Name'
+        },
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -229,7 +233,7 @@ describe('Product', () => {
           res.body.product.should.have.property('name').equal('Grüne Äpfel')
           res.body.product.should.have.property('imageUrl').equal('dev.null')
           res.body.product.should.have.property('categoryId').equal('qwe123')
-          res.body.product.should.have.property('vendorId').equal('qwe123')
+          res.body.product.should.have.property('vendor')
           done()
         })
       })
@@ -239,7 +243,7 @@ describe('Product', () => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendorId: 'asd123',
+        vendor: {},
         imageUrl: 'dev.eins',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -250,7 +254,7 @@ describe('Product', () => {
       })
       let product2 = new Product({
         categoryId: 'qwe123',
-        vendorId: 'qwe123',
+        vendor: {},
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -277,7 +281,7 @@ describe('Product', () => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendorId: 'asd123',
+        vendor: {},
         imageUrl: 'dev.eins',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -289,7 +293,7 @@ describe('Product', () => {
       let product2 = new Product({
         name: 'Grüne Äpfel',
         categoryId: 'qwe123',
-        vendorId: 'qwe123',
+        vendor: {},
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -321,7 +325,7 @@ describe('Product', () => {
       let product = new Product ({
         name: 'Grüne Äpfel',
         categoryId: 'qwe123',
-        vendorId: 'qwe123',
+        vendor: {},
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',

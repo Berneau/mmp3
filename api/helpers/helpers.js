@@ -2,7 +2,7 @@ module.exports = {
   productIsValid: function (product) {
     if (!product.name ||
         !product.categoryId ||
-        !product.vendorId ||
+        !product.vendor ||
         !product.availableAt) return false
 
     if (!product.availableAt.fromPeriod ||
