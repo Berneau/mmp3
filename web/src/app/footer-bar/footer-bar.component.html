@@ -15,8 +15,8 @@
 
       </div>
       <div class="">
-        <button *ngIf="!this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" [routerLink]="['login']">Login</button>
-        <button *ngIf="this.LoginStore.isLoggedIn()" class="waves-effect waves-light btn right" (click)="this.LoginStore.logout(); this.LoginStore.navigateToLandingPage()">Logout</button>
+        <button *ngIf="!this.LoginStore.isLoggedIn()" class="btn right" [routerLink]="['login']">Login</button>
+        <button *ngIf="this.LoginStore.isLoggedIn()" class="btn right" (click)="this.LoginStore.logout(); this.LoginStore.navigateToLandingPage()">Logout</button>
       </div>
     </div>
   </div>
