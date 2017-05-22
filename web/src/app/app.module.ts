@@ -133,7 +133,9 @@ const appRoutes: Routes = [
     UserFormComponent,
     CategoryFormComponent,
     TypeFormComponent,
-    EventFormComponent
+    EventFormComponent,
+    ProductFormComponent,
+    VendorFormComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
