@@ -28,6 +28,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { PostitListComponent } from './postit-list/postit-list.component';
 import { PostitDetailComponent } from './postit-detail/postit-detail.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminPostitListComponent } from './admin-postit-list/admin-postit-list.component';
 import { VendorFormComponent } from './vendor-form/vendor-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { PostitFormComponent } from './postit-form/postit-form.component';
@@ -131,7 +132,8 @@ const appRoutes: Routes = [
     EventFormComponent,
     VendorShortInfoComponent,
     SearchFieldComponent,
-    PostitConfirmedPipePipe
+    PostitConfirmedPipePipe,
+    AdminPostitListComponent
   ],
   entryComponents: [
     PostitFormComponent,
