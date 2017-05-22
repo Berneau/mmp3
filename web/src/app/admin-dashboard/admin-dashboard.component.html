@@ -4,11 +4,39 @@
     Jasmin
 
     <ul>
-      <li>link</li>
-      <li>link</li>
-      <li>link</li>
+      <li><a href="#">Schlachtbrett-Anfragen</a></li>
+      <li><a href="#">Schlachtbrett-Liste</a></li>
+      <li><a href="#">Event-Liste</a></li>
+      <li><a href="#">Kategorie-Liste</a></li>
+      <li><a href="#">Typ-Liste</a></li>
     </ul>
 
+  </div>
+  <div class="col s9">
+    <div class="s12 active" id="adminPostitListNew">
+      <h5>Schlachtbrett-Anfragen</h5>
+      <admin-postit-list [confirmed]="false"></admin-postit-list>
+    </div>
+    <div class="s12" id="adminPostitListConfirmed">
+      <h5>Schlachtbrett-Liste</h5>
+      <admin-postit-list [confirmed]="true"></admin-postit-list>
+    </div>
+    <div class="s12" id="adminEventList">
+      <h5>Event-Liste</h5>
+      <admin-event-list></admin-event-list>
+    </div>
+    <div class="s12" id="adminCategoryList">
+      <h5>Kategorie-Liste</h5>
+      <admin-category-list></admin-category-list>
+    </div>
+    <div class="s12" id="adminTypeList">
+      <h5>Typ-Liste</h5>
+      <admin-type-list></admin-type-list>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
     <button mz-button (click)="this.openNewUserModal()">Produzent
       <i class="material-icons left">add</i>
     </button>
@@ -24,18 +52,5 @@
     <button mz-button (click)="this.openNewEventModal()">Event
       <i class="material-icons left">add</i>
     </button>
-
-  </div>
-  <div class="col s9">
-    <h5>Schlachtbrett-Anfragen</h5>
-    <admin-postit-list [confirmed]="false"></admin-postit-list>
-    <h5>Schlachtbrett-Liste</h5>
-    <admin-postit-list [confirmed]="true"></admin-postit-list>
-    <h5>Event-Liste</h5>
-    <admin-event-list></admin-event-list>
-    <h5>Kategorie-Liste</h5>
-    <admin-category-list></admin-category-list>
-    <h5>Typ-Liste</h5>
-    <admin-type-list></admin-type-list>
   </div>
 </div>
