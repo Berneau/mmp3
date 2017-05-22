@@ -1,5 +1,8 @@
 <mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
-  <mz-modal-header>
+  <mz-modal-header *ngIf="category">
+    Kategorie bearbeiten
+  </mz-modal-header>
+  <mz-modal-header *ngIf="!category">
     Kategorie hinzufügen
   </mz-modal-header>
   <mz-modal-content>
@@ -33,7 +36,7 @@
     </div>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newCategory(addCategoryForm)" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" (click)="category ? this.updateCategory(category) : this.newCategory()" mz-modal-close>Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>

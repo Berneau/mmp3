@@ -5,6 +5,7 @@ import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
 import { Category } from './../interfaces/category'
 import { Type } from './../interfaces/type'
 
+import { CategoryService } from './../services/category.service'
 import { TypeService } from './../services/type.service'
 
 @Component({
@@ -17,7 +18,7 @@ export class CategoryFormComponent extends MzBaseModal {
   categoryForm: FormGroup
   @Input() category: Category
 
-  constructor(private fb: FormBuilder, private TypeStore: TypeService) {
+  constructor(private fb: FormBuilder, private TypeStore: TypeService, private store: CategoryService) {
     super()
   }
 
@@ -41,6 +42,28 @@ export class CategoryFormComponent extends MzBaseModal {
         imageUrl: ''
       });
     }
+  }
+
+  newCategory() {
+    this.store.addCategory(this.categoryForm.value)
+      .then(category => {
+        if (!category) {
+          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Kategorie gespeichert.', 2000)
+      })
+  }
+
+  updateCategory(p) {
+    this.store.updateCategory(p, this.categoryForm.value)
+    .then(category => {
+      if (!category) {
+        Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+        return
+      }
+      Materialize.toast('Änderungen gespeichert.', 2000)
+    })
   }
 
 }
