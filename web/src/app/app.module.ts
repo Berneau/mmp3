@@ -42,6 +42,9 @@ import { TypeFormComponent } from './type-form/type-form.component';
 import { EventFormComponent } from './event-form/event-form.component';
 import { VendorShortInfoComponent } from './vendor-short-info/vendor-short-info.component';
 import { SearchFieldComponent } from './search-field/search-field.component';
+import { SitemapComponent } from './sitemap/sitemap.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { AboutComponent } from './about/about.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -88,7 +91,10 @@ const appRoutes: Routes = [
   // },
   { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] },
   { path: 'suche', component: SearchResultsComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'sitemap', component: SitemapComponent },
+  { path: 'über-uns', component: AboutComponent },
+  { path: 'impressum', component: ImprintComponent },
 ];
 
 @NgModule({
@@ -108,7 +114,13 @@ const appRoutes: Routes = [
     EventDetailComponent,
     CategoryListComponent,
     CategoryDetailComponent,
+    ProductListComponent,
+    ProductVendorListComponent,
     AdminDashboardComponent,
+    AdminPostitListComponent,
+    AdminCategoryListComponent,
+    AdminTypeListComponent,
+    AdminEventListComponent,
     VendorFormComponent,
     ProductFormComponent,
     PostitListComponent,
@@ -120,13 +132,10 @@ const appRoutes: Routes = [
     EventFormComponent,
     VendorShortInfoComponent,
     SearchFieldComponent,
-    PostitConfirmedPipePipe,
-    AdminPostitListComponent,
-    AdminCategoryListComponent,
-    AdminTypeListComponent,
-    AdminEventListComponent,
-    ProductListComponent,
-    ProductVendorListComponent
+    SitemapComponent,
+    ImprintComponent,
+    AboutComponent,
+    PostitConfirmedPipePipe
   ],
   entryComponents: [
     PostitFormComponent,
