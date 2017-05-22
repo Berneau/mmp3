@@ -18,7 +18,7 @@
     <button mz-button (click)="addType.open()">Typ
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="addPostit.open()">Schlachtbretteintrag
+    <button mz-button (click)="this.openNewPostitModal()">Schlachtbretteintrag
       <i class="material-icons left">add</i>
     </button>
     <button mz-button (click)="addEvent.open()">Event
@@ -65,19 +65,6 @@
   </mz-modal-footer>
 </mz-modal>
 
-<mz-modal #addCategory [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
-  <mz-modal-header>
-    Kategorie hinzufügen
-  </mz-modal-header>
-  <mz-modal-content>
-    <category-form #addCategoryForm></category-form>
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newCategory(addCategoryForm)" mz-modal-close>Speichern</button>
-    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
-  </mz-modal-footer>
-</mz-modal>
-
 <mz-modal #addType [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
   <mz-modal-header>
     Typ hinzufügen
@@ -87,19 +74,6 @@
   </mz-modal-content>
   <mz-modal-footer>
     <button mz-button [flat]="true" (click)="this.newType(addTypeForm)" mz-modal-close>Speichern</button>
-    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
-  </mz-modal-footer>
-</mz-modal>
-
-<mz-modal #addPostit [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
-  <mz-modal-header>
-    Schlachtbrett-Eintrag hinzufügen
-  </mz-modal-header>
-  <mz-modal-content>
-    <postit-form #addPostitForm></postit-form>
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="this.newPostit(addPostitForm)" mz-modal-close>Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>

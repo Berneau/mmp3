@@ -133,6 +133,13 @@ const appRoutes: Routes = [
     SearchFieldComponent,
     PostitConfirmedPipePipe
   ],
+  entryComponents: [
+    PostitFormComponent,
+    UserFormComponent,
+    CategoryFormComponent,
+    TypeFormComponent,
+    EventFormComponent
+  ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,

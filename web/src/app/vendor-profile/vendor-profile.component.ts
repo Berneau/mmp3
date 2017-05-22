@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MzModalService } from 'ng2-materialize';
 
 import { VendorService } from './../services/vendor.service'
 import { LoginService } from './../services/login.service'
@@ -9,6 +10,8 @@ import { PostitService } from './../services/postit.service'
 
 import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
+
+import { PostitFormComponent } from './../postit-form/postit-form.component'
 
 @Component({
   selector: 'vendor-profile',
@@ -19,7 +22,7 @@ export class VendorProfileComponent implements OnInit {
 
   vendor: Vendor
 
-  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService, private ProductStore: ProductService, private PostitStore: PostitService) {
+  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService, private ProductStore: ProductService, private PostitStore: PostitService, private modalService: MzModalService) {
 
   }
 
@@ -74,4 +77,7 @@ export class VendorProfileComponent implements OnInit {
       })
   }
 
+  openNewPostitModal() {
+    this.modalService.open(PostitFormComponent, {vendor: this.vendor});
+  }
 }

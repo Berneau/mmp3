@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
 
 import { Category } from './../interfaces/category'
 import { Type } from './../interfaces/type'
@@ -11,12 +12,14 @@ import { TypeService } from './../services/type.service'
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.less']
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent extends MzBaseModal {
 
   categoryForm: FormGroup
   @Input() category: Category
 
-  constructor(private fb: FormBuilder, private TypeStore: TypeService) { }
+  constructor(private fb: FormBuilder, private TypeStore: TypeService) {
+    super()
+  }
 
   ngOnInit() {
     this.createForm()

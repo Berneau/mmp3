@@ -24,7 +24,7 @@
     <button mz-button [flat]="true" mz-modal-close><i class="material-icons right">close</i></button>
     <div *ngIf="this.LoginStore.isAdmin()" class="left">
       <button mz-button *ngIf="!postit.confirmed" [flat]="true" mz-modal-close (click)="this.confirmPostit(postit)"><i class="material-icons right">done</i></button>
-      <button mz-button [flat]="true" mz-modal-close><i class="material-icons right">mode_edit</i></button>
+      <button mz-button [flat]="true" mz-modal-close (click)="this.openUpdatePostitModal(postit)"><i class="material-icons right">mode_edit</i></button>
       <button mz-button [flat]="true" mz-modal-close (click)="this.deletePostit(postit)"><i class="material-icons right">delete</i></button>
     </div>
   </mz-modal-footer>

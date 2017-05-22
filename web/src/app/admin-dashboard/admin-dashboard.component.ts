@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MzModalService } from 'ng2-materialize';
 
 import { UserService } from './../services/user.service'
 import { VendorService } from './../services/vendor.service'
 import { CategoryService } from './../services/category.service'
 import { TypeService } from './../services/type.service'
-import { PostitService } from './../services/postit.service'
 import { EventService } from './../services/event.service'
+import { PostitService } from './../services/postit.service'
 
+import { PostitFormComponent } from './../postit-form/postit-form.component'
 
 @Component({
   selector: 'admin-dashboard',
@@ -15,9 +17,13 @@ import { EventService } from './../services/event.service'
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor(private UserStore: UserService, private VendorStore: VendorService, private CategoryStore: CategoryService, private TypeStore: TypeService, private PostitStore: PostitService, private EventStore: EventService, ) { }
+  constructor(private UserStore: UserService, private VendorStore: VendorService, private CategoryStore: CategoryService, private TypeStore: TypeService, private EventStore: EventService, private PostitStore: PostitService, private modalService: MzModalService) { }
 
   ngOnInit() {
+  }
+
+  openNewPostitModal() {
+    this.modalService.open(PostitFormComponent);
   }
 
   newUser(form) {
@@ -47,17 +53,6 @@ export class AdminDashboardComponent implements OnInit {
           return
         }
         Materialize.toast('Typ gespeichert.', 2000)
-      })
-  }
-
-  newPostit(form) {
-    this.PostitStore.addPostit(null, form.postitForm.value)
-      .then(postit => {
-        if (!postit) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Schlachtbrett-Eintrag gespeichert.', 2000)
       })
   }
 
