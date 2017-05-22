@@ -7,7 +7,7 @@
   </mz-modal-header>
   <mz-modal-content>
     <div>
-      <form #addCategoryForm materialize [formGroup]="categoryForm">
+      <form materialize [formGroup]="categoryForm">
         <div class="row">
           <h6>Bild</h6>
           <div class="input-field col s12 form-group">
@@ -17,7 +17,7 @@
                 <input type="file">
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" formControlName="imageUrl" type="text">
+                <input id="category-image" class="file-path validate" formControlName="imageUrl" type="text">
               </div>
             </div>
           </div>

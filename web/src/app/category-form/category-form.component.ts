@@ -25,6 +25,10 @@ export class CategoryFormComponent extends MzBaseModal {
   ngOnInit() {
     this.createForm()
     this.TypeStore.getTypes()
+    $('#category-image').change('input', (e) => {
+      let imageUrl = $(e.target).val()
+      this.categoryForm.patchValue({imageUrl: imageUrl})
+    })
   }
 
   createForm() {
