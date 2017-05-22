@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MzModalService } from 'ng2-materialize';
+
+import { Event } from './../interfaces/event'
+
+import { EventService } from './../services/event.service'
+
+import { EventFormComponent } from './../event-form/event-form.component'
 
 @Component({
   selector: 'admin-event-list',
@@ -7,9 +14,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminEventListComponent implements OnInit {
 
-  constructor() { }
+  selectedEvent: Event
+
+  constructor(private store: EventService, private modalService: MzModalService) { }
 
   ngOnInit() {
+    this.store.getEvents()
+  }
+
+  selectEvent(event: Event) {
+    this.selectedEvent = event
+    this.modalService.open(EventFormComponent, {event: this.selectedEvent});
+  }
+
+  deleteEvent(e) {
+    this.store.deleteEvent(e._id)
+      .then(success => {
+        if (!success) {
+          Materialize.toast('Fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Eintrag gelöscht.', 2000)
+      })
   }
 
 }

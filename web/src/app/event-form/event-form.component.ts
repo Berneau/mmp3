@@ -1,19 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
 
 import { Event } from './../interfaces/event'
+
+import { EventService } from './../services/event.service'
 
 @Component({
   selector: 'event-form',
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.less']
 })
-export class EventFormComponent implements OnInit {
+export class EventFormComponent extends MzBaseModal {
 
   eventForm: FormGroup
   @Input() event: Event
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private store: EventService) {
+    super()
+  }
 
   ngOnInit() {
     this.createForm()
@@ -41,7 +46,7 @@ export class EventFormComponent implements OnInit {
 
     $('.datepicker').change('input', (e) => {
       let date = $(e.target).val()
-      this.eventForm.patchValue({date: date})
+      this.eventForm.patchValue({ date: date })
     })
   }
 
@@ -70,6 +75,28 @@ export class EventFormComponent implements OnInit {
         })
       });
     }
+  }
+
+  newEvent() {
+    this.store.addEvent(this.eventForm.value)
+      .then(event => {
+        if (!event) {
+          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Event gespeichert.', 2000)
+      })
+  }
+
+  updateEvent(p) {
+    this.store.updateEvent(p, this.eventForm.value)
+      .then(event => {
+        if (!event) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Änderungen gespeichert.', 2000)
+      })
   }
 
 }
