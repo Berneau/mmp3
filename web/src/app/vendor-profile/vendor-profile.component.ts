@@ -12,6 +12,8 @@ import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
 
 import { PostitFormComponent } from './../postit-form/postit-form.component'
+import { ProductFormComponent } from './../product-form/product-form.component'
+import { VendorFormComponent } from './../vendor-form/vendor-form.component'
 
 @Component({
   selector: 'vendor-profile',
@@ -37,48 +39,19 @@ export class VendorProfileComponent implements OnInit {
             return
           }
           this.vendor = vendor
-          console.log(this.vendor)
         })
-
-      this.ProductStore.getVendorProducts(id)
     })
-  }
-
-  updateVendor(v) {
-    this.store.updateVendor(v.vendor, v.vendorForm.value)
-      .then(vendor => {
-        if (!vendor) {
-          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
-          return
-        }
-        this.vendor = vendor
-        Materialize.toast('Produzent gespeichert.', 2000)
-      })
-  }
-
-  newProduct(p) {
-    this.ProductStore.addProduct(p.vendor, p.productForm.value)
-      .then(product => {
-        if (!product) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Produkt gespeichert.', 2000)
-      })
-  }
-
-  newPostit(p) {
-    this.PostitStore.addPostit(p.vendor, p.postitForm.value)
-      .then(postit => {
-        if (!postit) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Eintrag gespeichert.', 2000)
-      })
   }
 
   openNewPostitModal() {
     this.modalService.open(PostitFormComponent, {vendor: this.vendor});
+  }
+
+  openNewProductModal() {
+    this.modalService.open(ProductFormComponent, {vendor: this.vendor});
+  }
+
+  openUpdateVendorModal() {
+    this.modalService.open(VendorFormComponent, {vendor: this.vendor});
   }
 }

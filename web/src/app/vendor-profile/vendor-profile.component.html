@@ -1,6 +1,6 @@
 <div *ngIf="vendor">
   <div *ngIf="this.LoginStore.isAdmin()" class="row">
-    <button mz-button (click)="editVendor.open()">bearbeiten
+    <button mz-button (click)="openUpdateVendorModal()">bearbeiten
       <i class="material-icons right">mode_edit</i></button>
   </div>
   <div class="row">
@@ -34,53 +34,14 @@
     <h5>Produkte</h5>
     <div class="row">
       <div *ngIf="this.LoginStore.isLoggedIn()" class="col s6">
-        <button mz-button (click)="addProduct.open()">neues Produkt
-          <i class="material-icons right">mode_edit</i></button>
-      </div>
-      <div *ngIf="this.LoginStore.isLoggedIn()" class="col s6">
+        <button mz-button (click)="this.openNewProductModal()">neues Produkt
+          <i class="material-icons right">mode_edit</i>
+        </button>
         <button mz-button (click)="this.openNewPostitModal()">neuer Schlachtbrett-Eintrag
-            <i class="material-icons right">mode_edit</i></button>
+            <i class="material-icons right">mode_edit</i>
+        </button>
       </div>
     </div>
     <hr>
-    <ul class="row">
-      <li *ngFor="let product of ProductStore.vendorProducts" class="col s12 m4 l3 xl2">
-        <a [routerLink]="['/produkt', product._id]">
-          <div class="card">
-            <div class="card-image">
-              <img class="activator" src="assets/dummy_img.jpg">
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{product.name}}</span>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+    <product-list [vendor]="vendor"></product-list>
   </div>
-  <!-- Modal Structure -->
-  <mz-modal #editVendor [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
-    <mz-modal-header>
-      Bearbeiten
-    </mz-modal-header>
-    <mz-modal-content>
-      <vendor-form #vendorForm [vendor]="vendor"></vendor-form>
-    </mz-modal-content>
-    <mz-modal-footer>
-      <button mz-button [flat]="true" (click)="this.updateVendor(vendorForm)" mz-modal-close>Speichern</button>
-      <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
-    </mz-modal-footer>
-  </mz-modal>
-
-  <mz-modal #addProduct [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
-    <mz-modal-header>
-      Neues Produkt hinzufügen
-    </mz-modal-header>
-    <mz-modal-content>
-      <product-form #productForm [vendor]="vendor"></product-form>
-    </mz-modal-content>
-    <mz-modal-footer>
-      <button mz-button [flat]="true" (click)="this.newProduct(productForm)" mz-modal-close>Speichern</button>
-      <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
-    </mz-modal-footer>
-  </mz-modal>

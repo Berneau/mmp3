@@ -1,19 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
 
 import { Vendor } from './../interfaces/vendor'
+
+import { VendorService } from './../services/vendor.service'
 
 @Component({
   selector: 'vendor-form',
   templateUrl: './vendor-form.component.html',
   styleUrls: ['./vendor-form.component.less']
 })
-export class VendorFormComponent implements OnInit {
+export class VendorFormComponent extends MzBaseModal {
 
   vendorForm: FormGroup
   @Input() vendor: Vendor
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: VendorService) {
+    super()
   }
 
   ngOnInit() {
@@ -53,5 +57,27 @@ export class VendorFormComponent implements OnInit {
         long: ''
       });
     }
+  }
+
+  newVendor() {
+    this.store.addVendor(this.vendor, this.vendorForm.value)
+      .then(vendor => {
+        if (!vendor) {
+          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Produkt gespeichert.', 2000)
+      })
+  }
+
+  updateVendor(v) {
+    this.store.updateVendor(v, this.vendorForm.value)
+    .then(vendor => {
+      if (!vendor) {
+        Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+        return
+      }
+      Materialize.toast('Änderungen gespeichert.', 2000)
+    })
   }
 }
