@@ -1,7 +1,7 @@
 <div class="row" *ngIf="store.vendors">
   <ul class="row collection">
     <li *ngFor="let vendor of store.vendors" class="collection-item avatar">
-      <img class="circle" src="assets/dummy_img.jpg">
+      <img class="circle" src="assets/{{vendor.imageUrl}}">
       <span class="title">{{vendor.name}}</span>
       <p>{{vendor.subName}}</p>
       <div class="secondary-content">

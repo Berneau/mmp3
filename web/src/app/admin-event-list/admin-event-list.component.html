@@ -1,7 +1,6 @@
 <div class="row" *ngIf="store.events">
   <ul class="row collection">
     <li *ngFor="let event of store.events" class="collection-item avatar">
-      <img class="circle" src="assets/dummy_img.jpg">
       <span class="title">{{event.name}}</span>
       <p>{{event.location.name}}</p>
       <div class="secondary-content">

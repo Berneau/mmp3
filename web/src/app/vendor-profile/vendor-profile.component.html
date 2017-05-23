@@ -1,6 +1,11 @@
 <div *ngIf="vendor">
   <div class="row">
     <div class="col l6 m6 s12">
+      <img class="col l8 m8 s8 right" src="assets/{{vendor.farmImageUrl}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col l6 m6 s12">
       <h4>{{vendor.name}}</h4>
       <h5>{{vendor.subName}}</h5>
       <p>{{vendor.description}}</p>

@@ -44,7 +44,7 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: form.imageUrl
+      imageUrl: form.imageUrl ? form.imageUrl : 'product.png'
     }
 
     return this.http
@@ -91,7 +91,7 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: form.imageUrl
+      imageUrl: form.imageUrl ? form.imageUrl : 'product.png'
     }
 
     return this.http

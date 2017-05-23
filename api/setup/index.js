@@ -44,8 +44,8 @@ let vendor1 = new Vendor({
   userUid: '',
   email: 'elfriede@hof.at',
   description: 'Sonniges Platzal',
-  imageUrl: 'image.url',
-  farmImageUrl: 'farm.image.url',
+  imageUrl: 'vendor.png',
+  farmImageUrl: 'farm.png',
   subName: 'Hacklhof',
   website: 'abc.com',
   tel: 0815123123,
@@ -62,8 +62,8 @@ let vendor2 = new Vendor({
   userUid: '',
   email: 'bertl@hof.at',
   description: 'Direkt am Fluß',
-  imageUrl: 'image.url',
-  farmImageUrl: 'farm.image.url',
+  imageUrl: 'vendor.png',
+  farmImageUrl: 'farm.png',
   subName: 'Schmittnhüttn',
   website: 'abc.com',
   tel: 0815123123,
@@ -89,17 +89,17 @@ let type3 = new Type({
 let category1 = new Category({
   name: 'Echtling',
   typeUid: '',
-  imageUrl: 'image.url'
+  imageUrl: 'category.png'
 })
 let category2 = new Category({
   name: 'Kürbisse',
   typeUid: '',
-  imageUrl: 'image.url'
+  imageUrl: 'category.png'
 })
 let category3 = new Category({
   name: 'Äpfel',
   typeUid: '',
-  imageUrl: 'image.url'
+  imageUrl: 'category.png'
 })
 
 let product1 = new Product({
@@ -112,7 +112,7 @@ let product1 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'image.url'
+  imageUrl: 'product.png'
 })
 let product2 = new Product({
   name: 'Hokkaido Kürbis',
@@ -124,10 +124,10 @@ let product2 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'image.url'
+  imageUrl: 'product.png'
 })
 let product3 = new Product({
-  name: 'Liselotte',
+  name: 'Mehlige Echtling',
   categoryId: '',
   vendor: '',
   availableAt: {
@@ -136,7 +136,7 @@ let product3 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'image.url'
+  imageUrl: 'product.png'
 })
 let event1 = new Event({
   name: 'Schranne',
@@ -163,15 +163,15 @@ let postit1 = new Postit({
   confirmed: true,
   description: 'Nur für kurze Zeit',
   vendorId: '',
-  imageUrl: 'image.url'
+  imageUrl: 'postit.png'
 })
 let postit2 = new Postit({
-  name: 'Eier',
+  name: 'Brot',
   confirmed: false,
-  description: 'Überschuss an Eiern',
+  description: 'Frisch gebackenes Bauernbrot',
   location: 'Lungau',
   vendorId: '',
-  imageUrl: 'image.url'
+  imageUrl: 'postit.png'
 })
 
 setupUsers()

@@ -3,7 +3,7 @@
     <a [routerLink]="['/produkte', category._id]">
       <div class="card">
         <div class="card-image">
-          <img class="activator" src="assets/dummy_img.jpg">
+          <img class="activator" src="assets/{{category.imageUrl}}">
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4">{{category.name}}</span>
