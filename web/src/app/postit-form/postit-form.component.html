@@ -17,23 +17,25 @@
                 <input type="file">
               </div>
               <div class="file-path-wrapper">
-                <input id="postit-image" class="file-path validate"  type="text" formControlName="imageUrl">
+                <input id="postit-image" class="file-path validate" type="text" formControlName="imageUrl">
               </div>
             </div>
           </div>
+        </div>
+        <div class="row">
           <h6>Grunddaten</h6>
-          <div class="input-field col s12 form-group">
-            <input id="postit-name" type="text" class="validate" formControlName="name">
-            <label for="postit-name">Name</label>
-          </div>
-          <div class="input-field col s12 form-group">
-            <input id="postit-location" type="text" class="validate" formControlName="location">
-            <label for="postit-location">Location</label>
-          </div>
-          <div class="input-field col s12">
-            <textarea id="postit-description" class="materialize-textarea" formControlName="description"></textarea>
-            <label for="postit-description">Beschreibung</label>
-          </div>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="postit-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="postit-location" type="text" formControlName="location" [label]="'Location'" [validate]="true">
+          </mz-input-container>
+        </div>
+        <div class="row">
+          <h6>Beschreibung</h6>
+          <mz-textarea-container>
+            <textarea mz-textarea [label]="'Beschreibung'" id="postit-description" formControlName="description" length="150"></textarea>
+          </mz-textarea-container>
         </div>
       </form>
     </div>
