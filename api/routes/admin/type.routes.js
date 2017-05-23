@@ -1,4 +1,5 @@
 var Type = require('../../models/type.model')
+var Category = require('../../models/category.model')
 var typeIsValid = require('../../helpers/helpers').typeIsValid
 
 module.exports = function(router) {
@@ -120,7 +121,9 @@ module.exports = function(router) {
       })
 
       else if (!err && type) {
-        Type.remove({ _id: req.params.id }, function(err, type) {
+
+        Category
+        .find({ typeUid: type._id }, function(err, categories) {
 
           // internal server error
           if (err) res.status(500).json({
@@ -128,12 +131,34 @@ module.exports = function(router) {
             err: err.message
           })
 
-          // successfully deleted
-          else res.status(200).json({
-            ok: true,
-            message: 'Successfully deleted'
+          // type is not in use by any categories -> delete
+          else if (categories.length == 0) {
+
+            Type.remove({ _id: req.params.id }, function(err, type) {
+
+              // internal server error
+              if (err) res.status(500).json({
+                ok: false,
+                err: err.message
+              })
+
+              // successfully deleted
+              else res.status(200).json({
+                ok: true,
+                message: 'Successfully deleted'
+              })
+            })
+
+          }
+
+          // type is in use by category -> do not delete
+          else res.status(403).json({
+            ok: false,
+            message: 'Type is in use by at least one category - not deleted'
           })
+
         })
+
 
         // no type with this id
       } else res.status(404).json({
