@@ -146,7 +146,8 @@ const appRoutes: Routes = [
     TypeFormComponent,
     EventFormComponent,
     ProductFormComponent,
-    VendorFormComponent
+    VendorFormComponent,
+    PostitDetailComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
