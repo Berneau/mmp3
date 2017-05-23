@@ -6,8 +6,19 @@
       <p>{{event.description}}</p>
       <p>
         <i class="material-icons">location_on</i> {{event.location.name}}
-        [{{event.location.lat}} {{event.location.long}}]
       </p>
+    </div>
+  </div>
+  <div class="row" *ngIf="event.location.lat && event.location.long">
+    <div class="col s12">
+      <ng2-map center="{{event.location.lat}}, {{event.location.long}}" disableDoubleClickZoom="true" disableDefaultUI="true">
+        <marker [position]="position" [icon]="{
+            url: 'assets/eventLocation.png',
+            anchor: [16,16],
+            size: [32,32],
+            scaledSize: [32,32]
+          }" title={{event.name}}></marker>
+      </ng2-map>
     </div>
   </div>
 </div>

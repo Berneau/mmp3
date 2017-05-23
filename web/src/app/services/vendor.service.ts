@@ -131,6 +131,30 @@ export class VendorService {
       .catch(this.handleError)
   }
 
+  getVendorPositions() {
+    let positions = []
+    let vendors
+    let url = `${this.apiEndpoint}/vendors`
+
+    this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        vendors = res.json().vendors
+      })
+      .then(() => {
+        for (let v of vendors) {
+          if (v.address.lat && v.address.long) {
+            let arr = [v.address.lat, v.address.long]
+            positions.push(arr)
+          }
+        }
+      })
+      .catch(this.handleError)
+
+      return positions
+  }
+
 
   private handleError(error: any) {
     console.log(error.statusText, 2000)

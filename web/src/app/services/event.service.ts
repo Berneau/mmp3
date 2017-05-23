@@ -112,6 +112,30 @@ export class EventService {
       .catch(this.handleError)
   }
 
+  getEventPositions() {
+    let positions = []
+    let events
+    let url = `${this.apiEndpoint}/events`
+
+    this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        events = res.json().events
+      })
+      .then(() => {
+        for (let e of events) {
+          if (e.location.lat && e.location.long) {
+            let arr = [e.location.lat, e.location.long]
+            positions.push(arr)
+          }
+        }
+      })
+      .catch(this.handleError)
+
+      return positions
+  }
+
   private handleError(error: any) {
     console.log(error.statusText, 2000)
   }

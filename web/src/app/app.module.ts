@@ -4,8 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/toPromise'
+var googleMapsAPIKey = require('./../../../api/config').googleMapsAPIKey
 
 import { MaterializeModule } from 'ng2-materialize';
+import { Ng2MapModule} from 'ng2-map';
 
 import { AdminGuard } from './guards/admin.guard';
 
@@ -155,7 +157,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    MaterializeModule.forRoot()
+    MaterializeModule.forRoot(),
+    Ng2MapModule.forRoot({ apiUrl: `https://maps.google.com/maps/api/js?key=${googleMapsAPIKey}` })
   ],
   providers: [
     ProductService,

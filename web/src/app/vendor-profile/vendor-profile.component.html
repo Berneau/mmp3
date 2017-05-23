@@ -23,8 +23,17 @@
       <img class="col l8 m8 s8 right" src="assets/{{vendor.imageUrl}}">
     </div>
   </div>
-  <div class="row">
-    <p>MAP {{vendor.address.long}} {{vendor.address.lat}}</p>
+  <div class="row" *ngIf="vendor.address.lat && vendor.address.long">
+    <div class="col s12">
+      <ng2-map center="{{vendor.address.lat}}, {{vendor.address.long}}" disableDoubleClickZoom="true" disableDefaultUI="true">
+        <marker [position]="position" [icon]="{
+            url: 'assets/vendorLocation.png',
+            anchor: [16,16],
+            size: [32,32],
+            scaledSize: [32,32]
+          }" title={{vendor.name}}></marker>
+      </ng2-map>
+    </div>
   </div>
   <div class="row">
     <h5>Produkte</h5>
