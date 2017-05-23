@@ -53,8 +53,8 @@ let vendor1 = new Vendor({
     city: 'Salzburg',
     zip: 5020,
     street: 'Landstraße 2',
-    lat: 47.123123,
-    long: 13.123123
+    lat: 47.846384,
+    long: 13.052578
   }
 })
 let vendor2 = new Vendor({
@@ -71,8 +71,8 @@ let vendor2 = new Vendor({
     city: 'Bergheim',
     zip: 5101,
     street: 'Hauptstraße 25',
-    lat: 47.123123,
-    long: 13.123123
+    lat: 47.758271,
+    long: 13.063993
   }
 })
 
@@ -144,8 +144,8 @@ let event1 = new Event({
   description: 'Moakt füa ois',
   location: {
     name: 'Mirabellplatz',
-    lat: 47.123123,
-    long: 13.123123
+    lat: 47.805761,
+    long: 13.043496
   }
 })
 let event2 = new Event({
@@ -154,8 +154,8 @@ let event2 = new Event({
   description: 'Grüner Moakt',
   location: {
     name: 'Salzburg Altstadt',
-    lat: 47.123123,
-    long: 13.123123
+    lat: 47.799514,
+    long: 13.043281
   }
 })
 let postit1 = new Postit({
