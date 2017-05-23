@@ -123,6 +123,7 @@ export class VendorService {
       .put(url, JSON.stringify(v), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
+        this.getVendors()
         return res.json().vendor as Vendor
       })
       .catch(this.handleError)

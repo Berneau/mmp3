@@ -1,0 +1,13 @@
+<div class="row" *ngIf="store.vendors">
+  <ul class="row collection">
+    <li *ngFor="let vendor of store.vendors" class="collection-item avatar">
+      <img class="circle" src="assets/dummy_img.jpg">
+      <span class="title">{{vendor.name}}</span>
+      <p>{{vendor.subName}}</p>
+      <div class="secondary-content">
+        <a (click)="selectVendor(vendor)"><i class="material-icons">mode_edit</i></a>
+        <a (click)="deleteVendor(vendor)"><i class="material-icons">delete</i></a>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -50,8 +50,4 @@ export class VendorProfileComponent implements OnInit {
   openNewProductModal() {
     this.modalService.open(ProductFormComponent, {vendor: this.vendor});
   }
-
-  openUpdateVendorModal() {
-    this.modalService.open(VendorFormComponent, {vendor: this.vendor});
-  }
 }

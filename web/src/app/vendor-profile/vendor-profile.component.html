@@ -1,8 +1,4 @@
 <div *ngIf="vendor">
-  <div *ngIf="this.LoginStore.isAdmin()" class="row">
-    <button mz-button (click)="openUpdateVendorModal()">bearbeiten
-      <i class="material-icons right">mode_edit</i></button>
-  </div>
   <div class="row">
     <div class="col l6 m6 s12">
       <h4>{{vendor.name}}</h4>

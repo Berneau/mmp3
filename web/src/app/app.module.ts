@@ -30,6 +30,7 @@ import { PostitListComponent } from './postit-list/postit-list.component';
 import { PostitDetailComponent } from './postit-detail/postit-detail.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminPostitListComponent } from './admin-postit-list/admin-postit-list.component';
+import { AdminVendorListComponent } from './admin-vendor-list/admin-vendor-list.component';
 import { AdminCategoryListComponent } from './admin-category-list/admin-category-list.component';
 import { AdminTypeListComponent } from './admin-type-list/admin-type-list.component';
 import { AdminEventListComponent } from './admin-event-list/admin-event-list.component';
@@ -135,7 +136,8 @@ const appRoutes: Routes = [
     SitemapComponent,
     ImprintComponent,
     AboutComponent,
-    PostitConfirmedPipePipe
+    PostitConfirmedPipePipe,
+    AdminVendorListComponent
   ],
   entryComponents: [
     PostitFormComponent,
