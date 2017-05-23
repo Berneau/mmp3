@@ -4,8 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/toPromise'
+let googleMapsAPIKey = require('./../../../api/config').googleMapsAPIKey
+let ng2MapApiUrl = { apiUrl: `https://maps.google.com/maps/api/js?key=${googleMapsAPIKey}` }
 
 import { MaterializeModule } from 'ng2-materialize';
+import { Ng2MapModule} from 'ng2-map';
 
 import { AdminGuard } from './guards/admin.guard';
 
@@ -30,6 +33,7 @@ import { PostitListComponent } from './postit-list/postit-list.component';
 import { PostitDetailComponent } from './postit-detail/postit-detail.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminPostitListComponent } from './admin-postit-list/admin-postit-list.component';
+import { AdminVendorListComponent } from './admin-vendor-list/admin-vendor-list.component';
 import { AdminCategoryListComponent } from './admin-category-list/admin-category-list.component';
 import { AdminTypeListComponent } from './admin-type-list/admin-type-list.component';
 import { AdminEventListComponent } from './admin-event-list/admin-event-list.component';
@@ -40,7 +44,6 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { TypeFormComponent } from './type-form/type-form.component';
 import { EventFormComponent } from './event-form/event-form.component';
-import { VendorShortInfoComponent } from './vendor-short-info/vendor-short-info.component';
 import { SearchFieldComponent } from './search-field/search-field.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { ImprintComponent } from './imprint/imprint.component';
@@ -130,12 +133,12 @@ const appRoutes: Routes = [
     CategoryFormComponent,
     TypeFormComponent,
     EventFormComponent,
-    VendorShortInfoComponent,
     SearchFieldComponent,
     SitemapComponent,
     ImprintComponent,
     AboutComponent,
-    PostitConfirmedPipePipe
+    PostitConfirmedPipePipe,
+    AdminVendorListComponent
   ],
   entryComponents: [
     PostitFormComponent,
@@ -144,7 +147,8 @@ const appRoutes: Routes = [
     TypeFormComponent,
     EventFormComponent,
     ProductFormComponent,
-    VendorFormComponent
+    VendorFormComponent,
+    PostitDetailComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -152,7 +156,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    MaterializeModule.forRoot()
+    MaterializeModule.forRoot(),
+    Ng2MapModule.forRoot(ng2MapApiUrl)
   ],
   providers: [
     ProductService,

@@ -1,29 +1,37 @@
 <footer class="page-footer">
-  <div class="row footer-copyright">
-    <div class="container">
-      <div class="col s12 m8 offset-m2">
-        <h5 class="row center">Kontakt & Mehr</h5>
-        <div class="row center">
-          <p>
-            <span class="col s6 right-align"><b>Adresse:</b></span>
-            <span class="col s6 left-align">Lungauer Kochwerk<br>DI Jasmin Pickl</span>
-          </p>
-          <span class="col s6 right-align"><b>Telefon:</b></span>
-          <span class="col s6 left-align">+43 664 75048599</span>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 footer-contact">
+        <h5 class="row">Kontakt & Mehr</h5>
+        <div class="row">
+          <div class="col s6 offset-s3 footer-contact-data">
+            <p class="row">
+              <span class="col s12 m6 bold">Adresse:</span>
+              <span class="col s12 m6">Lungauer Kochwerk<br>DI Jasmin Pickl</span>
+            </p>
+            <p class="row">
+              <span class="col s12 m6 bold">Telefon:</span>
+              <span class="col s12 m6">+43 664 75048599</span>
+            </p>
+          </div>
         </div>
-        <div class="row center">
-          <a href="#"><i class="material-icons">bookmark</i></a>
-          <a href="#"><i class="material-icons">bookmark</i></a>
+        <div class="row footer-social-media">
+          <a href="#">
+            <img src="assets/icons/facebook.svg" alt="facebook">
+          </a>
+          <a href="#">
+            <img src="assets/icons/instagram.svg" alt="instagram">
+          </a>
         </div>
-        <div class="row center">
+        <div class="row center footer-links">
           <a [routerLink]="['sitemap']">Sitemap</a>
           <a [routerLink]="['über-uns']">Über uns</a>
           <a [routerLink]="['impressum']">Impressum</a>
         </div>
       </div>
-      <div class="col s12 m2">
-        <button *ngIf="!this.LoginStore.isLoggedIn()" class="btn right" [routerLink]="['login']">Login</button>
-        <button *ngIf="this.LoginStore.isLoggedIn()" class="btn right" (click)="this.LoginStore.logout(); this.LoginStore.navigateToLandingPage()">Logout</button>
+      <div class="col s12 m2 footer-button ">
+        <button *ngIf="!this.LoginStore.isLoggedIn()" class="btn yellow" [routerLink]="['login']">Login</button>
+        <button *ngIf="this.LoginStore.isLoggedIn()" class="btn yellow" (click)="this.LoginStore.logout(); this.LoginStore.navigateToLandingPage()">Logout</button>
       </div>
     </div>
   </div>

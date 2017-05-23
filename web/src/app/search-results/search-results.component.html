@@ -8,7 +8,7 @@
       <a [routerLink]="['/produkte', result._id]">
         <div class="card">
           <div class="card-image">
-            <img class="activator" src="assets/dummy_img.jpg">
+            <img class="activator" src="assets/{{result.imageUrl}}">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
@@ -27,7 +27,7 @@
       <a [routerLink]="['/produzenten', result._id]">
         <div class="card">
           <div class="card-image">
-            <img class="activator" src="assets/dummy_img.jpg">
+            <img class="activator" src="assets/{{result.imageUrl}}">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
@@ -45,9 +45,6 @@
     <li *ngFor="let result of eventResults" class="col s12 m4 l3 xl2">
       <a [routerLink]="['/events', result._id]">
         <div class="card">
-          <div class="card-image">
-            <img class="activator" src="assets/dummy_img.jpg">
-          </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
           </div>

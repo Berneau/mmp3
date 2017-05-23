@@ -1,18 +1,42 @@
-@import "../../assets/variables";
+@import "../../assets/variables"; // mobile-first
 
 nav {
   background-color: @white-color;
   color: @midgrey-color;
   height: @header-height;
+
   .nav-wrapper {
     height: 100%;
     margin-bottom: 0;
-    .logo {
-      height: 50px;
-      vertical-align: bottom;
+
+    .col {
+      height: 100%;
+
+      #btn-sidenav {
+        &.button-collapse {
+          float: none;
+          margin: auto;
+          text-align: center;
+          height: 100%;
+          i {
+            margin: 0 auto;
+          }
+        }
+      }
+
+      .logo {
+        height: 50px;
+      }
     }
+
     a {
       color: @primary-color;
     }
   }
+}
+@media @medium-and-up {
+  // styles for medium screens and larger
+}
+@media @large-and-up {
+  // styles for large screens and up
 }

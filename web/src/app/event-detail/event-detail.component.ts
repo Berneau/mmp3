@@ -16,6 +16,7 @@ import { Vendor } from './../interfaces/vendor'
 export class EventDetailComponent implements OnInit {
 
   event: Event
+  position: Array<number>
 
   constructor(private store: EventService, private VendorStore: VendorService, private route: ActivatedRoute, private location: Location) { }
 
@@ -30,8 +31,8 @@ export class EventDetailComponent implements OnInit {
             return
           }
           this.event = event
+          this.position = [this.event.location.lat, this.event.location.long]
         })
     })
   }
-
 }

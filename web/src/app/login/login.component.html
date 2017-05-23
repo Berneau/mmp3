@@ -4,16 +4,12 @@
       <h4 class="light col s12">Login</h4>
     </div>
     <div class="row">
-      <div class="input-field col s12 form-group">
-        <input id="login-mail" type="text" class="validate" formControlName="email">
-        <label for="login-mail">Email</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="login-password" type="password" class="validate" formControlName="password">
-        <label for="login-password">Passwort</label>
-      </div>
+      <mz-input-container class="input-field col s12 form-group">
+        <input mz-input id="login-mail" type="email" formControlName="email" [label]="'E-Mail'">
+      </mz-input-container>
+      <mz-input-container class="input-field col s12 form-group">
+        <input mz-input id="login-password" type="password" formControlName="password" [label]="'Passwort'">
+      </mz-input-container>
     </div>
     <div class="row">
       <button class="btn waves-effect waves-light" type="submit" name="action">Login

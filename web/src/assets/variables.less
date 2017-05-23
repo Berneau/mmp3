@@ -24,42 +24,98 @@
 @contactfooter-height: 100px;
 @header-footer-height: calc(@header-height + @contactfooter-height + @socialfooter-height + 20px);
 
-// fonts
-@primary-font: OpenSans;
-@secondary-font: Montserrat;
-@third-font: Magnolia;
+// media querys
+@small-screen-up: 601px !default;
+@medium-screen-up: 993px !default;
+@large-screen-up: 1201px !default;
+@small-screen: 600px !default;
+@medium-screen: 992px !default;
+@large-screen: 1200px !default;
 
+@medium-and-up: "only screen and (min-width : @small-screen-up)";
+@large-and-up: "only screen and (min-width : @medium-screen-up)";
+
+
+// fonts
+@primary-font: 'OpenSans', 'Roboto', sans-serif;
+@secondary-font: 'Montserrat';
+@third-font: 'Magnolia';
+
+// Magnolia Script
 @font-face {
     font-family: Magnolia;
-    src: url(fonts/Magnolia Script.otf);
-    font-weight: normal;
+    src: url(fonts/Magnolia-Script.otf);
+    font-weight: 300;
 }
 
+// Montserrat
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-Light.ttf);
+  font-weight: 200;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-LightItalic.ttf);
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-Regular.ttf);
+  font-weight: 300;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-Italic.ttf);
+  font-weight: 300;
+  font-style: italic;
+}
 @font-face {
     font-family: Montserrat;
     src: url(fonts/Montserrat-Medium.ttf);
+    font-weight: 400;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-MediumItalic.ttf);
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+    font-family: Montserrat;
+    src: url(fonts/Montserrat-SemiBold.ttf);
     font-weight: 500;
 }
 @font-face {
-    font-family: Montserrat;
-    src: url(fonts/Montserrat-Regular.ttf);
-    font-weight: normal;
+  font-family: Montserrat;
+  src: url(fonts/Montserrat-SemiBoldItalic.ttf);
+  font-weight: 500;
+  font-style: italic;
+}
+
+// Open Sans
+@font-face {
+  font-family: OpenSans;
+  src: url(fonts/OpenSans-Light.ttf);
+  font-weight: 200;
 }
 @font-face {
-    font-family: Montserrat;
-    src: url(fonts/Montserrat-SemiBold.otf);
-    font-weight: 600;
+  font-family: OpenSans;
+  src: url(fonts/OpenSans-LightItalic.ttf);
+  font-weight: 200;
+  font-style: italic;
 }
 @font-face {
-    font-family: OpenSans;
-    src: url(fonts/OpenSans-Bold.ttf);
-    font-weight: bold;
+  font-family: OpenSans;
+  src: url(fonts/OpenSans-Regular.ttf);
+  font-weight: 300;
 }
 @font-face {
-    font-family: OpenSans;
-    src: url(fonts/OpenSans-BoldItalic.ttf);
-    font-weight: bold;
-    font-style: italic;
+  font-family: OpenSans;
+  src: url(fonts/OpenSans-Italic.ttf);
+  font-weight: 300;
+  font-style: italic;
 }
 @font-face {
     font-family: OpenSans;
@@ -67,8 +123,19 @@
     font-weight: 500;
 }
 @font-face {
+  font-family: OpenSans;
+  src: url(fonts/OpenSans-SemiboldItalic.ttf);
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
     font-family: OpenSans;
-    src: url(fonts/OpenSans-SemiboldItalic.ttf);
-    font-weight: 500;
-    font-style: italic;
+    src: url(fonts/OpenSans-Bold.ttf);
+    font-weight: 600;
+}
+@font-face {
+  font-family: OpenSans;
+  src: url(fonts/OpenSans-BoldItalic.ttf);
+  font-weight: 600;
+  font-style: italic;
 }

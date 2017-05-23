@@ -10,32 +10,31 @@
       <form materialize [formGroup]="eventForm">
         <div class="row">
           <h6>Grunddaten</h6>
-          <div class="input-field col s8 form-group">
-            <input id="event-name" type="text" class="validate" formControlName="name">
-            <label for="event-name">Name</label>
-          </div>
-          <div class="input-field col s4 form-group">
-            <input id="event-date" type="date" class="datepicker" formControlName="date">
-            <label for="event-date">Datum</label>
-          </div>
-          <div class="input-field col s12">
-            <textarea id="event-description" class="materialize-textarea" formControlName="description"></textarea>
-            <label for="event-description">Beschreibung</label>
-          </div>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="event-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="event-date" class="datepicker" type="date" formControlName="date" [label]="'Datum'" [validate]="true">
+          </mz-input-container>
+        </div>
+        <div class="row">
+          <h6>Beschreibung</h6>
+          <mz-textarea-container>
+            <textarea mz-textarea [label]="'Beschreibung'" id="event-description" formControlName="description" length="150"></textarea>
+          </mz-textarea-container>
+        </div>
+        <div class="row">
           <h6>Location</h6>
           <div formGroupName="location">
-            <div class="input-field col s12 form-group">
-              <input id="event-location-name" type="text" class="validate" formControlName="name">
-              <label for="event-location-name">Name</label>
-            </div>
-            <div class="input-field col s6 form-group">
-              <input id="event-location-lat" type="text" class="validate" formControlName="lat">
-              <label for="event-location-lat">Latitude</label>
-            </div>
-            <div class="input-field col s6 form-group">
-              <input id="event-location-long" type="text" class="validate" formControlName="long">
-              <label for="event-location-long">Longitude</label>
-            </div>
+            <mz-input-container class="input-field col s12 m6 form-group">
+              <input mz-input id="event-location-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+            </mz-input-container>
+            <mz-input-container class="input-field col s12 m3 form-group">
+              <input mz-input id="event-location-lat" type="number" step="0.000001" formControlName="lat" [label]="'Breitengrad'" [validate]="true">
+            </mz-input-container>
+            <mz-input-container class="input-field col s12 m3 form-group">
+              <input mz-input id="event-location-long" type="number" step="0.000001" formControlName="long" [label]="'Längengrad'" [validate]="true">
+            </mz-input-container>
           </div>
         </div>
       </form>

@@ -1,10 +1,11 @@
 <div class="row">
-  <div class="fullscreen">
-    <img class="responsive-img" src="assets/dummy_img_long.jpg">
-  </div>
+  <div class="fullscreen cinemagraph"></div>
 </div>
 <div class="row">
-  <div class="col l12">
+  <div class="col s12 landing-page-search">
+    <h5>Suchen und Finden!</h5>
+
+    <p>Was suchen Sie?</p>
     <search-field></search-field>
   </div>
 </div>
@@ -16,5 +17,31 @@
   <h4>Events</h4>
   <event-list></event-list>
 </div>
-<button class="btn" [routerLink]="['produkte']">Zu den Produkten</button>
-<button class="btn" [routerLink]="['produzenten']">Zu den Produzenten</button>
+<button class="btn orange" [routerLink]="['produkte']">Zu den Produkten</button>
+<button class="btn yellow" [routerLink]="['produzenten']">Zu den Produzenten</button>
+
+<div class="row" *ngIf="currentPosition && vendorPositions || eventPositions">
+  <div class="col s12">
+    <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12">
+      <marker [position]="currentPosition" [icon]="{
+          url: 'assets/currentLocation.png',
+          anchor: [16,16],
+          size: [32,32],
+          scaledSize: [32,32]
+        }" title="aktueller Standort"></marker>
+      <marker *ngFor="let pos of vendorPositions" [position]="pos" [icon]="{
+          url: 'assets/icons/vendorLocation.png',
+          anchor: [16,16],
+          size: [32,32],
+          scaledSize: [32,32]
+        }" title="Produzent">
+      </marker>
+      <marker *ngFor="let pos of eventPositions" [position]="pos" [icon]="{
+          url: 'assets/icons/eventLocation.png',
+          anchor: [16,16],
+          size: [32,32],
+          scaledSize: [32,32]
+        }" title="Event"></marker>
+    </ng2-map>
+  </div>
+</div>

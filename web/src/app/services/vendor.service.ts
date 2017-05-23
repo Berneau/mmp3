@@ -52,9 +52,10 @@ export class VendorService {
     let v = {
       name: form.name,
       userUid: user._id,
-      email: form.email,
+      email: user.email,
       description: form.description,
-      imageUrl: form.imageUrl,
+      imageUrl: form.imageUrl ? form.imageUrl : 'vendor.png',
+      farmImageUrl: form.farmImageUrl ? form.farmImageUrl : 'farm.png',
       subName: form.subName,
       website: form.website,
       tel: form.tel,
@@ -106,7 +107,8 @@ export class VendorService {
       userUid: vendor.userUid,
       email: vendor.email,
       description: form.description,
-      imageUrl: form.imageUrl,
+      imageUrl: form.imageUrl ? form.imageUrl : 'vendor.png',
+      farmImageUrl: form.farmImageUrl ? form.farmImageUrl : 'farm.png',
       subName: form.subName,
       tel: form.tel,
       website: form.website,
@@ -123,9 +125,34 @@ export class VendorService {
       .put(url, JSON.stringify(v), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
+        this.getVendors()
         return res.json().vendor as Vendor
       })
       .catch(this.handleError)
+  }
+
+  getVendorPositions() {
+    let positions = []
+    let vendors
+    let url = `${this.apiEndpoint}/vendors`
+
+    this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        vendors = res.json().vendors
+      })
+      .then(() => {
+        for (let v of vendors) {
+          if (v.address.lat && v.address.long) {
+            let arr = [v.address.lat, v.address.long]
+            positions.push(arr)
+          }
+        }
+      })
+      .catch(this.handleError)
+
+      return positions
   }
 
 

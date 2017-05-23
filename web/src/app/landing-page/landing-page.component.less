@@ -1,5 +1,30 @@
-@import "../../assets/variables";
+@import "../../assets/variables"; // mobile-first
+landing-page {
+  .cinemagraph {
+    background-image: url("./../../assets/cinemagraph.gif");
+    background-size: cover;
+    height: 30vh;
+  }
+  .landing-page-search {
+    background-color: @white-color;
+    search-field {
 
-.fullscreen {
-  width: 100%;
+    }
+  }
+}
+@media @medium-and-up {
+  landing-page {
+    .cinemagraph {
+      height: 40vh;
+    }
+    .landing-page.search {
+      background-color: @white-color;
+      search-field {
+
+      }
+    }
+  }
+}
+@media @large-and-up {
+  // styles for large screens and up
 }

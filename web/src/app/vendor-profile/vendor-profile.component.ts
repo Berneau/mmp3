@@ -23,6 +23,7 @@ import { VendorFormComponent } from './../vendor-form/vendor-form.component'
 export class VendorProfileComponent implements OnInit {
 
   vendor: Vendor
+  position: Array<number>
 
   constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService, private ProductStore: ProductService, private PostitStore: PostitService, private modalService: MzModalService) {
 
@@ -39,6 +40,7 @@ export class VendorProfileComponent implements OnInit {
             return
           }
           this.vendor = vendor
+          this.position = [this.vendor.address.lat, this.vendor.address.long]
         })
     })
   }
@@ -49,9 +51,5 @@ export class VendorProfileComponent implements OnInit {
 
   openNewProductModal() {
     this.modalService.open(ProductFormComponent, {vendor: this.vendor});
-  }
-
-  openUpdateVendorModal() {
-    this.modalService.open(VendorFormComponent, {vendor: this.vendor});
   }
 }

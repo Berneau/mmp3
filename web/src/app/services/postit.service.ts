@@ -69,7 +69,7 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: form.imageUrl
+      imageUrl: form.imageUrl ? form.imageUrl : 'postit.png'
     }
 
     return this.http
@@ -112,7 +112,7 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: form.imageUrl
+      imageUrl: form.imageUrl ? form.imageUrl : 'postit.png'
     }
 
     return this.http

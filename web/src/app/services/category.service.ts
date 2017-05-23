@@ -49,7 +49,7 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: form.imageUrl
+      imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
     }
 
     return this.http
@@ -89,7 +89,7 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: form.imageUrl
+      imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
     }
 
     return this.http

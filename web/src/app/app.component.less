@@ -1,17 +1,51 @@
-@import "../assets/variables";
+@import "../assets/variables"; // mobile-first
 
 body {
   background-color: @background-color;
-  font-family: @primary-font normal;
   height: 100%;
   margin: 0;
 
-  .main {
-    padding: 20px 60px auto;
+  app-root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: @primary-font 300;
+
+    .main {
+      flex: 1 0 auto;
+    }
+  }
+}
+
+.btn.btn {
+  font-family: @primary-font;
+  font-size: 10px;
+  border-radius: 2px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: 500;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.14), 1px 1px 0 0 rgba(0, 0, 0, 0.12), 0 0 0 0 rgba(0, 0, 0, 0.2);
+
+  &.orange {
+    background-color: @orange-color;
   }
 
-  div.divider {
-    background-color: @linegrey-color;
-    height: 1px;
+  &.yellow {
+    background-color: @yellow-color;
   }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.fullscreen {
+  width: 100%;
+}
+@media @medium-and-up {
+  // styles for medium screens and larger
+}
+@media @large-and-up {
+  // styles for large screens and up
 }

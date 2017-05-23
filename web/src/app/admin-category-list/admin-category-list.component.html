@@ -1,7 +1,7 @@
 <div class="row" *ngIf="store.categories">
   <ul class="row collection">
     <li *ngFor="let category of store.categories" class="collection-item avatar">
-      <img class="circle" src="assets/dummy_img.jpg">
+      <img class="circle" src="assets/{{category.imageUrl}}">
       <span class="title">{{category.name}}</span>
       <div class="secondary-content">
         <a (click)="selectCategory(category)"><i class="material-icons">mode_edit</i></a>

@@ -20,8 +20,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   openNewUserModal() {
-    this.modalService.open(PostitFormComponent);
-    // TODO: change
+    this.modalService.open(UserFormComponent);
   }
 
   openNewCategoryModal() {
