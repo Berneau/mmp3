@@ -17,8 +17,8 @@
     "prefix": "",
     "mobile": false,
     "styles": [
-      "styles.less",
-      "../node_modules/materialize-css/dist/css/materialize.css"
+      "../node_modules/materialize-css/dist/css/materialize.css",
+      "styles.less"
     ],
     "scripts": [
       "../node_modules/jquery/dist/jquery.js",
