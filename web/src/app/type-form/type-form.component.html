@@ -10,10 +10,9 @@
       <form materialize [formGroup]="typeForm">
         <div class="row">
           <h6>Grunddaten</h6>
-          <div class="input-field col s12 form-group">
-            <input id="type-name" type="text" class="validate" formControlName="name">
-            <label for="type-name">Name</label>
-          </div>
+          <mz-input-container class="input-field col s12 form-group">
+            <input mz-input id="type-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+          </mz-input-container>
         </div>
       </form>
     </div>
