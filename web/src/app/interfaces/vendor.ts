@@ -5,6 +5,7 @@ export class Vendor {
   email: string
   description?: string
   imageUrl?: string
+  farmImageUrl?: string
   subName?: string
   website?: string
   tel?: number

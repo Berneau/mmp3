@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
 
 import { Vendor } from './../interfaces/vendor'
+import { User } from './../interfaces/user'
 
 import { VendorService } from './../services/vendor.service'
 
@@ -15,6 +16,7 @@ export class VendorFormComponent extends MzBaseModal {
 
   vendorForm: FormGroup
   @Input() vendor: Vendor
+  @Input() user: User
 
   constructor(private fb: FormBuilder, private store: VendorService) {
     super()
@@ -31,6 +33,7 @@ export class VendorFormComponent extends MzBaseModal {
         subName: this.vendor.subName,
         email: { value: this.vendor.email, disabled: true },
         imageUrl: this.vendor.imageUrl,
+        farmImageUrl: this.vendor.farmImageUrl,
         description: this.vendor.description,
         tel: this.vendor.tel,
         website: this.vendor.website,
@@ -45,8 +48,9 @@ export class VendorFormComponent extends MzBaseModal {
       this.vendorForm = this.fb.group({
         name: '',
         subName: '',
-        email: '',
+        email: { value: this.user.email, disabled: true },
         imageUrl: '',
+        farmImageUrl: '',
         description: '',
         tel: '',
         website: '',
@@ -60,13 +64,13 @@ export class VendorFormComponent extends MzBaseModal {
   }
 
   newVendor() {
-    this.store.addVendor(this.vendor, this.vendorForm.value)
+    this.store.addVendor(this.user, this.vendorForm.value)
       .then(vendor => {
         if (!vendor) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
           return
         }
-        Materialize.toast('Produkt gespeichert.', 2000)
+        Materialize.toast('Produzent gespeichert.', 2000)
       })
   }
 

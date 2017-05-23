@@ -6,74 +6,85 @@
     Produzent hinzufügen
   </mz-modal-header>
   <mz-modal-content>
-<div>
-  <form materialize [formGroup]="vendorForm">
-    <div class="row">
-      <h6>Profilbild</h6>
-      <div class="input-field col s12 form-group">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>File</span>
-            <input type="file">
+    <div>
+      <form materialize [formGroup]="vendorForm">
+        <div class="row">
+          <div class="col s12 m6">
+            <h6>Profilbild</h6>
+            <div class="input-field col s12 form-group">
+              <div class="file-field input-field">
+                <div class="btn">
+                  <span>File</span>
+                  <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" formControlName="imageUrl" type="text">
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" formControlName="imageUrl" type="text">
+          <div class="col s12 m6">
+            <h6>Hofbild</h6>
+            <div class="input-field col s12 form-group">
+              <div class="file-field input-field">
+                <div class="btn">
+                  <span>File</span>
+                  <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" formControlName="farmImageUrl" type="text">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <h6>Kontaktdaten</h6>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-name" type="text" class="validate" formControlName="name">
-        <label for="vendor-name">Name</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-subName" type="text" class="validate" formControlName="subName">
-        <label for="vendor-subName">Hofname</label>
-      </div>
-      <div class="input-field col s12 form-group">
-        <input id="vendor-email" type="text" class="validate" formControlName="email">
-        <label for="vendor-email">Email</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-tel" type="text" class="validate" formControlName="tel">
-        <label for="vendor-tel">Telefonnummer</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-website" type="text" class="validate" formControlName="website">
-        <label for="vendor-website">Website</label>
-      </div>
-      <h6>Adresse</h6>
-      <div class="input-field col s12 form-group">
-        <input id="vendor-street" type="text" class="validate" formControlName="street">
-        <label for="vendor-street">Straße / Nr.</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-zip" type="text" class="validate" formControlName="zip">
-        <label for="vendor-zip">Postleitzahl</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-city" type="text" class="validate" formControlName="city">
-        <label for="vendor-city">Stadt</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-lat" type="text" class="validate" formControlName="lat">
-        <label for="vendor-lat">Breitengrad</label>
-      </div>
-      <div class="input-field col s12 m6 form-group">
-        <input id="vendor-long" type="text" class="validate" formControlName="long">
-        <label for="vendor-long">Längengrad</label>
-      </div>
-      <h6>Beschreibung</h6>
-      <div class="input-field col s12">
-        <textarea id="vendor-description" class="materialize-textarea" formControlName="description"></textarea>
-        <label for="vendor-description">Beschreibung</label>
-      </div>
+        <div class="row">
+          <h6>Kontaktdaten</h6>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-subName" type="text" formControlName="subName" [label]="'Hofname'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 form-group">
+            <input mz-input id="vendor-email" type="email" formControlName="email" [label]="'E-Mail'">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-tel" type="tel" formControlName="tel" [label]="'Telefonnummer'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-website" type="text" formControlName="website" [label]="'Website'" [validate]="true">
+          </mz-input-container>
+        </div>
+        <div class="row">
+          <h6>Adresse</h6>
+          <mz-input-container class="input-field col s12 form-group">
+            <input mz-input id="vendor-street" type="text" formControlName="street" [label]="'Straße / Nr.'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-zip" type="number" formControlName="zip" [label]="'Postleitzahl'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-city" type="text" formControlName="city" [label]="'Stadt'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-lat" type="number" step="0.000001" formControlName="lat" [label]="'Breitengrad'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="vendor-long" type="number" step="0.000001" formControlName="long" [label]="'Längengrad'" [validate]="true">
+          </mz-input-container>
+        </div>
+        <div class="row">
+          <h6>Beschreibung</h6>
+          <mz-textarea-container>
+            <textarea mz-textarea [label]="'Beschreibung'" id="vendor-description" formControlName="description" length="150"></textarea>
+          </mz-textarea-container>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
-</mz-modal-content>
-<mz-modal-footer>
-  <button mz-button [flat]="true" (click)="vendor ? this.updateVendor(vendor) : this.newVendor()" mz-modal-close>Speichern</button>
-  <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
-</mz-modal-footer>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="vendor ? this.updateVendor(vendor) : this.newVendor()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
 </mz-modal>

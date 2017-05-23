@@ -1,30 +1,30 @@
-<div>
-  <form materialize [formGroup]="userForm">
-    <div class="row">
-      <h6>Grunddaten</h6>
-      <div class="input-field col s12 form-group">
-        <input id="user-email" type="text" class="validate" formControlName="email">
-        <label for="user-email">Email</label>
-      </div>
-      <div class="input-field col s12 form-group">
-        <input id="user-password" type="password" class="validate" formControlName="password">
-        <label for="user-password">Passwort</label>
-      </div>
-      <div class="input-field col s12 form-group">
-        <input id="user-passwordConfirm" type="password" class="validate" formControlName="passwordConfirm">
-        <label for="user-passwordConfirm">Passwort bestätigen</label>
-      </div>
-      <h6>Admin-Rechte (nicht bei Produzenten!!)</h6>
-      <div class="input-field col s12 form-group">
-        <div class="switch">
-          <label>
-            Off
-            <input type="checkbox" formControlName="isAdmin">
-            <span class="lever"></span>
-            On
-          </label>
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header *ngIf="user">
+    Produzent bearbeiten
+  </mz-modal-header>
+  <mz-modal-header *ngIf="!user">
+    Produzent hinzufügen
+  </mz-modal-header>
+  <mz-modal-content>
+    <div>
+      <form materialize [formGroup]="userForm">
+        <div class="row">
+          <h6>Grunddaten</h6>
+          <mz-input-container class="input-field col s12 form-group">
+            <input mz-input id="user-email" type="text" formControlName="email" [label]="'E-Mail'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="user-password" type="password" formControlName="password" [label]="'Passwort'" [validate]="true">
+          </mz-input-container>
+          <mz-input-container class="input-field col s12 m6 form-group">
+            <input mz-input id="user-passwordConfirm" type="password" formControlName="passwordConfirm" [label]="'Passwort bestätigen'" [validate]="true">
+          </mz-input-container>
         </div>
-      </div>
+      </form>
     </div>
-  </form>
-</div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" (click)="user ? this.updateUser(user) : this.newUser()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
