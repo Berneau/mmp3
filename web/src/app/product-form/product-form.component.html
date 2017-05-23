@@ -28,28 +28,28 @@
           </div>
           <mz-select-container class="input-field col s12 m6 form-group">
             <select mz-select [placeholder]="'Kategorie'" id="product-categoryId" formControlName="categoryId">
-            <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" data-icon="assets/dummy_img.jpg" class="left circle">{{category.name}}</option>
-        </select>
+              <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" data-icon="assets/dummy_img.jpg" class="left circle">{{category.name}}</option>
+            </select>
           </mz-select-container>
           <h6>Verfügbarkeit</h6>
           <mz-select-container class="input-field col s6 m3 form-group">
             <select mz-select [placeholder]="'Periode'" id="product-fromPeriod" formControlName="fromPeriod">
-                <option *ngFor="let p of periods">{{p}}</option>
+                <option *ngFor="let p of periods" value="{{p}}">{{p}}</option>
             </select>
           </mz-select-container>
           <mz-select-container class="input-field col s6 m3 form-group">
             <select mz-select [placeholder]="'Monat'" id="product-fromMonth" formControlName="fromMonth">
-                <option *ngFor="let m of months">{{m}}</option>
+                <option *ngFor="let m of months" value="{{m}}">{{m}}</option>
             </select>
           </mz-select-container>
           <mz-select-container class="input-field col s6 m3 form-group">
             <select mz-select [placeholder]="'Periode'" id="product-toPeriod" formControlName="toPeriod">
-                <option *ngFor="let p of periods">{{p}}</option>
+                <option *ngFor="let p of periods" value="{{p}}">{{p}}</option>
             </select>
           </mz-select-container>
           <mz-select-container class="input-field col s6 m3 form-group">
             <select mz-select [placeholder]="'Monat'" id="product-toMonth" formControlName="toMonth">
-                <option *ngFor="let m of months">{{m}}</option>
+                <option *ngFor="let m of months" value="{{m}}">{{m}}</option>
             </select>
           </mz-select-container>
         </div>
