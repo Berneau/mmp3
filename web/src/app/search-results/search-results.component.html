@@ -8,15 +8,16 @@
   <div *ngIf="productResults?.length > 0" class="row category-list">
     <ul class="row">
       <li *ngFor="let result of productResults" class="col s12 m4 l3">
-        <a [routerLink]="['/produkte', result._id]">
+        <a [routerLink]="['/produzenten', result.vendor._id]">
           <div class="card">
             <div class="card-image">
               <img class="activator" src="assets/{{result.imageUrl}}">
             </div>
             <div class="card-content">
+              <p class="product-vendor" *ngIf="result.vendor.name">{{result.vendor.name}}</p>
               <h3 class="card-title">{{result.name}}</h3>
               <p class="further-link">
-                mehr
+                zum Produzenten
                 <i class="material-icons prefix">keyboard_arrow_right</i>
               </p>
             </div>
