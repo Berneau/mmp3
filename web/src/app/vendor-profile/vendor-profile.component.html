@@ -1,35 +1,47 @@
 <div *ngIf="vendor">
-  <div class="row">
-    <div class="col l6 m6 s12">
-      <img class="col l8 m8 s8 right" src="assets/{{vendor.farmImageUrl}}">
+  <div class="row farm-image">
+    <img class="fullscreen" src="assets/{{vendor.farmImageUrl}}">
+  </div>
+  <div class="row profile-head">
+    <div class="row">
+      <div class="col s12 m5 l3 profile-image">
+        <img class="responsive-image circle" src="assets/{{vendor.imageUrl}}">
+      </div>
+      <div class="col s12 m7 l9 profile-name">
+        <h4>{{vendor.name}}</h4>
+        <h5>{{vendor.subName}}</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 profile-data">
+        <div class="col s12 m6 l3">
+          <span><i class="material-icons">email</i></span>
+          <span>{{vendor.email}}</span>
+        </div>
+        <div class="col s12 m6 l3">
+          <span><i class="material-icons">phone</i></span>
+          <span>{{vendor.tel}}</span>
+        </div>
+        <div class="col s12 m6 l3">
+          <span><i class="material-icons">language</i></span>
+          <span>{{vendor.website}}</span>
+        </div>
+        <div class="col s12 m6 l3">
+          <span><i class="material-icons">location_on</i></span>
+          <span>{{vendor.address.street}} <br>
+            {{vendor.address.zip}} {{vendor.address.city}}</span>
+          </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col l6 m6 s12">
-      <h4>{{vendor.name}}</h4>
-      <h5>{{vendor.subName}}</h5>
-      <p>{{vendor.description}}</p>
-      <ul>
-        <li>
-          <i class="material-icons">location_on</i> {{vendor.address.street}}, {{vendor.address.zip}} {{vendor.address.city}}
-        </li>
-        <li>
-          <i class="material-icons">phone</i> {{vendor.tel}}
-        </li>
-        <li>
-          <i class="material-icons">language</i> {{vendor.website}}
-        </li>
-        <li>
-          <i class="material-icons">email</i> {{vendor.email}}
-        </li>
-      </ul>
+  <div class="container">
+    <div class="row vendor-description">
+      <div>
+        <h3>Beschreibung</h3>
+        <p>{{vendor.description}}</p>
+      </div>
     </div>
-    <div class="col l6 m6 s12">
-      <img class="col l8 m8 s8 right" src="assets/{{vendor.imageUrl}}">
-    </div>
-  </div>
-  <div class="row" *ngIf="vendor.address.lat && vendor.address.long">
-    <div class="col s12">
+    <div class="row map" *ngIf="vendor.address.lat && vendor.address.long">
       <ng2-map center="{{vendor.address.lat}}, {{vendor.address.long}}" disableDoubleClickZoom="true" disableDefaultUI="true">
         <marker [position]="position" [icon]="{
             url: 'assets/icons/vendorLocation.png',
@@ -39,19 +51,16 @@
           }" title={{vendor.name}}></marker>
       </ng2-map>
     </div>
-  </div>
-  <div class="row">
-    <h5>Produkte</h5>
-    <div class="row">
-      <div *ngIf="this.LoginStore.isLoggedIn()" class="col s6">
-        <button mz-button (click)="this.openNewProductModal()">neues Produkt
-          <i class="material-icons right">mode_edit</i>
-        </button>
-        <button mz-button (click)="this.openNewPostitModal()">neuer Schlachtbrett-Eintrag
-            <i class="material-icons right">mode_edit</i>
-        </button>
-      </div>
+    <div class="landing-page-headline">
+      <h4>Produkte</h4>
     </div>
-    <hr>
+    <div class="add-btns" *ngIf="this.LoginStore.isLoggedIn()">
+      <button mz-button (click)="this.openNewProductModal()" class="add-btn">Produkt
+        <i class="material-icons left">add</i>
+      </button>
+      <button mz-button (click)="this.openNewPostitModal()" class="add-btn">Gustostückerl
+        <i class="material-icons left">add</i>
+      </button>
+    </div>
     <product-list [vendor]="vendor"></product-list>
   </div>

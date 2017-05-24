@@ -1,18 +1,20 @@
-<div *ngIf="category">
+<div class="container" *ngIf="category">
   <div class="row">
-    <div class="col l6 m6 s12">
+    <div class="col s12 m6 category-name">
+      <h5 *ngIf="type">{{type.name}}</h5>
       <h3>
         {{category.name}}
       </h3>
-      <h5 *ngIf="type">{{type.name}}</h5>
     </div>
-    <div class="col l6 m6 s12">
-      <img class="col l8 m8 s8 right" src="assets/{{category.imageUrl}}" alt="category-image">
+    <div class="col s12 m6 category-image">
+      <img class="responsive-img circle" src="assets/{{category.imageUrl}}" alt="category-image">
     </div>
   </div>
-  <div class="row">
-    <h5>Produkte von Produzenten</h5>
-    <hr>
+  <div class="row category-products">
+    <div class="landing-page-headline">
+      <h4>Produzenten</h4>
+      <h5>Diese Produzenten verkaufen Produkte in der Produktkategorie '{{category.name}}'</h5>
+    </div>
     <product-vendor-list [category]="category"></product-vendor-list>
   </div>
 </div>

@@ -1,0 +1,61 @@
+@import "../../assets/variables"; // mobile-first
+
+event-detail {
+  .container {
+    margin-top: 50px;
+    .event-date {
+      span{
+        text-align: center;
+        display: block;
+        &.day {
+          font-size: 50px;
+          font-weight: 600;
+          color: @yellow-color;
+        }
+        &.month {
+          font-size: 16px;
+          color: @lightgrey-color;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .event-name {
+      text-align: center;
+    }
+
+    .event-description {
+      background-color: @white-color;
+      padding: 5px;
+      margin: 60px 0;
+
+      div {
+        border: 1px solid @lightgrey-color;
+        width: 100%;
+        padding: 20px;
+        margin: 0;
+
+        h3 {
+          font-family: @third-font;
+          color: @lightgrey-color;
+          font-size: 14px;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media @medium-and-up {
+  // styles for medium screens and larger
+  event-detail {
+    .container {
+
+      .event-name {
+        text-align: left;
+      }
+    }
+  }
+}
+@media @large-and-up {
+  // styles for large screens and up
+}

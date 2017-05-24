@@ -1,16 +1,19 @@
-<ul class="row">
-  <li *ngFor="let product of store.categoryProducts" class="col s12 m4 l3 xl2">
-    <div class="card">
-      <div class="card-image">
-        <img class="activator" src="assets/{{product.imageUrl}}">
+<div class="row product-vendor-list">
+  <ul>
+    <li *ngFor="let product of store.categoryProducts" class="col s12 m4 l3">
+      <div class="card">
+        <div class="card-image">
+          <img class="activator" src="assets/{{product.imageUrl}}">
+        </div>
+        <div class="card-content">
+          <p class="product-name">{{product.name}}</p>
+          <h3 class="card-title">{{product.vendor.name}}</h3>
+          <p class="further-link" [routerLink]="['/produzenten', product.vendor._id]">
+            zum Produzenten
+            <i class="material-icons prefix">keyboard_arrow_right</i>
+          </p>
+        </div>
       </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">{{product.name}}</span>
-        <p>{{product.vendor.name}}</p>
-        <a [routerLink]="['/produzenten', product.vendor._id]">
-          <i class="material-icons right">person</i>
-        </a>
-      </div>
-    </div>
-  </li>
-</ul>
+    </li>
+  </ul>
+</div>

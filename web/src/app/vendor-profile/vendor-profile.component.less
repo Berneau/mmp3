@@ -1,0 +1,151 @@
+@import "../../assets/variables"; // mobile-first
+
+vendor-profile {
+  .farm-image {
+    max-height: 20vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .profile-head {
+    background-color: @white-color;
+    padding-bottom: 10px;
+    margin-top: -100px;
+    color: @primary-color;
+
+    .profile-image {
+      text-align: center;
+      position: relative;
+
+      img.circle {
+        height: 150px;
+        width: 150px;
+        border: 5px solid @white-color;
+      }
+    }
+
+    .profile-name {
+      text-align: center;
+      margin-bottom: 20px;
+
+      h4 {
+        color: @lightgrey-color;
+        font-family: @third-font;
+        border-bottom: 1px solid @lightgrey-color;
+      }
+
+      h5 {
+        color: @orange-color;
+        font-size: 16px;
+      }
+    }
+
+    .profile-data {
+      text-align: center;
+
+      div {
+        span {
+          display: inline-block;
+          vertical-align: middle;
+
+          i {
+            color: @lightgrey-color;
+          }
+
+          &:first-of-type {
+            width: 24px;
+          }
+
+          &:last-of-type {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+
+  .container {
+    .vendor-description {
+      background-color: @white-color;
+      padding: 5px;
+
+      div {
+        border: 1px solid @lightgrey-color;
+        width: 100%;
+        padding: 20px;
+        margin: 0;
+
+        h3 {
+          font-family: @third-font;
+          color: @lightgrey-color;
+          font-size: 14px;
+          margin-top: 0;
+        }
+      }
+    }
+
+    .add-btns {
+      text-align: left;
+      margin: 0 auto;
+    }
+  }
+}
+@media @medium-and-up {
+  // styles for medium screens and larger
+  vendor-profile {
+    .farm-image {
+      max-height: 40vh;
+    }
+
+    .profile-head {
+      padding-bottom: 10px;
+      margin-top: -110px;
+
+      .row {
+        display: flex;
+        align-items: flex-end;
+
+        .profile-image {
+          img.circle {
+            height: 200px;
+            width: 200px;
+          }
+        }
+      }
+
+      .profile-data {
+        div {
+          text-align: left;
+
+          span {
+            &:first-of-type {
+              width: 28px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media @large-and-up {
+  // styles for large screens and up
+  vendor-profile {
+    .farm-image {
+      max-height: 30vh;
+    }
+
+    .profile-head {
+      .row {
+        .profile-name {
+          text-align: left;
+        }
+      }
+    }
+
+    .profile-data {
+      div.col {
+        text-align: center;
+      }
+    }
+  }
+}
