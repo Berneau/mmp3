@@ -4,6 +4,8 @@ nav {
   background-color: @white-color;
   color: @midgrey-color;
   height: @header-height;
+  font-family: @primary-font;
+  font-weight: 500;
 
   .nav-wrapper {
     height: 100%;
@@ -17,7 +19,8 @@ nav {
           float: none;
           margin: auto;
           text-align: center;
-          height: 100%;
+          height: 50%;
+
           i {
             margin: 0 auto;
           }
@@ -26,6 +29,26 @@ nav {
 
       .logo {
         height: 50px;
+      }
+
+      ul.nav-med-and-up {
+        height: 100%;
+
+        li {
+          display: inline-flex;
+          height: 100%;
+
+          &.active {
+            border-bottom: 3px solid @orange-color;
+            background-color: transparent;
+          }
+
+          a {
+            height: 100%;
+            justify-content: center;
+            font-size: 12px;
+          }
+        }
       }
     }
 

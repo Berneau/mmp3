@@ -1,14 +1,102 @@
 @import "../../assets/variables"; // mobile-first
+
 landing-page {
   .cinemagraph {
     background-image: url("./../../assets/cinemagraph.gif");
     background-size: cover;
     height: 30vh;
-  }
-  .landing-page-search {
-    background-color: @white-color;
-    search-field {
+    color: @white-color;
+    text-align: center;
+    vertical-align: middle;
 
+    h1 {
+      font-family: @secondary-font;
+      font-size: 35px;
+      margin-bottom: 0;
+    }
+
+    h3 {
+      font-family: @third-font;
+      font-size: 23px;
+      margin-top: 10px;
+    }
+  }
+
+  .col.landing-page-search {
+    font-family: @primary-font;
+    background-color: @white-color;
+    margin-top: -80px;
+    margin-bottom: 50px;
+    padding: 5px;
+
+    .container {
+      border: 1px solid @lightgrey-color;
+      width: 100%;
+      padding: 30px;
+
+      h5 {
+        font-weight: 600;
+        margin-bottom: 30px;
+
+        &::after,
+        &::before {
+          content: '';
+          display: inline-block;
+          height: 20px;
+          width: 20px;
+          background-image: url("./../../assets/icons/ornament_black.png");
+          background-size: cover;
+          vertical-align: middle;
+        }
+
+        &::before {
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .search {
+        .input-field {
+          .col.search-box {
+            border-radius: 7px;
+            padding: 3px 15px;
+
+            .prefix {
+              display: none;
+            }
+
+            input.search-input {
+              padding-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .landing-page-headline {
+    color: @lightgrey-color;
+    text-align: center;
+    margin-bottom: 30px;
+
+    h4 {
+      font-family: @third-font;
+      border-bottom: 1px solid @lightgrey-color;
+      margin-bottom: 5px;
+      padding-bottom: 5px;
+    }
+
+    h5 {
+      font-family: @primary-font;
+      font-size: 12px;
+      margin-top: 5px;
     }
   }
 }
@@ -17,11 +105,9 @@ landing-page {
     .cinemagraph {
       height: 40vh;
     }
+
     .landing-page.search {
       background-color: @white-color;
-      search-field {
-
-      }
     }
   }
 }

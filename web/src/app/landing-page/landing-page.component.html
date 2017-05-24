@@ -1,47 +1,62 @@
 <div class="row">
-  <div class="fullscreen cinemagraph"></div>
-</div>
-<div class="row">
-  <div class="col s12 landing-page-search">
-    <h5>Suchen und Finden!</h5>
-
-    <p>Was suchen Sie?</p>
-    <search-field></search-field>
+  <div class="fullscreen cinemagraph valign-wrapper">
+    <div class="row">
+      <h1>Lungauer Speis</h1>
+      <h3>Mei Werk, mei Gschmock!</h3>
+    </div>
   </div>
 </div>
-<div class="row">
-  <h4>Schlachtbrett</h4>
-  <postit-list [confirmed]="true"></postit-list>
-</div>
-<div class="row">
-  <h4>Events</h4>
-  <event-list></event-list>
-</div>
-<button class="btn orange" [routerLink]="['produkte']">Zu den Produkten</button>
-<button class="btn yellow" [routerLink]="['produzenten']">Zu den Produzenten</button>
+<div class="container">
+  <div class="row">
+    <div class="col s12 landing-page-search">
+      <div class="container">
+        <h5>Suchen und Finden!</h5>
+        <p>Was suchen Sie?</p>
+        <search-field></search-field>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="landing-page-headline">
+      <h4>Gustostückerl</h4>
+      <h5>Zeitlich begrenzte Angebote aus der Speis</h5>
+    </div>
+    <postit-list [confirmed]="true"></postit-list>
+  </div>
+  <div class="row">
+    <div class="landing-page-headline">
+      <h4>Termine & Veranstaltungen</h4>
+    </div>
+    <event-list></event-list>
+  </div>
+  <div class="center">
+    <button class="btn orange" [routerLink]="['produkte']">Zu den Produkten</button>
+    <button class="btn yellow" [routerLink]="['produzenten']">Zu den Produzenten</button>
+  </div>
 
-<div class="row" *ngIf="(vendorPositions || eventPositions)">
-  <div class="col s12">
-    <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12">
-      <marker [position]="currentPosition" [icon]="{
+  <div class="row" *ngIf="currentPosition && (vendorPositions || eventPositions)">
+    <div class="col s12">
+      <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12">
+        <marker [position]="currentPosition" [icon]="{
           url: 'assets/currentLocation.png',
           anchor: [16,16],
           size: [32,32],
           scaledSize: [32,32]
         }" title="aktueller Standort"></marker>
-      <marker *ngFor="let pos of vendorPositions" [position]="pos" [icon]="{
+        <marker *ngFor="let pos of vendorPositions" [position]="pos" [icon]="{
           url: 'assets/icons/vendorLocation.png',
           anchor: [16,16],
           size: [32,32],
           scaledSize: [32,32]
         }" title="Produzent">
-      </marker>
-      <marker *ngFor="let pos of eventPositions" [position]="pos" [icon]="{
+        </marker>
+        <marker *ngFor="let pos of eventPositions" [position]="pos" [icon]="{
           url: 'assets/icons/eventLocation.png',
           anchor: [16,16],
           size: [32,32],
           scaledSize: [32,32]
         }" title="Event"></marker>
-    </ng2-map>
+      </ng2-map>
+    </div>
   </div>
 </div>

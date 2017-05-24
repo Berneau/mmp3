@@ -9,11 +9,11 @@
       <img src="assets/logo.png" alt="Logo" class="logo s2" [routerLink]="['']">
     </div>
     <div class="col l7 hide-on-med-and-down">
-      <ul id="nav-mobile" class="right">
-        <li *ngIf="this.LoginStore.isAdmin()"><a [routerLink]="['admin']">Admin-Dashboard</a></li>
-        <li><a [routerLink]="['produzenten']">Produzenten</a></li>
-        <li><a [routerLink]="['produkte']">Produkte</a></li>
-        <li><a [routerLink]="['events']">Events</a></li>
+      <ul class="right nav-med-and-up">
+        <li *ngIf="this.LoginStore.isAdmin()" [routerLinkActive]="['active']"><a [routerLink]="['admin']">Admin-Dashboard</a></li>
+        <li [routerLinkActive]="['active']"><a [routerLink]="['produzenten']">Produzenten</a></li>
+        <li [routerLinkActive]="['active']"><a [routerLink]="['produkte']">Produkte</a></li>
+        <li [routerLinkActive]="['active']"><a [routerLink]="['events']">Events</a></li>
         <!-- <li><a [routerLink]="['rezepte']">Rezepte</a></li> -->
       </ul>
     </div>

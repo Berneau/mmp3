@@ -1,13 +1,35 @@
 @import "../../assets/variables"; // mobile-first
 
-search-field {
-  .search {
-    border: 1px solid black;
-    border-radius: 12px;
-    .prefix {
-      display: none;
+.search {
+  height: 100%;
+
+  .input-field {
+    height: 50%;
+
+    .search-box {
+      border: 1px solid @lightgrey-color;
+      border-radius: 20px;
+      padding: 3px 5px;
+
+      i {
+        font-size: 25px;
+        height: 30px;
+        line-height: 30px;
+        color: @lightgrey-color;
+      }
+
+      input.search-input {
+        margin: 0;
+        border: 0;
+        padding-left: 40px;
+        font-size: 14px;
+        height: 30px;
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
     }
-    input {}
   }
 }
 @media @medium-and-up {

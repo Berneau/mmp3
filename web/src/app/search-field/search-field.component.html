@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row search valign-wrapper">
   <div class="input-field col s12">
-    <div class="search">
+    <div class="search-box col s12 valign-wrapper">
       <i class="material-icons prefix">search</i>
-      <input #searchValue type="text" class="search-input" (keyup.enter)="search(searchValue.value); searchValue.value=''">
+      <input #searchValue type="text" placeholder="Suche" class="search-input" (keyup.enter)="search(searchValue.value); searchValue.value=''">
     </div>
   </div>
 </div>

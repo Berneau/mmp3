@@ -1,16 +1,15 @@
 @import "../../assets/variables"; // mobile-first
 
 footer-bar {
-  background-color: @white-color;
+  background-color: transparent;
   color: @primary-color;
-  border-radius: 40% 40% 0 0;
-  padding: 20px 0 5px;
-  margin-top: 75px;
-  width: 110%;
-  margin-left: -5%;
+  margin-top: 100px;
 
   .page-footer {
-    background-color: transparent;
+    background-color: @white-color;
+    border-radius: 100% 100% 0 0;
+    padding-top: 45px;
+    height: 100%;
 
     .footer-contact {
       text-align: center;
@@ -21,6 +20,10 @@ footer-bar {
 
       .footer-contact-data {
         font-size: 12px;
+        span {
+          display: inline-block;
+          vertical-align: top;
+        }
       }
 
       .footer-social-media {
@@ -48,6 +51,7 @@ footer-bar {
     }
 
     .footer-button {
+      margin-top: 20px;
       text-align: center;
     }
   }
@@ -55,17 +59,19 @@ footer-bar {
 @media @medium-and-up {
   // styles for medium screens and larger
   footer-bar {
-    border-radius: 100% 100% 0 0;
-
     .page-footer {
       background-image: url("./../../assets/visual.png");
       background-repeat: no-repeat;
-      background-size: 30% auto;
-      background-position: left;
+      background-size: 15% auto;
+      background-position: 10% 12em;
 
       .footer-contact {
         p {
+          margin-bottom: 0;
+
           span {
+            padding: 0 3px;
+
             &:first-of-type {
               text-align: right;
             }
@@ -75,9 +81,15 @@ footer-bar {
             }
           }
         }
+
+        .footer-social-media {
+          margin-top: 30px;
+        }
       }
 
       .footer-button {
+        margin-top: 0;
+        text-align: right;
         vertical-align: bottom;
       }
     }
@@ -85,4 +97,9 @@ footer-bar {
 }
 @media @large-and-up {
   // styles for large screens and up
+  footer-bar {
+    .page-footer {
+      background-position: 15% 6em;
+    }
+  }
 }
