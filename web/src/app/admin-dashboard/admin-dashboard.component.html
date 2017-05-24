@@ -1,61 +1,75 @@
-<h4>Admin Dahsboard</h4>
-<div class="row">
-  <div class="col s3">
-    Jasmin
+<div class="container">
+  <h4 class="page-title">Admin Dahsboard</h4>
+  <div class="row">
+    <div class="col s3 admin-nav">
+      <h3>Jasmin</h3>
 
-    <ul>
-      <li><a href="#">Schlachtbrett-Anfragen</a></li>
-      <li><a href="#">Schlachtbrett-Liste</a></li>
-      <li><a href="#">Produzenten-Liste</a></li>
-      <li><a href="#">Event-Liste</a></li>
-      <li><a href="#">Kategorie-Liste</a></li>
-      <li><a href="#">Typ-Liste</a></li>
-    </ul>
+      <ul>
+        <li><a href="#">Schlachtbrett-Anfragen</a></li>
+        <li><a href="#">Schlachtbrett-Liste</a></li>
+        <li><a href="#">Produzenten-Liste</a></li>
+        <li><a href="#">Event-Liste</a></li>
+        <li><a href="#">Kategorie-Liste</a></li>
+        <li><a href="#">Typ-Liste</a></li>
+      </ul>
 
+    </div>
+    <div class="col s9 admin-content">
+      <div class="s12" id="adminPostitListNew">
+        <div class="landing-page-headline">
+          <h4>Schlachtbrett-Anfragen</h4>
+        </div>
+        <admin-postit-list [confirmed]="false"></admin-postit-list>
+      </div>
+      <div class="s12" id="adminPostitListConfirmed">
+        <div class="landing-page-headline">
+          <h4>Schlachtbrett-Liste</h4>
+        </div>
+        <admin-postit-list [confirmed]="true"></admin-postit-list>
+      </div>
+      <div class="s12" id="adminVendorList">
+        <div class="landing-page-headline">
+          <h4>Produzenten-Liste</h4>
+        </div>
+        <admin-vendor-list></admin-vendor-list>
+      </div>
+      <div class="s12" id="adminEventList">
+        <div class="landing-page-headline">
+          <h4>Event-Liste</h4>
+        </div>
+        <admin-event-list></admin-event-list>
+      </div>
+      <div class="s12" id="adminCategoryList">
+        <div class="landing-page-headline">
+          <h4>Kategorie-Liste</h4>
+        </div>
+        <admin-category-list></admin-category-list>
+      </div>
+      <div class="s12" id="adminTypeList">
+        <div class="landing-page-headline">
+          <h4>Typ-Liste</h4>
+        </div>
+        <admin-type-list></admin-type-list>
+      </div>
+    </div>
   </div>
-  <div class="col s9">
-    <div class="s12 active" id="adminPostitListNew">
-      <h5>Schlachtbrett-Anfragen</h5>
-      <admin-postit-list [confirmed]="false"></admin-postit-list>
-    </div>
-    <div class="s12" id="adminPostitListConfirmed">
-      <h5>Schlachtbrett-Liste</h5>
-      <admin-postit-list [confirmed]="true"></admin-postit-list>
-    </div>
-    <div class="s12" id="adminVendorList">
-      <h5>Produzenten-Liste</h5>
-      <admin-vendor-list></admin-vendor-list>
-    </div>
-    <div class="s12" id="adminEventList">
-      <h5>Event-Liste</h5>
-      <admin-event-list></admin-event-list>
-    </div>
-    <div class="s12" id="adminCategoryList">
-      <h5>Kategorie-Liste</h5>
-      <admin-category-list></admin-category-list>
-    </div>
-    <div class="s12" id="adminTypeList">
-      <h5>Typ-Liste</h5>
-      <admin-type-list></admin-type-list>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col s12">
-    <button mz-button (click)="this.openNewUserModal()">Produzent
+  <div class="row">
+    <div class="col s12">
+      <button mz-button (click)="this.openNewUserModal()">Produzent
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="this.openNewCategoryModal()">Kategorie
+      <button mz-button (click)="this.openNewCategoryModal()">Kategorie
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="this.openNewTypeModal()">Typ
+      <button mz-button (click)="this.openNewTypeModal()">Typ
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="this.openNewPostitModal()">Schlachtbretteintrag
+      <button mz-button (click)="this.openNewPostitModal()">Schlachtbretteintrag
       <i class="material-icons left">add</i>
     </button>
-    <button mz-button (click)="this.openNewEventModal()">Event
+      <button mz-button (click)="this.openNewEventModal()">Event
       <i class="material-icons left">add</i>
     </button>
+    </div>
   </div>
 </div>

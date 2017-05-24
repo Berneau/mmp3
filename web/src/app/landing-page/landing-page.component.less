@@ -81,23 +81,34 @@ landing-page {
     }
   }
 
-  .landing-page-headline {
-    color: @lightgrey-color;
-    text-align: center;
+  event-list {
+    background-color: @white-color;
+    display: block;
+    padding: 30px 0;
     margin-bottom: 30px;
 
-    h4 {
-      font-family: @third-font;
-      border-bottom: 1px solid @lightgrey-color;
-      margin-bottom: 5px;
-      padding-bottom: 5px;
+    .page-title {
+      display: none;
     }
+  }
+}
 
-    h5 {
-      font-family: @primary-font;
-      font-size: 12px;
-      margin-top: 5px;
-    }
+.landing-page-headline {
+  color: @lightgrey-color;
+  text-align: center;
+  margin-bottom: 30px;
+
+  h4 {
+    font-family: @third-font;
+    border-bottom: 1px solid @lightgrey-color;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+  }
+
+  h5 {
+    font-family: @primary-font;
+    font-size: 12px;
+    margin-top: 5px;
   }
 }
 @media @medium-and-up {

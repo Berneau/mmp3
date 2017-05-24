@@ -1,55 +1,76 @@
-<h4>Suchergebnisse</h4>
+<div class="container">
+  <h4 class="page-title">Suchergebnisse</h4>
 
-<h6>Produkte</h6>
-<p *ngIf="productResults?.length == 0">Es wurden keine Produkte gefunden.</p>
-<div *ngIf="productResults?.length > 0" class="row">
-  <ul class="row">
-    <li *ngFor="let result of productResults" class="col s12 m4 l3 xl2">
-      <a [routerLink]="['/produkte', result._id]">
-        <div class="card">
-          <div class="card-image">
-            <img class="activator" src="assets/{{result.imageUrl}}">
+  <div class="landing-page-headline">
+    <h4>Produkte</h4>
+    <h5 *ngIf="productResults?.length == 0">Es wurden keine Produkte gefunden.</h5>
+  </div>
+  <div *ngIf="productResults?.length > 0" class="row">
+    <ul class="row">
+      <li *ngFor="let result of productResults" class="col s12 m4 l3 xl2">
+        <a [routerLink]="['/produkte', result._id]">
+          <div class="card">
+            <div class="card-image">
+              <img class="activator" src="assets/{{result.imageUrl}}">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+            </div>
           </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
-          </div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</div>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-<h6>Produzenten</h6>
-<p *ngIf="vendorResults?.length == 0">Es wurden keine Produzenten gefunden.</p>
-<div *ngIf="vendorResults?.length > 0" class="row">
-  <ul class="row">
-    <li *ngFor="let result of vendorResults" class="col s12 m4 l3 xl2">
-      <a [routerLink]="['/produzenten', result._id]">
-        <div class="card">
-          <div class="card-image">
-            <img class="activator" src="assets/{{result.imageUrl}}">
+  <div class="landing-page-headline">
+    <h4>Produzenten</h4>
+    <h5 *ngIf="vendorResults?.length == 0">Es wurden keine Produzenten gefunden.</h5>
+  </div>
+  <div *ngIf="vendorResults?.length > 0" class="row">
+    <ul class="row">
+      <li *ngFor="let result of vendorResults" class="col s12 m4 l3 xl2">
+        <a [routerLink]="['/produzenten', result._id]">
+          <div class="card">
+            <div class="card-image">
+              <img class="activator" src="assets/{{result.imageUrl}}">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+            </div>
           </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
-          </div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</div>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-<h6>Events</h6>
-<p *ngIf="eventResults?.length == 0">Es wurden keine Events gefunden.</p>
-<div *ngIf="eventResults?.length > 0" class="row">
-  <ul class="row">
-    <li *ngFor="let result of eventResults" class="col s12 m4 l3 xl2">
-      <a [routerLink]="['/events', result._id]">
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+  <div class="landing-page-headline">
+    <h4>Events</h4>
+    <h5 *ngIf="eventResults?.length == 0">Es wurden keine Events gefunden.</h5>
+  </div>
+  <div *ngIf="eventResults?.length > 0" class="row event-list">
+    <ul>
+      <li *ngFor="let result of eventResults" class="col s12 l6">
+        <a [routerLink]="['/events', result._id]">
+          <div class="card">
+            <div class="card-content row">
+              <div class="col s4 m2 l3 event-date">
+                <div class="row">
+                  <span class="col s12 day">{{result.date | date:'dd'}}</span>
+                  <span class="col s12 month">{{result.date | date:'MMM'}}</span>
+                </div>
+              </div>
+              <div class="col s8 m10 l9 event-details">
+                <h3 class="card-title">{{result.name}}</h3>
+                <p class="event-location" *ngIf="result.location.name">{{result.location.name}}</p>
+                <p class="further-link">
+                  mehr Informationen
+                  <i class="material-icons prefix">keyboard_arrow_right</i>
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </a>
-    </li>
-  </ul>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
