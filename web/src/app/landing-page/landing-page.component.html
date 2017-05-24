@@ -34,11 +34,15 @@
     <button class="btn yellow" [routerLink]="['produzenten']">Zu den Produzenten</button>
   </div>
 
-  <div class="row" *ngIf="currentPosition && (vendorPositions || eventPositions)">
-    <div class="col s12">
+  <div class="row current-position-map" *ngIf="currentPosition && (vendorPositions || eventPositions)">
+    <div class="landing-page-headline">
+      <h4>Aktueller Standort</h4>
+      <h5>Finde Produzenten und Events in deiner Nähe!</h5>
+    </div>
+    <div class="row map">
       <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12">
         <marker [position]="currentPosition" [icon]="{
-          url: 'assets/currentLocation.png',
+          url: 'assets/icons/currentLocation.png',
           anchor: [16,16],
           size: [32,32],
           scaledSize: [32,32]
