@@ -4,19 +4,22 @@
   </mz-modal-header>
   <mz-modal-content>
     <div class="row">
-      <div class="col s12">
+      <div class="col s12 m6 l4">
         <img class="responsive-img" src="assets/{{postit.imageUrl}}" alt="image">
       </div>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <p *ngIf="vendor"><b>Wer: </b>{{vendor.name}}</p>
-        <p><b>Wo:  </b>{{postit.location}}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <p>{{postit.description}}</p>
+      <div class="col s12 m6 l6 offset-l2">
+        <div *ngIf="vendor">
+          <h5>Wer</h5>
+          <p>{{vendor.name}}</p>
+        </div>
+        <div>
+          <h5>Wo</h5>
+          <p>{{postit.location}}</p>
+        </div>
+        <div>
+          <h5>Beschreibung</h5>
+          <p>{{postit.description}}</p>
+        </div>
       </div>
     </div>
   </mz-modal-content>

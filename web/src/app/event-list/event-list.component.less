@@ -1,0 +1,105 @@
+@import "../../assets/variables"; // mobile-first
+
+event-list {
+  .row {
+    background-color: @white-color;
+    padding: 50px 10px;
+    font-family: @secondary-font;
+    color: @primary-color;
+
+    ul {
+      li {
+        a {
+          div.card {
+            box-shadow: none;
+            border-bottom: 1px solid @lightgrey-color;
+
+            .card-content {
+              margin: 0;
+
+              .row {
+                margin: 0;
+                padding: 0;
+              }
+
+              .event-date {
+                text-align: center;
+
+                .day {
+                  font-size: 35px;
+                  font-weight: 600;
+                  color: @yellow-color;
+                  line-height: initial;
+                }
+
+                .month {
+                  text-transform: uppercase;
+                  font-size: 15px;
+                  color: @lightgrey-color;
+                  font-weight: 200;
+                }
+              }
+
+              .event-details {
+                h3.card-title {
+                  margin: 0;
+                  font-size: 20px;
+                }
+
+                .event-location {
+                  color: @lightgrey-color;
+                  font-size: 14px;
+                }
+
+                .further-link {
+                  font-size: 11px;
+                  color: @orange-color;
+                  margin-top: 10px;
+
+                  i {
+                    font-size: 15px;
+                    vertical-align: bottom;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media @medium-and-up {
+  // styles for medium screens and larger
+  event-list {
+    .row {
+      ul {
+        li {
+          a {
+            div.card {
+              .card-content {
+                .event-date {
+                  .day {
+                    font-size: 45px;
+                  }
+
+                  .month {
+                    font-size: 20px;
+                  }
+                }
+                .event-details {
+                  .further-link {
+                    text-align: right;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media @large-and-up {
+  // styles for large screens and up
+}

@@ -1,5 +1,43 @@
 @import "../../assets/variables"; // mobile-first
 
+postit-list {
+  ul {
+    li {
+      .card {
+        padding: 10px;
+        border-radius: 10px;
+
+        .card-content {
+          padding: 10px 0;
+
+          .postit-location {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: @orange-color;
+          }
+
+          .card-title {
+            margin: 3px 0;
+            font-size: 19px;
+            font-weight: 500;
+            color: @primary-color;
+          }
+
+          .further-link {
+            font-size: 11px;
+            color: @orange-color;
+            text-align: right;
+
+            i {
+              font-size: 15px;
+              vertical-align: bottom;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 @media @medium-and-up {
   // styles for medium screens and larger
 }

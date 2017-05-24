@@ -1,12 +1,17 @@
 <div class="row" *ngIf="store.postits">
-  <ul class="row">
-    <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="col s12 m4 l3 xl2">
+  <ul>
+    <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="col s12 m4 l3">
       <div class="card" (click)="selectPostit(postit)">
         <div class="card-image">
           <img class="activator" src="assets/{{postit.imageUrl}}">
         </div>
         <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{postit.name}}</span>
+          <p class="postit-location" *ngIf="postit.location">{{postit.location}}</p>
+          <h3 class="card-title">{{postit.name}}</h3>
+          <p class="further-link">
+            mehr lesen
+            <i class="material-icons prefix">keyboard_arrow_right</i>
+          </p>
         </div>
       </div>
     </li>
