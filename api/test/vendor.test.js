@@ -253,7 +253,7 @@ describe('Vendor', () => {
           .end((err, res) => {
             res.should.have.status(200)
             res.body.should.have.property('ok').equal(true)
-            res.body.should.have.property('message').equal('Successfully deleted')
+            res.body.should.have.property('message').equal('Successfully deleted vendor and associated products')
             done()
           })
       })

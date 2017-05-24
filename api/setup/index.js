@@ -101,7 +101,11 @@ let category3 = new Category({
   typeUid: '',
   imageUrl: 'category.png'
 })
-
+let category4 = new Category({
+  name: 'Schnitzereien',
+  typeUid: '',
+  imageUrl: 'image.url'
+})
 let product1 = new Product({
   name: 'Grüne Äpfel',
   categoryId: '',
@@ -293,6 +297,7 @@ function setupTypes() {
         if(err) reject('t2')
         else {
           category3.typeUid = res.body.type._id
+          category4.typeUid = res.body.type._id
           resolve(res.body.ok)
         }
       })
@@ -353,8 +358,20 @@ function setupCategories() {
         }
       })
   })
+  let c4 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/categories')
+      .set('x-access-token', token)
+      .send(category4)
+      .end((err, res) => {
+        if(err) reject('c4')
+        else {
+          resolve(res.body.ok)
+        }
+      })
+  })
 
-  Promise.all([c1, c2, c3]).then(values => {
+  Promise.all([c1, c2, c3, c4]).then(values => {
     console.log('Categories: ' + values)
     setupProducts()
   })

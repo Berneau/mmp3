@@ -1,4 +1,5 @@
 var Category = require('../../models/category.model')
+var Product = require('../../models/product.model')
 var categoryIsValid = require('../../helpers/helpers').categoryIsValid
 
 module.exports = function(router) {
@@ -128,7 +129,9 @@ module.exports = function(router) {
          })
 
          else if (!err && category) {
-           Category.remove({ _id: req.params.id }, function(err, category) {
+
+           Product
+           .find({ categoryId: category._id }, function(err, products) {
 
              // internal server error
              if (err) res.status(500).json({
@@ -136,12 +139,34 @@ module.exports = function(router) {
                err: err.message
              })
 
-             // successfully deleted
-             else res.status(200).json({
-               ok: true,
-               message: 'Successfully deleted'
+             // category is not in use by any products -> delete
+             else if (products.length == 0) {
+
+               Category.remove({ _id: req.params.id }, function(err, category) {
+
+                 // internal server error
+                 if (err) res.status(500).json({
+                   ok: false,
+                   err: err.message
+                 })
+
+                 // successfully deleted
+                 else res.status(200).json({
+                   ok: true,
+                   message: 'Successfully deleted'
+                 })
+               })
+
+             }
+
+             // category is in use by products -> do not delete
+             else res.status(403).json({
+               ok: false,
+               message: 'Category is in use by at least one product - not deleted'
              })
+
            })
+
 
            // no category with this id
          } else res.status(404).json({

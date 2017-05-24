@@ -1,4 +1,7 @@
+var ObjectId = require('mongoose').Types.ObjectId
+
 var Vendor = require('../../models/vendor.model')
+var Product = require('../../models/product.model')
 var vendorIsValid = require('../../helpers/helpers').vendorIsValid
 
 module.exports = function(router) {
@@ -176,20 +179,47 @@ module.exports = function(router) {
           })
 
           else if (!err && vendor) {
-            Vendor.remove({ _id: req.params.id }, function(err, vendor) {
 
-              // internal server error
-              if (err) res.status(500).json({
-                ok: false,
-                err: err.message
-              })
+            Product.find({ 'vendor._id': new ObjectId(vendor._id) }, function(err, products) {
 
-              // successfully deleted
-              else res.status(200).json({
+              res.status(200).json({
                 ok: true,
-                message: 'Successfully deleted'
+                message: 'Successfully deleted vendor and associated products',
+                products: products
               })
             })
+
+            // Product.remove({ 'vendor._id': new ObjectId(vendor._id) }, function(err, removed) {
+            //
+            //   console.log(removed)
+            //
+            //   // internal server error
+            //   if (err) res.status(500).json({
+            //     ok: false,
+            //     err: err.message
+            //   })
+            //
+            //   else {
+            //
+            //     Vendor.remove({ _id: req.params.id }, function(err, vendor) {
+            //
+            //       // internal server error
+            //       if (err) res.status(500).json({
+            //         ok: false,
+            //         err: err.message
+            //       })
+            //
+            //       // successfully deleted
+            //       else res.status(200).json({
+            //         ok: true,
+            //         message: 'Successfully deleted vendor and associated products'
+            //       })
+            //     })
+            //
+            //   }
+            //
+            // })
+
 
             // no vendor with this id
           } else res.status(404).json({
