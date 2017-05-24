@@ -7,10 +7,18 @@ admin-dashboard {
       color: @orange-color;
     }
 
-    ul {
+    ul.tabs {
+      all: initial;
       li {
+        all: initial;
         a {
           color: @primary-color;
+          &.active {
+            color: @orange-color;
+          }
+          &:hover {
+            color: @lightgrey-color;
+          }
         }
       }
     }

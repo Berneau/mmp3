@@ -17,6 +17,9 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private modalService: MzModalService) { }
 
   ngOnInit() {
+    $(document).ready(function() {
+      $('ul.tabs').tabs();
+    });
   }
 
   openNewUserModal() {
