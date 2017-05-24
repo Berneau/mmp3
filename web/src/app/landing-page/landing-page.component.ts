@@ -22,9 +22,10 @@ export class LandingPageComponent implements OnInit {
       timeout: 5000,
       maximumAge: 0
     };
+    this.currentPosition = [47.129550, 13.810360]
+    navigator.geolocation.getCurrentPosition(this.getCurrentUserPosition, this.handleMapError, options)
     this.getVendorPositions()
     this.getEventPositions()
-    navigator.geolocation.getCurrentPosition(this.getCurrentPosition, this.handleError, options)
   }
 
   getVendorPositions() {
@@ -36,8 +37,12 @@ export class LandingPageComponent implements OnInit {
     this.eventPositions = this.EventStore.getEventPositions()
   }
 
-  getCurrentPosition() {
+  getCurrentUserPosition(pos) {
+    this.currentPosition = [pos.coords.latitude, pos.coords.longitude]
+  }
 
+  handleMapError(err) {
+    console.log("map error:", err.message)
   }
 
   private handleError(error: any) {

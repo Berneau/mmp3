@@ -20,7 +20,7 @@
 <button class="btn orange" [routerLink]="['produkte']">Zu den Produkten</button>
 <button class="btn yellow" [routerLink]="['produzenten']">Zu den Produzenten</button>
 
-<div class="row" *ngIf="currentPosition && vendorPositions || eventPositions">
+<div class="row" *ngIf="(vendorPositions || eventPositions)">
   <div class="col s12">
     <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12">
       <marker [position]="currentPosition" [icon]="{
