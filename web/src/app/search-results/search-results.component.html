@@ -5,16 +5,20 @@
     <h4>Produkte</h4>
     <h5 *ngIf="productResults?.length == 0">Es wurden keine Produkte gefunden.</h5>
   </div>
-  <div *ngIf="productResults?.length > 0" class="row">
+  <div *ngIf="productResults?.length > 0" class="row category-list">
     <ul class="row">
-      <li *ngFor="let result of productResults" class="col s12 m4 l3 xl2">
+      <li *ngFor="let result of productResults" class="col s12 m4 l3">
         <a [routerLink]="['/produkte', result._id]">
           <div class="card">
             <div class="card-image">
               <img class="activator" src="assets/{{result.imageUrl}}">
             </div>
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+              <h3 class="card-title">{{result.name}}</h3>
+              <p class="further-link">
+                mehr
+                <i class="material-icons prefix">keyboard_arrow_right</i>
+              </p>
             </div>
           </div>
         </a>
@@ -26,16 +30,21 @@
     <h4>Produzenten</h4>
     <h5 *ngIf="vendorResults?.length == 0">Es wurden keine Produzenten gefunden.</h5>
   </div>
-  <div *ngIf="vendorResults?.length > 0" class="row">
+  <div *ngIf="vendorResults?.length > 0" class="row vendor-list">
     <ul class="row">
-      <li *ngFor="let result of vendorResults" class="col s12 m4 l3 xl2">
+      <li *ngFor="let result of vendorResults" class="col s12 m4 l3">
         <a [routerLink]="['/produzenten', result._id]">
           <div class="card">
             <div class="card-image">
               <img class="activator" src="assets/{{result.imageUrl}}">
             </div>
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{result.name}}</span>
+              <p class="vendor-subName" *ngIf="result.subName">{{result.subName}}</p>
+              <h3 class="card-title">{{result.name}}</h3>
+              <p class="further-link">
+                mehr
+                <i class="material-icons prefix">keyboard_arrow_right</i>
+              </p>
             </div>
           </div>
         </a>
