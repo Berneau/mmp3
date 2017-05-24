@@ -1,9 +1,27 @@
 <div class="container">
   <h4 class="page-title">Admin Dahsboard</h4>
   <div class="row">
+    <div class="col s12 add-btns">
+      <button mz-button class="add-btn" (click)="this.openNewUserModal()">Produzent
+      <i class="material-icons left">add</i>
+    </button>
+      <button mz-button class="add-btn" (click)="this.openNewCategoryModal()">Kategorie
+      <i class="material-icons left">add</i>
+    </button>
+      <button mz-button class="add-btn" (click)="this.openNewTypeModal()">Typ
+      <i class="material-icons left">add</i>
+    </button>
+      <button mz-button class="add-btn" (click)="this.openNewPostitModal()">Schlachtbretteintrag
+      <i class="material-icons left">add</i>
+    </button>
+      <button mz-button class="add-btn" (click)="this.openNewEventModal()">Event
+      <i class="material-icons left">add</i>
+    </button>
+    </div>
+  </div>
+  <div class="row">
     <div class="col s3 admin-nav">
-      <h3>Jasmin</h3>
-
+      <h3>Navigation</h3>
       <ul class="tabs">
         <li class="tab"><a class="active" href="#adminPostitListNew">Schlachtbrett-Anfragen</a></li>
         <li class="tab"><a href="#adminPostitListConfirmed">Schlachtbrett-Liste</a></li>
@@ -12,7 +30,6 @@
         <li class="tab"><a href="#adminCategoryList">Kategorie-Liste</a></li>
         <li class="tab"><a href="#adminTypeList">Typ-Liste</a></li>
       </ul>
-
     </div>
     <div class="col s9 admin-content">
       <div class="s12" id="adminPostitListNew">
@@ -51,25 +68,6 @@
         </div>
         <admin-type-list></admin-type-list>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col s12">
-      <button mz-button (click)="this.openNewUserModal()">Produzent
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button (click)="this.openNewCategoryModal()">Kategorie
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button (click)="this.openNewTypeModal()">Typ
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button (click)="this.openNewPostitModal()">Schlachtbretteintrag
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button (click)="this.openNewEventModal()">Event
-      <i class="material-icons left">add</i>
-    </button>
     </div>
   </div>
 </div>

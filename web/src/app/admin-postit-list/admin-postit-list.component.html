@@ -1,10 +1,16 @@
 <div class="row" *ngIf="(store.postits | postitConfirmedPipe: confirmed)">
   <ul class="row collection">
-    <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="collection-item avatar">
-        <img class="circle" src="assets/{{postit.imageUrl}}">
-        <span class="title">{{postit.name}}</span>
-        <p>{{postit.location}}</p>
+    <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="collection-item row">
+      <div class="col s2 postit-image">
+        <img class="circle responsive-img" src="assets/{{postit.imageUrl}}">
+      </div>
+      <div class="col s8 postit-details">
+        <h3 class="postit-title">{{postit.name}}</h3>
+        <p class="postit-location" *ngIf="postit.location">{{postit.location}}</p>
+      </div>
+      <div class="col s2 secondary-content">
         <a (click)="selectPostit(postit)" class="secondary-content"><i class="material-icons">settings</i></a>
+      </div>
     </li>
   </ul>
 </div>

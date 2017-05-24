@@ -9,6 +9,9 @@ admin-dashboard {
 
     ul.tabs {
       all: initial;
+      .indicator {
+        display: none;
+      }
       li {
         all: initial;
         a {
@@ -25,6 +28,9 @@ admin-dashboard {
   }
 
   .admin-content {
+    h4 {
+      margin-top: 0;
+    }
     .collection {
       border: 0;
 
@@ -36,6 +42,27 @@ admin-dashboard {
             color: @orange-color;
           }
         }
+      }
+    }
+  }
+}
+
+.add-btns {
+  text-align: right;
+  margin: 20px 0;
+  .add-btn {
+    background-color: transparent;
+    color: @primary-color;
+    border: 0;
+    box-shadow: none;
+    font-size: 12px;
+    i {
+      color: @orange-color;
+    }
+    &:hover{
+      color: lighten(@primary-color, 30%);
+      i {
+        color: lighten(@orange-color, 10%);
       }
     }
   }

@@ -1,0 +1,39 @@
+@import "../../assets/variables"; // mobile-first
+
+admin-postit-list {
+  ul.collection {
+    .collection-item {
+      .postit-image {
+        text-align: center;
+
+        img {
+          width: 55px;
+          height: 55px;
+          overflow: hidden;
+          vertical-align: middle;
+        }
+      }
+
+      .postit-details {
+        h3.postit-title {
+          margin: 0;
+          font-size: 20px;
+        }
+        .postit-location {
+          color: @lightgrey-color;
+          font-size: 14px;
+        }
+      }
+
+      .secondary-content {
+        text-align: right;
+      }
+    }
+  }
+}
+@media @medium-and-up {
+  // styles for medium screens and larger
+}
+@media @large-and-up {
+  // styles for large screens and up
+}

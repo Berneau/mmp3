@@ -1,0 +1,37 @@
+@import "../../assets/variables"; // mobile-first
+
+admin-type-list {
+  ul.collection {
+    .collection-item {
+      .type-icon {
+        text-align: center;
+
+        i {
+          width: 55px;
+          height: 55px;
+          overflow: hidden;
+          vertical-align: middle;
+          color: @orange-color;
+          font-size: 50px;
+        }
+      }
+
+      .type-details {
+        h3.type-title {
+          margin: 0;
+          font-size: 20px;
+        }
+      }
+
+      .secondary-content {
+        text-align: right;
+      }
+    }
+  }
+}
+@media @medium-and-up {
+  // styles for medium screens and larger
+}
+@media @large-and-up {
+  // styles for large screens and up
+}
