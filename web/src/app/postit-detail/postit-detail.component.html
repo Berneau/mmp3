@@ -5,18 +5,22 @@
   <mz-modal-content>
     <div class="row">
       <div class="col s12 m6 l4">
-        <img class="responsive-img" src="assets/{{postit.imageUrl}}" alt="image">
+        <img class="responsive-img circle" src="assets/{{postit.imageUrl}}" alt="image">
       </div>
       <div class="col s12 m6 l6 offset-l2">
         <div *ngIf="vendor">
-          <h5>Wer</h5>
+          <h5>Produzent</h5>
           <p>{{vendor.name}}</p>
+          <p [routerLink]="['/produzenten', vendor._id]" class="further-link">
+            zum Produzenten
+            <i class="material-icons prefix">keyboard_arrow_right</i>
+          </p>
         </div>
-        <div>
-          <h5>Wo</h5>
+        <div *ngIf="postit.location">
+          <h5>Location</h5>
           <p>{{postit.location}}</p>
         </div>
-        <div>
+        <div *ngIf="postit.description">
           <h5>Beschreibung</h5>
           <p>{{postit.description}}</p>
         </div>
@@ -24,11 +28,11 @@
     </div>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close><i class="material-icons right">close</i></button>
+    <button mz-button class="btn orange" [flat]="true" mz-modal-close><i class="material-icons">close</i></button>
     <div *ngIf="this.LoginStore.isAdmin()" class="left">
-      <button mz-button *ngIf="!postit.confirmed" [flat]="true" mz-modal-close (click)="this.confirmPostit(postit)"><i class="material-icons right">done</i></button>
-      <button mz-button [flat]="true" mz-modal-close (click)="this.openUpdatePostitModal(postit)"><i class="material-icons right">mode_edit</i></button>
-      <button mz-button [flat]="true" mz-modal-close (click)="this.deletePostit(postit)"><i class="material-icons right">delete</i></button>
+      <button mz-button class="btn yellow" *ngIf="!postit.confirmed" [flat]="true" mz-modal-close (click)="this.confirmPostit(postit)"><i class="material-icons">done</i></button>
+      <button mz-button class="btn yellow" [flat]="true" mz-modal-close (click)="this.openUpdatePostitModal(postit)"><i class="material-icons">mode_edit</i></button>
+      <button mz-button class="btn yellow" [flat]="true" mz-modal-close (click)="this.deletePostit(postit)"><i class="material-icons">delete</i></button>
     </div>
   </mz-modal-footer>
 </mz-modal>

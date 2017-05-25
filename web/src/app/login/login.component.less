@@ -1,0 +1,54 @@
+@import "../../assets/variables"; // mobile-first
+.login {
+  margin-top: 60px;
+
+  form {
+    background-color: @white-color;
+    padding: 20px 0;
+    border-radius: 5px;
+
+    .login-heading {
+      color: @primary-color;
+      text-align: center;
+      margin-bottom: 20px;
+
+      h4 {
+        font-family: @secondary-font;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+      }
+
+      h5 {
+        font-family: @primary-font;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+    }
+
+    .input-field {
+      color: @lightgrey-color;
+
+      input {
+        &:focus:not([readonly]) {
+          color: @primary-color;
+          border-bottom: 1px solid @orange-color;
+          box-shadow: 0 1px 0 0 @orange-color;
+
+          & + label {
+            color: @orange-color;
+          }
+        }
+      }
+
+      .prefix.active {
+        color: @orange-color;
+      }
+    }
+  }
+}
+@media @medium-and-up {
+  // styles for medium screens and larger
+}
+@media @large-and-up {
+  // styles for large screens and up
+}

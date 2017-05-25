@@ -9,18 +9,27 @@
     <div>
       <form materialize [formGroup]="productForm">
         <div class="row">
-          <h6>Bild</h6>
-          <div class="input-field col s12 form-group">
-            <div class="file-field input-field">
-              <div class="btn">
-                <span>File</span>
-                <input type="file">
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" formControlName="imageUrl" type="text">
-              </div>
-            </div>
-          </div>
+          <h6>Verfügbarkeit</h6>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'von Periode'" id="product-fromPeriod" formControlName="fromPeriod">
+              <option *ngFor="let p of periods" value="{{p}}">{{p}}</option>
+            </select>
+          </mz-select-container>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'von Monat'" id="product-fromMonth" formControlName="fromMonth">
+              <option *ngFor="let m of months" value="{{m}}">{{m}}</option>
+            </select>
+          </mz-select-container>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'bis Periode'" id="product-toPeriod" formControlName="toPeriod">
+              <option *ngFor="let p of periods" value="{{p}}">{{p}}</option>
+            </select>
+          </mz-select-container>
+          <mz-select-container class="input-field col s6 m3 form-group">
+            <select mz-select [placeholder]="'bis Monat'" id="product-toMonth" formControlName="toMonth">
+              <option *ngFor="let m of months" value="{{m}}">{{m}}</option>
+            </select>
+          </mz-select-container>
         </div>
         <div class="row">
           <h6>Grunddaten</h6>
@@ -29,32 +38,23 @@
           </mz-input-container>
           <mz-select-container class="input-field col s12 m6 form-group">
             <select mz-select [placeholder]="'Kategorie'" id="product-categoryId" formControlName="categoryId">
-              <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" data-icon="assets/dummy_img.jpg" class="left circle">{{category.name}}</option>
+              <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" data-icon="assets/category.png" class="left circle">{{category.name}}</option>
             </select>
           </mz-select-container>
         </div>
         <div class="row">
-          <h6>Verfügbarkeit</h6>
-          <mz-select-container class="input-field col s6 m3 form-group">
-            <select mz-select [placeholder]="'Periode'" id="product-fromPeriod" formControlName="fromPeriod">
-                <option *ngFor="let p of periods" value="{{p}}">{{p}}</option>
-            </select>
-          </mz-select-container>
-          <mz-select-container class="input-field col s6 m3 form-group">
-            <select mz-select [placeholder]="'Monat'" id="product-fromMonth" formControlName="fromMonth">
-                <option *ngFor="let m of months" value="{{m}}">{{m}}</option>
-            </select>
-          </mz-select-container>
-          <mz-select-container class="input-field col s6 m3 form-group">
-            <select mz-select [placeholder]="'Periode'" id="product-toPeriod" formControlName="toPeriod">
-                <option *ngFor="let p of periods" value="{{p}}">{{p}}</option>
-            </select>
-          </mz-select-container>
-          <mz-select-container class="input-field col s6 m3 form-group">
-            <select mz-select [placeholder]="'Monat'" id="product-toMonth" formControlName="toMonth">
-                <option *ngFor="let m of months" value="{{m}}">{{m}}</option>
-            </select>
-          </mz-select-container>
+          <h6>Bild</h6>
+          <div class="input-field col s12 form-group">
+            <div class="file-field input-field">
+              <div class="btn orange">
+                <span>File</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" formControlName="imageUrl" type="text">
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>

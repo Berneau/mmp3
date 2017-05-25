@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.store.logout()
+    this.store.logout()
   }
 
   createForm() {
@@ -30,15 +30,15 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.store.login(this.loginForm.value.email, this.loginForm.value.password)
-      .then(result => {
-        if (result === true) {
-          // login successful
-          this.router.navigate(['/'])
-        } else {
-          // login failed
-          Materialize.toast('Login failed', 2000)
-        }
-      })
+        .then(result => {
+          if (result === true) {
+            // login successful
+            this.router.navigate(['/'])
+          } else {
+            // login failed
+            Materialize.toast('Login failed', 2000)
+          }
+        })
     }
     else Materialize.toast('Please fill in both fields', 2000)
   }

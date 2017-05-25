@@ -12,9 +12,108 @@ body {
     overflow: hidden;
     font-family: @primary-font;
     font-weight: 300;
+    background-size: cover;
 
     .main {
       flex: 1 0 auto;
+    }
+  }
+}
+
+mz-modal {
+  mz-modal-header {
+    font-family: @third-font;
+    color: @lightgrey-color;
+  }
+
+  mz-modal-content {
+    .input-field {
+      color: @lightgrey-color;
+
+      input,
+      textarea {
+        &:focus:not([readonly]) {
+          color: @primary-color;
+          border-bottom: 1px solid @orange-color;
+          box-shadow: 0 1px 0 0 @orange-color;
+
+          & + label {
+            color: @orange-color;
+          }
+        }
+
+        &.valid {
+          border-bottom: 1px solid @valid-color;
+          box-shadow: 0 1px 0 0 @valid-color;
+        }
+
+        &.invalid {
+          border-bottom: 1px solid @invalid-color;
+          box-shadow: 0 1px 0 0 @invalid-color;
+        }
+      }
+
+      .prefix.active {
+        color: @orange-color;
+      }
+    }
+
+    .picker {
+      font-family: @primary-font;
+
+      .picker__date-display {
+        background-color: @lightgrey-color;
+
+        .picker__weekday-display {
+          background-color: @orange-color;
+          color: @primary-color;
+        }
+      }
+
+      .picker__nav--next,
+      .picker__nav--prev {
+        &:hover {
+          background-color: @lightgrey-color;
+        }
+      }
+
+      .picker__day {
+        &.picker__day--today {
+          color: @orange-color;
+        }
+
+        &.picker__day--selected {
+          background-color: @orange-color;
+        }
+      }
+
+      button {
+        &.btn-flat {
+          &.picker__close,
+          &.picker__today {
+            color: @orange-color;
+          }
+        }
+      }
+    }
+
+    mz-select-container {
+      ul.dropdown-content {
+        li:not(.disabled) {
+          span {
+            color: @primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  mz-modal-footer {
+    .btn.btn-flat {
+      color: @primary-color;
+      background-color: @lightgrey-color;
+      padding: 0 20px;
+      margin: 0 10px !important;
     }
   }
 }
@@ -45,23 +144,38 @@ body {
 .fullscreen {
   width: 100%;
 }
+
 .container {
   width: 85%;
 }
+
 .page-title {
   font-family: @third-font;
   margin-bottom: 30px;
   color: @lightgrey-color;
 }
+
 .hidden {
   display: none;
 }
+
 .map {
   background-color: @white-color;
   padding: 5px;
 }
 
+p {
+  &.further-link.further-link {
+    font-size: 11px;
+    color: @orange-color;
+    text-align: right;
 
+    i {
+      font-size: 15px;
+      vertical-align: bottom;
+    }
+  }
+}
 @media @medium-and-up {
   // styles for medium screens and larger
   .container {
