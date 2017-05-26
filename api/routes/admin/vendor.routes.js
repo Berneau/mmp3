@@ -2,6 +2,7 @@ var ObjectId = require('mongoose').Types.ObjectId
 
 var Vendor = require('../../models/vendor.model')
 var Product = require('../../models/product.model')
+var User = require('../../models/user.model')
 var vendorIsValid = require('../../helpers/helpers').vendorIsValid
 
 module.exports = function(router) {
