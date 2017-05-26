@@ -51,6 +51,7 @@ module.exports = function(router) {
             products: products
           })
         })
+        .populate('vendor')
         .sort({name: 1})
 
       }
@@ -74,6 +75,7 @@ module.exports = function(router) {
             products: products
           })
         })
+        .populate('vendor')
         .sort({name: 1})
 
       }
@@ -130,6 +132,7 @@ module.exports = function(router) {
                   }
 
                 })
+                .populate('vendor')
 
               }
 
@@ -142,9 +145,11 @@ module.exports = function(router) {
 
 
             })
+            .populate('vendor')
           }
 
         })
+        .populate('vendor')
 
       }
 
@@ -167,6 +172,7 @@ module.exports = function(router) {
             products: products
           })
         })
+        .populate('vendor')
         .sort({name: 1})
 
       }
