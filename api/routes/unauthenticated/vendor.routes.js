@@ -5,17 +5,19 @@ module.exports = function(router) {
 
   router.route('/vendors')
   /**
-   * @api {get} /vendors?filter=<filter> Get all vendors with optional search
+   * @api {get} /vendors?filter=<filter>&userId=<userId> Get all vendors with optional search or by userId
    * @apiName GetVendors
    * @apiGroup Vendors
    * @apiPermission none
    *
    * @apiParam {String} [filter] The fields name, subName, address.city and address.zip will be search by this.
+   * @apiParam {String} [userId] Id of the id of a user (returns only one object)
    *
    * @apiSuccess {Array} vendor Array of vendors.
  */
   .get(function(req, res) {
 
+    var userId = req.query.userId ? req.query.userId : ''
     var filter = req.query.filter ? req.query.filter : ''
     var regex = new RegExp(filter, 'i')
     var zip
@@ -23,29 +25,63 @@ module.exports = function(router) {
     if (Number.isInteger(parseInt(filter))) zip = parseInt(filter)
     else zip = undefined
 
-    Vendor
-    .find({
-      $or: [
-        { name: regex },
-        { subName: regex },
-        { 'address.city': regex },
-        { 'address.zip': zip }
-      ]
-    }, function(err, vendors) {
 
-      // internal server error
-      if (err) res.status(500).json({
-        ok: false,
-        err: err.message
+    // userId is given
+    if (userId) {
+
+      Vendor
+      .findOne({ userUid: userId }, function(err, vendor) {
+
+        // internal server error
+        if (err) res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return
+        else if (!vendor) res.status(404).json({
+          ok: false,
+          err: 'No Vendor found for this userId'
+        })
+
+        else res.status(200).json({
+          ok: true,
+          vendor: vendor
+        })
+
       })
 
-      // return vendor list
-      else res.status(200).json({
-        ok: true,
-        vendors: vendors
+    }
+
+    // no userId is given - normal list with optional search
+    else {
+
+      Vendor
+      .find({
+        $or: [
+          { name: regex },
+          { subName: regex },
+          { 'address.city': regex },
+          { 'address.zip': zip }
+        ]
+      }, function(err, vendors) {
+
+        // internal server error
+        if (err) res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return vendor list
+        else res.status(200).json({
+          ok: true,
+          vendors: vendors
+        })
       })
-    })
-    .sort({name: 1})
+      .sort({name: 1})
+
+    }
+
   })
 
   router.route('/vendors/:id')
