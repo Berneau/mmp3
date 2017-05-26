@@ -20,7 +20,7 @@ export class SitemapComponent implements OnInit {
 
   getSites() {
     for (let r of this.router.config) {
-      if (r.component && !r.canActivate && r.path !== '404' && r.path !== 'suche') {
+      if (r.component && !r.canActivate) {
         if (r.path === '') {
           this.sites.push({ name: 'Home', path: '' })
         }
