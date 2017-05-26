@@ -37,6 +37,7 @@ router.use(function(req, res, next) {
 // authenticated routes
 require('./routes/authenticated/product.routes')(router)
 require('./routes/authenticated/postit.routes')(router)
+require('./routes/authenticated/user.routes')(router)
 
 
 // admin check
