@@ -1,3 +1,5 @@
+var password = require('s-salt-pepper')
+
 var User = require('../../models/user.model')
 var userIsValid = require('../../helpers/helpers').userIsValid
 var stripUserObject = require('../../helpers/helpers').stripUserObject
@@ -65,6 +67,82 @@ module.exports = function(router) {
      })
    })
   })
+
+  /**
+  * @api {put} /users/:id Update user
+  * @apiName UpdateUser
+  * @apiGroup Users
+  * @apiPermission admin
+  *
+  * @apiParam {String} password For resetting the password.
+  *
+  * @apiSuccess {Object} user The updated user object.
+ */
+  .put(function(req, res) {
+
+    User.findById(req.params.id, function(err, user) {
+
+      // not a valid id
+      if (err && err.name != 'CastError') res.status(404).json({
+        ok: false,
+        err: err.message
+      })
+
+      else if (!err && user) {
+
+        if (userIsValid(req.body)) {
+
+          password.hash(req.body.password, function(err, salt, hash) {
+
+            // error during hashing
+            if (err) res.status(500).json({
+              ok: false,
+              err: err.message
+            })
+
+            else {
+
+              user.email = req.body.email
+              user.password = hash
+              user.salt = salt
+              user.isAdmin = req.body.isAdmin
+
+              user.save(function(err) {
+
+                // internal server error
+                if (err) res.status(500).json({
+                  ok: false,
+                  err: err.message
+                })
+
+                // return the updated user
+                else res.status(200).json({
+                  ok: true,
+                  user: stripUserObject(user)
+                })
+
+              })
+
+            }
+
+          })
+
+          // not a valid user
+        } else res.status(412).json({
+          ok: false,
+          message: 'Missing fields'
+        })
+
+        // no user with this id
+      } else res.status(404).json({
+        ok: false,
+        message: 'User not found'
+      })
+
+    })
+
+  })
+
 
   /**
   * @api {delete} /users/:id Delete user
