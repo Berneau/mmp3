@@ -12,8 +12,8 @@ module.exports = function(router) {
    * @apiPermission none
    *
    * @apiParam {String} [filter] Products and categories will be searched by this
-   * @apiParam {String} [categoryId] Id of a category (not combinable with vendorId)
-   * @apiParam {String} [vendorId] Id of a vendor (not combinable with categoryId)
+   * @apiParam {String} [categoryId] Id of a category (not combinable with vendorId, returns only one object)
+   * @apiParam {String} [vendorId] Id of a vendor (not combinable with categoryId, returns only one object)
    *
    * @apiSuccess {Array} product Array of products.
  */
