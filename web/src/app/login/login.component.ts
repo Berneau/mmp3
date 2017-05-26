@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      this.store.login(this.loginForm.value.email, this.loginForm.value.password)
+      this.store.login(this.loginForm.value)
         .then(user => {
           if (!user) {
             // login failed
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           } else {
             // login successful
             if (user.isAdmin) {
-              this.router.navigate(['/']) // TODO: Why can't navigate to /admin?
+              this.router.navigate(['/admin'])
             }
             else {
               let vendor = this.VendorStore.getVendorByUserId(user._id)
