@@ -73,7 +73,7 @@ export class UserService {
       .put(url, JSON.stringify(u), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
-        this.getUser(user._id)
+        this.getUser(res.json().user._id)
         return res.json().user as User
       })
       .catch(this.handleError)
