@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { LoginService } from './../services/login.service'
+import { VendorService } from './../services/vendor.service'
 
 @Component({
   selector: 'login',
@@ -12,7 +13,7 @@ import { LoginService } from './../services/login.service'
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private store: LoginService) {
+  constructor(private router: Router, private fb: FormBuilder, private store: LoginService, private VendorStore: VendorService) {
     this.createForm();
   }
 
@@ -30,13 +31,19 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.store.login(this.loginForm.value.email, this.loginForm.value.password)
-        .then(result => {
-          if (result === true) {
-            // login successful
-            this.router.navigate(['/'])
-          } else {
+        .then(user => {
+          if (!user) {
             // login failed
             Materialize.toast('Login failed', 2000)
+          } else {
+            // login successful
+            if (user.isAdmin) {
+              this.router.navigate(['/']) // TODO: Why can't navigate to /admin?
+            }
+            else {
+              let vendor = this.VendorStore.getVendorByUserId(user._id)
+              this.router.navigate(['/produzenten'])
+            }
           }
         })
     }

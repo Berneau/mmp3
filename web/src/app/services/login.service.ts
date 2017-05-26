@@ -30,12 +30,10 @@ export class LoginService {
 
         if (token) {
           this.token = token
-          localStorage.setItem('currentUser', JSON.stringify({ email: email,  _id: res.json().user._id, isAdmin: res.json().user.isAdmin, token: token}))
-
-          return true
-        } else {
-          return false
+          localStorage.setItem('currentUser', JSON.stringify({ email: email, _id: res.json().user._id, isAdmin: res.json().user.isAdmin, token: token }))
         }
+
+        return res.json().user
       })
       .catch(this.handleError)
   }
@@ -46,8 +44,13 @@ export class LoginService {
     localStorage.removeItem('currentUser')
   }
 
-  navigateToLandingPage() {
+  navigateTo(route) {
+    if(route == "") {
       this.router.navigate(['/'])
+    }
+    else {
+      this.router.navigate([`/${route}`])
+    }
   }
 
   isLoggedIn(): boolean {
