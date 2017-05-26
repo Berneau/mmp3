@@ -42,6 +42,8 @@ module.exports = function(router) {
       })
     } else {
 
+      // TODO: combine update and create
+
       var vendor = new Vendor({
         name: req.body.name,
         userUid: req.body.userUid,
@@ -180,45 +182,34 @@ module.exports = function(router) {
 
           else if (!err && vendor) {
 
-            Product.find({ 'vendor._id': new ObjectId(vendor._id) }, function(err, products) {
+            Product.remove({ vendor: vendor._id }, function(err, removed) {
 
-              res.status(200).json({
-                ok: true,
-                message: 'Successfully deleted vendor and associated products',
-                products: products
+              // internal server error
+              if (err) res.status(500).json({
+                ok: false,
+                err: err.message
               })
-            })
 
-            // Product.remove({ 'vendor._id': new ObjectId(vendor._id) }, function(err, removed) {
-            //
-            //   console.log(removed)
-            //
-            //   // internal server error
-            //   if (err) res.status(500).json({
-            //     ok: false,
-            //     err: err.message
-            //   })
-            //
-            //   else {
-            //
-            //     Vendor.remove({ _id: req.params.id }, function(err, vendor) {
-            //
-            //       // internal server error
-            //       if (err) res.status(500).json({
-            //         ok: false,
-            //         err: err.message
-            //       })
-            //
-            //       // successfully deleted
-            //       else res.status(200).json({
-            //         ok: true,
-            //         message: 'Successfully deleted vendor and associated products'
-            //       })
-            //     })
-            //
-            //   }
-            //
-            // })
+              else {
+
+                Vendor.remove({ _id: req.params.id }, function(err, vendor) {
+
+                  // internal server error
+                  if (err) res.status(500).json({
+                    ok: false,
+                    err: err.message
+                  })
+
+                  // successfully deleted
+                  else res.status(200).json({
+                    ok: true,
+                    message: 'Successfully deleted vendor and associated products'
+                  })
+                })
+
+              }
+
+            })
 
 
             // no vendor with this id

@@ -1,10 +1,12 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
+var Vendor = require('./vendor.model')
+
 var ProductSchema = new Schema({
   name: { type: String, required: true },
   categoryId: { type: String, required: true },
-  vendor: Object,
+  vendor: { type: String, ref: 'Vendor' },
   availableAt: {
     fromPeriod: { type: String, required: true },
     fromMonth: { type: String, required: true },

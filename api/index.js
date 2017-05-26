@@ -18,6 +18,9 @@ var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 mongoose.connect(database)
 
+// for debug
+// mongoose.set('debug', true)
+
 // get routes from routes.js
 var router = require('./routes')
 

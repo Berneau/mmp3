@@ -246,8 +246,8 @@ function setupVendors() {
       .end((err, res) => {
         if(err) reject('v1')
         else {
-          product1.vendor = res.body.vendor
-          product2.vendor = res.body.vendor
+          product1.vendor = res.body.vendor._id
+          product2.vendor = res.body.vendor._id
           postit1.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }
@@ -261,7 +261,7 @@ function setupVendors() {
       .end((err, res) => {
         if(err) reject('v2')
         else {
-          product3.vendor = res.body.vendor
+          product3.vendor = res.body.vendor._id
           postit2.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }
