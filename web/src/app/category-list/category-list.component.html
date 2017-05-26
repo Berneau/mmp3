@@ -5,11 +5,11 @@
       <li *ngFor="let category of store.categories" class="col s12 m4 l3">
         <a [routerLink]="['/produkte', category._id]">
           <div class="card">
-            <div class="card-image">
+            <div class="card-image" *ngIf="category.imageUrl">
               <img class="activator" src="assets/{{category.imageUrl}}">
             </div>
             <div class="card-content">
-              <h3 class="card-title">{{category.name}}</h3>
+              <h3 class="card-title" *ngIf="category.name">{{category.name}}</h3>
               <p class="further-link">
                 mehr
                 <i class="material-icons prefix">keyboard_arrow_right</i>

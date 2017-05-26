@@ -2,11 +2,11 @@
   <ul>
     <li *ngFor="let product of store.vendorProducts" class="col s12 m4 l3">
       <div class="card">
-        <div class="card-image">
+        <div class="card-image" *ngIf="product.imageUrl">
           <img class="activator" src="assets/{{product.imageUrl}}">
         </div>
         <div class="card-content">
-          <p class="product-available">
+          <p class="product-available"  *ngIf="product.availableAt.fromPeriod && product.availableAt.fromMonth && product.availableAt.toPeriod && product.availableAt.toMonth">
             {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
           </p>
           <h3 class="card-title">{{product.name}}</h3>

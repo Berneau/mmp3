@@ -2,18 +2,18 @@
   <div class="row">
     <div class="col s12 m6 category-name">
       <h5 *ngIf="type">{{type.name}}</h5>
-      <h3>
+      <h3 *ngIf="category.name">
         {{category.name}}
       </h3>
     </div>
-    <div class="col s12 m6 category-image">
+    <div class="col s12 m6 category-image"  *ngIf="category.imageUrl">
       <img class="responsive-img circle" src="assets/{{category.imageUrl}}" alt="category-image">
     </div>
   </div>
   <div class="row category-products">
     <div class="landing-page-headline">
       <h4>Produzenten</h4>
-      <h5>Diese Produzenten verkaufen Produkte in der Produktkategorie '{{category.name}}'</h5>
+      <h5 *ngIf="category.name">Diese Produzenten verkaufen Produkte in der Produktkategorie '{{category.name}}'</h5>
     </div>
     <product-vendor-list [category]="category"></product-vendor-list>
   </div>

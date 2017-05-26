@@ -2,12 +2,12 @@
   <ul>
     <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="col s12 m4 l3">
       <div class="card" (click)="selectPostit(postit)">
-        <div class="card-image">
+        <div class="card-image" *ngIf="postit.imageUrl">
           <img class="activator" src="assets/{{postit.imageUrl}}">
         </div>
         <div class="card-content">
           <p class="postit-location" *ngIf="postit.location">{{postit.location}}</p>
-          <h3 class="card-title">{{postit.name}}</h3>
+          <h3 class="card-title" *ngIf="postit.name">{{postit.name}}</h3>
           <p class="further-link">
             mehr lesen
             <i class="material-icons prefix">keyboard_arrow_right</i>

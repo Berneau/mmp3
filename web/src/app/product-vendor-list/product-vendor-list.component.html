@@ -2,13 +2,16 @@
   <ul>
     <li *ngFor="let product of store.categoryProducts" class="col s12 m4 l3">
       <div class="card">
-        <div class="card-image">
+        <div class="card-image" *ngIf="product.imageUrl">
           <img class="activator" src="assets/{{product.imageUrl}}">
         </div>
         <div class="card-content">
-          <p class="product-name">{{product.name}}</p>
-          <h3 class="card-title">{{product.vendor.name}}</h3>
-          <p class="further-link" [routerLink]="['/produzenten', product.vendor._id]">
+          <p class="product-available"  *ngIf="product.availableAt.fromPeriod && product.availableAt.fromMonth && product.availableAt.toPeriod && product.availableAt.toMonth">
+            {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
+          </p>
+          <p class="product-name" *ngIf="product.name">{{product.name}}</p>
+          <h3 class="card-title" *ngIf="product.vendor.name">{{product.vendor.name}}</h3>
+          <p class="further-link" [routerLink]="['/produzenten', product.vendor._id]" *ngIf="product.vendor._id">
             zum Produzenten
             <i class="material-icons prefix">keyboard_arrow_right</i>
           </p>
