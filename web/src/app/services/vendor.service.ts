@@ -42,7 +42,7 @@ export class VendorService {
       .catch(this.handleError)
   }
 
-  addVendor(form, userEmail) {
+  addVendor(form) {
     let url = `${this.apiEndpoint}/vendors`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -53,7 +53,7 @@ export class VendorService {
     let v = {
       name: form.name,
       userUid: form.userUid,
-      email: userEmail,
+      email: form.email,
       description: form.description,
       imageUrl: form.imageUrl ? form.imageUrl : 'vendor.png',
       farmImageUrl: form.farmImageUrl ? form.farmImageUrl : 'farm.png',

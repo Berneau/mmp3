@@ -12,8 +12,11 @@ export class UserService {
   private headers = new Headers({
     'Content-Type': 'application/json'
   })
+  passwordLength: number
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.passwordLength = 6
+  }
 
   getUser(id): Promise<any> {
     let url = `${this.apiEndpoint}/users/${id}`
@@ -61,9 +64,9 @@ export class UserService {
     })
 
     let u = {
-      email: form.email,
+      email: user.email,
       password: form.password,
-      isAdmin: form.isAsmin
+      isAdmin: form.isAdmin
     }
 
     return this.http

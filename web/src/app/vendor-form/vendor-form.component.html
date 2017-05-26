@@ -84,6 +84,8 @@
     </div>
   </mz-modal-content>
   <mz-modal-footer>
+    <button mz-button [flat]="true" *ngIf="user" class="left"(click)="editUser()">Passwörter bearbeiten</button>
+
     <button mz-button [flat]="true" (click)="submit()">Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>

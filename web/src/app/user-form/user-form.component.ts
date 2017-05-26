@@ -24,26 +24,26 @@ export class UserFormComponent extends MzBaseModal {
   userForm: FormGroup
   @Input() user: User
   isAdmin: boolean
-  passwordLength: number
 
   ngOnInit() {
     this.createForm()
-    this.passwordLength = 6
   }
 
   createForm() {
     if (this.user) {
       this.userForm = this.fb.group({
-        email: [this.user.email, Validators.required],
-        password: [this.user.password, [Validators.required, Validators.minLength(this.passwordLength)]],
+        email: [{ value: this.user.email, disabled: true }, Validators.required],
+        password: [this.user.password, [Validators.required, Validators.minLength(this.store.passwordLength)]],
         passwordConfirm: ['', Validators.required],
         isAdmin: [false, Validators.required]
-      });
+      }, {
+          validator: PasswordValidation.MatchPassword // checks if password and passwordConfirm matches
+        });
     }
     else {
       this.userForm = this.fb.group({
         email: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(this.passwordLength)]],
+        password: ['', [Validators.required, Validators.minLength(this.store.passwordLength)]],
         passwordConfirm: ['', Validators.required],
         isAdmin: [false, Validators.required]
       }, {
