@@ -8,14 +8,19 @@ import { LoginService } from '../services/login.service'
 @Injectable()
 export class AdminGuard implements CanActivate {
 
-  constructor(private LoginService: LoginService, private router: Router) { }
+  constructor(private LoginStore: LoginService, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if(!this.LoginService.isAdmin()){
-        this.router.navigate(['/404'])
+      if(!this.LoginStore.isAdmin()){
+        if(JSON.parse(localStorage.getItem('currentUser'))) {
+          this.router.navigate(['/'])
+        }
+        else {
+          this.router.navigate(['/404'])
+        }
       }
-    return this.LoginService.isAdmin()
+    return this.LoginStore.isAdmin()
   }
 }

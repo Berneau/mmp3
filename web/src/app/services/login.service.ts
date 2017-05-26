@@ -5,6 +5,8 @@ import { Headers, Http, Response } from '@angular/http';
 import { User } from './../interfaces/user'
 import { ApiEndpoint } from './../app.config'
 
+import { UserService } from './../services/user.service'
+
 @Injectable()
 export class LoginService {
   public token: string
@@ -15,10 +17,15 @@ export class LoginService {
   private headers = new Headers({ 'Content-Type': 'application/json' })
   private url = `${this.apiEndpoint}/auth`
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private UserStore: UserService) {
+    this.currentUser = null
+    this.token = null
+    this.currentUserIsAdmin = false
+    this.currentUserIsLoggedIn = false
     // // set token if saved in local storage
-    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
-    // this.token = this.currentUser && this.currentUser.token
+    if(JSON.parse(localStorage.getItem('currentUser'))) {
+      this.setCurrentUserFromToken(JSON.parse(localStorage.getItem('currentUser')))
+    }
   }
 
   login(form) {
@@ -38,7 +45,7 @@ export class LoginService {
 
         if (token) {
           this.token = token
-          localStorage.setItem('currentUser', JSON.stringify({ email: form.email, _id: res.json().user._id, token: token }))
+          localStorage.setItem('currentUser', JSON.stringify({token: token, _id: res.json().user._id }))
         }
 
         return res.json().user
@@ -65,6 +72,18 @@ export class LoginService {
     this.token = token
     this.currentUserIsLoggedIn = isLoggedIn
     this.currentUserIsAdmin = isAdmin
+  }
+
+  setCurrentUserFromToken(storage) {
+    this.UserStore.getUser(storage._id)
+    .then (user => {
+      // to set isAdmin before admin-guard asks if current user is admin
+      this.currentUserIsAdmin = user.isAdmin
+
+      let token = storage.token
+      let isLoggedIn = token ? true : false
+      this.setCurrentUser(user, token, isLoggedIn, user.isAdmin)
+    })
   }
 
   isLoggedIn(): boolean {

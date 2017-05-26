@@ -17,9 +17,13 @@ export class UserService {
 
   getUser(id): Promise<any> {
     let url = `${this.apiEndpoint}/users/${id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
 
     return this.http
-      .get(url)
+      .get(url, { headers: authHeaders })
       .toPromise()
       .then((res) => {
         return res.json().user as User
