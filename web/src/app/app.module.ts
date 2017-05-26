@@ -46,6 +46,7 @@ import { SearchFieldComponent } from './search-field/search-field.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
@@ -96,6 +97,9 @@ const appRoutes: Routes = [
   { path: 'sitemap', component: SitemapComponent },
   { path: 'über-uns', component: AboutComponent },
   { path: 'impressum', component: ImprintComponent },
+  { path: '404', component: NotFoundComponent },
+
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({
@@ -136,7 +140,8 @@ const appRoutes: Routes = [
     ImprintComponent,
     AboutComponent,
     PostitConfirmedPipePipe,
-    AdminVendorListComponent
+    AdminVendorListComponent,
+    NotFoundComponent
   ],
   entryComponents: [
     PostitFormComponent,
