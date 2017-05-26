@@ -42,17 +42,18 @@ export class VendorService {
       .catch(this.handleError)
   }
 
-  addVendor(user, form) {
+  addVendor(form, userEmail) {
     let url = `${this.apiEndpoint}/vendors`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
     })
 
+
     let v = {
       name: form.name,
-      userUid: user._id,
-      email: user.email,
+      userUid: form.userUid,
+      email: userEmail,
       description: form.description,
       imageUrl: form.imageUrl ? form.imageUrl : 'vendor.png',
       farmImageUrl: form.farmImageUrl ? form.farmImageUrl : 'farm.png',
@@ -152,9 +153,13 @@ export class VendorService {
       })
       .catch(this.handleError)
 
-      return positions
+    return positions
   }
 
+  getVendorByUserId(userId) {
+    let vendor = {id: 'rgerweh'} // TODO: fetch right data
+    return vendor
+  }
 
   private handleError(error: any) {
     console.log(error.statusText, 2000)
