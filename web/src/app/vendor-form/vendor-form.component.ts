@@ -1,11 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
+import { MzBaseModal, MzModalComponent, MzModalService } from 'ng2-materialize';
 
 import { Vendor } from './../interfaces/vendor'
 import { User } from './../interfaces/user'
 
 import { VendorService } from './../services/vendor.service'
+import { UserService } from './../services/user.service'
+
+import { UserFormComponent } from './../user-form/user-form.component'
+
+import { PasswordValidation } from './../helpers/password-confirmation'
 
 @Component({
   selector: 'vendor-form',
@@ -18,11 +23,17 @@ export class VendorFormComponent extends MzBaseModal {
   @Input() vendor: Vendor
   @Input() user: User
 
-  constructor(private fb: FormBuilder, private store: VendorService) {
+  constructor(private fb: FormBuilder, private store: VendorService, private UserStore: UserService, private modalService: MzModalService) {
     super()
   }
 
   ngOnInit() {
+    if (this.vendor && !this.user) {
+      this.UserStore.getUser(this.vendor.userUid)
+        .then(user => {
+          this.user = user
+        })
+    }
     this.createForm()
   }
 
@@ -31,7 +42,7 @@ export class VendorFormComponent extends MzBaseModal {
       this.vendorForm = this.fb.group({
         name: [this.vendor.name, Validators.required],
         userUid: [this.vendor.userUid, Validators.required],
-        email: [{ value: this.vendor.email, disabled: true }, Validators.required],
+        email: [this.vendor.email, Validators.required],
         description: this.vendor.description,
         imageUrl: this.vendor.imageUrl,
         farmImageUrl: this.vendor.farmImageUrl,
@@ -49,7 +60,7 @@ export class VendorFormComponent extends MzBaseModal {
       this.vendorForm = this.fb.group({
         name: ['', Validators.required],
         userUid: [this.user._id, Validators.required],
-        email: { value: this.user.email, disabled: true },
+        email: [this.user.email, Validators.required],
         description: '',
         imageUrl: '',
         farmImageUrl: '',
@@ -80,8 +91,12 @@ export class VendorFormComponent extends MzBaseModal {
     }
   }
 
+  editUser() {
+    this.modalService.open(UserFormComponent, { user: this.user });
+  }
+
   newVendor() {
-    this.store.addVendor(this.vendorForm.value, this.user.email)
+    this.store.addVendor(this.vendorForm.value)
       .then(vendor => {
         if (!vendor) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
@@ -93,12 +108,12 @@ export class VendorFormComponent extends MzBaseModal {
 
   updateVendor(v) {
     this.store.updateVendor(v, this.vendorForm.value)
-    .then(vendor => {
-      if (!vendor) {
-        Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
-        return
-      }
-      Materialize.toast('Änderungen gespeichert.', 2000)
-    })
+      .then(vendor => {
+        if (!vendor) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Änderungen gespeichert.', 2000)
+      })
   }
 }
