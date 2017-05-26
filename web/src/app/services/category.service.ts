@@ -76,33 +76,40 @@ export class CategoryService {
         this.getCategories()
         return res.json()
       })
-      .catch(this.handleError)
-  }
-
-  updateCategory(category, form) {
-    let url = `${this.apiEndpoint}/categories/${category._id}`
-    let token = JSON.parse(localStorage.getItem('currentUser')).token
-    let authHeaders = new Headers({
-      'Content-Type': 'application/json', 'x-access-token': token
-    })
-
-    let c = {
-      name: form.name,
-      typeUid: form.typeUid,
-      imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
-    }
-
-    return this.http
-      .put(url, JSON.stringify(c), { headers: authHeaders })
-      .toPromise()
-      .then((res: Response) => {
-        this.getCategories()
-        return res.json().category as Category
+      .catch((err) => {
+        if (err.json().message == "Category is in use by at least one product - not deleted") {
+          Materialize.toast('Die Kategorie enthält Produkte!', 2000)
+        }
+        else {
+          this.handleError(err)
+        }
       })
-      .catch(this.handleError)
   }
+
+updateCategory(category, form) {
+  let url = `${this.apiEndpoint}/categories/${category._id}`
+  let token = JSON.parse(localStorage.getItem('currentUser')).token
+  let authHeaders = new Headers({
+    'Content-Type': 'application/json', 'x-access-token': token
+  })
+
+  let c = {
+    name: form.name,
+    typeUid: form.typeUid,
+    imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
+  }
+
+  return this.http
+    .put(url, JSON.stringify(c), { headers: authHeaders })
+    .toPromise()
+    .then((res: Response) => {
+      this.getCategories()
+      return res.json().category as Category
+    })
+    .catch(this.handleError)
+}
 
   private handleError(error: any) {
-    console.log(error.statusText, 2000)
-  }
+  console.log(error.statusText, 2000)
+}
 }

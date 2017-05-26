@@ -27,13 +27,28 @@ export class TypeFormComponent extends MzBaseModal {
   createForm() {
     if (this.type) {
       this.typeForm = this.fb.group({
-        name: this.type.name
+        name: [this.type.name, Validators.required]
       });
     }
     else {
       this.typeForm = this.fb.group({
-        name: ''
+        name: ['', Validators.required]
       });
+    }
+  }
+
+  submit() {
+    if (this.typeForm.valid) {
+      if (this.type) {
+        this.updateType(this.type)
+      }
+      else {
+        this.newType()
+      }
+      this.modalComponent.close()
+    }
+    else {
+      Materialize.toast('Kontrollieren Sie bitte alle Felder.', 2000)
     }
   }
 

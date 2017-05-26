@@ -30,19 +30,42 @@ export class UserFormComponent extends MzBaseModal {
   createForm() {
     if (this.user) {
       this.userForm = this.fb.group({
-        email: this.user.email,
-        password: this.user.password,
-        passwordConfirm: this.user.password,
-        isAdmin: false
+        email: [this.user.email, Validators.required],
+        password: [this.user.password, Validators.required],
+        passwordConfirm: ['', Validators.required],
+        isAdmin: [false, Validators.required]
       });
     }
     else {
       this.userForm = this.fb.group({
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        isAdmin: false
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+        passwordConfirm: ['', [Validators.required, this.passwordsEqual]],
+        isAdmin: [false, Validators.required]
       });
+    }
+  }
+
+  passwordsEqual(a) {
+    if (a) {
+      console.log(a, a.parent, this)
+    }
+    return null
+  }
+
+  submit() {
+    if (this.userForm.valid) {
+      if (this.user) {
+        this.updateUser(this.user)
+      }
+      else {
+        console.log(this.userForm)
+        // this.newUser()
+      }
+      this.modalComponent.close()
+    }
+    else {
+      Materialize.toast('Kontrollieren Sie bitte alle Felder.', 2000)
     }
   }
 
@@ -53,19 +76,19 @@ export class UserFormComponent extends MzBaseModal {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
           return
         }
-        this.modalService.open(VendorFormComponent, {user: user});
+        this.modalService.open(VendorFormComponent, { user: user });
       })
   }
 
   updateUser(u) {
     this.store.updateUser(u, this.userForm.value)
-    .then(user => {
-      if (!user) {
-        Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
-        return
-      }
-      Materialize.toast('Änderungen gespeichert.', 2000)
-    })
+      .then(user => {
+        if (!user) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Änderungen gespeichert.', 2000)
+      })
   }
 
 }

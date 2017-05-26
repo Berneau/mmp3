@@ -70,7 +70,14 @@ export class TypeService {
         this.getTypes()
         return res.json()
       })
-      .catch(this.handleError)
+      .catch((err) => {
+        if (err.json().message == "Type is in use by at least one category - not deleted") {
+          Materialize.toast('Mindestens eine Kategorie hat diesen Typ!', 2000)
+        }
+        else {
+          this.handleError(err)
+        }
+      })
   }
 
   updateType(type, form) {
