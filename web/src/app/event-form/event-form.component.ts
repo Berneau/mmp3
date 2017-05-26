@@ -53,8 +53,8 @@ export class EventFormComponent extends MzBaseModal {
   createForm() {
     if (this.event) {
       this.eventForm = this.fb.group({
-        name: this.event.name,
-        date: this.event.date,
+        name: [this.event.name, [Validators.required]],
+        date: [this.event.date, [Validators.required]],
         description: this.event.description,
         location: this.fb.group({
           name: this.event.location.name,
@@ -65,8 +65,8 @@ export class EventFormComponent extends MzBaseModal {
     }
     else {
       this.eventForm = this.fb.group({
-        name: '',
-        date: '',
+        name: ['', [Validators.required]],
+        date: ['', [Validators.required]],
         description: '',
         location: this.fb.group({
           name: '',
@@ -74,6 +74,21 @@ export class EventFormComponent extends MzBaseModal {
           long: ''
         })
       });
+    }
+  }
+
+  submit() {
+    if (this.eventForm.valid) {
+      if (this.event) {
+        this.updateEvent(this.event)
+      }
+      else {
+        this.newEvent()
+      }
+      this.modalComponent.close()
+    }
+    else {
+      Materialize.toast('Kontrollieren Sie bitte alle Felder.', 2000)
     }
   }
 

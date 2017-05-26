@@ -14,7 +14,7 @@
             <input mz-input id="event-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
           </mz-input-container>
           <mz-input-container class="input-field col s12 m6 form-group">
-            <input mz-input id="event-date" class="datepicker" type="date" formControlName="date" [label]="'Datum'" [validate]="true">
+            <input mz-input id="event-date" class="datepicker" data-date-format="DD-MMMM-YYYY" type="date" formControlName="date" [label]="'Datum'" [validate]="true">
           </mz-input-container>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
     </div>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="event ? this.updateEvent(event) : this.newEvent()" mz-modal-close>Speichern</button>
+    <button mz-button [flat]="true" (click)="submit()">Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>

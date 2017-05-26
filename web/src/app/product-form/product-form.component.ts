@@ -36,27 +36,42 @@ export class ProductFormComponent extends MzBaseModal {
   createForm() {
     if (this.product) {
       this.productForm = this.fb.group({
-        name: this.product.name,
-        categoryId: this.product.categoryId,
-        vendor: { value: this.vendor != undefined ? this.vendor : null, disabled: true },
-        fromPeriod: this.product.availableAt.fromPeriod,
-        fromMonth: this.product.availableAt.fromMonth,
-        toPeriod: this.product.availableAt.toPeriod,
-        toMonth: this.product.availableAt.toMonth,
+        name: [this.product.name, Validators.required],
+        categoryId: [this.product.categoryId, Validators.required],
+        vendor: [{value: this.vendor != undefined ? this.vendor : null, disabled: true }, Validators.required],
+        fromPeriod: [this.product.availableAt.fromPeriod, Validators.required],
+        fromMonth: [this.product.availableAt.fromMonth, Validators.required],
+        toPeriod: [this.product.availableAt.toPeriod, Validators.required],
+        toMonth: [this.product.availableAt.toMonth, Validators.required],
         imageUrl: this.product.imageUrl
       });
     }
     else {
       this.productForm = this.fb.group({
-        name: '',
-        categoryId: '',
-        vendor: { value: this.vendor != undefined ? this.vendor : null, disabled: true },
-        fromPeriod: '',
-        fromMonth: '',
-        toPeriod: '',
-        toMonth: '',
+        name: ['', Validators.required],
+        categoryId: ['', Validators.required],
+        vendor: [{value: this.vendor != undefined ? this.vendor : null, disabled: true }, Validators.required],
+        fromPeriod: ['', Validators.required],
+        fromMonth: ['', Validators.required],
+        toPeriod: ['', Validators.required],
+        toMonth: ['', Validators.required],
         imageUrl: ''
       });
+    }
+  }
+
+  submit() {
+    if (this.productForm.valid) {
+      if (this.product) {
+        this.updateProduct(this.product)
+      }
+      else {
+        this.newProduct()
+      }
+      this.modalComponent.close()
+    }
+    else {
+      Materialize.toast('Kontrollieren Sie bitte alle Felder.', 2000)
     }
   }
 
@@ -73,13 +88,13 @@ export class ProductFormComponent extends MzBaseModal {
 
   updateProduct(p) {
     this.store.updateProduct(this.vendor, p, this.productForm.value)
-    .then(product => {
-      if (!product) {
-        Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
-        return
-      }
-      Materialize.toast('Änderungen gespeichert.', 2000)
-    })
+      .then(product => {
+        if (!product) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Änderungen gespeichert.', 2000)
+      })
   }
 
 }

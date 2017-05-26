@@ -29,14 +29,15 @@ export class VendorFormComponent extends MzBaseModal {
   createForm() {
     if (this.vendor) {
       this.vendorForm = this.fb.group({
-        name: this.vendor.name,
-        subName: this.vendor.subName,
-        email: { value: this.vendor.email, disabled: true },
+        name: [this.vendor.name, Validators.required],
+        userUid: [this.vendor.userUid, Validators.required],
+        email: [{ value: this.vendor.email, disabled: true }, Validators.required],
+        description: this.vendor.description,
         imageUrl: this.vendor.imageUrl,
         farmImageUrl: this.vendor.farmImageUrl,
-        description: this.vendor.description,
-        tel: this.vendor.tel,
+        subName: this.vendor.subName,
         website: this.vendor.website,
+        tel: this.vendor.tel,
         city: this.vendor.address.city,
         street: this.vendor.address.street,
         zip: this.vendor.address.zip,
@@ -46,14 +47,15 @@ export class VendorFormComponent extends MzBaseModal {
     }
     else {
       this.vendorForm = this.fb.group({
-        name: '',
-        subName: '',
+        name: ['', Validators.required],
+        userUid: [this.user._id, Validators.required],
         email: { value: this.user.email, disabled: true },
+        description: '',
         imageUrl: '',
         farmImageUrl: '',
-        description: '',
-        tel: '',
+        subName: '',
         website: '',
+        tel: '',
         city: '',
         street: '',
         zip: '',
@@ -63,8 +65,23 @@ export class VendorFormComponent extends MzBaseModal {
     }
   }
 
+  submit() {
+    if (this.vendorForm.valid) {
+      if (this.vendor) {
+        this.updateVendor(this.vendor)
+      }
+      else {
+        this.newVendor()
+      }
+      this.modalComponent.close()
+    }
+    else {
+      Materialize.toast('Kontrollieren Sie bitte alle Felder.', 2000)
+    }
+  }
+
   newVendor() {
-    this.store.addVendor(this.user, this.vendorForm.value)
+    this.store.addVendor(this.vendorForm.value, this.user.email)
       .then(vendor => {
         if (!vendor) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)

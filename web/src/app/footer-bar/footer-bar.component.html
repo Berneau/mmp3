@@ -31,7 +31,7 @@
         </div>
         <div class="col s12 m3 footer-button">
           <button *ngIf="!this.LoginStore.isLoggedIn()" class="btn yellow" [routerLink]="['login']">Login</button>
-          <button *ngIf="this.LoginStore.isLoggedIn()" class="btn yellow" (click)="this.LoginStore.logout(); this.LoginStore.navigateToLandingPage()">Logout</button>
+          <button *ngIf="this.LoginStore.isLoggedIn()" class="btn yellow" (click)="this.LoginStore.logout(); this.LoginStore.navigateTo('')">Logout</button>
         </div>
       </div>
     </div>

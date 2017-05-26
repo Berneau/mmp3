@@ -4,8 +4,8 @@ export class Event {
   date: Date
   description?: string
   location?: {
-    name: string
-    lat: number
-    long: number
+    name?: string
+    lat?: number
+    long?: number
   }
 }

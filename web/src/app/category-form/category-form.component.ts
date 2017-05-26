@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MzBaseModal, MzModalComponent } from 'ng2-materialize';
+import { MzBaseModal, MzModalComponent, MzModalService } from 'ng2-materialize';
 
 import { Category } from './../interfaces/category'
 import { Type } from './../interfaces/type'
@@ -18,7 +18,7 @@ export class CategoryFormComponent extends MzBaseModal {
   categoryForm: FormGroup
   @Input() category: Category
 
-  constructor(private fb: FormBuilder, private TypeStore: TypeService, private store: CategoryService) {
+  constructor(private fb: FormBuilder, private TypeStore: TypeService, private store: CategoryService, private modalService: MzModalService) {
     super()
   }
 
@@ -27,24 +27,39 @@ export class CategoryFormComponent extends MzBaseModal {
     this.TypeStore.getTypes()
     $('#category-image').change('input', (e) => {
       let imageUrl = $(e.target).val()
-      this.categoryForm.patchValue({imageUrl: imageUrl})
+      this.categoryForm.patchValue({ imageUrl: imageUrl })
     })
   }
 
   createForm() {
     if (this.category) {
       this.categoryForm = this.fb.group({
-        name: this.category.name,
-        typeUid: this.category.typeUid,
+        name: [this.category.name, [Validators.required]],
+        typeUid: [this.category.typeUid, [Validators.required]],
         imageUrl: this.category.imageUrl
       });
     }
     else {
       this.categoryForm = this.fb.group({
-        name: '',
-        typeUid: '',
+        name: ['', [Validators.required]],
+        typeUid: ['', [Validators.required]],
         imageUrl: ''
       });
+    }
+  }
+
+  submit() {
+    if (this.categoryForm.valid) {
+      if (this.category) {
+        this.updateCategory(this.category)
+      }
+      else {
+        this.newCategory()
+      }
+      this.modalComponent.close()
+    }
+    else {
+      Materialize.toast('Kontrollieren Sie bitte alle Felder.', 2000)
     }
   }
 
@@ -61,13 +76,13 @@ export class CategoryFormComponent extends MzBaseModal {
 
   updateCategory(p) {
     this.store.updateCategory(p, this.categoryForm.value)
-    .then(category => {
-      if (!category) {
-        Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
-        return
-      }
-      Materialize.toast('Änderungen gespeichert.', 2000)
-    })
+      .then(category => {
+        if (!category) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Änderungen gespeichert.', 2000)
+      })
   }
 
 }

@@ -104,7 +104,7 @@ let category3 = new Category({
 let category4 = new Category({
   name: 'Schnitzereien',
   typeUid: '',
-  imageUrl: 'image.url'
+  imageUrl: 'category.png'
 })
 let product1 = new Product({
   name: 'Grüne Äpfel',

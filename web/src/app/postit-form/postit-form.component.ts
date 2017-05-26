@@ -33,8 +33,8 @@ export class PostitFormComponent extends MzBaseModal {
   createForm() {
     if (this.postit) {
       this.postitForm = this.fb.group({
-        name: this.postit.name,
-        confirmed: false,
+        name: [this.postit.name, [Validators.required]],
+        confirmed: [false, [Validators.required]],
         vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         description: this.postit.description,
         location: this.postit.location,
@@ -43,13 +43,28 @@ export class PostitFormComponent extends MzBaseModal {
     }
     else {
       this.postitForm = this.fb.group({
-        name: '',
-        confirmed: false,
+        name: ['', [Validators.required]],
+        confirmed: [false, [Validators.required]],
         vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         description: '',
         location: '',
         imageUrl: ''
       });
+    }
+  }
+
+  submit() {
+    if (this.postitForm.valid) {
+      if (this.postit) {
+        this.updatePostit(this.postit)
+      }
+      else {
+        this.newPostit()
+      }
+      this.modalComponent.close()
+    }
+    else {
+      Materialize.toast('Kontrollieren Sie bitte alle Felder.', 2000)
     }
   }
 
