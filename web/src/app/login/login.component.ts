@@ -41,8 +41,12 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/admin'])
             }
             else {
-              let vendor = this.VendorStore.getVendorByUserId(user._id)
-              this.router.navigate(['/produzenten'])
+              this.VendorStore.getVendorByUserId(user._id)
+                .then(vendor => {
+                  if (vendor) {
+                    this.router.navigate(['/produzenten', vendor._id])
+                  }
+                })
             }
           }
         })

@@ -156,9 +156,16 @@ export class VendorService {
     return positions
   }
 
-  getVendorByUserId(userId) {
-    let vendor = {id: 'rgerweh'} // TODO: fetch right data
-    return vendor
+  getVendorByUserId(id) {
+    let url = `${this.apiEndpoint}/vendors?userId=${id}`
+
+    return this.http
+      .get(url)
+      .toPromise()
+      .then((res) => {
+        return res.json().vendor as Vendor
+      })
+      .catch(this.handleError)
   }
 
   private handleError(error: any) {

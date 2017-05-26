@@ -54,7 +54,7 @@
     <div class="landing-page-headline">
       <h4>Produkte</h4>
     </div>
-    <div class="add-btns" *ngIf="this.LoginStore.isLoggedIn()">
+    <div class="add-btns" *ngIf="LoginStore.isCurrentVendor(vendor.userUid)">
       <button mz-button (click)="this.openNewProductModal()" class="add-btn">Produkt
         <i class="material-icons left">add</i>
       </button>

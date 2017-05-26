@@ -23,7 +23,7 @@ export class LoginService {
     this.currentUserIsAdmin = false
     this.currentUserIsLoggedIn = false
     // // set token if saved in local storage
-    if(JSON.parse(localStorage.getItem('currentUser'))) {
+    if (JSON.parse(localStorage.getItem('currentUser'))) {
       this.setCurrentUserFromToken(JSON.parse(localStorage.getItem('currentUser')))
     }
   }
@@ -41,11 +41,11 @@ export class LoginService {
         let token = res.json() && res.json().token
         let isAdmin = res.json() && res.json().user.isAdmin
         let isLoggedIn = token ? true : false
-        this.setCurrentUser(res.json().user, token, isLoggedIn, isAdmin )
+        this.setCurrentUser(res.json().user, token, isLoggedIn, isAdmin)
 
         if (token) {
           this.token = token
-          localStorage.setItem('currentUser', JSON.stringify({token: token, _id: res.json().user._id }))
+          localStorage.setItem('currentUser', JSON.stringify({ token: token, _id: res.json().user._id }))
         }
 
         return res.json().user
@@ -59,7 +59,7 @@ export class LoginService {
   }
 
   navigateTo(route) {
-    if(route == "") {
+    if (route == "") {
       this.router.navigate(['/'])
     }
     else {
@@ -76,14 +76,14 @@ export class LoginService {
 
   setCurrentUserFromToken(storage) {
     this.UserStore.getUser(storage._id)
-    .then (user => {
-      // to set isAdmin before admin-guard asks if current user is admin
-      this.currentUserIsAdmin = user.isAdmin
-
-      let token = storage.token
-      let isLoggedIn = token ? true : false
-      this.setCurrentUser(user, token, isLoggedIn, user.isAdmin)
-    })
+      .then(user => {
+        if (user) {
+          this.currentUser = user
+          this.token = storage.token
+          this.currentUserIsLoggedIn = storage.token ? true : false
+          this.currentUserIsAdmin = user.isAdmin ? true : false
+        }
+      })
   }
 
   isLoggedIn(): boolean {
@@ -92,6 +92,13 @@ export class LoginService {
 
   isAdmin(): boolean {
     return this.currentUserIsAdmin
+  }
+
+  isCurrentVendor(id): boolean {
+    if(this.currentUser) {
+      return id == this.currentUser._id
+    }
+    return false
   }
 
   handleError(err) {
