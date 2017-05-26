@@ -6,7 +6,7 @@ module.exports = function(router) {
 
   router.route('/products')
   /**
-   * @api {get} /products?filter=<filter>&categoryId=<categoryId>&<vendorId=<vendorId> Get all products with optional search by vendor or category
+   * @api {get} /products?filter=<filter>&categoryId=<categoryId>&vendorId=<vendorId> Get all products with optional search by vendor or category
    * @apiName GetProducts
    * @apiGroup Products
    * @apiPermission none
@@ -61,7 +61,7 @@ module.exports = function(router) {
       else if (vendorId && !categoryId) {
 
         Product
-        .find({ 'vendor._id': vendorId }, function(err, products) {
+        .find({ 'vendor': vendorId }, function(err, products) {
 
           // internal server error
           if (err) res.status(500).json({
