@@ -5,32 +5,47 @@ import { Headers, Http, Response } from '@angular/http';
 import { User } from './../interfaces/user'
 import { ApiEndpoint } from './../app.config'
 
+import { UserService } from './../services/user.service'
+
 @Injectable()
 export class LoginService {
   public token: string
   public currentUserIsAdmin: boolean
+  public currentUserIsLoggedIn: boolean
+  public currentUser: User
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({ 'Content-Type': 'application/json' })
   private url = `${this.apiEndpoint}/auth`
-  currentUser: User
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
-    // set token if saved in local storage
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
-    this.token = this.currentUser && this.currentUser.token
-    this.currentUserIsAdmin = this.currentUser && this.currentUser.isAdmin
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router, private UserStore: UserService) {
+    this.currentUser = null
+    this.token = null
+    this.currentUserIsAdmin = false
+    this.currentUserIsLoggedIn = false
+    // // set token if saved in local storage
+    if(JSON.parse(localStorage.getItem('currentUser'))) {
+      this.setCurrentUserFromToken(JSON.parse(localStorage.getItem('currentUser')))
+    }
   }
 
-  login(email, password) {
+  login(form) {
+    let user = {
+      email: form.email,
+      password: form.password
+    }
+
     return this.http
-      .post(this.url, JSON.stringify({ email, password }), { headers: this.headers })
+      .post(this.url, JSON.stringify(user), { headers: this.headers })
       .toPromise()
       .then((res: Response) => {
         let token = res.json() && res.json().token
+        let isAdmin = res.json() && res.json().user.isAdmin
+        let isLoggedIn = token ? true : false
+        this.setCurrentUser(res.json().user, token, isLoggedIn, isAdmin )
 
         if (token) {
           this.token = token
-          localStorage.setItem('currentUser', JSON.stringify({ email: email, _id: res.json().user._id, isAdmin: res.json().user.isAdmin, token: token }))
+          localStorage.setItem('currentUser', JSON.stringify({token: token, _id: res.json().user._id }))
         }
 
         return res.json().user
@@ -39,8 +54,7 @@ export class LoginService {
   }
 
   logout(): void {
-    this.token = null
-    this.currentUserIsAdmin = false
+    this.setCurrentUser(null, null, false, false)
     localStorage.removeItem('currentUser')
   }
 
@@ -53,16 +67,31 @@ export class LoginService {
     }
   }
 
+  setCurrentUser(user, token, isLoggedIn, isAdmin) {
+    this.currentUser = user
+    this.token = token
+    this.currentUserIsLoggedIn = isLoggedIn
+    this.currentUserIsAdmin = isAdmin
+  }
+
+  setCurrentUserFromToken(storage) {
+    this.UserStore.getUser(storage._id)
+    .then (user => {
+      // to set isAdmin before admin-guard asks if current user is admin
+      this.currentUserIsAdmin = user.isAdmin
+
+      let token = storage.token
+      let isLoggedIn = token ? true : false
+      this.setCurrentUser(user, token, isLoggedIn, user.isAdmin)
+    })
+  }
+
   isLoggedIn(): boolean {
-    // console.log('isloggedin')
-    if (this.token) return true
-    else return false
+    return this.currentUserIsLoggedIn
   }
 
   isAdmin(): boolean {
-    // console.log("isAdmin")
-    if (this.currentUserIsAdmin) return true
-    else return false
+    return this.currentUserIsAdmin
   }
 
   handleError(err) {
