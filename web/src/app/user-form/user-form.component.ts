@@ -8,6 +8,8 @@ import { UserService } from './../services/user.service'
 
 import { VendorFormComponent } from './../vendor-form/vendor-form.component'
 
+import { PasswordValidation } from './../helpers/password-confirmation'
+
 @Component({
   selector: 'user-form',
   templateUrl: './user-form.component.html',
@@ -40,17 +42,12 @@ export class UserFormComponent extends MzBaseModal {
       this.userForm = this.fb.group({
         email: ['', Validators.required],
         password: ['', Validators.required],
-        passwordConfirm: ['', [Validators.required, this.passwordsEqual]],
+        passwordConfirm: ['', Validators.required],
         isAdmin: [false, Validators.required]
+      }, {
+        validator: PasswordValidation.MatchPassword // checks if password and passwordConfirm matches
       });
     }
-  }
-
-  passwordsEqual(a) {
-    if (a) {
-      console.log(a, a.parent, this)
-    }
-    return null
   }
 
   submit() {
