@@ -1,25 +1,30 @@
 <div class="row product-list">
-  <ul>
-    <li *ngFor="let product of store.vendorProducts" class="col s12 m4 l3">
-      <div class="card">
-        <div class="card-image">
-          <img class="activator" src="assets/{{product.imageUrl}}">
-        </div>
-        <div class="card-content">
-          <p class="product-available">
-            {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
-          </p>
-          <h3 class="card-title">{{product.name}}</h3>
-          <p class="further-link" *ngIf="LoginStore.isLoggedIn()">
-            <button mz-button class="btn yellow" (click)="this.selectProduct(product)">
+  <div class="row" *ngIf="store.vendorProducts">
+    <ul>
+      <li *ngFor="let product of store.vendorProducts" class="col s12 m4 l3">
+        <div class="card">
+          <div class="card-image" *ngIf="product.imageUrl">
+            <img class="activator" src="assets/{{product.imageUrl}}">
+          </div>
+          <div class="card-content">
+            <p class="product-available" *ngIf="product.availableAt.fromPeriod && product.availableAt.fromMonth && product.availableAt.toPeriod && product.availableAt.toMonth">
+              {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
+            </p>
+            <h3 class="card-title">{{product.name}}</h3>
+            <p class="further-link" *ngIf="LoginStore.isLoggedIn()">
+              <button mz-button class="btn yellow" (click)="this.selectProduct(product)">
               <i class="material-icons">mode_edit</i>
             </button>
-            <button mz-button class="btn orange" (click)="this.deleteProduct(product)">
+              <button mz-button class="btn orange" (click)="this.deleteProduct(product)">
               <i class="material-icons">delete</i>
             </button>
-          </p>
+            </p>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="row" *ngIf="!store.vendorProducts">
+    <p class="no-items-message">Derzeit gibt es leider keine aktuellen Produkte.</p>
+  </div>
 </div>

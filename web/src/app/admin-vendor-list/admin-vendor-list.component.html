@@ -15,3 +15,8 @@
     </li>
   </ul>
 </div>
+<div *ngIf="!store.vendors">
+  <div class="row">
+    <p class="no-items-message">Derzeit gibt es leider keine aktuellen Produzenten.</p>
+  </div>
+</div>

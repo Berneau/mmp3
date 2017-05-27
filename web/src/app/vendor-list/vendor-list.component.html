@@ -1,24 +1,31 @@
 <div class="container">
   <h4 class="page-title">Produzenten</h4>
-  <div class="row vendor-list">
-    <ul>
-      <li *ngFor="let vendor of store.vendors" class="col s12 m4 l3">
-        <a [routerLink]="['/produzenten', vendor._id]">
-          <div class="card">
-            <div class="card-image">
-              <img class="activator" src="assets/{{vendor.imageUrl}}">
+  <div *ngIf="store.vendors">
+    <div class="row vendor-list">
+      <ul>
+        <li *ngFor="let vendor of store.vendors" class="col s12 m4 l3">
+          <a [routerLink]="['/produzenten', vendor._id]">
+            <div class="card">
+              <div class="card-image" *ngIf="vendor.imageUrl">
+                <img class="activator" src="assets/{{vendor.imageUrl}}">
+              </div>
+              <div class="card-content">
+                <p class="vendor-subName" *ngIf="vendor.subName">{{vendor.subName}}</p>
+                <h3 class="card-title" *ngIf="vendor.name">{{vendor.name}}</h3>
+                <p class="further-link">
+                  mehr
+                  <i class="material-icons prefix">keyboard_arrow_right</i>
+                </p>
+              </div>
             </div>
-            <div class="card-content">
-              <p class="vendor-subName" *ngIf="vendor.subName">{{vendor.subName}}</p>
-              <h3 class="card-title">{{vendor.name}}</h3>
-              <p class="further-link">
-                mehr
-                <i class="material-icons prefix">keyboard_arrow_right</i>
-              </p>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="!store.vendors">
+    <div class="row">
+      <p class="no-items-message">Derzeit gibt es leider keine aktuellen Produzenten.</p>
+    </div>
   </div>
 </div>

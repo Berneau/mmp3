@@ -14,3 +14,8 @@
     </li>
   </ul>
 </div>
+<div *ngIf="!store.categories">
+  <div class="row">
+    <p class="no-items-message">Derzeit gibt es leider keine aktuellen Produktkategorien.</p>
+  </div>
+</div>

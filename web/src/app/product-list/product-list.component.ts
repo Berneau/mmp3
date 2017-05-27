@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(p) {
-    this.store.deleteProduct(p._id, p.vendorId)
+    this.store.deleteProduct(p._id, p.vendor)
       .then(success => {
         if (!success) {
           Materialize.toast('Fehlgeschlagen.', 2000)

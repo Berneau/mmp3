@@ -14,3 +14,8 @@
     </li>
   </ul>
 </div>
+<div *ngIf="!(store.postits | postitConfirmedPipe: confirmed)">
+  <div class="row">
+    <p class="no-items-message">Derzeit gibt es leider keine aktuellen <span *ngIf="confirmed">Angebote</span><span *ngIf="!confirmed">Anfragen</span>.</p>
+  </div>
+</div>

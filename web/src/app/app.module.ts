@@ -21,8 +21,6 @@ import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductVendorListComponent } from './product-vendor-list/product-vendor-list.component';
-import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { CategoryListComponent } from './category-list/category-list.component';
@@ -50,7 +48,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 import { ProductService } from './services/product.service';
 import { VendorService } from './services/vendor.service';
-import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
 import { LoginService } from './services/login.service';
 import { EventService } from './services/event.service';
@@ -84,13 +81,6 @@ const appRoutes: Routes = [
       { path: ':id', component: EventDetailComponent }
     ]
   },
-  // { path: 'rezepte', component: RecipeListComponent },
-  // {
-  //   path: 'rezepte',
-  //   children: [
-  //     { path: ':id', component: RecipeDetailComponent }
-  //   ]
-  // },
   { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] },
   { path: 'suche', component: SearchResultsComponent },
   { path: 'login', component: LoginComponent },
@@ -113,8 +103,6 @@ const appRoutes: Routes = [
     SearchResultsComponent,
     VendorListComponent,
     VendorProfileComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
     EventListComponent,
     EventDetailComponent,
     CategoryListComponent,
@@ -165,7 +153,6 @@ const appRoutes: Routes = [
   providers: [
     ProductService,
     VendorService,
-    RecipeService,
     CategoryService,
     LoginService,
     AdminGuard,

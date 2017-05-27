@@ -22,7 +22,9 @@ export class EventService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.events = res.json().events
+        if (res.json().events.length != 0) {
+          this.events = res.json().events
+        }
       })
       .catch(this.handleError)
   }

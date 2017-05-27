@@ -7,10 +7,13 @@ vendor-profile {
     position: relative;
   }
 
+  .farm-image + .profile-head {
+    margin-top: -100px;
+  }
+
   .profile-head {
     background-color: @white-color;
     padding-bottom: 10px;
-    margin-top: -100px;
     color: @primary-color;
 
     .profile-image {
@@ -97,9 +100,12 @@ vendor-profile {
       max-height: 40vh;
     }
 
+    .farm-image + .profile-head {
+      margin-top: -110px;
+    }
+
     .profile-head {
       padding-bottom: 10px;
-      margin-top: -110px;
 
       .row {
         display: flex;

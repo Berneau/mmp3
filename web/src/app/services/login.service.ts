@@ -95,8 +95,13 @@ export class LoginService {
   }
 
   isCurrentVendor(id): boolean {
-    if(this.currentUser) {
-      return id == this.currentUser._id
+    if (this.currentUserIsAdmin && this.currentUser) {
+      return this.currentUserIsAdmin
+    }
+    else {
+      if (this.currentUser) {
+        return id == this.currentUser._id
+      }
     }
     return false
   }
