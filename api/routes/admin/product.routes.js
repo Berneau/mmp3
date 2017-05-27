@@ -12,39 +12,40 @@ module.exports = function(router) {
      *
      * @apiSuccess {String} message Success message.
     */
-    .delete(function(req, res) {
+  .delete(function(req, res) {
 
-      Product.findById(req.params.id, function(err, product) {
+    Product.findById(req.params.id, function(err, product) {
 
-        // not a valid id
-        if (err && err.name != 'CastError') res.status(404).json({
+      // not a valid id
+      if (err && err.name != 'CastError') return res.status(404).json({
+        ok: false,
+        err: err.message
+      })
+
+      // no product with this id found
+      if (!product) return res.status(404).json({
+        ok: false,
+        message: 'Product not found'
+      })
+
+      Product.remove({ _id: req.params.id }, function(err, product) {
+
+        // internal server error
+        if (err) return res.status(500).json({
           ok: false,
           err: err.message
         })
 
-        else if (!err && product) {
-          Product.remove({ _id: req.params.id }, function(err, product) {
-
-            // internal server error
-            if (err) res.status(500).json({
-              ok: false,
-              err: err.message
-            })
-
-            // successfully deleted
-            else res.status(200).json({
-              ok: true,
-              message: 'Successfully deleted'
-            })
-          })
-
-          // no product with this id found
-        } else res.status(404).json({
-          ok: false,
-          message: 'Product not found'
+        // successfully deleted
+        res.status(200).json({
+          ok: true,
+          message: 'Successfully deleted'
         })
 
       })
+
     })
+
+  })
 
 }

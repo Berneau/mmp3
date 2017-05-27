@@ -1,5 +1,6 @@
 var Postit = require('../../models/postit.model')
 var postitIsValid = require('../../helpers/helpers').postitIsValid
+var postitFactory = require('../../helpers/helpers').postitFactory
 
 module.exports = function(router) {
 
@@ -21,39 +22,29 @@ module.exports = function(router) {
  */
   .post(function(req, res) {
 
-    if (!postitIsValid(req.body)) {
+    // not a valid postit Object
+    if (!postitIsValid(req.body)) return res.status(412).json({
+      ok: false,
+      message: 'Missing fields'
+    })
 
-      // not a valid postit Object
-      res.status(412).json({
+    var postit = new Postit()
+    postit = postitFactory(req.body, postit)
+
+    postit.save(function(err) {
+
+      //internal server error
+      if (err) return res.status(500).json({
         ok: false,
-        message: 'Missing fields'
-      })
-    } else {
-
-      var postit = new Postit({
-        name: req.body.name,
-        confirmed: req.body.confirmed,
-        description: req.body.description,
-        location: req.body.location,
-        vendorId: req.body.vendorId,
-        imageUrl: req.body.imageUrl
+        err: err.message
       })
 
-      postit.save(function(err) {
-
-        //internal server error
-        if (err) res.status(500).json({
-          ok: false,
-          err: err.message
-        })
-
-        // return created postit
-        else res.status(200).json({
-          ok: true,
-          postit: postit
-        })
+      // return created postit
+      res.status(200).json({
+        ok: true,
+        postit: postit
       })
-    }
+    })
 
   })
 
