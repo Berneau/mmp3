@@ -57,18 +57,17 @@ export class ProductService {
       .catch(this.handleError)
   }
 
-  deleteProduct(id, vendorId): Promise<any> {
+  deleteProduct(id, vendor): Promise<any> {
     let url = `${this.apiEndpoint}/products/${id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
     })
-
     return this.http
       .delete(url, { headers: authHeaders })
       .toPromise()
       .then((res) => {
-        this.getVendorProducts(vendorId)
+        this.getVendorProducts(vendor._id)
         return res.json()
       })
       .catch(this.handleError)
@@ -111,7 +110,9 @@ export class ProductService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.vendorProducts = res.json().products
+        if (res.json().products.length != 0) {
+          this.vendorProducts = res.json().products
+        }
       })
       .catch(this.handleError)
   }
@@ -123,7 +124,9 @@ export class ProductService {
       .get(url)
       .toPromise()
       .then((res) => {
-        this.categoryProducts = res.json().products
+        if (res.json().products.length != 0) {
+          this.categoryProducts = res.json().products
+        }
       })
       .catch(this.handleError)
   }

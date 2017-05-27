@@ -1,4 +1,5 @@
 <div class="row product-vendor-list">
+  <div class="row" *ngIf="store.categoryProducts">
   <ul>
     <li *ngFor="let product of store.categoryProducts" class="col s12 m4 l3">
       <div class="card">
@@ -19,4 +20,8 @@
       </div>
     </li>
   </ul>
+</div>
+<div class="row" *ngIf="!store.categoryProducts">
+  <p class="no-items-message">Derzeit gibt es leider keine aktuellen Produkte.</p>
+</div>
 </div>
