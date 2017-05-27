@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
+import { ApiEndpoint } from './../app.config';
 
 import { Product } from './../interfaces/product'
 import { Vendor } from './../interfaces/vendor'
-import { ApiEndpoint } from './../app.config';
 
 @Injectable()
 export class ProductService {
 
   vendorProducts: Product[]
   categoryProducts: Product[]
+  private apiEndpoint = ApiEndpoint
 
   constructor(private http: Http) { }
-
-  private apiEndpoint = ApiEndpoint
 
   getProduct(id): Promise<any> {
     let url = `${this.apiEndpoint}/products/${id}`

@@ -23,7 +23,7 @@ export class VendorFormComponent extends MzBaseModal {
   @Input() vendor: Vendor
   @Input() user: User
 
-  constructor(private fb: FormBuilder, private store: VendorService, private UserStore: UserService, private modalService: MzModalService) {
+  constructor(private store: VendorService, private fb: FormBuilder, private UserStore: UserService, private modalService: MzModalService) {
     super()
   }
 

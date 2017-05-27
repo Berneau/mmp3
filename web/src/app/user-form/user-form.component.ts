@@ -17,13 +17,13 @@ import { PasswordValidation } from './../helpers/password-confirmation'
 })
 export class UserFormComponent extends MzBaseModal {
 
-  constructor(private fb: FormBuilder, private store: UserService, private modalService: MzModalService) {
+  userForm: FormGroup
+  isAdmin: boolean
+  @Input() user: User
+
+  constructor(private store: UserService, private fb: FormBuilder, private modalService: MzModalService) {
     super()
   }
-
-  userForm: FormGroup
-  @Input() user: User
-  isAdmin: boolean
 
   ngOnInit() {
     this.createForm()

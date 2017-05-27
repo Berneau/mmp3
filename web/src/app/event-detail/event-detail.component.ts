@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { EventService } from './../services/event.service'
-import { VendorService } from './../services/vendor.service'
-
 import { Event } from './../interfaces/event'
 import { Vendor } from './../interfaces/vendor'
+
+import { EventService } from './../services/event.service'
+import { VendorService } from './../services/vendor.service'
 
 @Component({
   selector: 'event-detail',
@@ -18,7 +18,7 @@ export class EventDetailComponent implements OnInit {
   event: Event
   position: Array<number>
 
-  constructor(private store: EventService, private VendorStore: VendorService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private store: EventService, private route: ActivatedRoute, private location: Location, private VendorStore: VendorService) { }
 
   ngOnInit() {
     this.route.params.forEach((params) => {

@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
+import { ApiEndpoint } from './../app.config'
 
 import { Event } from './../interfaces/event'
-import { ApiEndpoint } from './../app.config'
 
 @Injectable()
 export class EventService {
-
-  constructor(private http: Http) { }
 
   events: Event[]
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({
     'Content-Type': 'application/json'
   })
+
+  constructor(private http: Http) { }
 
   getEvents(): Promise<any> {
     let url = `${this.apiEndpoint}/events`

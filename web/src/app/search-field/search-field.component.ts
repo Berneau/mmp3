@@ -9,13 +9,13 @@ import { SearchService } from './../services/search.service'
 })
 export class SearchFieldComponent implements OnInit {
 
-  constructor(private SearchStore: SearchService) { }
+  constructor(private store: SearchService) { }
 
   ngOnInit() {
   }
 
   search(word) {
-    this.SearchStore.search(word)
+    this.store.search(word)
   }
 
 }

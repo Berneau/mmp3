@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MzModalService } from 'ng2-materialize';
 
-import { ProductService } from './../services/product.service'
-import { LoginService } from './../services/login.service'
-
 import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
+
+import { ProductService } from './../services/product.service'
+import { LoginService } from './../services/login.service'
 
 import { ProductFormComponent } from './../product-form/product-form.component'
 
@@ -16,8 +16,8 @@ import { ProductFormComponent } from './../product-form/product-form.component'
 })
 export class ProductListComponent implements OnInit {
 
-  @Input() vendor: Vendor
   selectedProduct: Product
+  @Input() vendor: Vendor
 
   constructor(private store: ProductService, private LoginStore: LoginService, private modalService: MzModalService) { }
 

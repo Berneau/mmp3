@@ -18,7 +18,7 @@ export class PostitFormComponent extends MzBaseModal {
   postit: Postit
   vendor: Vendor
 
-  constructor(private fb: FormBuilder, private store: PostitService) {
+  constructor(private store: PostitService, private fb: FormBuilder) {
     super()
   }
 

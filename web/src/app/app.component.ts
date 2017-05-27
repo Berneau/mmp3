@@ -1,7 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { LoginService } from './services/login.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +7,6 @@ import { LoginService } from './services/login.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  constructor (private LoginStore: LoginService) {
+  constructor () {
   }
 }

@@ -3,13 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MzModalService } from 'ng2-materialize';
 
-import { VendorService } from './../services/vendor.service'
-import { LoginService } from './../services/login.service'
-import { ProductService } from './../services/product.service'
-import { PostitService } from './../services/postit.service'
-
 import { Vendor } from './../interfaces/vendor'
-import { Product } from './../interfaces/product'
+
+import { VendorService } from './../services/vendor.service'
 
 import { PostitFormComponent } from './../postit-form/postit-form.component'
 import { ProductFormComponent } from './../product-form/product-form.component'
@@ -25,7 +21,7 @@ export class VendorProfileComponent implements OnInit {
   vendor: Vendor
   position: Array<number>
 
-  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, public LoginStore: LoginService, private ProductStore: ProductService, private PostitStore: PostitService, private modalService: MzModalService) {
+  constructor(private store: VendorService, private route: ActivatedRoute, private location: Location, private modalService: MzModalService) {
 
   }
 
