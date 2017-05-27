@@ -18,8 +18,7 @@ module.exports = function(router) {
     var filter = req.query.filter ? req.query.filter : ''
     var regex = new RegExp(filter, 'i')
 
-    Event
-    .find({
+    Event.find({
       $or: [
         { name: regex },
         { 'location.name': regex }
@@ -27,13 +26,13 @@ module.exports = function(router) {
     }, function(err, events) {
 
       // internal server error
-      if (err) res.status(500).json({
+      if (err) return res.status(500).json({
         ok: false,
         err: err.message
       })
 
       // return event list
-      else res.status(200).json({
+      res.status(200).json({
         ok: true,
         events: events
       })
@@ -51,25 +50,27 @@ module.exports = function(router) {
    * @apiSuccess {Object} event The event for given id.
   */
   .get(function(req, res) {
+
     Event.findById(req.params.id, function(err, event) {
 
       // internal server error
-      if (err && err.name != 'CastError') res.status(404).json({
+      if (err && err.name != 'CastError') return res.status(404).json({
         ok: false,
         err: err.message
       })
 
+      // no event was found
+      if (!event) return res.status(404).json({
+        ok: false,
+        message: 'Event not found'
+      })
+
       // return found event Object
-      else if (!err && event) res.status(200).json({
+      res.status(200).json({
         ok: true,
         event: event
       })
 
-      // no event was found
-      else res.status(404).json({
-        ok: false,
-        message: 'Event not found'
-      })
     })
   })
 

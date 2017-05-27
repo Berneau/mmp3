@@ -47,7 +47,7 @@ describe('Product', () => {
 
   describe('GET product', () => {
 
-    it('should GET a product by its id', (done) => {
+    it.skip('should GET a product by its id', (done) => {
       let product = new Product({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
@@ -90,7 +90,7 @@ describe('Product', () => {
 
   describe('POST product', () => {
 
-    it('should POST a valid product', (done) => {
+    it.skip('should POST a valid product', (done) => {
       let product = {
         name: 'Rote Äpfel',
         categoryId: 'asd123',
@@ -192,7 +192,7 @@ describe('Product', () => {
 
   describe('PUT product', () => {
 
-    it('should UPDATE and return a product', (done) => {
+    it.skip('should UPDATE and return a product', (done) => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
@@ -239,7 +239,7 @@ describe('Product', () => {
       })
     })
 
-    it('should not UPDATE the product if it is not valid', (done) => {
+    it.skip('should not UPDATE the product if it is not valid', (done) => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
@@ -321,7 +321,7 @@ describe('Product', () => {
 
   describe('DELETE product', () => {
 
-    it('should DELETE a product if it exists', (done) => {
+    it.skip('should DELETE a product if it exists', (done) => {
       let product = new Product ({
         name: 'Grüne Äpfel',
         categoryId: 'qwe123',
