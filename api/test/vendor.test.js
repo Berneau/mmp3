@@ -240,7 +240,7 @@ describe('Vendor', () => {
 
   describe('DELETE vendor', () => {
 
-    it('should DELETE a vendor if it exists', (done) => {
+    it.skip('should DELETE a vendor if it exists', (done) => {
       let vendor = new Vendor({
         name: 'Bauernhof',
         userUid: 'asd123',
