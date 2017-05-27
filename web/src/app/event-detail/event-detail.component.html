@@ -5,7 +5,7 @@
       <span class="month">{{event.date | date:'MMMM yyyy'}}</span>
     </div>
     <div class="col s12 m8 l9 event-name" *ngIf="event.name">
-      <h4 class="page-title">{{event.name}}</h4>
+      <h4 class="page-title truncate">{{event.name}}</h4>
     </div>
   </div>
   <div class="row event-description" *ngIf="event.description">
@@ -17,7 +17,7 @@
   <div class="row">
     <div class="landing-page-headline" *ngIf="event.location.name">
       <h4>Location</h4>
-      <h5>{{event.location.name}}</h5>
+      <h5 class="truncate">{{event.location.name}}</h5>
     </div>
     <div class="row" *ngIf="event.location.lat && event.location.long">
       <div class="row map">

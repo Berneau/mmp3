@@ -5,8 +5,8 @@
         <img class="circle responsive-img" src="assets/{{postit.imageUrl}}">
       </div>
       <div class="col s8 postit-details">
-        <h3 class="postit-title">{{postit.name}}</h3>
-        <p class="postit-location" *ngIf="postit.location">{{postit.location}}</p>
+        <h3 class="postit-title truncate">{{postit.name}}</h3>
+        <p class="postit-location truncate" *ngIf="postit.location">{{postit.location}}</p>
       </div>
       <div class="col s2 secondary-content">
         <a (click)="selectPostit(postit)" class="secondary-content"><i class="material-icons">settings</i></a>

@@ -137,6 +137,31 @@ mz-modal {
   }
 }
 
+.add-btns {
+  text-align: right;
+  margin: 20px 0;
+
+  .add-btn {
+    background-color: transparent;
+    color: @primary-color;
+    border: 0;
+    box-shadow: none;
+    font-size: 12px;
+
+    i {
+      color: @orange-color;
+    }
+
+    &:hover {
+      color: lighten(@primary-color, 30%);
+
+      i {
+        color: lighten(@orange-color, 10%);
+      }
+    }
+  }
+}
+
 .bold {
   font-weight: bold;
 }
@@ -175,13 +200,13 @@ p {
       vertical-align: bottom;
     }
   }
+
   &.no-items-message {
     font-family: @secondary-font;
     font-size: 14px;
     color: @midgrey-color;
   }
 }
-
 @media @medium-and-up {
   // styles for medium screens and larger
   .container {

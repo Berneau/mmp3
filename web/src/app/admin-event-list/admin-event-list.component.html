@@ -6,8 +6,8 @@
         <span class="col s12 month">{{event.date | date:'MMM'}}</span>
       </div>
       <div class="col s8 event-details">
-        <h3 class="event-title">{{event.name}}</h3>
-        <p class="event-location" *ngIf="event.location.name">{{event.location.name}}</p>
+        <h3 class="event-title truncate">{{event.name}}</h3>
+        <p class="event-location truncate" *ngIf="event.location.name">{{event.location.name}}</p>
       </div>
       <div class="col s2 secondary-content">
         <a (click)="selectEvent(event)"><i class="material-icons">mode_edit</i></a>

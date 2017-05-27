@@ -5,8 +5,8 @@
         <img class="circle" src="assets/{{vendor.imageUrl}}">
       </div>
       <div class="col s8 vendor-details">
-        <h3 class="vendor-title">{{vendor.name}}</h3>
-        <p class="vendor-subName" *ngIf="vendor.subName">{{vendor.subName}}</p>
+        <h3 class="vendor-title truncate">{{vendor.name}}</h3>
+        <p class="vendor-subName truncate" *ngIf="vendor.subName">{{vendor.subName}}</p>
       </div>
       <div class="col s2 secondary-content">
         <a (click)="selectVendor(vendor)"><i class="material-icons">mode_edit</i></a>

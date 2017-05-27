@@ -10,8 +10,10 @@
                 <img class="activator" src="assets/{{vendor.imageUrl}}">
               </div>
               <div class="card-content">
-                <p class="vendor-subName" *ngIf="vendor.subName">{{vendor.subName}}</p>
-                <h3 class="card-title" *ngIf="vendor.name">{{vendor.name}}</h3>
+                <div class="vendor-subName">
+                  <p class="truncate" *ngIf="vendor.subName">{{vendor.subName}}</p>
+                </div>
+                <h3 class="card-title truncate" *ngIf="vendor.name">{{vendor.name}}</h3>
                 <p class="further-link">
                   mehr
                   <i class="material-icons prefix">keyboard_arrow_right</i>

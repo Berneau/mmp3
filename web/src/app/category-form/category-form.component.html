@@ -29,7 +29,7 @@
           </mz-input-container>
           <mz-select-container class="input-field col s12 m6 form-group">
             <select mz-select [placeholder]="'Typ'" id="category-TypeId" formControlName="typeUid">
-                <option *ngFor="let type of this.TypeStore.types" value="{{type._id}}" class="left circle">{{type.name}}</option>
+                <option *ngFor="let type of this.TypeStore.types" value="{{type._id}}" class="left circle truncate">{{type.name}}</option>
             </select>
           </mz-select-container>
         </div>

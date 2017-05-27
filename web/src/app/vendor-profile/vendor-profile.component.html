@@ -8,27 +8,27 @@
         <img class="responsive-image circle" src="assets/{{vendor.imageUrl}}">
       </div>
       <div class="col s12 m7 l9 profile-name">
-        <h4>{{vendor.name}}</h4>
-        <h5 *ngIf="vendor.subName">{{vendor.subName}}</h5>
+        <h4 class="truncate">{{vendor.name}}</h4>
+        <h5 *ngIf="vendor.subName" class="truncate">{{vendor.subName}}</h5>
       </div>
     </div>
     <div class="row">
       <div class="col s12 profile-data">
         <div class="col s12 m6 l3" *ngIf="vendor.email">
           <span><i class="material-icons">email</i></span>
-          <span>{{vendor.email}}</span>
+          <span class="truncate">{{vendor.email}}</span>
         </div>
         <div class="col s12 m6 l3" *ngIf="vendor.tel">
           <span><i class="material-icons">phone</i></span>
-          <span>{{vendor.tel}}</span>
+          <span class="truncate">{{vendor.tel}}</span>
         </div>
         <div class="col s12 m6 l3" *ngIf="vendor.website">
           <span><i class="material-icons">language</i></span>
-          <span>{{vendor.website}}</span>
+          <span class="truncate">{{vendor.website}}</span>
         </div>
         <div class="col s12 m6 l3" *ngIf="vendor.address.street || vendor.address.zip || vendor.address.city">
           <span><i class="material-icons">location_on</i></span>
-          <span>{{vendor.address.street}} <br>
+          <span class="truncate">{{vendor.address.street}} <br>
             {{vendor.address.zip}} {{vendor.address.city}}</span>
           </div>
       </div>

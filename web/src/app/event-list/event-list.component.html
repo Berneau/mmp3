@@ -14,8 +14,10 @@
                   </div>
                 </div>
                 <div class="col s8 m10 l9 event-details">
-                  <h3 class="card-title" *ngIf="event.name">{{event.name}}</h3>
-                  <p class="event-location" *ngIf="event.location.name">{{event.location.name}}</p>
+                  <h3 class="card-title truncate" *ngIf="event.name">{{event.name}}</h3>
+                  <div class="event-location">
+                    <p class=" truncate" *ngIf="event.location.name">{{event.location.name}}</p>
+                  </div>
                   <p class="further-link">
                     mehr Informationen
                     <i class="material-icons prefix">keyboard_arrow_right</i>
