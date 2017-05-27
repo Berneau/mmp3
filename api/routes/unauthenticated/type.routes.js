@@ -13,20 +13,20 @@ module.exports = function(router) {
  */
  .get(function(req, res) {
 
-   Type
-   .find({}, function(err, types) {
+   Type.find({}, function(err, types) {
 
      // internal server error
-     if (err) res.status(500).json({
+     if (err) return res.status(500).json({
        ok: false,
        err: err.message
      })
 
      // return type list
-     else res.status(200).json({
+     res.status(200).json({
        ok: true,
        types: types
      })
+
    })
    .sort({name: 1})
  })
@@ -41,25 +41,29 @@ module.exports = function(router) {
     * @apiSuccess {Object} type The type for given id.
    */
    .get(function(req, res) {
+
      Type.findById(req.params.id, function(err, type) {
 
        // internal server error
-       if (err && err.name != 'CastError') res.status(404).json({
+       if (err && err.name != 'CastError') return res.status(404).json({
          ok: false,
          err: err.message
        })
 
+       // no type found for this id
+       if (!type) return res.status(404).json({
+         ok: false,
+         message: 'Type not found'
+       })
+
        // return found type Object
-       else if (!err && type) res.status(200).json({
+       res.status(200).json({
          ok: true,
          type: type
        })
 
-       // no type found for this id
-       else res.status(404).json({
-         ok: false,
-         message: 'Type not found'
-       })
      })
+
    })
+
 }

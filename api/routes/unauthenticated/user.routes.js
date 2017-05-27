@@ -22,65 +22,57 @@ module.exports = function(router) {
 */
   .post(function(req, res) {
 
-   if (userIsValid(req.body)) {
+    // no valid user object
+    if (!userIsValid(req.body)) return res.status(412).json({
+      ok: false,
+      message: 'Not a valid user object'
+    })
 
-     if (emailIsValid(req.body.email)) {
+    // no valid email address
+    if (!emailIsValid(req.body.email)) return res.status(412).json({
+      ok: false,
+      message: 'Not a valid email address'
+    })
 
-       password.hash(req.body.password, function(err, salt, hash) {
+    password.hash(req.body.password, function(err, salt, hash) {
 
-         // error during hashing
-         if (err) res.status(500).json({
-           ok: false,
-           err: err.message
-         })
+      // error during hashing
+      if (err) return res.status(500).json({
+        ok: false,
+        err: err.message
+      })
 
-         else {
-           var user = new User({
-             email: req.body.email,
-             password: hash,
-             salt: salt,
-             isAdmin: req.body.isAdmin
-           })
+      var user = new User({
+        email: req.body.email,
+        password: hash,
+        salt: salt,
+        isAdmin: req.body.isAdmin
+      })
 
-           user.save(function(err) {
-             if (err) {
+      user.save(function(err) {
 
-               // Err Code 11000 = duplicate Key in MongoDB, email already exists
-               if (err.code == 11000) res.status(200).json({
-                 ok: false,
-                 message: 'Email already taken.'
-               })
+        // Err Code 11000 = duplicate Key in MongoDB, email already exists
+        if (err && err.code == 11000) return res.status(200).json({
+          ok: false,
+          message: 'Email already taken.'
+        })
 
-               // internal server error
-               else res.status(500).json({
-                 ok: false,
-                 err: err.message
-               })
-             }
+        // internal server error
+        if (err) return res.status(500).json({
+          ok: false,
+          err: err.message
+        })
 
-             // return created user object
-             else res.status(200).json({
-               ok: true,
-               user: stripUserObject(user)
-             })
-           })
-         }
+        // return created user object
+        res.status(200).json({
+          ok: true,
+          user: stripUserObject(user)
+        })
 
-       })
+      })
 
-     }
+    })
 
-     // no valid email address
-     else res.status(412).json({
-       ok: false,
-       message: 'Not a valid email address'
-     })
-
-     // no valid user object
-   } else res.status(412).json({
-     ok: false,
-     message: 'Not a valid user object'
-   })
   })
 
 }

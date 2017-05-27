@@ -29,22 +29,22 @@ module.exports = function(router) {
     // userId is given
     if (userId) {
 
-      Vendor
-      .findOne({ userUid: userId }, function(err, vendor) {
+      Vendor.findOne({ userUid: userId }, function(err, vendor) {
 
         // internal server error
-        if (err) res.status(500).json({
+        if (err) return res.status(500).json({
           ok: false,
           err: err.message
         })
 
-        // return
-        else if (!vendor) res.status(404).json({
+        // no vendor found
+        if (!vendor) return res.status(404).json({
           ok: false,
           err: 'No Vendor found for this userId'
         })
 
-        else res.status(200).json({
+        // return the found vendor object
+        res.status(200).json({
           ok: true,
           vendor: vendor
         })
@@ -56,8 +56,7 @@ module.exports = function(router) {
     // no userId is given - normal list with optional search
     else {
 
-      Vendor
-      .find({
+      Vendor.find({
         $or: [
           { name: regex },
           { subName: regex },
@@ -67,13 +66,13 @@ module.exports = function(router) {
       }, function(err, vendors) {
 
         // internal server error
-        if (err) res.status(500).json({
+        if (err) return res.status(500).json({
           ok: false,
           err: err.message
         })
 
         // return vendor list
-        else res.status(200).json({
+        res.status(200).json({
           ok: true,
           vendors: vendors
         })
@@ -85,42 +84,44 @@ module.exports = function(router) {
   })
 
   router.route('/vendors/:id')
-    /**
-     * @api {get} /vendors/:id Get vendor
-     * @apiName GetVendor
-     * @apiGroup Vendors
-     * @apiPermission none
-     *
-     * @apiSuccess {Object} vendor The vendor for given id.
-     * @apiSuccess {Array} products The products of the vendor.
-    */
-    .get(function(req, res) {
-      Vendor.findById(req.params.id, function(err, vendor) {
+  /**
+   * @api {get} /vendors/:id Get vendor
+   * @apiName GetVendor
+   * @apiGroup Vendors
+   * @apiPermission none
+   *
+   * @apiSuccess {Object} vendor The vendor for given id.
+   * @apiSuccess {Array} products The products of the vendor.
+  */
+  .get(function(req, res) {
 
-        // internal server err
-        if (err && err.name != 'CastError') res.status(404).json({
-          ok: false,
-          err: err.message
-        })
+    Vendor.findById(req.params.id, function(err, vendor) {
 
-        // return found vendor object
-        else if (!err && vendor) {
-          Product.find({ 'vendorId': vendor._id }, function(err, products) {
-
-            res.status(200).json({
-              ok: true,
-              vendor: vendor,
-              products: products
-            })
-          })
-        }
-
-        // no vendor was found
-        else res.status(404).json({
-          ok: false,
-          message: 'Vendor not found'
-        })
+      // internal server err
+      if (err && err.name != 'CastError') return res.status(404).json({
+        ok: false,
+        err: err.message
       })
+
+      // no vendor was found
+      if (!vendor) return res.status(404).json({
+        ok: false,
+        message: 'Vendor not found'
+      })
+
+      // return found vendor object with products
+      Product.find({ 'vendorId': vendor._id }, function(err, products) {
+
+        res.status(200).json({
+          ok: true,
+          vendor: vendor,
+          products: products
+        })
+
+      })
+
     })
+
+  })
 
 }

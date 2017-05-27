@@ -13,17 +13,16 @@ module.exports = function(router) {
   */
   .get(function(req, res) {
 
-    Postit
-    .find({}, function(err, postits) {
+    Postit.find({}, function(err, postits) {
 
       // internal server error
-      if (err) res.status(500).json({
+      if (err) return res.status(500).json({
         ok: false,
         err: err.message
       })
 
       // return postit list
-      else res.status(200).json({
+      res.status(200).json({
         ok: true,
         postits: postits
       })
@@ -41,25 +40,27 @@ module.exports = function(router) {
    * @apiSuccess {Object} postit The postit for given id.
   */
   .get(function(req, res) {
+
     Postit.findById(req.params.id, function(err, postit) {
 
       // internal server err
-      if (err && err.name != 'CastError') res.status(404).json({
+      if (err && err.name != 'CastError') return res.status(404).json({
         ok: false,
         err: err.message
       })
 
+      // no postit was found
+      if (!postit) return res.status(404).json({
+        ok: false,
+        message: 'Postit not found'
+      })
+
       // return found postit object
-      else if (!err && postit) res.status(200).json({
+      res.status(200).json({
         ok: true,
         postit: postit
       })
 
-      // no postit was found
-      else res.status(404).json({
-        ok: false,
-        message: 'Postit not found'
-      })
     })
   })
 }
