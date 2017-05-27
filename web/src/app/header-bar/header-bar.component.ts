@@ -13,6 +13,7 @@ export class HeaderBarComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(".button-collapse").sideNav();
   }
 
 
