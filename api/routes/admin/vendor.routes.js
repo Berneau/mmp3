@@ -193,7 +193,7 @@ module.exports = function(router) {
 
               else {
 
-                Vendor.remove({ _id: req.params.id }, function(err, vendor) {
+                User.remove({ _id: vendor.userUid }, function(err, removed) {
 
                   // internal server error
                   if (err) res.status(500).json({
@@ -201,11 +201,25 @@ module.exports = function(router) {
                     err: err.message
                   })
 
-                  // successfully deleted
-                  else res.status(200).json({
-                    ok: true,
-                    message: 'Successfully deleted vendor and associated products'
-                  })
+                  else {
+
+                    Vendor.remove({ _id: req.params.id }, function(err, removed) {
+
+                      // internal server error
+                      if (err) res.status(500).json({
+                        ok: false,
+                        err: err.message
+                      })
+
+                      // successfully deleted
+                      else res.status(200).json({
+                        ok: true,
+                        message: 'Successfully deleted vendor and associated user and products'
+                      })
+                    })
+
+                  }
+
                 })
 
               }
