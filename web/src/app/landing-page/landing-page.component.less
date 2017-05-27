@@ -29,7 +29,6 @@ landing-page {
   .col.landing-page-search {
     font-family: @primary-font;
     background-color: @white-color;
-    margin-top: -80px;
     margin-bottom: 50px;
     padding: 5px;
 
@@ -118,14 +117,25 @@ landing-page {
 @media @medium-and-up {
   landing-page {
     .cinemagraph {
-      height: 40vh;
+      height: 30vh;
     }
 
-    .landing-page.search {
+    .col.landing-page-search {
       background-color: @white-color;
+      margin-top: -80px;
     }
   }
 }
 @media @large-and-up {
   // styles for large screens and up
+  landing-page {
+    .cinemagraph {
+      height: 40vh;
+    }
+
+    .col.landing-page-search {
+      background-color: @white-color;
+      margin-top: -80px;
+    }
+  }
 }
