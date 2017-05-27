@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'postitConfirmedPipe'
 })
-export class PostitConfirmedPipePipe implements PipeTransform {
+export class PostitConfirmedPipe implements PipeTransform {
 
   confirmed: boolean
 
