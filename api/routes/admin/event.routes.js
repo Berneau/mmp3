@@ -18,41 +18,37 @@ module.exports = function(router) {
   */
   .post(function(req, res) {
 
-    if(!eventIsValid(req.body)) {
+    // not a valid event Object
+    if(!eventIsValid(req.body)) return res.status(412).json({
+      ok: false,
+      message: 'Missing fields'
+    })
 
-      // not a valid event Object
-      res.status(412).json({
+    var event = new Event({
+      name: req.body.name,
+      date: req.body.date,
+      description: req.body.description,
+      location: {
+        name: req.body.location ? req.body.location.name : undefined,
+        lat: req.body.location ? req.body.location.lat : undefined,
+        long: req.body.location ? req.body.location.long : undefined
+      }
+    })
+
+    event.save(function(err) {
+
+      // internal server error
+      if (err) return res.status(500).json({
         ok: false,
-        message: 'Missing fields'
-      })
-    } else {
-
-      var event = new Event({
-        name: req.body.name,
-        date: req.body.date,
-        description: req.body.description,
-        location: {
-          name: req.body.location ? req.body.location.name : undefined,
-          lat: req.body.location ? req.body.location.lat : undefined,
-          long: req.body.location ? req.body.location.long : undefined
-        }
+        err: err.message
       })
 
-      event.save(function(err) {
-
-        // internal server error
-        if (err) res.status(500).json({
-          ok: false,
-          err: err.message
-        })
-
-        // return created event
-        else res.status(200).json({
-          ok: true,
-          event: event
-        })
+      // return created event
+      res.status(200).json({
+        ok: true,
+        event: event
       })
-    }
+    })
 
   })
 
@@ -74,48 +70,48 @@ module.exports = function(router) {
     Event.findById(req.params.id, function(err, event) {
 
       // not a valid id
-      if (err && err.name != 'CastError') res.status(404).json({
+      if (err && err.name != 'CastError') return res.status(404).json({
         ok: false,
         err: err.message
       })
 
-      else if (!err && event) {
-        if (eventIsValid(req.body)) {
-
-          event.name = req.body.name
-          event.date = req.body.date
-          event.description = req.body.description
-          event.location.name = req.body.location ? req.body.location.name : undefined
-          event.location.lat = req.body.location ? req.body.location.lat : undefined
-          event.location.long = req.body.location ? req.body.location.long : undefined
-
-          event.save(function(err) {
-
-            // internal server error
-            if (err) res.status(500).json({
-              ok: false,
-              err: err.message
-            })
-
-            // return the updated event
-            else res.status(200).json({
-              ok: true,
-              event: event
-            })
-          })
-
-          // not a valid type
-        } else res.status(412).json({
-          ok: false,
-          message: 'Missing fields'
-        })
-
-        // no event with this id
-      } else res.status(404).json({
+      // no event with this id
+      if (!event) return res.status(404).json({
         ok: false,
         message: 'Event not found'
       })
+
+      // not a valid event
+      if (!eventIsValid(req.body)) return res.status(412).json({
+        ok: false,
+        message: 'Missing fields'
+      })
+
+      event.name = req.body.name
+      event.date = req.body.date
+      event.description = req.body.description
+      event.location.name = req.body.location ? req.body.location.name : undefined
+      event.location.lat = req.body.location ? req.body.location.lat : undefined
+      event.location.long = req.body.location ? req.body.location.long : undefined
+
+      event.save(function(err) {
+
+        // internal server error
+        if (err) return res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // return the updated event
+        res.status(200).json({
+          ok: true,
+          event: event
+        })
+
+      })
+
     })
+
   })
 
   /**
@@ -127,36 +123,39 @@ module.exports = function(router) {
    * @apiSuccess {String} message Success message.
   */
   .delete(function(req, res) {
+
     Event.findById(req.params.id, function(err, event) {
 
       // not a valid id
-      if (err && err.name != 'CastError') res.status(404).json({
+      if (err && err.name != 'CastError') return res.status(404).json({
         ok: false,
         err: err.message
       })
 
-      else if (!err && event) {
-        Event.remove({ _id: req.params.id }, function(err, event) {
-
-          // internal server error
-          if (err) res.status(500).json({
-            ok: false,
-            err: err.message
-          })
-
-          // successfully deleted
-          else res.status(200).json({
-            ok: true,
-            message: 'Successfully deleted'
-          })
-        })
-
-        // no event with this id
-      } else res.status(404).json({
+      // no event with this id
+      if (!event) return res.status(404).json({
         ok: false,
         message: 'Event not found'
       })
+
+      Event.remove({ _id: req.params.id }, function(err, event) {
+
+        // internal server error
+        if (err) return res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // successfully deleted
+        res.status(200).json({
+          ok: true,
+          message: 'Successfully deleted'
+        })
+
+      })
+
     })
+
   })
 
 }

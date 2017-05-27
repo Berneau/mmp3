@@ -17,34 +17,31 @@ module.exports = function(router) {
  */
   .post(function(req, res) {
 
-    if (!typeIsValid(req.body)) {
+    // not a valid type Object
+    if (!typeIsValid(req.body)) return res.status(412).json({
+      ok: false,
+      message: 'Missing fields'
+    })
 
-      // not a valid type Object
-      res.status(412).json({
+    var type = new Type({
+      name: req.body.name
+    })
+
+    type.save(function(err) {
+
+      // internal server error
+      if (err) return res.status(500).json({
         ok: false,
-        message: 'Missing fields'
-      })
-    } else {
-
-      var type = new Type({
-        name: req.body.name
+        err: err.message
       })
 
-      type.save(function(err) {
-
-        // internal server error
-        if (err) res.status(500).json({
-          ok: false,
-          err: err.message
-        })
-
-        // return created type
-        else res.status(200).json({
-          ok: true,
-          type: type
-        })
+      // return created type
+      res.status(200).json({
+        ok: true,
+        type: type
       })
-    }
+
+    })
 
   })
 
@@ -64,43 +61,43 @@ module.exports = function(router) {
     Type.findById(req.params.id, function(err, type) {
 
       // not a valid id
-      if (err && err.name != 'CastError') res.status(404).json({
+      if (err && err.name != 'CastError') return res.status(404).json({
         ok: false,
         err: err.message
       })
 
-      else if (!err && type) {
-        if (typeIsValid(req.body)) {
-
-          type.name = req.body.name
-
-          type.save(function(err) {
-
-            // internal server error
-            if (err) res.status(500).json({
-              ok: false,
-              err: err
-            })
-
-            // return the updated typeUid
-            res.status(200).json({
-              ok: true,
-              type: type
-            })
-          })
-
-          // not a valid type
-        } else res.status(412).json({
-          ok: false,
-          message: 'Missing fields'
-        })
-
-        // no type with this id
-      } else res.status(404).json({
+      // no type with this id
+      if (!type) return res.status(404).json({
         ok: false,
         message: 'Type not found'
       })
+
+      // not a valid type
+      if (!typeIsValid(req.body)) return res.status(412).json({
+        ok: false,
+        message: 'Missing fields'
+      })
+
+      type.name = req.body.name
+
+      type.save(function(err) {
+
+        // internal server error
+        if (err) return res.status(500).json({
+          ok: false,
+          err: err
+        })
+
+        // return the updated typeUid
+        res.status(200).json({
+          ok: true,
+          type: type
+        })
+
+      })
+
     })
+
   })
 
   /**
@@ -112,60 +109,57 @@ module.exports = function(router) {
    * @apiSuccess {String} message Success message.
   */
   .delete(function(req, res) {
+
     Type.findById(req.params.id, function(err, type) {
 
       // not a valid id
-      if (err && err.name != 'CastError') res.status(404).json({
+      if (err && err.name != 'CastError') return res.status(404).json({
         ok: false,
         err: err.message
       })
 
-      else if (!err && type) {
+      // no type with this id
+      if (!type) return res.status(404).json({
+        ok: false,
+        message: 'Type not found'
+      })
 
-        Category
-        .find({ typeUid: type._id }, function(err, categories) {
+      // search for categories which could use the type
+      Category.find({ typeUid: type._id }, function(err, categories) {
+
+        // internal server error
+        if (err) return res.status(500).json({
+          ok: false,
+          err: err.message
+        })
+
+        // type is in use by category -> do not delete
+        if (categories.length > 0) return res.status(403).json({
+          ok: false,
+          message: 'Type is in use by at least one category - not deleted'
+        })
+
+        // type is not in use by any categories -> delete
+        Type.remove({ _id: req.params.id }, function(err, type) {
 
           // internal server error
-          if (err) res.status(500).json({
+          if (err) return res.status(500).json({
             ok: false,
             err: err.message
           })
 
-          // type is not in use by any categories -> delete
-          else if (categories.length == 0) {
-
-            Type.remove({ _id: req.params.id }, function(err, type) {
-
-              // internal server error
-              if (err) res.status(500).json({
-                ok: false,
-                err: err.message
-              })
-
-              // successfully deleted
-              else res.status(200).json({
-                ok: true,
-                message: 'Successfully deleted'
-              })
-            })
-
-          }
-
-          // type is in use by category -> do not delete
-          else res.status(403).json({
-            ok: false,
-            message: 'Type is in use by at least one category - not deleted'
+          // successfully deleted
+          res.status(200).json({
+            ok: true,
+            message: 'Successfully deleted'
           })
 
         })
 
-
-        // no type with this id
-      } else res.status(404).json({
-        ok: false,
-        message: 'Type not found'
       })
+
     })
+
   })
 
 }

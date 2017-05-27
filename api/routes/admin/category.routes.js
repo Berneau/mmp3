@@ -19,36 +19,33 @@ module.exports = function(router) {
  */
   .post(function(req, res) {
 
-    if (!categoryIsValid(req.body)) {
+    // not a valid category Object
+    if (!categoryIsValid(req.body)) return res.status(412).json({
+      ok: false,
+      message: 'Missing fields'
+    })
 
-      // not a valid category Object
-      res.status(412).json({
+    var category = new Category({
+      name: req.body.name,
+      typeUid: req.body.typeUid,
+      imageUrl: req.body.imageUrl
+    })
+
+    category.save(function(err) {
+
+      //internal server error
+      if (err) return res.status(500).json({
         ok: false,
-        message: 'Missing fields'
-      })
-    } else {
-
-      var category = new Category({
-        name: req.body.name,
-        typeUid: req.body.typeUid,
-        imageUrl: req.body.imageUrl
+        err: err.message
       })
 
-      category.save(function(err) {
-
-        //internal server error
-        if (err) res.status(500).json({
-          ok: false,
-          err: err.message
-        })
-
-        // return created category
-        else res.status(200).json({
-          ok: true,
-          category: category
-        })
+      // return created category
+      res.status(200).json({
+        ok: true,
+        category: category
       })
-    }
+
+    })
 
   })
 
@@ -70,45 +67,44 @@ module.exports = function(router) {
       Category.findById(req.params.id, function(err, category) {
 
         // not a valid id
-        if (err && err.name != 'CastError') res.status(404).json({
+        if (err && err.name != 'CastError') return res.status(404).json({
           ok: false,
           err: err.message
         })
 
-        else if (!err && category) {
-          if (categoryIsValid(req.body)) {
-
-            category.name = req.body.name
-            category.typeUid = req.body.typeUid
-            category.imageUrl = req.body.imageUrl
-
-            category.save(function(err) {
-
-              // internal server error
-              if (err) res.status(500).json({
-                ok: false,
-                err: err.message
-              })
-
-              // return the updated category
-              else res.status(200).json({
-                ok: true,
-                category: category
-              })
-            })
-
-            // not a valid category
-          } else res.status(412).json({
-            ok: false,
-            message: 'Missing fields'
-          })
-
-          // no category with this id
-        } else res.status(404).json({
+        // no category with this id
+        if (!category) return res.status(404).json({
           ok: false,
           message: 'Category not found'
         })
+
+        // not a valid category
+        if (!categoryIsValid(req.body)) return res.status(412).json({
+          ok: false,
+          message: 'Missing fields'
+        })
+
+        category.name = req.body.name
+        category.typeUid = req.body.typeUid
+        category.imageUrl = req.body.imageUrl
+
+        category.save(function(err) {
+
+          // internal server error
+          if (err) return res.status(500).json({
+            ok: false,
+            err: err.message
+          })
+
+          // return the updated category
+          res.status(200).json({
+            ok: true,
+            category: category
+          })
+        })
+
       })
+
     })
 
     /**
@@ -119,61 +115,57 @@ module.exports = function(router) {
      *
      * @apiSuccess {String} message Success message.
     */
-     .delete(function(req, res) {
-       Category.findById(req.params.id, function(err, category) {
+  .delete(function(req, res) {
 
-         // not a valid id
-         if (err && err.name != 'CastError') res.status(404).json({
-           ok: false,
-           err: err.message
-         })
+    Category.findById(req.params.id, function(err, category) {
 
-         else if (!err && category) {
+      // not a valid id
+      if (err && err.name != 'CastError') return res.status(404).json({
+        ok: false,
+        err: err.message
+      })
 
-           Product
-           .find({ categoryId: category._id }, function(err, products) {
+      // no category with this id
+      if (!category) return res.status(404).json({
+        ok: false,
+        message: 'Category not found'
+      })
 
-             // internal server error
-             if (err) res.status(500).json({
-               ok: false,
-               err: err.message
-             })
+      Product.find({ categoryId: category._id }, function(err, products) {
 
-             // category is not in use by any products -> delete
-             else if (products.length == 0) {
+        // internal server error
+        if (err) return res.status(500).json({
+          ok: false,
+          err: err.message
+        })
 
-               Category.remove({ _id: req.params.id }, function(err, category) {
+        // category is in use by products -> do not delete
+        if (products.length > 0) return res.status(403).json({
+          ok: false,
+          message: 'Category is in use by at least one product - not deleted'
+        })
 
-                 // internal server error
-                 if (err) res.status(500).json({
-                   ok: false,
-                   err: err.message
-                 })
+        // category is not in use by any products -> delete
+        Category.remove({ _id: req.params.id }, function(err, category) {
 
-                 // successfully deleted
-                 else res.status(200).json({
-                   ok: true,
-                   message: 'Successfully deleted'
-                 })
-               })
+          // internal server error
+          if (err) return res.status(500).json({
+            ok: false,
+            err: err.message
+          })
 
-             }
+          // successfully deleted
+          res.status(200).json({
+            ok: true,
+            message: 'Successfully deleted'
+          })
 
-             // category is in use by products -> do not delete
-             else res.status(403).json({
-               ok: false,
-               message: 'Category is in use by at least one product - not deleted'
-             })
+        })
 
-           })
+      })
 
+    })
 
-           // no category with this id
-         } else res.status(404).json({
-           ok: false,
-           message: 'Category not found'
-         })
-       })
-     })
+  })
 
 }
