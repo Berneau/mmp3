@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-
-import { Category } from './../interfaces/category'
 import { ApiEndpoint } from './../app.config'
 
+import { Category } from './../interfaces/category'
 import { Product } from './../interfaces/product'
 import { Type } from './../interfaces/type'
 
 @Injectable()
 export class CategoryService {
 
-  constructor(private http: Http) { }
-
   categories: Category[]
   categoryProducts: Product[]
   private apiEndpoint = ApiEndpoint
+
+  constructor(private http: Http) { }
 
   getCategories(): Promise<any> {
     let url = `${this.apiEndpoint}/categories`

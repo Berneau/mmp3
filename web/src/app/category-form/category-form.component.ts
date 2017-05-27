@@ -18,7 +18,7 @@ export class CategoryFormComponent extends MzBaseModal {
   categoryForm: FormGroup
   @Input() category: Category
 
-  constructor(private fb: FormBuilder, private TypeStore: TypeService, private store: CategoryService, private modalService: MzModalService) {
+  constructor(private store: CategoryService, private fb: FormBuilder, private TypeStore: TypeService, private modalService: MzModalService) {
     super()
   }
 

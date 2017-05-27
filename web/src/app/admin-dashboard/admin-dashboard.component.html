@@ -1,46 +1,46 @@
 <div class="container">
   <h4 class="page-title">Admin Dahsboard</h4>
   <div class="row">
-    <div class="col s12 add-btns">
-      <button mz-button class="add-btn" (click)="this.openNewUserModal()">Produzent
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button class="add-btn" (click)="this.openNewCategoryModal()">Kategorie
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button class="add-btn" (click)="this.openNewTypeModal()">Typ
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button class="add-btn" (click)="this.openNewPostitModal()">Schlachtbretteintrag
-      <i class="material-icons left">add</i>
-    </button>
-      <button mz-button class="add-btn" (click)="this.openNewEventModal()">Event
-      <i class="material-icons left">add</i>
-    </button>
+    <div class="add-btns">
+      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewUserModal()">Produzent
+        <i class="material-icons left">add</i>
+      </button>
+      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewCategoryModal()">Kategorie
+        <i class="material-icons left">add</i>
+      </button>
+      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewTypeModal()">Typ
+        <i class="material-icons left">add</i>
+      </button>
+      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewEventModal()">Event
+        <i class="material-icons left">add</i>
+      </button>
+      <button mz-button class="col s12 m4 l3 add-btn" (click)="this.openNewPostitModal()">Gustostückerl
+        <i class="material-icons left">add</i>
+      </button>
     </div>
   </div>
   <div class="row">
-    <div class="col s3 admin-nav">
+    <div class="col s12 m3 admin-nav">
       <h3>Navigation</h3>
       <ul class="tabs">
-        <li class="tab"><a class="active" href="#adminPostitListNew">Schlachtbrett-Anfragen</a></li>
-        <li class="tab"><a href="#adminPostitListConfirmed">Schlachtbrett-Liste</a></li>
+        <li class="tab"><a class="active" href="#adminPostitListNew">Gustostückerl-Anfragen</a></li>
+        <li class="tab"><a href="#adminPostitListConfirmed">Gustostückerl-Liste</a></li>
         <li class="tab"><a href="#adminVendorList">Produzenten-Liste</a></li>
         <li class="tab"><a href="#adminEventList">Event-Liste</a></li>
         <li class="tab"><a href="#adminCategoryList">Kategorie-Liste</a></li>
         <li class="tab"><a href="#adminTypeList">Typ-Liste</a></li>
       </ul>
     </div>
-    <div class="col s9 admin-content">
+    <div class="col s12 m9 admin-content">
       <div class="s12" id="adminPostitListNew">
         <div class="landing-page-headline">
-          <h4>Schlachtbrett-Anfragen</h4>
+          <h4>Gustostückerl-Anfragen</h4>
         </div>
         <admin-postit-list [confirmed]="false"></admin-postit-list>
       </div>
       <div class="s12" id="adminPostitListConfirmed">
         <div class="landing-page-headline">
-          <h4>Schlachtbrett-Liste</h4>
+          <h4>Gustostückerl-Liste</h4>
         </div>
         <admin-postit-list [confirmed]="true"></admin-postit-list>
       </div>

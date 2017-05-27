@@ -7,7 +7,7 @@ admin-event-list {
         text-align: center;
 
         .day {
-          font-size: 35px;
+          font-size: 25px;
           font-weight: 600;
           color: @yellow-color;
           line-height: initial;
@@ -15,11 +15,10 @@ admin-event-list {
 
         .month {
           text-transform: uppercase;
-          font-size: 15px;
-          color: @lightgrey-color;
-          font-weight: 200;
+          font-size: 14px;
         }
       }
+
       .event-details {
         h3.event-title {
           margin: 0;
@@ -31,16 +30,32 @@ admin-event-list {
           font-size: 14px;
         }
       }
+
       .secondary-content {
         text-align: right;
       }
     }
   }
 }
-
-
 @media @medium-and-up {
   // styles for medium screens and larger
+  admin-event-list {
+    ul.collection {
+      .collection-item {
+        .event-date {
+          .day {
+            font-size: 35px;
+          }
+
+          .month {
+            font-size: 15px;
+            color: @lightgrey-color;
+            font-weight: 200;
+          }
+        }
+      }
+    }
+  }
 }
 @media @large-and-up {
   // styles for large screens and up

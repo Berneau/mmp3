@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MzModalService } from 'ng2-materialize';
 
 import { Postit } from './../interfaces/postit'
+
 import { PostitService } from './../services/postit.service'
+
 import { PostitDetailComponent } from './../postit-detail/postit-detail.component'
 
 @Component({
@@ -12,8 +14,8 @@ import { PostitDetailComponent } from './../postit-detail/postit-detail.componen
 })
 export class PostitListComponent implements OnInit {
 
-  @Input() confirmed: boolean
   selectedPostit: Postit
+  @Input() confirmed: boolean
 
   constructor(private store: PostitService, private modalService: MzModalService) { }
 

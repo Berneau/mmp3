@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Headers, Http, Response } from '@angular/http';
+import { ApiEndpoint } from './../app.config'
 
 import { User } from './../interfaces/user'
-import { ApiEndpoint } from './../app.config'
 
 import { UserService } from './../services/user.service'
 
 @Injectable()
 export class LoginService {
+
   public token: string
   public currentUserIsAdmin: boolean
   public currentUserIsLoggedIn: boolean

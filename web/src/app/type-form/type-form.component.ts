@@ -16,7 +16,7 @@ export class TypeFormComponent extends MzBaseModal {
   typeForm: FormGroup
   @Input() type: Type
 
-  constructor(private fb: FormBuilder, private store: TypeService) {
+  constructor(private store: TypeService, private fb: FormBuilder) {
     super()
   }
 

@@ -10,7 +10,9 @@ import { ProductService } from './../services/product.service'
   styleUrls: ['./product-vendor-list.component.less']
 })
 export class ProductVendorListComponent implements OnInit {
+
   @Input() category: Category
+
   constructor(private store: ProductService) { }
 
   ngOnInit() {

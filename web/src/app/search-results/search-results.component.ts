@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { SearchService } from './../services/search.service'
-
 import { Vendor } from './../interfaces/vendor'
 import { Category } from './../interfaces/category'
 import { Event } from './../interfaces/event'
+
+import { SearchService } from './../services/search.service'
 
 @Component({
   selector: 'search-results',
@@ -18,12 +18,12 @@ export class SearchResultsComponent implements OnInit {
   productResults: Category[]
   eventResults: Event[]
 
-  constructor(private SearchStore: SearchService, private route: ActivatedRoute) { }
+  constructor(private store: SearchService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.forEach((params) => {
       let word = params['search']
-      this.SearchStore.getVendorResults(word)
+      this.store.getVendorResults(word)
         .then(vendorResults => {
           if (!vendorResults) {
             this.vendorResults = []
@@ -31,7 +31,7 @@ export class SearchResultsComponent implements OnInit {
           }
           this.vendorResults = vendorResults
         })
-      this.SearchStore.getProductResults(word)
+      this.store.getProductResults(word)
         .then(productResults => {
           if (!productResults) {
             this.productResults = []
@@ -39,7 +39,7 @@ export class SearchResultsComponent implements OnInit {
           }
           this.productResults = productResults
         })
-      this.SearchStore.getEventResults(word)
+      this.store.getEventResults(word)
         .then(eventResults => {
           if (!eventResults) {
             this.eventResults = []

@@ -11,9 +11,10 @@ import { VendorService } from './../services/vendor.service'
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private store: LoginService, private VendorStore: VendorService) {
+  constructor(private store: LoginService, private router: Router, private fb: FormBuilder, private VendorStore: VendorService) {
     this.createForm();
   }
 

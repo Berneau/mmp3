@@ -1,5 +1,5 @@
 <mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
-  <mz-modal-header>
+  <mz-modal-header class="truncate">
     {{postit.name}}
   </mz-modal-header>
   <mz-modal-content>
@@ -10,7 +10,7 @@
       <div class="col s12 m6 l6 offset-l2">
         <div *ngIf="vendor">
           <h5>Produzent</h5>
-          <p>{{vendor.name}}</p>
+          <p class="truncate">{{vendor.name}}</p>
           <p [routerLink]="['/produzenten', vendor._id]" class="further-link">
             zum Produzenten
             <i class="material-icons prefix">keyboard_arrow_right</i>
@@ -18,7 +18,7 @@
         </div>
         <div *ngIf="postit.location">
           <h5>Location</h5>
-          <p>{{postit.location}}</p>
+          <p class="truncate">{{postit.location}}</p>
         </div>
         <div *ngIf="postit.description">
           <h5>Beschreibung</h5>

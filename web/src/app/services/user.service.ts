@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-
 import { ApiEndpoint } from './../app.config'
 
 import { User } from './../interfaces/user'
@@ -8,11 +7,11 @@ import { User } from './../interfaces/user'
 @Injectable()
 export class UserService {
 
+  passwordLength: number
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({
     'Content-Type': 'application/json'
   })
-  passwordLength: number
 
   constructor(private http: Http) {
     this.passwordLength = 6

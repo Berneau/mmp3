@@ -14,8 +14,8 @@ import { PostitDetailComponent } from './../postit-detail/postit-detail.componen
 })
 export class AdminPostitListComponent implements OnInit {
 
-  @Input() confirmed: boolean
   selectedPostit: Postit
+  @Input() confirmed: boolean
 
   constructor(private store: PostitService, private modalService: MzModalService) { }
 

@@ -1,13 +1,13 @@
 <div class="row" *ngIf="store.events">
   <ul class="collection">
     <li *ngFor="let event of store.events" class="collection-item row">
-      <div class="col s2 event-date">
+      <div class="col s3 m2 event-date">
         <span class="col s12 day">{{event.date | date:'dd'}}</span>
         <span class="col s12 month">{{event.date | date:'MMM'}}</span>
       </div>
-      <div class="col s8 event-details">
-        <h3 class="event-title">{{event.name}}</h3>
-        <p class="event-location" *ngIf="event.location.name">{{event.location.name}}</p>
+      <div class="col s7 m8 event-details">
+        <h3 class="event-title truncate">{{event.name}}</h3>
+        <p class="event-location truncate" *ngIf="event.location.name">{{event.location.name}}</p>
       </div>
       <div class="col s2 secondary-content">
         <a (click)="selectEvent(event)"><i class="material-icons">mode_edit</i></a>

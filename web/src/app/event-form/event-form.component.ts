@@ -16,7 +16,7 @@ export class EventFormComponent extends MzBaseModal {
   eventForm: FormGroup
   @Input() event: Event
 
-  constructor(private fb: FormBuilder, private store: EventService) {
+  constructor(private store: EventService, private fb: FormBuilder) {
     super()
   }
 

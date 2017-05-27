@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Category } from './../interfaces/category'
-import { CategoryService } from './../services/category.service'
-
 import { Type } from './../interfaces/type'
+
+import { CategoryService } from './../services/category.service'
 import { TypeService } from './../services/type.service'
 
 
@@ -16,10 +16,10 @@ import { TypeService } from './../services/type.service'
 })
 export class CategoryDetailComponent implements OnInit {
 
-  constructor(private store: CategoryService, private TypeStore: TypeService, private route: ActivatedRoute, private location: Location) { }
-
   category: Category
   type: Type
+
+  constructor(private store: CategoryService, private route: ActivatedRoute, private location: Location, private TypeStore: TypeService) { }
 
   ngOnInit() {
     this.route.params.forEach((params) => {

@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-
-import { Vendor } from './../interfaces/vendor'
 import { ApiEndpoint } from './../app.config'
 
+import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
 import { Postit } from './../interfaces/postit'
 
 @Injectable()
 export class VendorService {
 
-  constructor(private http: Http) { }
-
   vendors: Vendor[]
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({
     'Content-Type': 'application/json'
   })
+
+  constructor(private http: Http) { }
 
   getVendors(): Promise<any> {
     let url = `${this.apiEndpoint}/vendors`

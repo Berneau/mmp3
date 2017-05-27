@@ -6,8 +6,10 @@
           <img class="activator" src="assets/{{postit.imageUrl}}">
         </div>
         <div class="card-content">
-          <p class="postit-location" *ngIf="postit.location">{{postit.location}}</p>
-          <h3 class="card-title" *ngIf="postit.name">{{postit.name}}</h3>
+          <div class="postit-location">
+            <p class="truncate" *ngIf="postit.location">{{postit.location}}</p>
+          </div>
+          <h3 class="card-title truncate" *ngIf="postit.name">{{postit.name}}</h3>
           <p class="further-link">
             mehr lesen
             <i class="material-icons prefix">keyboard_arrow_right</i>

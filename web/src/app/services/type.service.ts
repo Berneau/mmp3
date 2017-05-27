@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
+import { ApiEndpoint } from './../app.config'
 
 import { Type } from './../interfaces/type'
-import { ApiEndpoint } from './../app.config'
 
 @Injectable()
 export class TypeService {

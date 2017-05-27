@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MzBaseModal, MzModalComponent, MzModalService } from 'ng2-materialize';
 
+import { Postit } from './../interfaces/postit'
+import { Vendor } from './../interfaces/vendor'
+
 import { PostitService } from './../services/postit.service'
 import { LoginService } from './../services/login.service'
 import { VendorService } from './../services/vendor.service'
-
-import { Postit } from './../interfaces/postit'
-import { Vendor } from './../interfaces/vendor'
 
 import { PostitFormComponent } from './../postit-form/postit-form.component'
 
@@ -21,7 +21,7 @@ export class PostitDetailComponent extends MzBaseModal {
   postit: Postit
   vendor: Vendor
 
-  constructor(private store: PostitService, private LoginStore: LoginService, private VendorStore: VendorService, private route: ActivatedRoute, private modalService: MzModalService) {
+  constructor(private store: PostitService, private route: ActivatedRoute, private LoginStore: LoginService, private VendorStore: VendorService, private modalService: MzModalService) {
     super()
   }
 

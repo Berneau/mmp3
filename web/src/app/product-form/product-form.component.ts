@@ -17,12 +17,12 @@ import { ProductService } from './../services/product.service'
 export class ProductFormComponent extends MzBaseModal {
 
   productForm: FormGroup
-  @Input() product: Product
-  @Input() vendor: Vendor
   periods: String[]
   months: String[]
+  @Input() product: Product
+  @Input() vendor: Vendor
 
-  constructor(private fb: FormBuilder, private CategoryStore: CategoryService, private store: ProductService) {
+  constructor(private store: ProductService, private fb: FormBuilder, private CategoryStore: CategoryService) {
     super()
   }
 
