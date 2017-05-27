@@ -1,5 +1,6 @@
 var Postit = require('../../models/postit.model')
 var postitIsValid = require('../../helpers/helpers').postitIsValid
+var postitFactory = require('../../helpers/helpers').postitFactory
 
 module.exports = function(router) {
 
@@ -41,12 +42,7 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
-      postit.name = req.body.name
-      postit.confirmed = req.body.confirmed
-      postit.description = req.body.description
-      postit.location = req.body.location
-      postit.vendorId = req.body.vendorId
-      postit.imageUrl = req.body.imageUrl
+      postit = postitFactory(req.body, postit)
 
       postit.save(function(err) {
 

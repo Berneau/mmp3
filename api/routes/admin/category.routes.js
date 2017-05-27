@@ -1,6 +1,7 @@
 var Category = require('../../models/category.model')
 var Product = require('../../models/product.model')
 var categoryIsValid = require('../../helpers/helpers').categoryIsValid
+var categoryFactory = require('../../helpers/helpers').categoryFactory
 
 module.exports = function(router) {
 
@@ -25,11 +26,8 @@ module.exports = function(router) {
       message: 'Missing fields'
     })
 
-    var category = new Category({
-      name: req.body.name,
-      typeUid: req.body.typeUid,
-      imageUrl: req.body.imageUrl
-    })
+    var category = new Category()
+    category = categoryFactory(req.body, category)
 
     category.save(function(err) {
 
@@ -84,9 +82,7 @@ module.exports = function(router) {
           message: 'Missing fields'
         })
 
-        category.name = req.body.name
-        category.typeUid = req.body.typeUid
-        category.imageUrl = req.body.imageUrl
+        category = categoryFactory(req.body, category)
 
         category.save(function(err) {
 

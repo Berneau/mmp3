@@ -1,5 +1,6 @@
 var Event = require('../../models/event.model')
 var eventIsValid = require('../../helpers/helpers').eventIsValid
+var eventFactory = require('../../helpers/helpers').eventFactory
 
 module.exports = function(router) {
 
@@ -24,16 +25,8 @@ module.exports = function(router) {
       message: 'Missing fields'
     })
 
-    var event = new Event({
-      name: req.body.name,
-      date: req.body.date,
-      description: req.body.description,
-      location: {
-        name: req.body.location ? req.body.location.name : undefined,
-        lat: req.body.location ? req.body.location.lat : undefined,
-        long: req.body.location ? req.body.location.long : undefined
-      }
-    })
+    var event = new Event()
+    event = eventFactory(req.body, event)
 
     event.save(function(err) {
 
@@ -87,12 +80,7 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
-      event.name = req.body.name
-      event.date = req.body.date
-      event.description = req.body.description
-      event.location.name = req.body.location ? req.body.location.name : undefined
-      event.location.lat = req.body.location ? req.body.location.lat : undefined
-      event.location.long = req.body.location ? req.body.location.long : undefined
+      event = eventFactory(req.body, event)
 
       event.save(function(err) {
 

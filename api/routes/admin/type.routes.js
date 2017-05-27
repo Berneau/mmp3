@@ -1,6 +1,7 @@
 var Type = require('../../models/type.model')
 var Category = require('../../models/category.model')
 var typeIsValid = require('../../helpers/helpers').typeIsValid
+var typeFactory = require('../../helpers/helpers').typeFactory
 
 module.exports = function(router) {
 
@@ -23,9 +24,8 @@ module.exports = function(router) {
       message: 'Missing fields'
     })
 
-    var type = new Type({
-      name: req.body.name
-    })
+    var type = new Type()
+    type = typeFactory(req.body, type)
 
     type.save(function(err) {
 
@@ -78,7 +78,7 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
-      type.name = req.body.name
+      type = typeFactory(req.body, type)
 
       type.save(function(err) {
 

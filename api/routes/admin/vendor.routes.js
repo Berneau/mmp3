@@ -1,9 +1,8 @@
-var ObjectId = require('mongoose').Types.ObjectId
-
 var Vendor = require('../../models/vendor.model')
 var Product = require('../../models/product.model')
 var User = require('../../models/user.model')
 var vendorIsValid = require('../../helpers/helpers').vendorIsValid
+var vendorFactory = require('../../helpers/helpers').vendorFactory
 
 module.exports = function(router) {
 
@@ -40,24 +39,8 @@ module.exports = function(router) {
       message: 'Missing fields'
     })
 
-    var vendor = new Vendor({
-      name: req.body.name,
-      userUid: req.body.userUid,
-      email: req.body.email,
-      description: req.body.description,
-      imageUrl: req.body.imageUrl,
-      farmImageUrl: req.body.farmImageUrl,
-      subName: req.body.subName,
-      website: req.body.website,
-      tel: req.body.tel,
-      address: {
-        city: req.body.address ? req.body.address.city : undefined,
-        zip: req.body.address ? req.body.address.zip : undefined,
-        street: req.body.address ? req.body.address.street : undefined,
-        lat: req.body.address ? req.body.address.lat : undefined,
-        long: req.body.address ? req.body.address.long : undefined
-      }
-    })
+    var vendor = new Vendor()
+    vendor = vendorFactory(req.body, vendor)
 
     vendor.save(function(err) {
 
@@ -124,20 +107,7 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
-      vendor.name = req.body.name
-      vendor.userUid = req.body.userUid
-      vendor.email = req.body.email
-      vendor.description = req.body.description
-      vendor.imageUrl = req.body.imageUrl
-      vendor.farmImageUrl = req.body.farmImageUrl
-      vendor.subName = req.body.subName
-      vendor.website = req.body.website
-      vendor.tel = req.body.tel
-      vendor.address.city = req.body.address ? req.body.address.city : undefined
-      vendor.address.zip = req.body.address ? req.body.address.zip : undefined
-      vendor.address.street = req.body.address ? req.body.address.street : undefined
-      vendor.address.lat = req.body.address ? req.body.address.lat : undefined
-      vendor.address.long = req.body.address ? req.body.address.long : undefined
+      vendor = vendorFactory(req.body, vendor)
 
       vendor.save(function(err) {
 

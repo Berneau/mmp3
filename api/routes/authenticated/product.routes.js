@@ -1,5 +1,6 @@
 var Product = require('../../models/product.model')
 var productIsValid = require('../../helpers/helpers').productIsValid
+var productFactory = require('../../helpers/helpers').productFactory
 
 
 module.exports = function(router) {
@@ -31,18 +32,8 @@ module.exports = function(router) {
       message: 'Missing fields'
     })
 
-    var product = new Product({
-      name: req.body.name,
-      categoryId: req.body.categoryId,
-      vendor: req.body.vendor,
-      availableAt: {
-        fromPeriod: req.body.availableAt ? req.body.availableAt.fromPeriod : undefined,
-        fromMonth: req.body.availableAt ? req.body.availableAt.fromMonth : undefined,
-        toPeriod: req.body.availableAt ? req.body.availableAt.toPeriod : undefined,
-        toMonth: req.body.availableAt ? req.body.availableAt.toMonth : undefined
-      },
-      imageUrl: req.body.imageUrl
-    })
+    var product = new Product()
+    product = productFactory(req.body, product)
 
     product.save(function(err) {
 
@@ -103,14 +94,7 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
-      product.name = req.body.name
-      product.categoryId = req.body.categoryId
-      product.vendor = req.body.vendor
-      product.availableAt.fromPeriod = req.body.availableAt ? req.body.availableAt.fromPeriod : undefined
-      product.availableAt.fromMonth = req.body.availableAt ? req.body.availableAt.fromMonth : undefined
-      product.availableAt.toPeriod = req.body.availableAt ? req.body.availableAt.toPeriod : undefined
-      product.availableAt.toMonth = req.body.availableAt ? req.body.availableAt.toMonth : undefined
-      product.imageUrl = req.body.imageUrl
+      product = productFactory(req.body, product)
 
       product.save(function(err) {
 
