@@ -47,11 +47,11 @@ describe('Product', () => {
 
   describe('GET product', () => {
 
-    it.skip('should GET a product by its id', (done) => {
+    it('should GET a product by its id', (done) => {
       let product = new Product({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendor: {},
+        vendor: 'abc',
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -90,11 +90,11 @@ describe('Product', () => {
 
   describe('POST product', () => {
 
-    it.skip('should POST a valid product', (done) => {
+    it('should POST a valid product', (done) => {
       let product = {
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendor: {},
+        vendor: 'abc',
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -192,13 +192,11 @@ describe('Product', () => {
 
   describe('PUT product', () => {
 
-    it.skip('should UPDATE and return a product', (done) => {
+    it('should UPDATE and return a product', (done) => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendor: {
-          name: 'Generic Farmer Name'
-        },
+        vendor: 'abc',
         imageUrl: 'dev.eins',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -210,9 +208,7 @@ describe('Product', () => {
       let product2 = new Product({
         name: 'Grüne Äpfel',
         categoryId: 'qwe123',
-        vendor: {
-          name: 'Generic Farmer Name'
-        },
+        vendor: 'abc',
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -239,11 +235,11 @@ describe('Product', () => {
       })
     })
 
-    it.skip('should not UPDATE the product if it is not valid', (done) => {
+    it('should not UPDATE the product if it is not valid', (done) => {
       let product1 = new Product ({
         name: 'Rote Äpfel',
         categoryId: 'asd123',
-        vendor: {},
+        vendor: 'abc',
         imageUrl: 'dev.eins',
         availableAt: {
           fromPeriod: 'Anfang',
@@ -321,11 +317,11 @@ describe('Product', () => {
 
   describe('DELETE product', () => {
 
-    it.skip('should DELETE a product if it exists', (done) => {
+    it('should DELETE a product if it exists', (done) => {
       let product = new Product ({
         name: 'Grüne Äpfel',
         categoryId: 'qwe123',
-        vendor: {},
+        vendor: 'abc',
         imageUrl: 'dev.null',
         availableAt: {
           fromPeriod: 'Anfang',

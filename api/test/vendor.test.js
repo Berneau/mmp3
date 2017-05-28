@@ -2,6 +2,7 @@
 
 let mongoose = require('mongoose')
 let Vendor = require('../models/vendor.model')
+let User = require('../models/user.model')
 let chai = require('chai')
 let chaiHttp = require('chai-http')
 let server = require('../index')
@@ -240,23 +241,35 @@ describe('Vendor', () => {
 
   describe('DELETE vendor', () => {
 
-    it.skip('should DELETE a vendor if it exists', (done) => {
-      let vendor = new Vendor({
-        name: 'Bauernhof',
-        userUid: 'asd123',
-        email: 'bauern@hof.at'
+    it('should DELETE a vendor if it exists', (done) => {
+      let user = new User({
+        email: 'abc@null.com',
+        password: 'test',
+        isAdmin: false
       })
-      vendor.save((err, vendor) => {
-        chai.request(server)
-          .delete('/api/vendors/' + vendor._id)
-          .set('x-access-token', token)
-          .end((err, res) => {
-            res.should.have.status(200)
-            res.body.should.have.property('ok').equal(true)
-            res.body.should.have.property('message').equal('Successfully deleted vendor and associated products')
-            done()
+      chai.request(server)
+        .post('/api/users')
+        .send(user)
+        .end((err, res) => {
+
+          let vendor = new Vendor({
+            name: 'Bauernhof',
+            userUid: res.body.user._id,
+            email: 'bauern@hof.at'
           })
-      })
+          vendor.save((err, vendor) => {
+            chai.request(server)
+            .delete('/api/vendors/' + vendor._id)
+            .set('x-access-token', token)
+            .end((err, res) => {
+              res.should.have.status(200)
+              res.body.should.have.property('ok').equal(true)
+              res.body.should.have.property('message').equal('Successfully deleted vendor and associated user and products')
+              done()
+            })
+          })
+
+        })
     })
 
     it('should not DELETE a vendor with an invalid id', (done) => {
