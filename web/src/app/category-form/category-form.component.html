@@ -25,7 +25,7 @@
         <div class="row">
           <h6>Grunddaten</h6>
           <mz-input-container class="input-field col s12 m6 form-group">
-            <input mz-input id="category-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+            <input mz-input id="category-name" type="text" formControlName="name" [label]="'Name'" [validate]="true" required>
           </mz-input-container>
           <mz-select-container class="input-field col s12 m6 form-group">
             <select mz-select [placeholder]="'Typ'" id="category-TypeId" formControlName="typeUid">
@@ -37,7 +37,7 @@
     </div>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="submit()">Speichern</button>
+    <button mz-button [flat]="true" (click)="submit()" [disabled]="!categoryForm.valid">Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>
