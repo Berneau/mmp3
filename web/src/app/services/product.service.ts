@@ -8,8 +8,6 @@ import { Vendor } from './../interfaces/vendor'
 @Injectable()
 export class ProductService {
 
-  vendorProducts: Product[]
-  categoryProducts: Product[]
   private apiEndpoint = ApiEndpoint
 
   constructor(private http: Http) { }
@@ -110,7 +108,7 @@ export class ProductService {
       .toPromise()
       .then((res) => {
         if (res.json().products.length != 0) {
-          this.vendorProducts = res.json().products
+          return res.json().products
         }
       })
       .catch(this.handleError)
@@ -124,7 +122,7 @@ export class ProductService {
       .toPromise()
       .then((res) => {
         if (res.json().products.length != 0) {
-          this.categoryProducts = res.json().products
+          return res.json().products
         }
       })
       .catch(this.handleError)

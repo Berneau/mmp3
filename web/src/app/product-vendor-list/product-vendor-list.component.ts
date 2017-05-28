@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Category } from './../interfaces/category'
+import { Product } from './../interfaces/product'
 
 import { ProductService } from './../services/product.service'
 
@@ -11,12 +12,20 @@ import { ProductService } from './../services/product.service'
 })
 export class ProductVendorListComponent implements OnInit {
 
+  categoryProducts: Product[]
   @Input() category: Category
 
   constructor(private store: ProductService) { }
 
   ngOnInit() {
-  this.store.getCategoryProducts(this.category._id)
+  this.getCategoryProducts(this.category._id)
+  }
+
+  getCategoryProducts(id) {
+    this.store.getCategoryProducts(id)
+      .then((products) => {
+        this.categoryProducts = products
+      })
   }
 
 }
