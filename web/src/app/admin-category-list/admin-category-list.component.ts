@@ -6,6 +6,7 @@ import { Category } from './../interfaces/category'
 import { CategoryService } from './../services/category.service'
 
 import { CategoryFormComponent } from './../category-form/category-form.component'
+import { DeleteConfirmationComponent } from './../delete-confirmation/delete-confirmation.component'
 
 @Component({
   selector: 'admin-category-list',
@@ -24,18 +25,22 @@ export class AdminCategoryListComponent implements OnInit {
 
   selectCategory(category: Category) {
     this.selectedCategory = category
-    this.modalService.open(CategoryFormComponent, {category: this.selectedCategory});
+    this.modalService.open(CategoryFormComponent, { category: this.selectedCategory });
   }
 
   deleteCategory(c) {
-    this.store.deleteCategory(c._id)
-      .then(success => {
-        if (!success) {
-          Materialize.toast('Fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Eintrag gelöscht.', 2000)
-      })
+    this.modalService.open(DeleteConfirmationComponent, { name: c.name, message: 'Kategorien können nicht gelöscht werden, wenn sie Produkte enthalten!' })
+    $('delete-confirmation #deletionConfirmedButton').on('click', () => {
+      this.store.deleteCategory(c._id)
+        .then(success => {
+          if (!success) {
+            Materialize.toast('Fehlgeschlagen.', 2000)
+            return
+          }
+          Materialize.toast('Eintrag gelöscht.', 2000)
+        })
+    })
+
   }
 
 }

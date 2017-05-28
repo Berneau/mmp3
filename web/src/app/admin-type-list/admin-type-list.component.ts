@@ -6,6 +6,7 @@ import { Type } from './../interfaces/type'
 import { TypeService } from './../services/type.service'
 
 import { TypeFormComponent } from './../type-form/type-form.component'
+import { DeleteConfirmationComponent } from './../delete-confirmation/delete-confirmation.component'
 
 @Component({
   selector: 'admin-type-list',
@@ -24,18 +25,21 @@ export class AdminTypeListComponent implements OnInit {
 
   selectType(type: Type) {
     this.selectedType = type
-    this.modalService.open(TypeFormComponent, {type: this.selectedType});
+    this.modalService.open(TypeFormComponent, { type: this.selectedType });
   }
 
   deleteType(t) {
-    this.store.deleteType(t._id)
-      .then(success => {
-        if (!success) {
-          Materialize.toast('Fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Eintrag gelöscht.', 2000)
-      })
+    this.modalService.open(DeleteConfirmationComponent, { name: t.name, message: 'Typen können nicht gelöscht werden, wenn sie von Kategorien benutzt werden!' })
+    $('delete-confirmation #deletionConfirmedButton').on('click', () => {
+      this.store.deleteType(t._id)
+        .then(success => {
+          if (!success) {
+            Materialize.toast('Fehlgeschlagen.', 2000)
+            return
+          }
+          Materialize.toast('Eintrag gelöscht.', 2000)
+        })
+    })
   }
 
 }
