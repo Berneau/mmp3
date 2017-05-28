@@ -1,0 +1,18 @@
+<mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions" class="delete-confirmation">
+  <mz-modal-header>
+    Löschen
+  </mz-modal-header>
+  <mz-modal-content>
+    <div class="row">
+      <h5 *ngIf="this.name">Wollen Sie '{{this.name}}' wirklich löschen?</h5>
+      <p *ngIf="this.message">
+        <span>Information:</span> {{this.message}}
+      </p>
+      <h5 *ngIf="!this.message && !this.name">Wollen Sie wirklich löschen?</h5>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button id="deletionConfirmedButton" class="left" [flat]="true" (click)="close()">Löschen</button>
+    <button mz-button class="right" [flat]="true" mz-modal-close>Abbrechen</button>
+  </mz-modal-footer>
+</mz-modal>
