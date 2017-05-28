@@ -11,7 +11,7 @@
               {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
             </p>
             <h3 class="card-title truncate">{{product.name}}</h3>
-            <p class="further-link" *ngIf="LoginStore.isLoggedIn()">
+            <p class="further-link" *ngIf="LoginStore.isCurrentVendor(vendor.userUid)">
               <button mz-button class="btn yellow" (click)="this.selectProduct(product)">
               <i class="material-icons">mode_edit</i>
             </button>

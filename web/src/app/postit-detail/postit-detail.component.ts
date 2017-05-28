@@ -48,6 +48,7 @@ export class PostitDetailComponent extends MzBaseModal {
         }
         this.postit = postit
         Materialize.toast('Eintrag gespeichert.', 2000)
+        this.modalComponent.close()
       })
   }
 
