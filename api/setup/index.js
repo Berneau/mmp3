@@ -38,14 +38,19 @@ let user3 = new User({
   password: 'secret',
   isAdmin: false
 })
+let user4 = new User({
+  email: 'franziska@hof.at',
+  password: 'secret',
+  isAdmin: false
+})
 
 let vendor1 = new Vendor({
   name: 'Elfriede Hackl',
   userUid: '',
   email: 'elfriede@hof.at',
   description: 'Sonniges Platzal',
-  imageUrl: 'vendor.png',
-  farmImageUrl: 'farm.png',
+  imageUrl: 'vendor_female1.png',
+  farmImageUrl: 'farm1.png',
   subName: 'Hacklhof',
   website: 'abc.com',
   tel: 0815123123,
@@ -62,8 +67,8 @@ let vendor2 = new Vendor({
   userUid: '',
   email: 'bertl@hof.at',
   description: 'Direkt am Fluß',
-  imageUrl: 'vendor.png',
-  farmImageUrl: 'farm.png',
+  imageUrl: 'vendor_male.png',
+  farmImageUrl: 'farm2.png',
   subName: 'Schmittnhüttn',
   website: 'abc.com',
   tel: 0815123123,
@@ -75,6 +80,24 @@ let vendor2 = new Vendor({
     long: 13.063993
   }
 })
+let vendor3 = new Vendor({
+  name: 'Franziska Müller',
+  userUid: '',
+  email: 'franziska@hof.at',
+  description: '',
+  imageUrl: 'vendor_female2.png',
+  farmImageUrl: 'farm3.png',
+  subName: 'Müller-Hof',
+  website: 'abc.com',
+  tel: 0815123123,
+  address: {
+    city: 'Bergheim',
+    zip: 5101,
+    street: 'Hauptstraße 25',
+    lat: 47.808271,
+    long: 13.053993
+  }
+})
 
 let type1 = new Type({
   name: 'Gemüse'
@@ -83,31 +106,42 @@ let type2 = new Type({
   name: 'Obst'
 })
 let type3 = new Type({
-  name: 'Käse'
+  name: 'Milchprodukte'
+})
+let type4 = new Type({
+  name: 'Eier'
+})
+let type5 = new Type({
+  name: 'Fleisch'
 })
 
 let category1 = new Category({
-  name: 'Echtling',
+  name: 'Butter',
   typeUid: '',
-  imageUrl: 'category.png'
+  imageUrl: 'category_butter.png'
 })
 let category2 = new Category({
-  name: 'Kürbisse',
+  name: 'Radieschen',
   typeUid: '',
-  imageUrl: 'category.png'
+  imageUrl: 'category_radish.png'
 })
 let category3 = new Category({
-  name: 'Äpfel',
+  name: 'Kirschen',
   typeUid: '',
-  imageUrl: 'category.png'
+  imageUrl: 'category_cherries.png'
 })
 let category4 = new Category({
-  name: 'Schnitzereien',
+  name: 'Karotten',
   typeUid: '',
-  imageUrl: 'category.png'
+  imageUrl: 'category_carrots.png'
+})
+let category5 = new Category({
+  name: 'Eier',
+  typeUid: '',
+  imageUrl: 'category_eggs.png'
 })
 let product1 = new Product({
-  name: 'Grüne Äpfel',
+  name: 'Käuterbutter',
   categoryId: '',
   vendor: '',
   availableAt: {
@@ -116,10 +150,10 @@ let product1 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'product.png'
+  imageUrl: 'product_butter.png'
 })
 let product2 = new Product({
-  name: 'Hokkaido Kürbis',
+  name: 'Rote & Gelbe Radieschen',
   categoryId: '',
   vendor: '',
   availableAt: {
@@ -128,10 +162,10 @@ let product2 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'product.png'
+  imageUrl: 'product_radish.png'
 })
 let product3 = new Product({
-  name: 'Mehlige Echtling',
+  name: 'Süße Kirschen',
   categoryId: '',
   vendor: '',
   availableAt: {
@@ -140,7 +174,19 @@ let product3 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'product.png'
+  imageUrl: 'product_cherries.png'
+})
+let product4 = new Product({
+  name: 'Wachteleier',
+  categoryId: '',
+  vendor: '',
+  availableAt: {
+    fromPeriod: 'Anfang',
+    fromMonth: 'April',
+    toPeriod: 'Ende',
+    toMonth: 'September'
+  },
+  imageUrl: 'product_eggs.png'
 })
 let event1 = new Event({
   name: 'Schranne',
@@ -163,20 +209,53 @@ let event2 = new Event({
   }
 })
 let postit1 = new Postit({
-  name: 'Wild',
+  name: 'Wildfleisch',
   confirmed: true,
-  description: 'Nur für kurze Zeit',
+  description: 'Nur für kurze Zeit!',
   vendorId: '',
-  imageUrl: 'postit.png'
+  imageUrl: 'postit_vension.png'
 })
 let postit2 = new Postit({
-  name: 'Brot',
+  name: 'Frisches Bauernbrot',
   confirmed: false,
-  description: 'Frisch gebackenes Bauernbrot',
+  description: 'Frisch gebackenes Bauernbrot frisch aus dem Ofen!',
   location: 'Lungau',
   vendorId: '',
-  imageUrl: 'postit.png'
+  imageUrl: 'postit_bread.png'
 })
+let postit3 = new Postit({
+  name: 'Frische Gartenkräuter',
+  confirmed: true,
+  description: 'Nur solange der Vorrat reicht!',
+  location: 'Lungau',
+  vendorId: '',
+  imageUrl: 'postit_herbs.png'
+})
+let postit4 = new Postit({
+  name: 'Frischer Kräuteraufstrich',
+  confirmed: true,
+  description: 'Maximal 2 Wochen haltbar!',
+  location: 'Lungau',
+  vendorId: '',
+  imageUrl: 'postit_spread.png'
+})
+let postit5 = new Postit({
+  name: 'Köstliche Teemischung',
+  confirmed: false,
+  description: 'Individuell zusammengestellte Teemischungen zum aufbrühen!',
+  location: '',
+  vendorId: '',
+  imageUrl: 'postit_tea.png'
+})
+let postit6 = new Postit({
+  name: 'Feiner Traubensaft',
+  confirmed: true,
+  description: 'Individuell zusammengestellte Teemischungen zum aufbrühen!',
+  location: '',
+  vendorId: '',
+  imageUrl: 'postit_juice.png'
+})
+
 
 setupUsers()
 
@@ -186,7 +265,7 @@ function setupUsers() {
       .post('/api/users')
       .send(user1)
       .end((err, res) => {
-        if(err) reject('u1')
+        if (err) reject('u1')
         else resolve(res.body.ok)
       })
   })
@@ -195,7 +274,7 @@ function setupUsers() {
       .post('/api/users')
       .send(user2)
       .end((err, res) => {
-        if(err) reject('u2')
+        if (err) reject('u2')
         else {
           vendor1.userUid = res.body.user._id
           resolve(res.body.ok)
@@ -207,26 +286,39 @@ function setupUsers() {
       .post('/api/users')
       .send(user3)
       .end((err, res) => {
-        if(err) reject('u3')
+        if (err) reject('u3')
         else {
           vendor2.userUid = res.body.user._id
           resolve(res.body.ok)
         }
       })
   })
+  let u4 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/users')
+      .send(user4)
+      .end((err, res) => {
+        if (err) reject('u4')
+        else {
+          vendor3.userUid = res.body.user._id
+          resolve(res.body.ok)
+        }
+      })
+  })
 
-  Promise.all([u1, u2, u3]).then(values => {
+  Promise.all([u1, u2, u3, u4]).then(values => {
     console.log('Users: ' + values)
     setupAuth()
   })
 }
+
 function setupAuth() {
   let a1 = new Promise((resolve, reject) => {
     chai.request(server)
       .post('/api/auth')
       .send(user1)
       .end((err, res) => {
-        if(err) reject('a1')
+        if (err) reject('a1')
         else resolve(res.body)
       })
   })
@@ -237,6 +329,7 @@ function setupAuth() {
     setupVendors()
   })
 }
+
 function setupVendors() {
   let v1 = new Promise((resolve, reject) => {
     chai.request(server)
@@ -244,10 +337,10 @@ function setupVendors() {
       .set('x-access-token', token)
       .send(vendor1)
       .end((err, res) => {
-        if(err) reject('v1')
+        if (err) reject('v1')
         else {
           product1.vendor = res.body.vendor._id
-          product2.vendor = res.body.vendor._id
+          product3.vendor = res.body.vendor._id
           postit1.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }
@@ -259,20 +352,35 @@ function setupVendors() {
       .set('x-access-token', token)
       .send(vendor2)
       .end((err, res) => {
-        if(err) reject('v2')
+        if (err) reject('v2')
         else {
-          product3.vendor = res.body.vendor._id
-          postit2.vendorId = res.body.vendor._id
+          product2.vendor = res.body.vendor._id
+          product4.vendor = res.body.vendor._id
+          postit3.vendorId = res.body.vendor._id
+          resolve(res.body.ok)
+        }
+      })
+  })
+  let v3 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/vendors')
+      .set('x-access-token', token)
+      .send(vendor3)
+      .end((err, res) => {
+        if (err) reject('v3')
+        else {
+          postit5.vendorId = res.body.vendor._id
           resolve(res.body.ok)
         }
       })
   })
 
-  Promise.all([v1, v2]).then(values => {
+  Promise.all([v1, v2, v3]).then(values => {
     console.log('Vendors: ' + values)
     setupTypes()
   })
 }
+
 function setupTypes() {
   let t1 = new Promise((resolve, reject) => {
     chai.request(server)
@@ -280,10 +388,10 @@ function setupTypes() {
       .set('x-access-token', token)
       .send(type1)
       .end((err, res) => {
-        if(err) reject('t1')
+        if (err) reject('t1')
         else {
-          category1.typeUid = res.body.type._id
           category2.typeUid = res.body.type._id
+          category4.typeUid = res.body.type._id
           resolve(res.body.ok)
         }
       })
@@ -294,10 +402,9 @@ function setupTypes() {
       .set('x-access-token', token)
       .send(type2)
       .end((err, res) => {
-        if(err) reject('t2')
+        if (err) reject('t2')
         else {
           category3.typeUid = res.body.type._id
-          category4.typeUid = res.body.type._id
           resolve(res.body.ok)
         }
       })
@@ -308,16 +415,43 @@ function setupTypes() {
       .set('x-access-token', token)
       .send(type3)
       .end((err, res) => {
-        if(err) reject('t3')
+        if (err) reject('t3')
+        else {
+          category1.typeUid = res.body.type._id
+          resolve(res.body.ok)
+        }
+      })
+  })
+  let t4 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/types')
+      .set('x-access-token', token)
+      .send(type4)
+      .end((err, res) => {
+        if (err) reject('t4')
+        else {
+          category5.typeUid = res.body.type._id
+          resolve(res.body.ok)
+        }
+      })
+  })
+  let t5 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/types')
+      .set('x-access-token', token)
+      .send(type5)
+      .end((err, res) => {
+        if (err) reject('t5')
         else resolve(res.body.ok)
       })
   })
 
-  Promise.all([t1, t2, t3]).then(values => {
+  Promise.all([t1, t2, t3, t4, t5]).then(values => {
     console.log('Types: ' + values)
     setupCategories()
   })
 }
+
 function setupCategories() {
   let c1 = new Promise((resolve, reject) => {
     chai.request(server)
@@ -325,9 +459,9 @@ function setupCategories() {
       .set('x-access-token', token)
       .send(category1)
       .end((err, res) => {
-        if(err) reject('c1')
+        if (err) reject('c1')
         else {
-          product3.categoryId = res.body.category._id
+          product1.categoryId = res.body.category._id
           resolve(res.body.ok)
         }
       })
@@ -338,7 +472,7 @@ function setupCategories() {
       .set('x-access-token', token)
       .send(category2)
       .end((err, res) => {
-        if(err) reject('c2')
+        if (err) reject('c2')
         else {
           product2.categoryId = res.body.category._id
           resolve(res.body.ok)
@@ -351,9 +485,9 @@ function setupCategories() {
       .set('x-access-token', token)
       .send(category3)
       .end((err, res) => {
-        if(err) reject('c3')
+        if (err) reject('c3')
         else {
-          product1.categoryId = res.body.category._id
+          product3.categoryId = res.body.category._id
           resolve(res.body.ok)
         }
       })
@@ -364,19 +498,32 @@ function setupCategories() {
       .set('x-access-token', token)
       .send(category4)
       .end((err, res) => {
-        if(err) reject('c4')
+        if (err) reject('c4')
         else {
           resolve(res.body.ok)
         }
       })
   })
-
-  Promise.all([c1, c2, c3, c4]).then(values => {
+  let c5 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/categories')
+      .set('x-access-token', token)
+      .send(category5)
+      .end((err, res) => {
+        if (err) reject('c5')
+        else {
+          product4.categoryId = res.body.category._id
+          resolve(res.body.ok)
+        }
+      })
+  })
+  Promise.all([c1, c2, c3, c4, c5]).then(values => {
     console.log('Categories: ' + values)
     setupProducts()
   })
 
 }
+
 function setupProducts() {
   let p1 = new Promise((resolve, reject) => {
     chai.request(server)
@@ -384,7 +531,7 @@ function setupProducts() {
       .set('x-access-token', token)
       .send(product1)
       .end((err, res) => {
-        if(err) reject('p1')
+        if (err) reject('p1')
         else resolve(res.body.ok)
       })
   })
@@ -394,7 +541,7 @@ function setupProducts() {
       .set('x-access-token', token)
       .send(product2)
       .end((err, res) => {
-        if(err) reject('p2')
+        if (err) reject('p2')
         else resolve(res.body.ok)
       })
   })
@@ -404,12 +551,22 @@ function setupProducts() {
       .set('x-access-token', token)
       .send(product3)
       .end((err, res) => {
-        if(err) reject('p3')
+        if (err) reject('p3')
+        else resolve(res.body.ok)
+      })
+  })
+  let p4 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/products')
+      .set('x-access-token', token)
+      .send(product4)
+      .end((err, res) => {
+        if (err) reject('p4')
         else resolve(res.body.ok)
       })
   })
 
-  Promise.all([p1, p2, p3]).then(values => {
+  Promise.all([p1, p2, p3, p4]).then(values => {
     console.log('Products: ' + values)
     setupEvents()
   })
@@ -422,7 +579,7 @@ function setupEvents() {
       .set('x-access-token', token)
       .send(event1)
       .end((err, res) => {
-        if(err) reject('e1')
+        if (err) reject('e1')
         else resolve(res.body.ok)
       })
   })
@@ -432,7 +589,7 @@ function setupEvents() {
       .set('x-access-token', token)
       .send(event2)
       .end((err, res) => {
-        if(err) reject('e2')
+        if (err) reject('e2')
         else resolve(res.body.ok)
       })
   })
@@ -444,28 +601,68 @@ function setupEvents() {
 }
 
 function setupPostits() {
-  let p1 = new Promise((resolve, reject) => {
+  let pt1 = new Promise((resolve, reject) => {
     chai.request(server)
       .post('/api/postits')
       .set('x-access-token', token)
       .send(postit1)
       .end((err, res) => {
-        if(err) reject('e1')
+        if (err) reject('pt1')
         else resolve(res.body.ok)
       })
   })
-  let p2 = new Promise((resolve, reject) => {
+  let pt2 = new Promise((resolve, reject) => {
     chai.request(server)
       .post('/api/postits')
       .set('x-access-token', token)
       .send(postit2)
       .end((err, res) => {
-        if(err) reject('e1')
+        if (err) reject('pt2')
+        else resolve(res.body.ok)
+      })
+  })
+  let pt3 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/postits')
+      .set('x-access-token', token)
+      .send(postit3)
+      .end((err, res) => {
+        if (err) reject('pt3')
+        else resolve(res.body.ok)
+      })
+  })
+  let pt4 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/postits')
+      .set('x-access-token', token)
+      .send(postit4)
+      .end((err, res) => {
+        if (err) reject('pt4')
+        else resolve(res.body.ok)
+      })
+  })
+  let pt5 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/postits')
+      .set('x-access-token', token)
+      .send(postit5)
+      .end((err, res) => {
+        if (err) reject('pt5')
+        else resolve(res.body.ok)
+      })
+  })
+  let pt6 = new Promise((resolve, reject) => {
+    chai.request(server)
+      .post('/api/postits')
+      .set('x-access-token', token)
+      .send(postit6)
+      .end((err, res) => {
+        if (err) reject('pt6')
         else resolve(res.body.ok)
       })
   })
 
-  Promise.all([p1, p2]).then(values => {
+  Promise.all([pt1, pt2, pt3, pt4, pt5, pt6]).then(values => {
     console.log('Postits: ' + values)
     process.exit(0)
   })
