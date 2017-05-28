@@ -7,7 +7,7 @@
           <a [routerLink]="['/produkte', category._id]">
             <div class="card">
               <div class="card-image" *ngIf="category.imageUrl">
-                <img class="activator" src="assets/{{category.imageUrl}}">
+                <img class="activator" src="assets/images/{{category.imageUrl}}">
               </div>
               <div class="card-content">
                 <h3 class="card-title truncate" *ngIf="category.name">{{category.name}}</h3>

@@ -1,11 +1,11 @@
 <div *ngIf="vendor">
   <div class="row farm-image"  *ngIf="vendor.farmImageUrl">
-    <img class="fullscreen" src="assets/{{vendor.farmImageUrl}}">
+    <img class="fullscreen" src="assets/images/{{vendor.farmImageUrl}}">
   </div>
   <div class="row profile-head">
     <div class="row">
       <div class="col s12 m5 l3 profile-image" *ngIf="vendor.imageUrl">
-        <img class="responsive-image circle" src="assets/{{vendor.imageUrl}}">
+        <img class="responsive-image circle" src="assets/images/{{vendor.imageUrl}}">
       </div>
       <div class="col s12 m7 l9 profile-name">
         <h4 class="truncate">{{vendor.name}}</h4>

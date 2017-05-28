@@ -11,7 +11,7 @@
         <a [routerLink]="['/produzenten', result.vendor._id]">
           <div class="card">
             <div class="card-image">
-              <img class="activator" src="assets/{{result.imageUrl}}">
+              <img class="activator" src="assets/images/{{result.imageUrl}}">
             </div>
             <div class="card-content">
               <p class="product-vendor" *ngIf="result.vendor.name">{{result.vendor.name}}</p>
@@ -37,7 +37,7 @@
         <a [routerLink]="['/produzenten', result._id]">
           <div class="card">
             <div class="card-image">
-              <img class="activator" src="assets/{{result.imageUrl}}">
+              <img class="activator" src="assets/images/{{result.imageUrl}}">
             </div>
             <div class="card-content">
               <p class="vendor-subName" *ngIf="result.subName">{{result.subName}}</p>

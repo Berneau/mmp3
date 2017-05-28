@@ -38,7 +38,7 @@
           </mz-input-container>
           <mz-select-container class="input-field col s12 m6 form-group">
             <select mz-select [placeholder]="'Wählen...'" [label]="'Kategorie'"  id="product-categoryId" formControlName="categoryId" required>
-              <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" attr.data-icon="assets/{{category.imageUrl}}" class="left circle">{{category.name}}</option>
+              <option *ngFor="let category of this.CategoryStore.categories" value="{{category._id}}" attr.data-icon="assets/images/{{category.imageUrl}}" class="left circle">{{category.name}}</option>
             </select>
           </mz-select-container>
         </div>

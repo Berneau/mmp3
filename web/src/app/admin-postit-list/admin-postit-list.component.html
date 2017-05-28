@@ -2,7 +2,7 @@
   <ul class="row collection">
     <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="collection-item row">
       <div class="col s3 m2 postit-image">
-        <img class="circle responsive-img" src="assets/{{postit.imageUrl}}">
+        <img class="circle responsive-img" src="assets/images/{{postit.imageUrl}}">
       </div>
       <div class="col s7 m8 postit-details">
         <h3 class="postit-title truncate">{{postit.name}}</h3>
