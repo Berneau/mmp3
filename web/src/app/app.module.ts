@@ -57,6 +57,7 @@ import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 
 import { PostitConfirmedPipe } from './pipes/postit-confirmed.pipe';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -89,7 +90,7 @@ const appRoutes: Routes = [
   { path: 'impressum', component: ImprintComponent },
   { path: '404', component: NotFoundComponent },
 
-  {path: '**', redirectTo: '/404'}
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
@@ -129,7 +130,8 @@ const appRoutes: Routes = [
     AboutComponent,
     PostitConfirmedPipe,
     AdminVendorListComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DeleteConfirmationComponent
   ],
   entryComponents: [
     PostitFormComponent,
@@ -139,7 +141,8 @@ const appRoutes: Routes = [
     EventFormComponent,
     ProductFormComponent,
     VendorFormComponent,
-    PostitDetailComponent
+    PostitDetailComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

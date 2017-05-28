@@ -8,6 +8,7 @@ import { ProductService } from './../services/product.service'
 import { LoginService } from './../services/login.service'
 
 import { ProductFormComponent } from './../product-form/product-form.component'
+import { DeleteConfirmationComponent } from './../delete-confirmation/delete-confirmation.component'
 
 @Component({
   selector: 'product-list',
@@ -17,28 +18,40 @@ import { ProductFormComponent } from './../product-form/product-form.component'
 export class ProductListComponent implements OnInit {
 
   selectedProduct: Product
+  vendorProducts: Product[]
   @Input() vendor: Vendor
 
   constructor(private store: ProductService, private LoginStore: LoginService, private modalService: MzModalService) { }
 
   ngOnInit() {
+    this.getVendorProducts()
+  }
+
+  getVendorProducts() {
     this.store.getVendorProducts(this.vendor._id)
+      .then((products) => {
+        this.vendorProducts = products
+      })
   }
 
   selectProduct(product: Product) {
     this.selectedProduct = product
-    this.modalService.open(ProductFormComponent, {product: this.selectedProduct, vendor: this.vendor});
+    this.modalService.open(ProductFormComponent, { product: this.selectedProduct, vendor: this.vendor });
   }
 
   deleteProduct(p) {
-    this.store.deleteProduct(p._id, p.vendor)
-      .then(success => {
-        if (!success) {
-          Materialize.toast('Fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Eintrag gelöscht.', 2000)
-      })
+    this.modalService.open(DeleteConfirmationComponent, { name: p.name })
+    $('delete-confirmation #deletionConfirmedButton').on('click', () => {
+      this.store.deleteProduct(p._id, p.vendor)
+        .then(success => {
+          if (!success) {
+            Materialize.toast('Fehlgeschlagen.', 2000)
+            return
+          }
+          this.getVendorProducts()
+          Materialize.toast('Eintrag gelöscht.', 2000)
+        })
+    })
   }
 
 }

@@ -1,0 +1,31 @@
+@import "../../assets/variables"; // mobile-first
+
+.delete-confirmation {}
+@media @medium-and-up {
+  // styles for medium screens and larger
+  .delete-confirmation {
+    .modal.modal-fixed-footer.open {
+      height: 40%;
+      top: 20%;
+
+      .modal-content {
+        mz-modal-content {
+          h5 {
+            font-size: 20px;
+            margin: 50px 0 35px;
+          }
+
+          p {
+            span {
+              display: block;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media @large-and-up {
+  // styles for large screens and up
+}

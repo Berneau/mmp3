@@ -10,6 +10,7 @@ import { LoginService } from './../services/login.service'
 import { VendorService } from './../services/vendor.service'
 
 import { PostitFormComponent } from './../postit-form/postit-form.component'
+import { DeleteConfirmationComponent } from './../delete-confirmation/delete-confirmation.component'
 
 @Component({
   selector: 'postit-detail',
@@ -51,19 +52,23 @@ export class PostitDetailComponent extends MzBaseModal {
   }
 
   deletePostit(p) {
-    this.store.deletePostit(p._id)
-      .then(success => {
-        if (!success) {
-          Materialize.toast('Fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Eintrag gelöscht.', 2000)
-      })
+    this.modalService.open(DeleteConfirmationComponent, { name: p.name })
+    $('delete-confirmation #deletionConfirmedButton').on('click', () => {
+      this.store.deletePostit(p._id)
+        .then(success => {
+          if (!success) {
+            Materialize.toast('Fehlgeschlagen.', 2000)
+            return
+          }
+          Materialize.toast('Eintrag gelöscht.', 2000)
+          this.modalComponent.close()
+        })
+    })
   }
 
   openUpdatePostitModal(p) {
     this.postit = p
-    this.modalService.open(PostitFormComponent, {postit: this.postit, vendor: this.vendor});
+    this.modalService.open(PostitFormComponent, { postit: this.postit, vendor: this.vendor });
   }
 
 }
