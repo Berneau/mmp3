@@ -41,13 +41,13 @@
         <div class="row">
           <h6>Kontaktdaten</h6>
           <mz-input-container class="input-field col s12 m6 form-group">
-            <input mz-input id="vendor-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+            <input mz-input id="vendor-name" type="text" formControlName="name" [label]="'Name'" [validate]="true" required>
           </mz-input-container>
           <mz-input-container class="input-field col s12 m6 form-group">
             <input mz-input id="vendor-subName" type="text" formControlName="subName" [label]="'Hofname'" [validate]="true">
           </mz-input-container>
           <mz-input-container class="input-field col s12 form-group">
-            <input mz-input id="vendor-email" type="email" formControlName="email" [label]="'E-Mail'">
+            <input mz-input id="vendor-email" type="email" formControlName="email" [label]="'E-Mail'" required>
           </mz-input-container>
           <mz-input-container class="input-field col s12 m6 form-group">
             <input mz-input id="vendor-tel" type="tel" formControlName="tel" [label]="'Telefonnummer'" [validate]="true">
@@ -86,7 +86,7 @@
   <mz-modal-footer>
     <button mz-button [flat]="true" *ngIf="user" class="left"(click)="editUser()">Passwörter bearbeiten</button>
 
-    <button mz-button [flat]="true" (click)="submit()">Speichern</button>
+    <button mz-button [flat]="true" (click)="submit()" [disabled]="!vendorForm.valid">Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>

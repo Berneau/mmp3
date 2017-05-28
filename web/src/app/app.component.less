@@ -28,10 +28,15 @@ mz-modal {
 
   mz-modal-content {
     .input-field {
-      color: @lightgrey-color;
+      color: @primary-color;
 
       input,
       textarea {
+        &.label {
+          color: @invalid-color;
+          font-size: 14px;
+        }
+
         &:focus:not([readonly]) {
           color: @primary-color;
           border-bottom: 1px solid @orange-color;
@@ -42,14 +47,42 @@ mz-modal {
           }
         }
 
-        &.valid {
+        &.ng-valid.ng-touched,
+        &:valid.ng-touched {
           border-bottom: 1px solid @valid-color;
           box-shadow: 0 1px 0 0 @valid-color;
         }
 
-        &.invalid {
+        &.ng-invalid.ng-touched,
+        &:invalid.ng-touched {
           border-bottom: 1px solid @invalid-color;
           box-shadow: 0 1px 0 0 @invalid-color;
+        }
+
+        &:required ~ label {
+          &::after {
+            content: '*';
+            opacity: 1;
+            position: initial;
+            display: inline-block;
+            margin-left: 4px;
+          }
+        }
+      }
+
+      .select-wrapper {
+        & + label {
+          &::after {
+            content: '*';
+            opacity: 1;
+            position: initial;
+            display: inline-block;
+            margin-left: 4px;
+          }
+        }
+
+        input.select-dropdown {
+          margin-bottom: 0;
         }
       }
 

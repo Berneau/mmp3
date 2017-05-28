@@ -1,9 +1,9 @@
 <mz-modal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
   <mz-modal-header *ngIf="postit">
-    Schlachtbrett-Eintrag bearbeiten
+    Gustostückerl-Eintrag bearbeiten
   </mz-modal-header>
   <mz-modal-header *ngIf="!postit">
-    Schlachtbrett-Eintrag hinzufügen
+    Gustostückerl-Eintrag hinzufügen
   </mz-modal-header>
   <mz-modal-content>
     <div>
@@ -25,7 +25,7 @@
         <div class="row">
           <h6>Grunddaten</h6>
           <mz-input-container class="input-field col s12 m6 form-group">
-            <input mz-input id="postit-name" type="text" formControlName="name" [label]="'Name'" [validate]="true">
+            <input mz-input id="postit-name" type="text" formControlName="name" [label]="'Name'" [validate]="true" required>
           </mz-input-container>
           <mz-input-container class="input-field col s12 m6 form-group">
             <input mz-input id="postit-location" type="text" formControlName="location" [label]="'Location'" [validate]="true">
@@ -41,7 +41,7 @@
     </div>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" (click)="submit()">Speichern</button>
+    <button mz-button [flat]="true" (click)="submit()" [disabled]="!postitForm.valid">Speichern</button>
     <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
   </mz-modal-footer>
 </mz-modal>
