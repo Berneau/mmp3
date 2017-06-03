@@ -68,5 +68,6 @@ require('./routes/admin/category.routes')(router)
 require('./routes/admin/type.routes')(router)
 require('./routes/admin/event.routes')(router)
 require('./routes/admin/postit.routes')(router)
+require('./routes/admin/s3.routes')(router)
 
 module.exports = router
