@@ -4,9 +4,9 @@ module.exports = function(router) {
 
   router.route('/s3')
   /**
-  * @api {get} /s3 Get S3key
-  * @apiName GetS3key
-  * @apiGroup S3key
+  * @api {get} /s3 Get s3Credentials
+  * @apiName Gets3Credentials
+  * @apiGroup s3Credentials
   * @apiPermission admin
   *
   * @apiSuccess {Object} s3Credentials The credentials for uploading images.
