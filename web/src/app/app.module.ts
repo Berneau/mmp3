@@ -8,6 +8,8 @@ import 'rxjs/add/operator/toPromise'
 import { MaterializeModule } from 'ng2-materialize';
 import { Ng2MapModule} from 'ng2-map';
 
+import { googleMapsAPIKey } from './app.config'
+
 import { AdminGuard } from './guards/admin.guard';
 
 import { AppComponent } from './app.component';
@@ -151,7 +153,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     MaterializeModule.forRoot(),
-    Ng2MapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDnH8lRvKKKtX4jvVReC8kkaIUAgWq9F7Q' })
+    Ng2MapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=' + googleMapsAPIKey })
   ],
   providers: [
     ProductService,
