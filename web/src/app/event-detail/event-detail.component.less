@@ -1,17 +1,18 @@
 @import "../../assets/less/variables"; // mobile-first
 
 event-detail {
-  .container {
-    margin-top: 50px;
+  .page-title {
     .event-date {
-      span{
+      span {
         text-align: center;
         display: block;
+
         &.day {
-          font-size: 50px;
+          font-size: 40px;
           font-weight: 600;
           color: @yellow-color;
         }
+
         &.month {
           font-size: 16px;
           color: @lightgrey-color;
@@ -19,9 +20,14 @@ event-detail {
         }
       }
     }
+
     .event-name {
       text-align: center;
     }
+  }
+
+  .container {
+    margin-top: 50px;
 
     .event-description {
       background-color: @white-color;
@@ -44,12 +50,10 @@ event-detail {
     }
   }
 }
-
 @media @medium-and-up {
   // styles for medium screens and larger
   event-detail {
     .container {
-
       .event-name {
         text-align: left;
       }

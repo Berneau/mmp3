@@ -27,12 +27,14 @@
       </div>
     </div>
   </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button class="btn orange" [flat]="true" mz-modal-close><i class="material-icons">close</i></button>
-    <div *ngIf="this.LoginStore.isAdmin()" class="left">
+  <mz-modal-footer class="row">
+    <div *ngIf="this.LoginStore.isAdmin()" class="col s9 m8">
       <button mz-button class="btn yellow" *ngIf="!postit.confirmed" [flat]="true" (click)="this.confirmPostit(postit)" mz-modal-close><i class="material-icons">done</i></button>
       <button mz-button class="btn yellow" [flat]="true" (click)="this.openUpdatePostitModal(postit)" mz-modal-close><i class="material-icons">mode_edit</i></button>
       <button mz-button class="btn yellow" [flat]="true" (click)="this.deletePostit(postit)" mz-modal-close><i class="material-icons">delete</i></button>
+    </div>
+    <div class="col s3 m4">
+      <button mz-button class="btn orange right" [flat]="true" mz-modal-close><i class="material-icons">close</i></button>
     </div>
   </mz-modal-footer>
 </mz-modal>

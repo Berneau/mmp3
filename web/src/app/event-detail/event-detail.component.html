@@ -1,34 +1,36 @@
-<div class="container" *ngIf="event">
-  <div class="row">
-    <div class="col s12 m4 l3 event-date" *ngIf="event.date">
+<div *ngIf="event">
+  <div class="row page-title">
+    <div class="col s12 m2 offset-m2 event-date" *ngIf="event.date">
       <span class="day">{{event.date | date:'dd'}}</span>
       <span class="month">{{event.date | date:'MMMM yyyy'}}</span>
     </div>
-    <div class="col s12 m8 l9 event-name" *ngIf="event.name">
-      <h4 class="page-title truncate">{{event.name}}</h4>
+    <div class="col s12 m6 event-name" *ngIf="event.name">
+      <h4 class="truncate">{{event.name}}</h4>
     </div>
   </div>
-  <div class="row event-description" *ngIf="event.description">
-    <div>
-      <h3>Beschreibung</h3>
-      <p>{{event.description}}</p>
+  <div class="container">
+    <div class="row event-description" *ngIf="event.description">
+      <div>
+        <h3>Beschreibung</h3>
+        <p>{{event.description}}</p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="landing-page-headline" *ngIf="event.location.name">
-      <h4>Location</h4>
-      <h5 class="truncate">{{event.location.name}}</h5>
-    </div>
-    <div class="row" *ngIf="event.location.lat && event.location.long">
-      <div class="row map">
-        <ng2-map center="{{event.location.lat}}, {{event.location.long}}" disableDoubleClickZoom="true" disableDefaultUI="true">
-          <marker [position]="position" [icon]="{
+    <div class="row">
+      <div class="landing-page-headline" *ngIf="event.location.name">
+        <h4>Location</h4>
+        <h5 class="truncate">{{event.location.name}}</h5>
+      </div>
+      <div class="row" *ngIf="event.location.lat && event.location.long">
+        <div class="row map">
+          <ng2-map center="{{event.location.lat}}, {{event.location.long}}" disableDoubleClickZoom="true" disableDefaultUI="true" scrollwheel="false">
+            <marker [position]="position" [icon]="{
               url: 'assets/icons/eventLocation.png',
               anchor: [16,16],
               size: [32,32],
               scaledSize: [32,32]
             }" title={{event.name}}></marker>
-        </ng2-map>
+          </ng2-map>
+        </div>
       </div>
     </div>
   </div>

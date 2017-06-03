@@ -1,6 +1,8 @@
+<div class="page-title">
+  <h4>Sitemap</h4>
+</div>
 <div class="sitemap container">
   <div class="row">
-    <h4 class="page-title">Sitemap</h4>
     <ul *ngIf="sites">
       <li *ngFor="let site of sites"><a [routerLink]="[site.path]">{{site.name}}</a></li>
     </ul>

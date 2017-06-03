@@ -1,5 +1,17 @@
 @import "../assets/less/variables"; // mobile-first
 
+.preloader-wrapper {
+  margin: 0 auto;
+
+  .spinner-orange-only {
+    border-color: @orange-color
+  }
+}
+
+.fullheight {
+  height: 100vh;
+}
+
 body {
   background-color: @background-color;
   height: 100%;
@@ -22,6 +34,12 @@ body {
           max-height: 258px;
           overflow: hidden;
         }
+      }
+
+      .divider {
+        background-color: @lightgrey-color;
+        width: 60%;
+        margin: 75px auto;
       }
     }
   }
@@ -148,11 +166,20 @@ mz-modal {
     }
   }
 
+  .modal {
+    .modal-footer {
+      .btn-flat {
+        float: none;
+      }
+    }
+  }
+
   mz-modal-footer {
+    padding: 10px 0;
     .btn.btn-flat {
       color: @primary-color;
       background-color: @lightgrey-color;
-      padding: 0 20px;
+      padding: 0 10px;
       margin: 0 10px !important;
     }
   }
@@ -178,25 +205,31 @@ mz-modal {
 }
 
 .add-btns {
-  text-align: right;
+  text-align: left;
   margin: 20px 0;
 
-  .add-btn {
-    background-color: transparent;
-    color: @primary-color;
-    border: 0;
-    box-shadow: none;
-    font-size: 12px;
+  &.left {}
 
-    i {
-      color: @orange-color;
-    }
+  .add-btn-div {
+    display: inline-block;
 
-    &:hover {
-      color: lighten(@primary-color, 30%);
+    .add-btn {
+      background-color: transparent;
+      color: @primary-color;
+      border: 0;
+      box-shadow: none;
+      font-size: 12px;
 
       i {
-        color: lighten(@orange-color, 10%);
+        color: @orange-color;
+      }
+
+      &:hover {
+        color: lighten(@primary-color, 30%);
+
+        i {
+          color: lighten(@orange-color, 10%);
+        }
       }
     }
   }
@@ -215,9 +248,21 @@ mz-modal {
 }
 
 .page-title {
-  font-family: @third-font;
   margin-bottom: 30px;
-  color: @lightgrey-color;
+  color: @primary-color;
+  text-align: center;
+  background-color: @white-color;
+  padding: 50px 0;
+
+  h4 {
+    font-family: @third-font;
+    font-size: 30px;
+  }
+
+  h5 {
+    font-size: 12px;
+    font-family: @secondary-font;
+  }
 }
 
 .hidden {
@@ -252,7 +297,20 @@ p {
   .container {
     width: 85%;
   }
+
+  mz-modal-footer {
+    .btn.btn-flat {
+      padding: 0 20px;
+    }
+  }
 }
 @media @large-and-up {
   // styles for large screens and up
+  .page-title {
+    padding: 80px 0;
+
+    h4 {
+      font-size: 45px;
+    }
+  }
 }
