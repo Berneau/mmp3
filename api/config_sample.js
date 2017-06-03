@@ -1,10 +1,14 @@
 var config = {
   database: 'mongodb://<user>:<password>@waffle.modulusmongo.net:27017/zyM9evyn',
+  s3Credentials: {
+    identityPoolId: '',
+    accessKeyId: '',
+    secretAccessKey: '',
+    bucketName: '',
+    bucketRegion: ''
+  },
   secret: 'secret',
-  pepper: 'muchPeeperSoWow',
-  s3AccessKeyId: '',
-  s3SecretAccessKey: '',
-  s3Bucket: ''
+  pepper: 'muchPeeperSoWow'
 }
 
 module.exports = config
