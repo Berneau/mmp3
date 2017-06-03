@@ -1,4 +1,4 @@
-var s3key = require('./../../config.js').s3key
+var s3Credentials = require('./../../config.js').s3Credentials
 
 module.exports = function(router) {
 
@@ -9,13 +9,13 @@ module.exports = function(router) {
   * @apiGroup S3key
   * @apiPermission admin
   *
-  * @apiSuccess {String} s3key The key for uploading images.
+  * @apiSuccess {Object} s3Credentials The credentials for uploading images.
  */
  .get(function(req, res) {
 
    return res.status(200).json({
      ok: true,
-     s3key: s3key
+     s3Credentials: s3Credentials
    })
 
  })
