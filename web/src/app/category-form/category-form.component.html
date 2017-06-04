@@ -7,14 +7,14 @@
   </mz-modal-header>
   <mz-modal-content>
     <div>
-      <form materialize [formGroup]="categoryForm">
+      <form materialize [formGroup]="categoryForm" enctype="multipart/form-data">
         <div class="row">
           <h6>Bild</h6>
           <div class="input-field col s12 form-group">
             <div class="file-field input-field">
               <div class="btn orange">
                 <span>File</span>
-                <input type="file">
+                <input type="file" accept="image/*" (change)="fileOnChange($event)">
               </div>
               <div class="file-path-wrapper">
                 <input id="category-image" class="file-path validate" formControlName="imageUrl" type="text">
