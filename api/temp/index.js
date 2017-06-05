@@ -1,11 +1,13 @@
 var aws = require('aws-sdk')
+var cors = require('cors')
 var express = require('express')
 var multer = require('multer')
 var multerS3 = require('multer-s3')
 
 var app = express()
-var s3 = new aws.S3({})
+app.use(cors())
 
+var s3 = new aws.S3({})
 var port = 3000
 
 var upload = multer({
@@ -22,6 +24,7 @@ var upload = multer({
 })
 
 app.post('/upload', upload.single('test'), function(req, res, next) {
+  console.log(res.file)
   res.send('finished')
 })
 
