@@ -12,6 +12,7 @@ require('./routes/unauthenticated/category.routes')(router)
 require('./routes/unauthenticated/type.routes')(router)
 require('./routes/unauthenticated/event.routes')(router)
 require('./routes/unauthenticated/postit.routes')(router)
+require('./routes/unauthenticated/upload.routes')(router)
 
 // authentication
 router.use(function(req, res, next) {
@@ -68,6 +69,5 @@ require('./routes/admin/category.routes')(router)
 require('./routes/admin/type.routes')(router)
 require('./routes/admin/event.routes')(router)
 require('./routes/admin/postit.routes')(router)
-require('./routes/admin/s3.routes')(router)
 
 module.exports = router
