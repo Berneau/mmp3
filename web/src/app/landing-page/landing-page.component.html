@@ -23,10 +23,9 @@
     </div>
     <postit-list [confirmed]="true"></postit-list>
   </div>
-  <div class="row">
-    <div class="landing-page-headline">
-      <h4>Termine & Veranstaltungen</h4>
-    </div>
+  <div class="divider"></div>
+  <div class="row landing-page-eventlist">
+    <h4>Termine & Veranstaltungen</h4>
     <event-list></event-list>
   </div>
   <div class="center">
@@ -40,7 +39,7 @@
       <h5>Finde Produzenten und Events in deiner Nähe!</h5>
     </div>
     <div class="row map">
-      <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12">
+      <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12" scrollwheel="false">
         <marker [position]="currentPosition" [icon]="{
           url: 'assets/icons/currentLocation.png',
           anchor: [16,16],

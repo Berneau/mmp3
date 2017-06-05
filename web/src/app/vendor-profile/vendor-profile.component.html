@@ -1,5 +1,5 @@
 <div *ngIf="vendor">
-  <div class="row farm-image"  *ngIf="vendor.farmImageUrl">
+  <div class="row farm-image" *ngIf="vendor.farmImageUrl">
     <img class="fullscreen" src="assets/images/{{vendor.farmImageUrl}}">
   </div>
   <div class="row profile-head">
@@ -30,7 +30,7 @@
           <span><i class="material-icons">location_on</i></span>
           <span class="truncate">{{vendor.address.street}} <br>
             {{vendor.address.zip}} {{vendor.address.city}}</span>
-          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="row map" *ngIf="vendor.address.lat && vendor.address.long">
-      <ng2-map center="{{vendor.address.lat}}, {{vendor.address.long}}" disableDoubleClickZoom="true" disableDefaultUI="true">
+      <ng2-map center="{{vendor.address.lat}}, {{vendor.address.long}}" disableDoubleClickZoom="true" disableDefaultUI="true" scrollwheel="false">
         <marker [position]="position" [icon]="{
             url: 'assets/icons/vendorLocation.png',
             anchor: [16,16],
@@ -55,12 +55,16 @@
       <h4>Produkte</h4>
     </div>
     <div class="add-btns" *ngIf="LoginStore.isCurrentVendor(vendor.userUid)">
-      <button mz-button (click)="this.openNewProductModal()" class="add-btn">Produkt
+      <div class="add-btn-div">
+        <button mz-button (click)="this.openNewProductModal()" class="add-btn">Produkt
+          <i class="material-icons left">add</i>
+        </button>
+      </div>
+      <div class="add-btn-div">
+        <button mz-button (click)="this.openNewPostitModal()" class="add-btn">Gustostückerl
         <i class="material-icons left">add</i>
       </button>
-      <button mz-button (click)="this.openNewPostitModal()" class="add-btn">Gustostückerl
-        <i class="material-icons left">add</i>
-      </button>
+      </div>
     </div>
     <product-list [vendor]="vendor"></product-list>
   </div>

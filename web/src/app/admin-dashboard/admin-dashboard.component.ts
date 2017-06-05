@@ -17,6 +17,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private modalService: MzModalService) { }
 
   ngOnInit() {
+    $('.button-collapse').sideNav('hide');
     $(document).ready(function() {
       $('ul.tabs').tabs();
     });

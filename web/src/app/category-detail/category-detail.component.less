@@ -1,8 +1,9 @@
 @import "../../assets/less/variables"; // mobile-first
 
 category-detail {
-  .container {
-    margin-top: 50px;
+  .category-head {
+    padding: 50px 0;
+    background-color: @white-color;
 
     .category-name {
       text-align: center;
@@ -25,7 +26,9 @@ category-detail {
         width: 150px;
       }
     }
+  }
 
+  .container {
     .category-products {
       margin-top: 40px;
     }
@@ -34,14 +37,16 @@ category-detail {
 @media @medium-and-up {
   // styles for medium screens and larger
   category-detail {
-    .container {
+    .category-head {
       .category-image {
         img {
           height: 200px;
           width: 200px;
         }
       }
+    }
 
+    .container {
       .category-products {
         margin-top: 70px;
       }

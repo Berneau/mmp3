@@ -19,7 +19,7 @@ module.exports = function(router) {
    * @apiSuccess {Object} category The created category
  */
   .post(function(req, res) {
-
+    console.log(req.body) // TODO: check if file upload is functional
     // not a valid category Object
     if (!categoryIsValid(req.body)) return res.status(412).json({
       ok: false,

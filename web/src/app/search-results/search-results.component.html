@@ -1,6 +1,7 @@
+<div class="page-title">
+  <h4>Suchergebnisse</h4>
+</div>
 <div class="container">
-  <h4 class="page-title">Suchergebnisse</h4>
-
   <div class="landing-page-headline">
     <h4>Produkte</h4>
     <h5 *ngIf="productResults?.length == 0">Es wurden keine Produkte gefunden.</h5>
@@ -14,8 +15,8 @@
               <img class="activator" src="assets/images/{{result.imageUrl}}">
             </div>
             <div class="card-content">
-              <p class="product-vendor" *ngIf="result.vendor.name">{{result.vendor.name}}</p>
-              <h3 class="card-title">{{result.name}}</h3>
+              <p class="product-vendor truncate" *ngIf="result.vendor.name">{{result.vendor.name}}</p>
+              <h3 class="card-title truncate">{{result.name}}</h3>
               <p class="further-link">
                 zum Produzenten
                 <i class="material-icons prefix">keyboard_arrow_right</i>
@@ -40,8 +41,8 @@
               <img class="activator" src="assets/images/{{result.imageUrl}}">
             </div>
             <div class="card-content">
-              <p class="vendor-subName" *ngIf="result.subName">{{result.subName}}</p>
-              <h3 class="card-title">{{result.name}}</h3>
+              <p class="vendor-subName truncate" *ngIf="result.subName">{{result.subName}}</p>
+              <h3 class="card-title truncate">{{result.name}}</h3>
               <p class="further-link">
                 mehr
                 <i class="material-icons prefix">keyboard_arrow_right</i>
@@ -70,8 +71,8 @@
                 </div>
               </div>
               <div class="col s8 m10 l9 event-details">
-                <h3 class="card-title">{{result.name}}</h3>
-                <p class="event-location" *ngIf="result.location.name">{{result.location.name}}</p>
+                <h3 class="card-title truncate">{{result.name}}</h3>
+                <p class="event-location" *ngIf="result.location.name truncate">{{result.location.name}}</p>
                 <p class="further-link">
                   mehr Informationen
                   <i class="material-icons prefix">keyboard_arrow_right</i>

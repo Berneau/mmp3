@@ -16,6 +16,7 @@ import { TypeService } from './../services/type.service'
 export class CategoryFormComponent extends MzBaseModal {
 
   categoryForm: FormGroup
+  file: File
   @Input() category: Category
 
   constructor(private store: CategoryService, private fb: FormBuilder, private TypeStore: TypeService, private modalService: MzModalService) {
@@ -48,6 +49,13 @@ export class CategoryFormComponent extends MzBaseModal {
     }
   }
 
+  fileOnChange(e: EventTarget) {
+    let eventObj: MSInputMethodContext = <MSInputMethodContext> e;
+    let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    let files: FileList = target.files;
+    this.file = files[0];
+  }
+
   submit() {
     if (this.categoryForm.valid) {
       if (this.category) {
@@ -64,14 +72,15 @@ export class CategoryFormComponent extends MzBaseModal {
   }
 
   newCategory() {
-    this.store.addCategory(this.categoryForm.value)
-      .then(category => {
-        if (!category) {
-          Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
-          return
-        }
-        Materialize.toast('Kategorie gespeichert.', 2000)
-      })
+    this.store.addCategory(this.categoryForm, this.file)
+    .then(category => {
+      if (!category) {
+        Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
+        return
+      }
+      console.log(category)
+      Materialize.toast('Kategorie gespeichert.', 2000)
+    })
   }
 
   updateCategory(p) {

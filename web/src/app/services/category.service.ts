@@ -38,7 +38,7 @@ export class CategoryService {
       .catch(this.handleError)
   }
 
-  addCategory(form) {
+  addCategory(form, file) {
     let url = `${this.apiEndpoint}/categories`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -48,11 +48,16 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
+      imageUrl: ''
+    }
+
+    let obj = {
+      category: JSON.stringify(c),
+      file: file ? file : null
     }
 
     return this.http
-      .post(url, JSON.stringify(c), { headers: authHeaders })
+      .post(url, obj, { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
         this.getCategories()
@@ -85,30 +90,30 @@ export class CategoryService {
       })
   }
 
-updateCategory(category, form) {
-  let url = `${this.apiEndpoint}/categories/${category._id}`
-  let token = JSON.parse(localStorage.getItem('currentUser')).token
-  let authHeaders = new Headers({
-    'Content-Type': 'application/json', 'x-access-token': token
-  })
+  updateCategory(category, form) {
+    let url = `${this.apiEndpoint}/categories/${category._id}`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
 
-  let c = {
-    name: form.name,
-    typeUid: form.typeUid,
-    imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
+    let c = {
+      name: form.name,
+      typeUid: form.typeUid,
+      imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
+    }
+
+    return this.http
+      .put(url, JSON.stringify(c), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getCategories()
+        return res.json().category as Category
+      })
+      .catch(this.handleError)
   }
 
-  return this.http
-    .put(url, JSON.stringify(c), { headers: authHeaders })
-    .toPromise()
-    .then((res: Response) => {
-      this.getCategories()
-      return res.json().category as Category
-    })
-    .catch(this.handleError)
-}
-
   private handleError(error: any) {
-  console.log(error.statusText, 2000)
-}
+    console.log(error.statusText, 2000)
+  }
 }

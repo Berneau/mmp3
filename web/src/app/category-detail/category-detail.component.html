@@ -1,20 +1,22 @@
-<div class="container" *ngIf="category">
-  <div class="row">
+<div *ngIf="category">
+  <div class="row category-head">
     <div class="col s12 m6 category-name">
       <h5 *ngIf="type" class="truncate">{{type.name}}</h5>
       <h3 *ngIf="category.name" class="truncate">
-        {{category.name}}
-      </h3>
+      {{category.name}}
+    </h3>
     </div>
-    <div class="col s12 m6 category-image"  *ngIf="category.imageUrl">
+    <div class="col s12 m6 category-image" *ngIf="category.imageUrl">
       <img class="responsive-img circle" src="assets/images/{{category.imageUrl}}" alt="category-image">
     </div>
   </div>
-  <div class="row category-products">
-    <div class="landing-page-headline">
-      <h4>Produzenten</h4>
-      <h5 *ngIf="category.name">Diese Produzenten verkaufen Produkte in der Produktkategorie '{{category.name}}'</h5>
+  <div class="container">
+    <div class="row category-products">
+      <div class="landing-page-headline">
+        <h4>Produzenten</h4>
+        <h5 *ngIf="category.name">Diese Produzenten verkaufen Produkte in der Produktkategorie '{{category.name}}'</h5>
+      </div>
+      <product-vendor-list [category]="category"></product-vendor-list>
     </div>
-    <product-vendor-list [category]="category"></product-vendor-list>
   </div>
 </div>

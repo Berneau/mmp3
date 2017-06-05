@@ -1,72 +1,86 @@
+<div class="page-title">
+  <h4>Admin Dahsboard</h4>
+</div>
 <div class="container">
-  <h4 class="page-title">Admin Dahsboard</h4>
   <div class="row">
-    <div class="add-btns">
-      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewUserModal()">Produzent
-        <i class="material-icons left">add</i>
-      </button>
-      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewCategoryModal()">Kategorie
-        <i class="material-icons left">add</i>
-      </button>
-      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewTypeModal()">Typ
-        <i class="material-icons left">add</i>
-      </button>
-      <button mz-button class="col s12 m4 l2 add-btn" (click)="this.openNewEventModal()">Event
-        <i class="material-icons left">add</i>
-      </button>
-      <button mz-button class="col s12 m4 l3 add-btn" (click)="this.openNewPostitModal()">Gustostückerl
-        <i class="material-icons left">add</i>
-      </button>
+    <div class="add-btns center col s12">
+      <div class="add-btn-div">
+        <button mz-button class="add-btn truncate" (click)="this.openNewUserModal()">Produzent
+          <i class="material-icons left">add</i>
+        </button>
+      </div>
+      <div class="add-btn-div">
+        <button mz-button class="add-btn truncate" (click)="this.openNewCategoryModal()">Kategorie
+          <i class="material-icons left">add</i>
+        </button>
+      </div>
+      <div class="add-btn-div">
+        <button mz-button class="add-btn truncate" (click)="this.openNewTypeModal()">Typ
+          <i class="material-icons left">add</i>
+        </button>
+      </div>
+      <div class="add-btn-div">
+        <button mz-button class="add-btn truncate" (click)="this.openNewEventModal()">Event
+            <i class="material-icons left">add</i>
+        </button>
+      </div>
+      <div class="add-btn-div">
+        <button mz-button class="add-btn truncate" (click)="this.openNewPostitModal()">Gustostückerl
+          <i class="material-icons left">add</i>
+        </button>
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col s12 m3 admin-nav">
+    <div class="col s12 l3 admin-nav">
       <h3>Navigation</h3>
       <ul class="tabs">
-        <li class="tab"><a class="active" href="#adminPostitListNew">Gustostückerl-Anfragen</a></li>
-        <li class="tab"><a href="#adminPostitListConfirmed">Gustostückerl-Liste</a></li>
-        <li class="tab"><a href="#adminVendorList">Produzenten-Liste</a></li>
-        <li class="tab"><a href="#adminEventList">Event-Liste</a></li>
-        <li class="tab"><a href="#adminCategoryList">Kategorie-Liste</a></li>
-        <li class="tab"><a href="#adminTypeList">Typ-Liste</a></li>
+        <li class="tab"><a class="truncate active" href="#adminPostitListNew">Gustostückerl-Anfragen</a></li>
+        <li class="tab"><a class="truncate" href="#adminPostitListConfirmed">Gustostückerl-Liste</a></li>
+        <li class="tab"><a class="truncate" href="#adminVendorList">Produzenten-Liste</a></li>
+        <li class="tab"><a class="truncate" href="#adminEventList">Event-Liste</a></li>
+        <li class="tab"><a class="truncate" href="#adminCategoryList">Kategorie-Liste</a></li>
+        <li class="tab"><a class="truncate" href="#adminTypeList">Typ-Liste</a></li>
       </ul>
     </div>
-    <div class="col s12 m9 admin-content">
-      <div class="s12" id="adminPostitListNew">
-        <div class="landing-page-headline">
-          <h4>Gustostückerl-Anfragen</h4>
+    <div class="container">
+      <div class="col s12 l9 admin-content">
+        <div class="s12" id="adminPostitListNew">
+          <div class="landing-page-headline">
+            <h4>Gustostückerl-Anfragen</h4>
+          </div>
+          <admin-postit-list [confirmed]="false"></admin-postit-list>
         </div>
-        <admin-postit-list [confirmed]="false"></admin-postit-list>
-      </div>
-      <div class="s12" id="adminPostitListConfirmed">
-        <div class="landing-page-headline">
-          <h4>Gustostückerl-Liste</h4>
+        <div class="s12" id="adminPostitListConfirmed">
+          <div class="landing-page-headline">
+            <h4>Gustostückerl-Liste</h4>
+          </div>
+          <admin-postit-list [confirmed]="true"></admin-postit-list>
         </div>
-        <admin-postit-list [confirmed]="true"></admin-postit-list>
-      </div>
-      <div class="s12" id="adminVendorList">
-        <div class="landing-page-headline">
-          <h4>Produzenten-Liste</h4>
+        <div class="s12" id="adminVendorList">
+          <div class="landing-page-headline">
+            <h4>Produzenten-Liste</h4>
+          </div>
+          <admin-vendor-list></admin-vendor-list>
         </div>
-        <admin-vendor-list></admin-vendor-list>
-      </div>
-      <div class="s12" id="adminEventList">
-        <div class="landing-page-headline">
-          <h4>Event-Liste</h4>
+        <div class="s12" id="adminEventList">
+          <div class="landing-page-headline">
+            <h4>Event-Liste</h4>
+          </div>
+          <admin-event-list></admin-event-list>
         </div>
-        <admin-event-list></admin-event-list>
-      </div>
-      <div class="s12" id="adminCategoryList">
-        <div class="landing-page-headline">
-          <h4>Kategorie-Liste</h4>
+        <div class="s12" id="adminCategoryList">
+          <div class="landing-page-headline">
+            <h4>Kategorie-Liste</h4>
+          </div>
+          <admin-category-list></admin-category-list>
         </div>
-        <admin-category-list></admin-category-list>
-      </div>
-      <div class="s12" id="adminTypeList">
-        <div class="landing-page-headline">
-          <h4>Typ-Liste</h4>
+        <div class="s12" id="adminTypeList">
+          <div class="landing-page-headline">
+            <h4>Typ-Liste</h4>
+          </div>
+          <admin-type-list></admin-type-list>
         </div>
-        <admin-type-list></admin-type-list>
       </div>
     </div>
   </div>

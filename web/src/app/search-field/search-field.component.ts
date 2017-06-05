@@ -15,6 +15,7 @@ export class SearchFieldComponent implements OnInit {
   }
 
   search(word) {
+    $('.button-collapse').sideNav('hide');
     this.store.search(word)
   }
 
