@@ -21,7 +21,7 @@ module.exports = function(router) {
 
   router.route('/upload')
 
-  .post(upload.single('test'), function(req, res) {
+  .post(upload.single('image'), function(req, res) {
     console.log(req.file)
 
     res.status(200).json({

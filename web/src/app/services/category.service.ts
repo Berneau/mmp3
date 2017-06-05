@@ -39,10 +39,12 @@ export class CategoryService {
   }
 
   addCategory(form, file) {
-    let url = `${this.apiEndpoint}/categories`
+    let url = `${this.apiEndpoint}/upload`//`${this.apiEndpoint}/categories`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
-    let authHeaders = new Headers({
+    let authHeadersData = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
+    })
+    let authHeadersFile = new Headers({ 'x-access-token': token
     })
 
     let c = {
@@ -51,13 +53,8 @@ export class CategoryService {
       imageUrl: ''
     }
 
-    let obj = {
-      category: JSON.stringify(c),
-      file: file ? file : null
-    }
-
     return this.http
-      .post(url, obj, { headers: authHeaders })
+      .post(url, file, { headers: authHeadersFile })
       .toPromise()
       .then((res: Response) => {
         this.getCategories()
