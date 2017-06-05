@@ -78,7 +78,6 @@ export class CategoryFormComponent extends MzBaseModal {
         Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
         return
       }
-      console.log(category)
       Materialize.toast('Kategorie gespeichert.', 2000)
     })
   }

@@ -9,7 +9,7 @@ var upload = multer({
     s3: s3,
     bucket: 'lungau',
     metadata: function(req, file, cb) {
-      cb(null, {fieldName: file.fieldName})
+      cb(null, {})
     },
     key: function(req, file, cb) {
       cb(null, Date.now().toString())
@@ -21,7 +21,7 @@ module.exports = function(router) {
 
   router.route('/upload')
 
-  .post(upload.single('image'), function(req, res) {
+  .post(upload.single('file'), function(req, res) {
     console.log(req.file)
 
     res.status(200).json({

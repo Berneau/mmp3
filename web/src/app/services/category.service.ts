@@ -44,7 +44,8 @@ export class CategoryService {
     let authHeadersData = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
     })
-    let authHeadersFile = new Headers({ 'x-access-token': token
+    let authHeadersFile = new Headers({
+      'x-access-token': token
     })
 
     let c = {
@@ -52,15 +53,32 @@ export class CategoryService {
       typeUid: form.typeUid,
       imageUrl: ''
     }
+    console.log("FILE", file)
+    // return this.http
+    //   .post(url, file, { headers: authHeadersFile })
+    //   .toPromise()
+    //   .then((res: Response) => {
+    //     this.getCategories()
+    //     return res.json().category as Category
+    //   })
+    //   .catch(this.handleError)
+    return new Promise((resolve, reject) => {
+      var formData: any = new FormData()
+      var xhr = new XMLHttpRequest()
 
-    return this.http
-      .post(url, file, { headers: authHeadersFile })
-      .toPromise()
-      .then((res: Response) => {
-        this.getCategories()
-        return res.json().category as Category
-      })
-      .catch(this.handleError)
+      // formData.append('beer_id', beer_id)
+      formData.append('file', file)
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) resolve(JSON.parse(xhr.response))
+          else reject(xhr.response)
+        }
+      }
+      xhr.open("POST", url, true)
+      xhr.setRequestHeader('x-amz-meta-fieldName', 'file');
+      xhr.send(formData)
+    })
   }
 
   deleteCategory(id): Promise<any> {
