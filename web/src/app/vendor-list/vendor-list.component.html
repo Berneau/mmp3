@@ -13,12 +13,12 @@
                 <img class="activator" src="assets/images/{{vendor.imageUrl}}">
               </div>
               <div class="card-content">
-                <div class="vendor-subName">
-                  <p class="truncate" *ngIf="vendor.subName">{{vendor.subName}}</p>
+                <div class="vendor-subInfo">
+                  <p class="truncate" *ngIf="vendor.address.city">{{vendor.address.city}}</p>
                 </div>
                 <h3 class="card-title truncate" *ngIf="vendor.name">{{vendor.name}}</h3>
                 <p class="further-link">
-                  mehr
+                  zum Profil
                   <i class="material-icons prefix">keyboard_arrow_right</i>
                 </p>
               </div>

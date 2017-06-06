@@ -6,6 +6,7 @@ vendor-profile {
     min-height: 80px;
     overflow: hidden;
     position: relative;
+
     img {
       position: absolute;
       bottom: 0;
@@ -32,40 +33,41 @@ vendor-profile {
       }
     }
 
-    .profile-name {
-      text-align: center;
-      margin-bottom: 20px;
+    .vendor-data {
+      .profile-name {
+        text-align: center;
+        margin-bottom: 5px;
+        font-family: @secondary-font;
+        color: @primary-color;
 
-      h4 {
-        color: @lightgrey-color;
-        font-family: @third-font;
-        border-bottom: 1px solid @lightgrey-color;
+        h4 {
+          font-weight: 600;
+          margin-bottom: 0;
+          font-size: 25px;
+        }
+
+        h5 {
+          font-size: 16px;
+          margin-top: 5px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid @lightgrey-color;
+        }
       }
 
-      h5 {
-        color: @orange-color;
-        font-size: 16px;
-      }
-    }
+      .profile-data {
+        font-family: @primary-font;
+        font-size: 13px;
+        text-align: left;
+        color: @midgrey-color;
+        font-weight: 400;
 
-    .profile-data {
-      text-align: center;
+        .data-entry {
+          display: block;
+          margin-right: 15px;
 
-      div {
-        span {
-          display: inline-block;
-          vertical-align: middle;
-
-          i {
-            color: @lightgrey-color;
-          }
-
-          &:first-of-type {
-            width: 24px;
-          }
-
-          &:last-of-type {
-            text-align: left;
+          .data-label {
+            text-transform: uppercase;
+            margin-right: 2px;
           }
         }
       }
@@ -75,7 +77,8 @@ vendor-profile {
   .container {
     .vendor-description {
       background-color: @white-color;
-      padding: 5px;
+      padding: 7px;
+      box-shadow: 1px 1px 2px @lightgrey-color;
 
       div {
         border: 1px solid @lightgrey-color;
@@ -90,6 +93,10 @@ vendor-profile {
           margin-top: 0;
         }
       }
+    }
+
+    .map {
+      margin: 40px 0;
     }
 
     .add-btns {
@@ -118,20 +125,22 @@ vendor-profile {
         align-items: flex-end;
 
         .profile-image {
+          margin-bottom: 15px;
+
           img.circle {
             height: 200px;
             width: 200px;
           }
         }
-      }
 
-      .profile-data {
-        div {
-          text-align: left;
+        .vendor-data {
+          .profile-name {
+            text-align: left;
+          }
 
-          span {
-            &:first-of-type {
-              width: 28px;
+          .profile-data {
+            .data-entry {
+              display: inline-block;
             }
           }
         }
@@ -145,19 +154,11 @@ vendor-profile {
     .farm-image {
       height: 30vh;
     }
+  }
 
-    .profile-head {
-      .row {
-        .profile-name {
-          text-align: left;
-        }
-      }
-    }
-
-    .profile-data {
-      div.col {
-        text-align: center;
-      }
+  .container {
+    .map {
+      margin: 0;
     }
   }
 }

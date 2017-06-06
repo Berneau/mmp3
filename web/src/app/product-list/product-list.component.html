@@ -7,10 +7,10 @@
             <img class="activator" src="assets/images/{{product.imageUrl}}">
           </div>
           <div class="card-content">
+            <h3 class="card-title truncate">{{product.name}}</h3>
             <p class="product-available truncate" *ngIf="product.availableAt.fromPeriod && product.availableAt.fromMonth && product.availableAt.toPeriod && product.availableAt.toMonth">
               {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
             </p>
-            <h3 class="card-title truncate">{{product.name}}</h3>
             <p class="further-link" *ngIf="LoginStore.isCurrentVendor(vendor.userUid)">
               <button mz-button class="btn yellow" (click)="this.selectProduct(product)">
               <i class="material-icons">mode_edit</i>
