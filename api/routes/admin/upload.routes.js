@@ -5,8 +5,7 @@ var multerS3 = require('multer-s3')
 aws.config.loadFromPath('./s3Config.json')
 var s3 = new aws.S3({})
 
-// TODO: check image filetype
-
+// middleware to upload to s3
 var upload = multer({
   storage: multerS3({
     s3: s3,
@@ -17,7 +16,16 @@ var upload = multer({
     key: function(req, file, cb) {
       cb(null, Date.now().toString())
     }
-  })
+  }),
+  onError: function(err) {
+
+    // error saving image to s3
+    res.status(500).json({
+      ok: false,
+      err: err.message
+    })
+
+  }
 })
 
 module.exports = function(router) {
@@ -33,6 +41,7 @@ module.exports = function(router) {
   */
   .post(upload.single('file'), function(req, res) {
 
+    // return image originalname
     res.status(200).json({
       ok: true,
       originalname: req.file.originalname
