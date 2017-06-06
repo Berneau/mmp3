@@ -10,8 +10,9 @@ var upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'lungau',
+    acl: 'public-read',
     metadata: function(req, file, cb) {
-      cb(null, {})
+      cb(null, {originalname: file.originalname})
     },
     key: function(req, file, cb) {
       cb(null, Date.now().toString())
