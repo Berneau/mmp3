@@ -41,24 +41,24 @@
     <div class="row map">
       <ng2-map center="{{currentPosition}}" disableDoubleClickZoom="true" disableDefaultUI="true" zoom="12" scrollwheel="false">
         <marker [position]="currentPosition" [icon]="{
-          url: 'assets/icons/currentLocation.png',
+          url: 'assets/icons/location.png',
           anchor: [16,16],
           size: [32,32],
           scaledSize: [32,32]
         }" title="aktueller Standort"></marker>
-        <marker *ngFor="let pos of vendorPositions" [position]="pos" [icon]="{
-          url: 'assets/icons/vendorLocation.png',
+        <marker *ngFor="let vendor of vendorPositions" [position]="[vendor.address.lat, vendor.address.long]" [icon]="{
+          url: 'assets/icons/location.png',
           anchor: [16,16],
           size: [32,32],
           scaledSize: [32,32]
-        }" title="Produzent">
+        }" title="{{vendor.name}}" [routerLink]="['produzenten', vendor._id]">
         </marker>
-        <marker *ngFor="let pos of eventPositions" [position]="pos" [icon]="{
-          url: 'assets/icons/eventLocation.png',
+        <marker *ngFor="let event of eventPositions" [position]="[event.location.lat, event.location.long]" [icon]="{
+          url: 'assets/icons/location.png',
           anchor: [16,16],
           size: [32,32],
           scaledSize: [32,32]
-        }" title="Event"></marker>
+        }" title="{{event.name}}" [routerLink]="['events', event._id]"></marker>
       </ng2-map>
     </div>
   </div>

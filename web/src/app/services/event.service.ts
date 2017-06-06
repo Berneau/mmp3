@@ -128,8 +128,7 @@ export class EventService {
       .then(() => {
         for (let e of events) {
           if (e.location.lat && e.location.long) {
-            let arr = [e.location.lat, e.location.long]
-            positions.push(arr)
+            positions.push(e)
           }
         }
       })

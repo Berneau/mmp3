@@ -41,27 +41,10 @@ export class CategoryService {
   addCategory(form, file) {
     let url = `${this.apiEndpoint}/upload`//`${this.apiEndpoint}/categories`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
-    let authHeadersData = new Headers({
+    let authHeaders = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
     })
-    let authHeadersFile = new Headers({
-      'x-access-token': token
-    })
 
-    let c = {
-      name: form.name,
-      typeUid: form.typeUid,
-      imageUrl: ''
-    }
-    console.log("FILE", file)
-    // return this.http
-    //   .post(url, file, { headers: authHeadersFile })
-    //   .toPromise()
-    //   .then((res: Response) => {
-    //     this.getCategories()
-    //     return res.json().category as Category
-    //   })
-    //   .catch(this.handleError)
     return new Promise((resolve, reject) => {
       var formData: any = new FormData()
       var xhr = new XMLHttpRequest()
@@ -76,9 +59,28 @@ export class CategoryService {
         }
       }
       xhr.open("POST", url, true)
-      xhr.setRequestHeader('x-amz-meta-fieldName', 'file');
+      xhr.setRequestHeader('x-amz-meta-fieldName', 'category-file');
+      xhr.setRequestHeader('x-access-token', token);
       xhr.send(formData)
     })
+      .then((res: Response) => {
+
+        let c = {
+          name: form.name,
+          typeUid: form.typeUid,
+          imageUrl: res.json().originalname
+        }
+
+        this.http
+          .post(url, JSON.stringify(c), { headers: authHeaders })
+          .toPromise()
+          .then((res: Response) => {
+            this.getCategories()
+            return res.json().category as Category
+          })
+          .catch(this.handleError)
+      })
+      .catch(this.handleError)
   }
 
   deleteCategory(id): Promise<any> {

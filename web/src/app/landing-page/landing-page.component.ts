@@ -10,8 +10,8 @@ import { VendorService } from './../services/vendor.service'
 })
 export class LandingPageComponent implements OnInit {
 
-  vendorPositions: Array<number>[]
-  eventPositions: Array<number>[]
+  vendorPositions: Array<any>[]
+  eventPositions: Array<any>[]
   currentPosition: Array<number>
 
   constructor(private EventStore: EventService, private VendorStore: VendorService) { }
@@ -23,8 +23,8 @@ export class LandingPageComponent implements OnInit {
       maximumAge: 0
     };
     navigator.geolocation.getCurrentPosition((pos) => {this.setCurrentPosition(pos.coords)}, (err) => {this.handleMapError(err)}, options)
-    this.vendorPositions = this.VendorStore.getVendorPositions()
-    this.eventPositions = this.EventStore.getEventPositions()
+    this.getVendorPositions()
+    this.getEventPositions()
   }
 
   getVendorPositions() {

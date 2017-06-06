@@ -145,8 +145,7 @@ export class VendorService {
       .then(() => {
         for (let v of vendors) {
           if (v.address.lat && v.address.long) {
-            let arr = [v.address.lat, v.address.long]
-            positions.push(arr)
+            positions.push(v)
           }
         }
       })
