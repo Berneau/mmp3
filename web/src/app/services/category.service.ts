@@ -39,7 +39,8 @@ export class CategoryService {
   }
 
   addCategory(form, file) {
-    let url = `${this.apiEndpoint}/upload`//`${this.apiEndpoint}/categories`
+    let fileUrl = `${this.apiEndpoint}/upload`
+    let url = `${this.apiEndpoint}/categories`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
       'Content-Type': 'application/json', 'x-access-token': token
@@ -49,7 +50,6 @@ export class CategoryService {
       var formData: any = new FormData()
       var xhr = new XMLHttpRequest()
 
-      // formData.append('beer_id', beer_id)
       formData.append('file', file)
 
       xhr.onreadystatechange = function() {
@@ -58,7 +58,7 @@ export class CategoryService {
           else reject(xhr.response)
         }
       }
-      xhr.open("POST", url, true)
+      xhr.open("POST", fileUrl, true)
       xhr.setRequestHeader('x-amz-meta-fieldName', 'category-file');
       xhr.setRequestHeader('x-access-token', token);
       xhr.send(formData)
