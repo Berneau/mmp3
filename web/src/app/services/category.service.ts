@@ -11,6 +11,7 @@ export class CategoryService {
 
   categories: Category[]
   categoryProducts: Product[]
+  AWSEndpoint: String
   private apiEndpoint = ApiEndpoint
 
   constructor(private http: Http) { }
@@ -47,44 +48,39 @@ export class CategoryService {
     })
 
     return new Promise((resolve, reject) => {
-      var formData: any = new FormData()
+      var formData: FormData = new FormData()
       var xhr = new XMLHttpRequest()
 
       formData.append('file', file)
 
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
-          if (xhr.status == 200) resolve(JSON.parse(xhr.response))
-          else reject(xhr.response)
+          if (xhr.status == 200) return resolve(xhr.response)
+          else return reject(xhr.response)
         }
       }
       xhr.open("POST", fileUrl, true)
       xhr.setRequestHeader('x-amz-meta-fieldName', 'category-file');
+      xhr.setRequestHeader('x-amz-acl', 'public-read');
       xhr.setRequestHeader('x-access-token', token);
       xhr.send(formData)
     })
-      .then((res) => {
-
-        // TODO: res.link geht nicht -> herausfinden warum
-        console.log(res)
+      .then( (res: string) => {
 
         let c = {
-          name: form.name,
-          typeUid: form.typeUid,
-          imageUrl: ''
+          name: form.value.name,
+          typeUid: form.value.typeUid,
+          imageUrl: res
         }
 
-
-        // this.http
-        // TODO: url ist selbe wie oben -> ladet bild nochmal hoch
-        //   .post(url, JSON.stringify(c), { headers: authHeaders })
-        //   .toPromise()
-        //   .then((res) => {
-        //     this.getCategories()
-        //     // console.log(res)
-        //     return res.category as Category
-        //   })
-        //   .catch(this.handleError)
+        this.http
+          .post(url, JSON.stringify(c), { headers: authHeaders })
+          .toPromise()
+          .then((res: Response) => {
+            this.getCategories()
+            return res.json().category as Category
+          })
+          .catch(this.handleError)
       })
       .catch(this.handleError)
   }
@@ -137,6 +133,8 @@ export class CategoryService {
   }
 
   private handleError(error: any) {
-    console.log(error)
+    if (error.message) console.log(error.message, 2000)
+    else if (error.statusText) console.log(error.statusText, 2000)
+    else console.log(error)
   }
 }
