@@ -36,8 +36,6 @@ module.exports = function(router) {
   */
   .post(upload.single('file'), function(req, res) {
 
-    console.log(req.file)
-
     // req.file is empty
     if (!req.file) return res.status(500).json({
       ok: false,
@@ -45,10 +43,6 @@ module.exports = function(router) {
     })
 
     // return image originalname
-    return res.status(200).json({
-      ok: true,
-      link: req.file.location
-    })
-
+    return res.status(200).send(req.file.location)
   })
 }

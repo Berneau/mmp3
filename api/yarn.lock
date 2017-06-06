@@ -301,6 +301,20 @@ etag@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.7.0.tgz#03d30b5f67dd6e632d2945d30d6652731a34d5d8"
 
+express-sanitize-escape@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/express-sanitize-escape/-/express-sanitize-escape-1.1.0.tgz#f2a1e606a177cbac676ee2fee9ca7a1579bdd1af"
+  dependencies:
+    htmlencode "0.0.4"
+    lodash "4.6.1"
+    sanitizer "0.1.3"
+
+express-sanitizer@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/express-sanitizer/-/express-sanitizer-1.0.2.tgz#227efca714a9cbe33bb22158e9e3e8714d3a5275"
+  dependencies:
+    sanitizer "0.1.3"
+
 express@^4.14.0:
   version "4.14.0"
   resolved "https://registry.yarnpkg.com/express/-/express-4.14.0.tgz#c1ee3f42cdc891fb3dc650a8922d51ec847d0d66"
@@ -458,6 +472,10 @@ hsts@2.0.0:
   resolved "https://registry.yarnpkg.com/hsts/-/hsts-2.0.0.tgz#a52234c6070decf214b2b6b70bb144d07e4776c7"
   dependencies:
     core-util-is "1.0.2"
+
+htmlencode@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/htmlencode/-/htmlencode-0.0.4.tgz#f7e2d6afbe18a87a78e63ba3308e753766740e3f"
 
 http-errors@~1.5.0:
   version "1.5.1"
@@ -618,6 +636,10 @@ lodash.once@^4.0.0:
 lodash.reduce@4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.reduce/-/lodash.reduce-4.6.0.tgz#f1ab6b839299ad48f784abbf476596f03b914d3b"
+
+lodash@4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.6.1.tgz#df00c1164ad236b183cfc3887a5e8d38cc63cbbc"
 
 lodash@^4.0.0, lodash@^4.14.0:
   version "4.17.2"
@@ -850,7 +872,7 @@ readable-stream@1.1.x:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@2.1.5, readable-stream@^2.0.5:
+readable-stream@2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.1.5.tgz#66fa8b720e1438b364681f2ad1a63c618448c9d0"
   dependencies:
@@ -862,7 +884,7 @@ readable-stream@2.1.5, readable-stream@^2.0.5:
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
 
-readable-stream@^2.2.2:
+readable-stream@^2.0.5, readable-stream@^2.2.2:
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.10.tgz#effe72bb7c884c0dd335e2379d526196d9d011ee"
   dependencies:
@@ -904,6 +926,10 @@ s-salt-pepper@^2.1.0:
 safe-buffer@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
+
+sanitizer@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/sanitizer/-/sanitizer-0.1.3.tgz#d4f0af7475d9a7baf2a9e5a611718baa178a39e1"
 
 sax@1.2.1, sax@>=0.6.0:
   version "1.2.1"
