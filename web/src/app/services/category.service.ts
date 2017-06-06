@@ -63,22 +63,28 @@ export class CategoryService {
       xhr.setRequestHeader('x-access-token', token);
       xhr.send(formData)
     })
-      .then((res: Response) => {
+      .then((res) => {
+
+        // TODO: res.link geht nicht -> herausfinden warum
+        console.log(res)
 
         let c = {
           name: form.name,
           typeUid: form.typeUid,
-          imageUrl: res.json().originalname
+          imageUrl: ''
         }
 
-        this.http
-          .post(url, JSON.stringify(c), { headers: authHeaders })
-          .toPromise()
-          .then((res: Response) => {
-            this.getCategories()
-            return res.json().category as Category
-          })
-          .catch(this.handleError)
+
+        // this.http
+        // TODO: url ist selbe wie oben -> ladet bild nochmal hoch
+        //   .post(url, JSON.stringify(c), { headers: authHeaders })
+        //   .toPromise()
+        //   .then((res) => {
+        //     this.getCategories()
+        //     // console.log(res)
+        //     return res.category as Category
+        //   })
+        //   .catch(this.handleError)
       })
       .catch(this.handleError)
   }
@@ -131,6 +137,6 @@ export class CategoryService {
   }
 
   private handleError(error: any) {
-    console.log(error.statusText, 2000)
+    console.log(error)
   }
 }

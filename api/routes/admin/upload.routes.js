@@ -18,15 +18,8 @@ var upload = multer({
     }
   }),
   onError: function(err, next) {
-
-    // error saving image to s3
-    res.status(500).json({
-      ok: false,
-      err: err.message
-    })
-
+    console.log(err)
     next(err)
-
   }
 })
 
@@ -43,10 +36,18 @@ module.exports = function(router) {
   */
   .post(upload.single('file'), function(req, res) {
 
+    console.log(req.file)
+
+    // req.file is empty
+    if (!req.file) return res.status(500).json({
+      ok: false,
+      message: 'Image not saved'
+    })
+
     // return image originalname
-    res.status(200).json({
+    return res.status(200).json({
       ok: true,
-      link: 'https://s3.amazonaws.com/lungau/' + req.file.originalname
+      link: req.file.location
     })
 
   })
