@@ -1,7 +1,6 @@
 var config = {
   database: 'mongodb://<user>:<password>@waffle.modulusmongo.net:27017/zyM9evyn',
   s3Credentials: {
-    identityPoolId: '',
     accessKeyId: '',
     secretAccessKey: '',
     bucketName: '',
