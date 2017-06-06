@@ -17,13 +17,15 @@ var upload = multer({
       cb(null, Date.now().toString())
     }
   }),
-  onError: function(err) {
+  onError: function(err, next) {
 
     // error saving image to s3
     res.status(500).json({
       ok: false,
       err: err.message
     })
+
+    next(err)
 
   }
 })
@@ -37,14 +39,14 @@ module.exports = function(router) {
   * @apiGroup Images
   * @apiPermission admin
   *
-  * @apiSuccess {String} originalname Location of the image saved to s3.
+  * @apiSuccess {String} link Full link to the image saved to s3.
   */
   .post(upload.single('file'), function(req, res) {
 
     // return image originalname
     res.status(200).json({
       ok: true,
-      originalname: req.file.originalname
+      link: 'https://s3.amazonaws.com/lungau/' + req.file.originalname
     })
 
   })
