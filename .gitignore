@@ -1,6 +1,7 @@
 node_modules
 .atomignore
 config.js
+s3Config.json
 apidoc
 *.log
 build
