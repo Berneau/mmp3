@@ -1,8 +1,10 @@
 var express = require('express')
-var app = express()
 var bodyParser = require('body-parser')
+var expressSanitzer = require('express-sanitizer')
 var helmet = require('helmet')
 var cors = require('cors')
+
+var app = express()
 
 // set environment settings
 var database
@@ -21,18 +23,24 @@ mongoose.connect(database)
 // for debug
 // mongoose.set('debug', true)
 
-// get routes from routes.js
-var router = require('./routes')
-
+// helmet protection
 app.use(helmet())
+
+// Cross-Origin Resource sharing
 app.use(cors())
+
+// jsonify requests
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+// escape params and user input
+app.use(expressSanitzer())
+
+// get routes from routes.js
+var router = require('./routes')
 
 // prefix all routes with /api
 app.use('/api', router)
-
 
 app.listen(port)
 console.log(' ---------------------------------------')
