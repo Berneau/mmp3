@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { ApiEndpoint } from './../app.config'
 
+import { UploadService } from './../services/upload.service'
+
 import { Postit } from './../interfaces/postit'
 
 @Injectable()
@@ -11,7 +13,7 @@ export class PostitService {
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({ 'Content-Type': 'application/json' })
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private uploadStore: UploadService) { }
 
   getPostits(): Promise<any> {
     let url = `${this.apiEndpoint}/postits`
@@ -56,7 +58,18 @@ export class PostitService {
       .catch(this.handleError)
   }
 
-  addPostit(vendor, form) {
+  addPostit(vendor, form, file) {
+    return this.uploadStore.fileUpload(file, 'postit')
+      .then((res: string) => {
+        return this.addPostitHelper(res, form, vendor)
+          .then((postit) => {
+            return postit as Postit
+          })
+      })
+      .catch(this.handleError)
+  }
+
+  addPostitHelper (key, form, vendor) {
     let url = `${this.apiEndpoint}/postits`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -69,17 +82,18 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: form.imageUrl ? form.imageUrl : 'postit.png'
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_postit.png',
+      imageKey: key
     }
 
     return this.http
-      .post(url, JSON.stringify(p), { headers: authHeaders })
-      .toPromise()
-      .then((res: Response) => {
-        this.getPostits()
-        return res.json().postit as Postit
-      })
-      .catch(this.handleError)
+    .post(url, JSON.stringify(p), { headers: authHeaders })
+    .toPromise()
+    .then((res: Response) => {
+      this.getPostits()
+      return res.json().postit as Postit
+    })
+    .catch(this.handleError)
   }
 
   deletePostit(id): Promise<any> {

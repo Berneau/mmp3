@@ -20,6 +20,8 @@ import { PasswordValidation } from './../helpers/password-confirmation'
 export class VendorFormComponent extends MzBaseModal {
 
   vendorForm: FormGroup
+  file: File
+  farmFile: File
   @Input() vendor: Vendor
   @Input() user: User
 
@@ -45,7 +47,9 @@ export class VendorFormComponent extends MzBaseModal {
         email: [this.vendor.email, Validators.required],
         description: this.vendor.description,
         imageUrl: this.vendor.imageUrl,
+        imageKey: this.vendor.imageKey,
         farmImageUrl: this.vendor.farmImageUrl,
+        farmImageKey: this.vendor.farmImageKey,
         subName: this.vendor.subName,
         website: this.vendor.website,
         tel: this.vendor.tel,
@@ -76,6 +80,20 @@ export class VendorFormComponent extends MzBaseModal {
     }
   }
 
+  fileOnChange(e: EventTarget) {
+    let eventObj: MSInputMethodContext = <MSInputMethodContext> e;
+    let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    let files: FileList = target.files;
+    this.file = files[0];
+  }
+
+  farmFileOnChange(e: EventTarget) {
+    let eventObj: MSInputMethodContext = <MSInputMethodContext> e;
+    let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    let files: FileList = target.files;
+    this.farmFile = files[0];
+  }
+
   submit() {
     if (this.vendorForm.valid) {
       if (this.vendor) {
@@ -96,7 +114,7 @@ export class VendorFormComponent extends MzBaseModal {
   }
 
   newVendor() {
-    this.store.addVendor(this.vendorForm.value)
+    this.store.addVendor(this.vendorForm.value, this.file, this.farmFile)
       .then(vendor => {
         if (!vendor) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)

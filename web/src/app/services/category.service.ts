@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { ApiEndpoint } from './../app.config'
 
+import { UploadService } from './../services/upload.service'
+
 import { Category } from './../interfaces/category'
 import { Product } from './../interfaces/product'
 import { Type } from './../interfaces/type'
@@ -11,11 +13,10 @@ export class CategoryService {
 
   categories: Category[]
   categoryProducts: Product[]
-  category: Category
   AWSEndpoint: String
   private apiEndpoint = ApiEndpoint
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private uploadStore: UploadService) { }
 
   getCategories(): Promise<any> {
     let url = `${this.apiEndpoint}/categories`
@@ -41,26 +42,7 @@ export class CategoryService {
   }
 
   addCategory(form, file) {
-    let fileUrl = `${this.apiEndpoint}/upload`
-    let token = JSON.parse(localStorage.getItem('currentUser')).token
-
-    return new Promise((resolve, reject) => {
-      var formData: FormData = new FormData()
-      var xhr = new XMLHttpRequest()
-
-      formData.append('file', file)
-
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-          if (xhr.status == 200) return resolve(xhr.response)
-          else return reject(xhr.response)
-        }
-      }
-      xhr.open("POST", fileUrl, true)
-      xhr.setRequestHeader('x-amz-meta-fieldName', 'category-file');
-      xhr.setRequestHeader('x-access-token', token);
-      xhr.send(formData)
-    })
+    return this.uploadStore.fileUpload(file, 'category')
       .then((res: string) => {
         return this.addCategoryHelper(res, form)
           .then((category) => {

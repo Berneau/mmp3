@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { ApiEndpoint } from './../app.config';
 
+import { UploadService } from './../services/upload.service'
+
 import { Product } from './../interfaces/product'
 import { Vendor } from './../interfaces/vendor'
 
@@ -10,7 +12,7 @@ export class ProductService {
 
   private apiEndpoint = ApiEndpoint
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,  private uploadStore: UploadService) { }
 
   getProduct(id): Promise<any> {
     let url = `${this.apiEndpoint}/products/${id}`
@@ -23,8 +25,18 @@ export class ProductService {
       })
       .catch(this.handleError)
   }
+  addProduct(vendor, form, file) {
+    return this.uploadStore.fileUpload(file, 'product')
+      .then((res: string) => {
+        return this.addProductHelper(res, form, vendor)
+          .then((product) => {
+            return product as Product
+          })
+      })
+      .catch(this.handleError)
+  }
 
-  addProduct(vendor, form) {
+  addProductHelper(key, form, vendor) {
     let url = `${this.apiEndpoint}/products`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -41,7 +53,8 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: form.imageUrl ? form.imageUrl : 'product.png'
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_product.png',
+      imageKey: key
     }
 
     return this.http

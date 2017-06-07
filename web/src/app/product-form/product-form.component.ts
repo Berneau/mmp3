@@ -19,6 +19,7 @@ export class ProductFormComponent extends MzBaseModal {
   productForm: FormGroup
   periods: String[]
   months: String[]
+  file: File
   @Input() product: Product
   @Input() vendor: Vendor
 
@@ -43,7 +44,8 @@ export class ProductFormComponent extends MzBaseModal {
         fromMonth: [this.product.availableAt.fromMonth, Validators.required],
         toPeriod: [this.product.availableAt.toPeriod, Validators.required],
         toMonth: [this.product.availableAt.toMonth, Validators.required],
-        imageUrl: this.product.imageUrl
+        imageUrl: this.product.imageUrl,
+        imageKey: this.product.imageKey
       });
     }
     else {
@@ -55,9 +57,17 @@ export class ProductFormComponent extends MzBaseModal {
         fromMonth: ['', Validators.required],
         toPeriod: ['', Validators.required],
         toMonth: ['', Validators.required],
-        imageUrl: ''
+        imageUrl: '',
+        imageKey: ''
       });
     }
+  }
+
+  fileOnChange(e: EventTarget) {
+    let eventObj: MSInputMethodContext = <MSInputMethodContext> e;
+    let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    let files: FileList = target.files;
+    this.file = files[0];
   }
 
   submit() {
@@ -76,7 +86,7 @@ export class ProductFormComponent extends MzBaseModal {
   }
 
   newProduct() {
-    this.store.addProduct(this.vendor, this.productForm.value)
+    this.store.addProduct(this.vendor, this.productForm.value, this.file)
       .then(product => {
         if (!product) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)

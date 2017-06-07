@@ -17,6 +17,7 @@ export class PostitFormComponent extends MzBaseModal {
   postitForm: FormGroup
   postit: Postit
   vendor: Vendor
+  file: File
 
   constructor(private store: PostitService, private fb: FormBuilder) {
     super()
@@ -26,7 +27,7 @@ export class PostitFormComponent extends MzBaseModal {
     this.createForm()
     $('#postit-image').change('input', (e) => {
       let imageUrl = $(e.target).val()
-      this.postitForm.patchValue({imageUrl: imageUrl})
+      this.postitForm.patchValue({ imageUrl: imageUrl })
     })
   }
 
@@ -38,7 +39,8 @@ export class PostitFormComponent extends MzBaseModal {
         vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         description: this.postit.description,
         location: this.postit.location,
-        imageUrl: this.postit.imageUrl
+        imageUrl: this.postit.imageUrl,
+        imageKey: this.postit.imageKey
       });
     }
     else {
@@ -48,9 +50,17 @@ export class PostitFormComponent extends MzBaseModal {
         vendorId: { value: this.vendor != undefined ? this.vendor._id : null, disabled: true },
         description: '',
         location: '',
-        imageUrl: ''
+        imageUrl: '',
+        imageKey: ''
       });
     }
+  }
+
+  fileOnChange(e: EventTarget) {
+    let eventObj: MSInputMethodContext = <MSInputMethodContext> e;
+    let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    let files: FileList = target.files;
+    this.file = files[0];
   }
 
   submit() {
@@ -69,7 +79,7 @@ export class PostitFormComponent extends MzBaseModal {
   }
 
   newPostit() {
-    this.store.addPostit(this.vendor, this.postitForm.value)
+    this.store.addPostit(this.vendor, this.postitForm.value, this.file)
       .then(postit => {
         if (!postit) {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
@@ -81,13 +91,13 @@ export class PostitFormComponent extends MzBaseModal {
 
   updatePostit(p) {
     this.store.updatePostit(this.vendor, p, this.postitForm.value)
-    .then(postit => {
-      if (!postit) {
-        Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
-        return
-      }
-      Materialize.toast('Änderungen gespeichert.', 2000)
-    })
+      .then(postit => {
+        if (!postit) {
+          Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
+          return
+        }
+        Materialize.toast('Änderungen gespeichert.', 2000)
+      })
   }
 
 }
