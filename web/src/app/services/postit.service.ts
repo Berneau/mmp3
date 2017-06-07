@@ -69,7 +69,7 @@ export class PostitService {
       .catch(this.handleError)
   }
 
-  addPostitHelper (key, form, vendor) {
+  addPostitHelper(key, form, vendor) {
     let url = `${this.apiEndpoint}/postits`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -87,13 +87,13 @@ export class PostitService {
     }
 
     return this.http
-    .post(url, JSON.stringify(p), { headers: authHeaders })
-    .toPromise()
-    .then((res: Response) => {
-      this.getPostits()
-      return res.json().postit as Postit
-    })
-    .catch(this.handleError)
+      .post(url, JSON.stringify(p), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getPostits()
+        return res.json().postit as Postit
+      })
+      .catch(this.handleError)
   }
 
   deletePostit(id): Promise<any> {
@@ -113,7 +113,18 @@ export class PostitService {
       .catch(this.handleError)
   }
 
-  updatePostit(vendor, postit, form) {
+  updatePostit(vendor, postit, form, file) {
+    return this.uploadStore.fileUpload(file, 'postit')
+      .then((res: string) => {
+        return this.updatePostitHelper(vendor, postit, form, res)
+          .then((postit) => {
+            return postit as Postit
+          })
+      })
+      .catch(this.handleError)
+  }
+
+  updatePostitHelper(vendor, postit, form, key) {
     let url = `${this.apiEndpoint}/postits/${postit._id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -126,7 +137,8 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: form.imageUrl ? form.imageUrl : 'postit.png'
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_postit.png',
+      imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 
     return this.http

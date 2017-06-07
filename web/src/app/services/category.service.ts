@@ -63,7 +63,7 @@ export class CategoryService {
       name: form.value.name,
       typeUid: form.value.typeUid,
       imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
-      imageKey: key
+      imageKey: key ? key : ''
     }
 
     return this.http
@@ -99,8 +99,18 @@ export class CategoryService {
         }
       })
   }
+  updateCategory(category, form, file) {
+    return this.uploadStore.fileUpload(file, 'category')
+      .then((res: string) => {
+        return this.updateCategoryHelper(category, form, res)
+          .then((category) => {
+            return category as Category
+          })
+      })
+      .catch(this.handleError)
+  }
 
-  updateCategory(category, form) {
+  updateCategoryHelper(category, form, key) {
     let url = `${this.apiEndpoint}/categories/${category._id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -110,8 +120,8 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: form.imageUrl ? form.imageUrl : category.imageUrl ? category.imageUrl : '',
-      imageKey: form.imageKey
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
+      imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 
     return this.http

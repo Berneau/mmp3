@@ -90,7 +90,7 @@ export class PostitFormComponent extends MzBaseModal {
   }
 
   updatePostit(p) {
-    this.store.updatePostit(this.vendor, p, this.postitForm.value)
+    this.store.updatePostit(this.vendor, p, this.postitForm.value, this.file)
       .then(postit => {
         if (!postit) {
           Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)

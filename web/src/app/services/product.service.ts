@@ -83,7 +83,18 @@ export class ProductService {
       .catch(this.handleError)
   }
 
-  updateProduct(vendor, product, form) {
+  updateProduct(vendor, product, form, file) {
+    return this.uploadStore.fileUpload(file, 'product')
+      .then((res: string) => {
+        return this.updateProductHelper(vendor, product, form, res)
+          .then((product) => {
+            return product as Product
+          })
+      })
+      .catch(this.handleError)
+  }
+
+  updateProductHelper(vendor, product, form, key) {
     let url = `${this.apiEndpoint}/products/${product._id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -100,7 +111,8 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: form.imageUrl ? form.imageUrl : 'product.png'
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_product.png',
+      imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 
     return this.http
