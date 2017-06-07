@@ -120,7 +120,7 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : '',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
       imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 
