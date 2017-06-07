@@ -108,6 +108,32 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
+      // image has been changed
+      var params
+      var multiple = false
+      if (req.body.imageKey != vendor.imageKey && req.body.farmImageKey != vendor.farmImageKey) {
+        params = {
+          Bucket: 'lungau',
+          Delete: {
+            Objects: [
+              { Key: vendor.imageKey },
+              { Key: vendor.farmImageKey }
+            ]
+          }
+        }
+        multiple = true
+      } else if (req.body.imageKey != vendor.imageKey) {
+        params = {
+          Bucket: 'lungau',
+          Key: vendor.imageKey
+        }
+      } else if (req.body.farmImageKey != vendor.farmImageKey) {
+        params = {
+          Bucket: 'lungau',
+          Key: vendor.farmImageKey
+        }
+      }
+
       vendor = vendorFactory(req.body, vendor)
 
       vendor.save(function(err) {
@@ -118,8 +144,49 @@ module.exports = function(router) {
           err: err.message
         })
 
+        // old image has to be deleted
+        if (params) {
+
+          if (multiple) {
+
+            deleteImages(params, function(err) {
+
+              // error deleting image
+              if (err) return res.status(200).json({
+                ok: true,
+                message: 'Updated vendor, but error deleting old images'
+              })
+
+              // return the updated vendor
+              res.status(200).json({
+                ok: true,
+                vendor: vendor
+              })
+
+            })
+
+          } else {
+
+            deleteImage(params, function(err) {
+
+              // error deleting image
+              if (err) return res.status(200).json({
+                ok: true,
+                message: 'Updated vendor, but error deleting old image'
+              })
+
+              // return the updated vendor
+              res.status(200).json({
+                ok: true,
+                vendor: vendor
+              })
+
+            })
+
+          }
+
         // return the updated vendor
-        res.status(200).json({
+        } else res.status(200).json({
           ok: true,
           vendor: vendor
         })
