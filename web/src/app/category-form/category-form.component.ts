@@ -85,7 +85,7 @@ export class CategoryFormComponent extends MzBaseModal {
   }
 
   updateCategory(p) {
-    this.store.updateCategory(p, this.categoryForm.value)
+    this.store.updateCategory(p, this.categoryForm.value, this.file)
       .then(category => {
         if (!category) {
           Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
