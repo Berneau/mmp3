@@ -15,6 +15,7 @@ module.exports = function(router) {
    * @apiParam {String} name The name of the category
    * @apiParam {String} typeUid The uid of the type (e.g. vegetables)
    * @apiParam {String} [imageUrl] Url to the image of the category
+   * @apiParam {String} [imageKey] Key of the image
    *
    * @apiSuccess {Object} category The created category
  */
@@ -57,6 +58,7 @@ module.exports = function(router) {
      * @apiParam {String} name The name of the category
      * @apiParam {String} typeUid The uid of the type (e.g. vegetables)
      * @apiParam {String} [imageUrl] Url to the image of the category
+     * @apiParam {String} [imageKey] Key of the image
      *
      * @apiSuccess {Object} category The updated category
     */
