@@ -6,4 +6,5 @@ export class Postit {
   location?: string
   vendorId?: string
   imageUrl?: string
+  imageKey?: string
 }

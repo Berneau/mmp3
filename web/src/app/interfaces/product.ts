@@ -10,4 +10,5 @@ export class Product {
     toMonth: string
   }
   imageUrl?: string
+  imageKey?: string
 }

@@ -57,6 +57,7 @@ import { PostitService } from './services/postit.service';
 import { TypeService } from './services/type.service';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
+import { UploadService } from './services/upload.service';
 
 import { PostitConfirmedPipe } from './pipes/postit-confirmed.pipe';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
@@ -165,7 +166,8 @@ const appRoutes: Routes = [
     PostitService,
     TypeService,
     SearchService,
-    UserService
+    UserService,
+    UploadService
   ],
   bootstrap: [AppComponent]
 })

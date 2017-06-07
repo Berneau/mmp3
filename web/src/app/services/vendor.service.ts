@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { ApiEndpoint } from './../app.config'
 
+import { UploadService } from './../services/upload.service'
+
 import { Vendor } from './../interfaces/vendor'
 import { Product } from './../interfaces/product'
 import { Postit } from './../interfaces/postit'
@@ -15,7 +17,7 @@ export class VendorService {
     'Content-Type': 'application/json'
   })
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private uploadStore: UploadService) { }
 
   getVendors(): Promise<any> {
     let url = `${this.apiEndpoint}/vendors`
@@ -41,7 +43,25 @@ export class VendorService {
       .catch(this.handleError)
   }
 
-  addVendor(form) {
+  addVendor(form, file, farmFile) {
+    return this.uploadStore.fileUpload(file, 'vendor/profileImage')
+      .then((res: string) => {
+        return this.uploadStore.fileUpload(farmFile, 'vendor/farmImage')
+        .then((farmRes: string) => {
+          return [farmRes, res]
+        })
+      })
+      .then(([farmRes, res]) => {
+        return this.addVendorHelper(res, farmRes, form)
+          .then((vendor) => {
+            return vendor as Vendor
+          })
+      })
+      .catch(this.handleError)
+  }
+
+  addVendorHelper(key, farmKey, form) {
+    console.log(key, farmKey, form)
     let url = `${this.apiEndpoint}/vendors`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -54,8 +74,10 @@ export class VendorService {
       userUid: form.userUid,
       email: form.email,
       description: form.description,
-      imageUrl: form.imageUrl ? form.imageUrl : 'vendor.png',
-      farmImageUrl: form.farmImageUrl ? form.farmImageUrl : 'farm.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_vendor.png',
+      imageKey: key,
+      farmImageUrl: farmKey ? `https://lungau.s3.eu-central-1.amazonaws.com/${farmKey}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_farm.png',
+      farmImageKey: farmKey,
       subName: form.subName,
       website: form.website,
       tel: form.tel,
