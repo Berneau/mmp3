@@ -97,7 +97,7 @@ export class ProductFormComponent extends MzBaseModal {
   }
 
   updateProduct(p) {
-    this.store.updateProduct(this.vendor, p, this.productForm.value)
+    this.store.updateProduct(this.vendor, p, this.productForm.value, this.file)
       .then(product => {
         if (!product) {
           Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
