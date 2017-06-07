@@ -44,6 +44,6 @@ module.exports = function(router) {
     })
 
     // return image originalname
-    return res.status(200).send(req.file.location)
+    return res.status(200).send(req.file.key)
   })
 }
