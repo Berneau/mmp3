@@ -3,6 +3,7 @@ var Product = require('../../models/product.model')
 var User = require('../../models/user.model')
 var vendorIsValid = require('../../helpers/helpers').vendorIsValid
 var vendorFactory = require('../../helpers/helpers').vendorFactory
+var deleteImages = require('../../helpers/helpers').deleteImages
 
 module.exports = function(router) {
 
@@ -171,6 +172,17 @@ module.exports = function(router) {
             err: err.message
           })
 
+          // set imageKey before vendor is deleted
+          var params = {
+            Bucket: 'lungau',
+            Delete: {
+              Objects: [
+                { Key: vendor.imageKey },
+                { Key: vendor.farmImageKey }
+              ]
+            }
+          }
+
           // remove the vendor
           Vendor.remove({ _id: req.params.id }, function(err, removed) {
 
@@ -180,10 +192,25 @@ module.exports = function(router) {
               err: err.message
             })
 
-            // successfully deleted
-            res.status(200).json({
+            if (!params.Delete.Objects[0].Key && !params.Delete.Objects[1].Key) return res.status(200).json({
               ok: true,
-              message: 'Successfully deleted vendor and associated user and products'
+              message: 'Removed vendor, no images found tho'
+            })
+
+            deleteImages(params, function(err) {
+
+              // error deleting image
+              if (err) return res.status(200).json({
+                ok: true,
+                message: 'Removed category, but error deleting image'
+              })
+
+              // successfully deleted
+              res.status(200).json({
+                ok: true,
+                message: 'Successfully deleted vendors and associated user, products and images'
+              })
+
             })
 
           })

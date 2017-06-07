@@ -150,7 +150,6 @@ module.exports = function(router) {
           Key: category.imageKey
         }
 
-
         // category is not in use by any products -> delete
         Category.remove({ _id: req.params.id }, function(err, message) {
 

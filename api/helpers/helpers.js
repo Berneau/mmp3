@@ -145,5 +145,18 @@ module.exports = {
     s3.deleteObject(params, function(err, data) {
       cb(err)
     })
+  },
+  deleteImages: function(params, cb) {
+
+    console.log(params)
+
+    // setup aws and s3
+    aws.config.loadFromPath('./s3Config.json')
+    var s3 = new aws.S3()
+
+    s3.deleteObjects(params, function(err, data) {
+      console.log(err)
+      cb(err)
+    })
   }
 }
