@@ -21,6 +21,7 @@ module.exports = {
     product.availableAt.toPeriod = data.availableAt ? data.availableAt.toPeriod : undefined
     product.availableAt.toMonth = data.availableAt ? data.availableAt.toMonth : undefined
     product.imageUrl = data.imageUrl
+    product.imageKey = data.imageKey
     return product
   },
   vendorIsValid: function (vendor) {
@@ -35,7 +36,9 @@ module.exports = {
     vendor.email = data.email
     vendor.description = data.description
     vendor.imageUrl = data.imageUrl
+    vendor.imageKey = data.imageKey
     vendor.farmImageUrl = data.farmImageUrl
+    vendor.farmImageKey = data.farmImageKey
     vendor.subName = data.subName
     vendor.website = data.website
     vendor.tel = data.tel
@@ -92,6 +95,7 @@ module.exports = {
     postit.location = data.location
     postit.vendorId = data.vendorId
     postit.imageUrl = data.imageUrl
+    postit.imageKey = data.imageKey
     return postit
   },
   userIsValid: function (user) {
