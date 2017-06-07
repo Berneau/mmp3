@@ -118,27 +118,32 @@ let type5 = new Type({
 let category1 = new Category({
   name: 'Butter',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780940339'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780940339',
+  imageKey: '1496780940339'
 })
 let category2 = new Category({
   name: 'Radieschen',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780915742'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780915742',
+  imageKey: '1496780915742'
 })
 let category3 = new Category({
   name: 'Kirschen',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780948873'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780948873',
+  imageKey: '1496780948873'
 })
 let category4 = new Category({
   name: 'Karotten',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780974561'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780974561',
+  imageKey: '1496780974561'
 })
 let category5 = new Category({
   name: 'Eier',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780960878'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780960878',
+  imageKey: '1496780960878'
 })
 let product1 = new Product({
   name: 'Käuterbutter',

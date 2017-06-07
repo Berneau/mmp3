@@ -1,3 +1,5 @@
+var aws = require('aws-sdk')
+
 module.exports = {
   productIsValid: function (product) {
     if (!product.name ||
@@ -133,5 +135,15 @@ module.exports = {
       result.push(noDupes[item])
     }
     return result
+  },
+  deleteImage: function(params, cb) {
+
+    // setup aws and s3
+    aws.config.loadFromPath('./s3Config.json')
+    var s3 = new aws.S3()
+
+    s3.deleteObject(params, function(err, data) {
+      cb(err)
+    })
   }
 }

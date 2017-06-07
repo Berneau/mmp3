@@ -2,6 +2,7 @@ var Category = require('../../models/category.model')
 var Product = require('../../models/product.model')
 var categoryIsValid = require('../../helpers/helpers').categoryIsValid
 var categoryFactory = require('../../helpers/helpers').categoryFactory
+var deleteImage = require('../../helpers/helpers').deleteImage
 
 module.exports = function(router) {
 
@@ -143,8 +144,15 @@ module.exports = function(router) {
           message: 'Category is in use by at least one product - not deleted'
         })
 
+        // set imageKey before category is deleted
+        var params = {
+          Bucket: 'lungau',
+          Key: category.imageKey
+        }
+
+
         // category is not in use by any products -> delete
-        Category.remove({ _id: req.params.id }, function(err, category) {
+        Category.remove({ _id: req.params.id }, function(err, message) {
 
           // internal server error
           if (err) return res.status(500).json({
@@ -152,10 +160,25 @@ module.exports = function(router) {
             err: err.message
           })
 
-          // successfully deleted
-          res.status(200).json({
+          if (!params.Key) return res.status(200).json({
             ok: true,
-            message: 'Successfully deleted'
+            message: 'Removed category, no image found tho'
+          })
+
+          deleteImage(params, function(err) {
+
+            // error deleting image
+            if (err) return res.status(200).json({
+              ok: true,
+              message: 'Removed category, but error deleting image'
+            })
+
+            // successfully deleted
+            res.status(200).json({
+              ok: true,
+              message: 'Successfully deleted category and image'
+            })
+
           })
 
         })
