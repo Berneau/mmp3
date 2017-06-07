@@ -11,6 +11,7 @@ export class CategoryService {
 
   categories: Category[]
   categoryProducts: Product[]
+  category: Category
   AWSEndpoint: String
   private apiEndpoint = ApiEndpoint
 
@@ -41,11 +42,7 @@ export class CategoryService {
 
   addCategory(form, file) {
     let fileUrl = `${this.apiEndpoint}/upload`
-    let url = `${this.apiEndpoint}/categories`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
-    let authHeaders = new Headers({
-      'Content-Type': 'application/json', 'x-access-token': token
-    })
 
     return new Promise((resolve, reject) => {
       var formData: FormData = new FormData()
@@ -61,27 +58,38 @@ export class CategoryService {
       }
       xhr.open("POST", fileUrl, true)
       xhr.setRequestHeader('x-amz-meta-fieldName', 'category-file');
-      xhr.setRequestHeader('x-amz-acl', 'public-read');
       xhr.setRequestHeader('x-access-token', token);
       xhr.send(formData)
     })
-      .then( (res: string) => {
-
-        let c = {
-          name: form.value.name,
-          typeUid: form.value.typeUid,
-          imageUrl: res ? `https://lungau.s3.eu-central-1.amazonaws.com/${res}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
-          imageKey: res
-        }
-
-        this.http
-          .post(url, JSON.stringify(c), { headers: authHeaders })
-          .toPromise()
-          .then((res: Response) => {
-            this.getCategories()
-            return res.json().category as Category
+      .then((res: string) => {
+        return this.addCategoryHelper(res, form)
+          .then((category) => {
+            return category as Category
           })
-          .catch(this.handleError)
+      })
+      .catch(this.handleError)
+  }
+
+  addCategoryHelper(key, form) {
+    let url = `${this.apiEndpoint}/categories`
+    let token = JSON.parse(localStorage.getItem('currentUser')).token
+    let authHeaders = new Headers({
+      'Content-Type': 'application/json', 'x-access-token': token
+    })
+
+    let c = {
+      name: form.value.name,
+      typeUid: form.value.typeUid,
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
+      imageKey: key
+    }
+
+    return this.http
+      .post(url, JSON.stringify(c), { headers: authHeaders })
+      .toPromise()
+      .then((res: Response) => {
+        this.getCategories()
+        return res.json().category
       })
       .catch(this.handleError)
   }
@@ -120,7 +128,7 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: form.imageUrl ? form.imageUrl : '',
+      imageUrl: form.imageUrl ? form.imageUrl : category.imageUrl ? category.imageUrl : '',
       imageKey: form.imageKey
     }
 
