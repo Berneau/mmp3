@@ -117,7 +117,24 @@ export class VendorService {
       .catch(this.handleError)
   }
 
-  updateVendor(vendor, form) {
+  updateVendor(vendor, form, file, farmFile) {
+    return this.uploadStore.fileUpload(file, 'vendor/profileImage')
+      .then((res: string) => {
+        return this.uploadStore.fileUpload(farmFile, 'vendor/farmImage')
+        .then((farmRes: string) => {
+          return [farmRes, res]
+        })
+      })
+      .then(([farmRes, res]) => {
+        return this.updateVendorHelper(vendor, form, res, farmRes)
+          .then((vendor) => {
+            return vendor as Vendor
+          })
+      })
+      .catch(this.handleError)
+  }
+
+  updateVendorHelper(vendor, form, key, farmKey) {
     let url = `${this.apiEndpoint}/vendors/${vendor._id}`
     let token = JSON.parse(localStorage.getItem('currentUser')).token
     let authHeaders = new Headers({
@@ -129,8 +146,10 @@ export class VendorService {
       userUid: vendor.userUid,
       email: vendor.email,
       description: form.description,
-      imageUrl: form.imageUrl ? form.imageUrl : 'vendor.png',
-      farmImageUrl: form.farmImageUrl ? form.farmImageUrl : 'farm.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_vendor.png',
+      imageKey: key ? key : form.imageKey ? form.imageKey : '',
+      farmImageUrl: farmKey ? `https://lungau.s3.eu-central-1.amazonaws.com/${farmKey}` : form.farmImageUrl ? form.farmImageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_farm.png',
+      farmImageKey: farmKey ? farmKey : form.farmImageKey ? form.farmImageKey : '',
       subName: form.subName,
       tel: form.tel,
       website: form.website,

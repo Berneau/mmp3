@@ -125,7 +125,7 @@ export class VendorFormComponent extends MzBaseModal {
   }
 
   updateVendor(v) {
-    this.store.updateVendor(v, this.vendorForm.value)
+    this.store.updateVendor(v, this.vendorForm.value, this.file, this.farmFile)
       .then(vendor => {
         if (!vendor) {
           Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
