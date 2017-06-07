@@ -120,7 +120,8 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: form.imageUrl ? form.imageUrl : 'category.png'
+      imageUrl: form.imageUrl ? form.imageUrl : '',
+      imageKey: form.imageKey
     }
 
     return this.http
