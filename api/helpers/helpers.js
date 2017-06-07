@@ -55,6 +55,7 @@ module.exports = {
     category.name = data.name
     category.typeUid = data.typeUid
     category.imageUrl = data.imageUrl
+    category.imageKey = data.imageKey
     return category
   },
   typeIsValid: function (type) {
