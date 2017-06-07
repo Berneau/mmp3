@@ -37,14 +37,16 @@ export class CategoryFormComponent extends MzBaseModal {
       this.categoryForm = this.fb.group({
         name: [this.category.name, [Validators.required]],
         typeUid: [this.category.typeUid, [Validators.required]],
-        imageUrl: this.category.imageUrl
+        imageUrl: this.category.imageUrl,
+        imageKey: this.category.imageKey
       });
     }
     else {
       this.categoryForm = this.fb.group({
         name: ['', [Validators.required]],
         typeUid: ['', [Validators.required]],
-        imageUrl: ''
+        imageUrl: '',
+        imageKey: ''
       });
     }
   }
