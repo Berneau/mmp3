@@ -8,6 +8,24 @@
     box-sizing: border-box;
     width: 49%;
     text-align: center;
+    padding: 0 10px;
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      overflow: hidden;
+      border-radius: 50%;
+
+      img {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+    }
 
     h6 {
       font-family: @secondary-font;

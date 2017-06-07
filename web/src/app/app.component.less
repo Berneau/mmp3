@@ -32,7 +32,19 @@ body {
       .card {
         .card-image {
           max-height: 258px;
+          position: relative;
+          width: 100%;
+          padding-top: 100%;
           overflow: hidden;
+
+          img {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+          }
         }
       }
 
