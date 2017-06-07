@@ -7,7 +7,8 @@ var PostitSchema = new Schema({
   description: String,
   location: String,
   vendorId: String,
-  imageUrl: String
+  imageUrl: String,
+  imageKey: String
 })
 
 module.exports = mongoose.model('Postit', PostitSchema)

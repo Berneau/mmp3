@@ -13,7 +13,8 @@ var ProductSchema = new Schema({
     toPeriod: { type: String, required: true },
     toMonth: { type: String, required: true }
   },
-  imageUrl: String
+  imageUrl: String,
+  imageKey: String
 })
 
 module.exports = mongoose.model('Product', ProductSchema)
