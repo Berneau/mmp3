@@ -3,7 +3,7 @@
     <li *ngFor="let postit of (store.postits | postitConfirmedPipe: confirmed)" class="col s12 m4 l3">
       <div class="card" (click)="selectPostit(postit)">
         <div class="card-image" *ngIf="postit.imageUrl">
-          <img class="activator" src="assets/images/{{postit.imageUrl}}">
+          <img class="activator" src="{{postit.imageUrl}}">
         </div>
         <div class="card-content">
           <div class="postit-location">

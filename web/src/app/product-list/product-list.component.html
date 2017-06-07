@@ -4,7 +4,7 @@
       <li *ngFor="let product of vendorProducts" class="col s12 m4 l3">
         <div class="card">
           <div class="card-image" *ngIf="product.imageUrl">
-            <img class="activator" src="assets/images/{{product.imageUrl}}">
+            <img class="activator" src="{{product.imageUrl}}">
           </div>
           <div class="card-content">
             <h3 class="card-title truncate">{{product.name}}</h3>

@@ -70,7 +70,8 @@ export class CategoryService {
         let c = {
           name: form.value.name,
           typeUid: form.value.typeUid,
-          imageUrl: res
+          imageUrl: res ? `https://lungau.s3.eu-central-1.amazonaws.com/${res}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
+          imageKey: res
         }
 
         this.http
