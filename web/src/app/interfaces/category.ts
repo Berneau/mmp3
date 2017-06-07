@@ -3,4 +3,5 @@ export interface Category {
   name: string
   typeUid: string
   imageUrl?: string
+  imageKey?: string
 }
