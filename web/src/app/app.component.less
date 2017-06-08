@@ -12,6 +12,28 @@
   height: 100vh;
 }
 
+a {
+  i.material-icons {
+    cursor: pointer;
+  }
+}
+
+.image-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding-top: 100%;
+
+  img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+}
+
 body {
   background-color: @background-color;
   height: 100%;
@@ -31,7 +53,6 @@ body {
 
       .card {
         .card-image {
-          max-height: 258px;
           position: relative;
           width: 100%;
           padding-top: 100%;
@@ -292,6 +313,7 @@ p {
     font-size: 11px;
     color: @orange-color;
     text-align: right;
+    cursor: pointer;
 
     i {
       font-size: 15px;

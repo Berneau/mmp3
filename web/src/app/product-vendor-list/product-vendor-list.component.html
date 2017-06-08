@@ -1,27 +1,25 @@
 <div class="row product-vendor-list">
-  <div class="container">
-    <div class="row" *ngIf="categoryProducts">
-      <ul>
-        <li *ngFor="let product of categoryProducts" class="col s12 m4 l3">
-          <div class="card">
-            <div class="card-image" *ngIf="product.imageUrl">
-              <img class="activator" src="{{product.imageUrl}}">
-            </div>
-            <div class="card-content">
-              <p class="product-available truncate" *ngIf="product.availableAt.fromPeriod && product.availableAt.fromMonth && product.availableAt.toPeriod && product.availableAt.toMonth">
-                {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
-              </p>
-              <p class="product-name truncate" *ngIf="product.name">{{product.name}}</p>
-              <h3 class="card-title truncate" *ngIf="product.vendor.name">{{product.vendor.name}}</h3>
-              <p class="further-link" [routerLink]="['/produzenten', product.vendor._id]" *ngIf="product.vendor._id">
-                zum Produzenten
-                <i class="material-icons prefix">keyboard_arrow_right</i>
-              </p>
-            </div>
+  <div class="row" *ngIf="categoryProducts">
+    <ul>
+      <li *ngFor="let product of categoryProducts" class="col s12 m4 l3">
+        <div class="card">
+          <div class="card-image" *ngIf="product.imageUrl">
+            <img class="activator" src="{{product.imageUrl}}">
           </div>
-        </li>
-      </ul>
-    </div>
+          <div class="card-content">
+            <p class="product-available truncate" *ngIf="product.availableAt.fromPeriod && product.availableAt.fromMonth && product.availableAt.toPeriod && product.availableAt.toMonth">
+              {{product.availableAt.fromPeriod}} {{product.availableAt.fromMonth}} - {{product.availableAt.toPeriod}} {{product.availableAt.toMonth}}
+            </p>
+            <p class="product-name truncate" *ngIf="product.name">{{product.name}}</p>
+            <h3 class="card-title truncate" *ngIf="product.vendor.name">{{product.vendor.name}}</h3>
+            <p class="further-link" [routerLink]="['/produzenten', product.vendor._id]" *ngIf="product.vendor._id">
+              zum Produzenten
+              <i class="material-icons prefix">keyboard_arrow_right</i>
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
   <div class="row" *ngIf="!categoryProducts">
     <p class="no-items-message">Derzeit gibt es leider keine Produzenten die aktuell Produkte in dieser Kategorie anbieten.</p>
