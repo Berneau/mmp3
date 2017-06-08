@@ -94,6 +94,15 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
+      // image has been changed
+      var params
+      if (req.body.imageKey != product.imageKey) {
+        params = {
+          Bucket: 'lungau',
+          Key: product.imageKey
+        }
+      }
+
       product = productFactory(req.body, product)
 
       product.save(function(err) {
@@ -104,8 +113,27 @@ module.exports = function(router) {
           err: err.message
         })
 
+        // old image has to be deleted
+        if (params) {
+
+          deleteImage(params, function(err) {
+
+            // error deleting image
+            if (err) return res.status(200).json({
+              ok: true,
+              message: 'Updated product, but error deleting old image'
+            })
+
+            // return the updated product
+            res.status(200).json({
+              ok: true,
+              product: product
+            })
+
+          })
+
         // return the updated product
-        res.status(200).json({
+        } else res.status(200).json({
           ok: true,
           product: product
         })

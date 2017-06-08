@@ -1,6 +1,7 @@
 var Postit = require('../../models/postit.model')
 var postitIsValid = require('../../helpers/helpers').postitIsValid
 var postitFactory = require('../../helpers/helpers').postitFactory
+var deleteImage = require('../../helpers/helpers').deleteImage
 
 module.exports = function(router) {
 
@@ -42,6 +43,15 @@ module.exports = function(router) {
         message: 'Missing fields'
       })
 
+      // image has been changed
+      var params
+      if (req.body.imageKey != postit.imageKey) {
+        params = {
+          Bucket: 'lungau',
+          Key: postit.imageKey
+        }
+      }
+
       postit = postitFactory(req.body, postit)
 
       postit.save(function(err) {
@@ -52,8 +62,27 @@ module.exports = function(router) {
           err: err.message
         })
 
+        // old image has to be deleted
+        if (params) {
+
+          deleteImage(params, function(err) {
+
+            // error deleting image
+            if (err) return res.status(200).json({
+              ok: true,
+              message: 'Updated postit, but error deleting old image'
+            })
+
+            // return the updated postit
+            res.status(200).json({
+              ok: true,
+              postit: postit
+            })
+
+          })
+
         // return the updated postit
-        res.status(200).json({
+        } else res.status(200).json({
           ok: true,
           postit: postit
         })
@@ -88,6 +117,12 @@ module.exports = function(router) {
         message: 'Postit not found'
       })
 
+      // set imageKey before postit is deleted
+      var params = {
+        Bucket: 'lungau',
+        Key: postit.imageKey
+      }
+
       Postit.remove({ _id: req.params.id }, function(err, postit) {
 
         // internal server error
@@ -96,10 +131,25 @@ module.exports = function(router) {
           err: err.message
         })
 
-        // successfully deleted
-        res.status(200).json({
+        if (!params.Key) return res.status(200).json({
           ok: true,
-          message: 'Successfully deleted'
+          message: 'Removed postit, no image found tho'
+        })
+
+        deleteImage(params, function(err) {
+
+          // error deleting image
+          if (err) return res.status(200).json({
+            ok: true,
+            message: 'Removed postit, but error deleting image'
+          })
+
+          // successfully deleted
+          res.status(200).json({
+            ok: true,
+            message: 'Successfully deleted postit and image'
+          })
+
         })
 
       })

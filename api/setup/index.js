@@ -49,8 +49,10 @@ let vendor1 = new Vendor({
   userUid: '',
   email: 'elfriede@hof.at',
   description: 'Sonniges Platzal',
-  imageUrl: 'vendor_female1.png',
-  farmImageUrl: 'farm1.png',
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/vendors/vendor_1.jpg',
+  imageKey: 'vendors/vendor_1.jpg',
+  farmImageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/farms/farm_1.jpg',
+  farmImageKey: 'farms/farm_1.jpg',
   subName: 'Hacklhof',
   website: 'abc.com',
   tel: 0815123123,
@@ -67,8 +69,10 @@ let vendor2 = new Vendor({
   userUid: '',
   email: 'bertl@hof.at',
   description: 'Direkt am Fluß',
-  imageUrl: 'vendor_male.png',
-  farmImageUrl: 'farm2.png',
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/vendors/vendor_2.jpg',
+  imageKey: 'vendors/vendor_2.jpg',
+  farmImageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/farms/farm_2.jpg',
+  farmImageKey: 'farms/farm_2.jpg',
   subName: 'Schmittnhüttn',
   website: 'abc.com',
   tel: 0815123123,
@@ -85,8 +89,10 @@ let vendor3 = new Vendor({
   userUid: '',
   email: 'franziska@hof.at',
   description: '',
-  imageUrl: 'vendor_female2.png',
-  farmImageUrl: 'farm3.png',
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/vendors/vendor_3.jpg',
+  imageKey: 'vendors/vendor_3.jpg',
+  farmImageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/farms/farm_3.jpg',
+  farmImageKey: 'farms/farm_3.jpg',
   subName: 'Müller-Hof',
   website: 'abc.com',
   tel: 0815123123,
@@ -118,27 +124,32 @@ let type5 = new Type({
 let category1 = new Category({
   name: 'Butter',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780940339'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/categories/category_butter.jpg',
+  imageKey: 'categories/category_butter.jpg'
 })
 let category2 = new Category({
   name: 'Radieschen',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780915742'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/categories/category_radish.jpg',
+  imageKey: 'categories/category_radish.jpg'
 })
 let category3 = new Category({
   name: 'Kirschen',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780948873'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/categories/categoriy_cherry.jpg',
+  imageKey: 'categories/categoriy_cherry.jpg'
 })
 let category4 = new Category({
   name: 'Karotten',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780974561'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/categories/category_carrots.jpg',
+  imageKey: 'categories/category_carrots.jpg'
 })
 let category5 = new Category({
   name: 'Eier',
   typeUid: '',
-  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/1496780960878'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/categories/category_eggs.jpg',
+  imageKey: 'categories/category_eggs.jpg'
 })
 let product1 = new Product({
   name: 'Käuterbutter',
@@ -150,7 +161,8 @@ let product1 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'product_butter.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/products/product_butter.jpg',
+  imageKey: 'products/product_butter.jpg'
 })
 let product2 = new Product({
   name: 'Rote & Gelbe Radieschen',
@@ -162,7 +174,8 @@ let product2 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'product_radish.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/products/product_rasish.jpg',
+  imageKey: 'products/product_rasish.jpg'
 })
 let product3 = new Product({
   name: 'Süße Kirschen',
@@ -174,7 +187,8 @@ let product3 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'product_cherries.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/products/product_cherry.jpg',
+  imageKey: 'products/product_cherry.jpg'
 })
 let product4 = new Product({
   name: 'Wachteleier',
@@ -186,7 +200,8 @@ let product4 = new Product({
     toPeriod: 'Ende',
     toMonth: 'September'
   },
-  imageUrl: 'product_eggs.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/products/product_eggs.jpg',
+  imageKey: 'products/product_eggs.jpg'
 })
 let event1 = new Event({
   name: 'Schranne',
@@ -213,7 +228,8 @@ let postit1 = new Postit({
   confirmed: true,
   description: 'Nur für kurze Zeit!',
   vendorId: '',
-  imageUrl: 'postit_vension.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/postits/postit_vension.png',
+  imageKey: 'postits/postit_vension.png'
 })
 let postit2 = new Postit({
   name: 'Frisches Bauernbrot',
@@ -221,7 +237,8 @@ let postit2 = new Postit({
   description: 'Frisch gebackenes Bauernbrot frisch aus dem Ofen!',
   location: 'Lungau',
   vendorId: '',
-  imageUrl: 'postit_bread.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/postits/postit_bread.jpg',
+  imageKey: 'postits/postit_bread.jpg'
 })
 let postit3 = new Postit({
   name: 'Frische Gartenkräuter',
@@ -229,7 +246,8 @@ let postit3 = new Postit({
   description: 'Nur solange der Vorrat reicht!',
   location: 'Lungau',
   vendorId: '',
-  imageUrl: 'postit_herbs.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/postits/postit_herbs.jpg',
+  imageKey: 'postits/postit_herbs.jpg'
 })
 let postit4 = new Postit({
   name: 'Frischer Kräuteraufstrich',
@@ -237,7 +255,8 @@ let postit4 = new Postit({
   description: 'Maximal 2 Wochen haltbar!',
   location: 'Lungau',
   vendorId: '',
-  imageUrl: 'postit_spread.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/postits/postit_spread.jpg',
+  imageKey: 'postits/postit_spread.jpg'
 })
 let postit5 = new Postit({
   name: 'Köstliche Teemischung',
@@ -245,7 +264,8 @@ let postit5 = new Postit({
   description: 'Individuell zusammengestellte Teemischungen zum aufbrühen!',
   location: '',
   vendorId: '',
-  imageUrl: 'postit_tea.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/postits/postit_tea.jpg',
+  imageKey: 'postits/postit_tea.jpg'
 })
 let postit6 = new Postit({
   name: 'Feiner Traubensaft',
@@ -253,7 +273,8 @@ let postit6 = new Postit({
   description: 'Individuell zusammengestellte Teemischungen zum aufbrühen!',
   location: '',
   vendorId: '',
-  imageUrl: 'postit_juice.png'
+  imageUrl: 'https://lungau.s3.eu-central-1.amazonaws.com/postits/postit_juice.jpg',
+  imageKey: 'postits/postit_juice.jpg'
 })
 
 

@@ -1,5 +1,6 @@
 var Product = require('../../models/product.model')
 var productIsValid = require('../../helpers/helpers').productIsValid
+var deleteImage = require('../../helpers/helpers').deleteImage
 
 module.exports = function(router) {
 
@@ -28,6 +29,12 @@ module.exports = function(router) {
         message: 'Product not found'
       })
 
+      // set imageKey before product is deleted
+      var params = {
+        Bucket: 'lungau',
+        Key: product.imageKey
+      }
+
       Product.remove({ _id: req.params.id }, function(err, product) {
 
         // internal server error
@@ -36,10 +43,25 @@ module.exports = function(router) {
           err: err.message
         })
 
-        // successfully deleted
-        res.status(200).json({
+        if (!params.Key) return res.status(200).json({
           ok: true,
-          message: 'Successfully deleted'
+          message: 'Removed product, no image found tho'
+        })
+
+        deleteImage(params, function(err) {
+
+          // error deleting image
+          if (err) return res.status(200).json({
+            ok: true,
+            message: 'Removed product, but error deleting image'
+          })
+
+          // successfully deleted
+          res.status(200).json({
+            ok: true,
+            message: 'Successfully deleted product and image'
+          })
+
         })
 
       })
