@@ -8,7 +8,7 @@
   <mz-modal-content>
     <div>
       <form materialize [formGroup]="postitForm">
-        <div class="row">
+        <div class="row" *ngIf="LoginStore.isAdmin()">
           <h6>Bild</h6>
           <div class="input-field col s12 form-group">
             <div class="file-field input-field">

@@ -3,6 +3,7 @@ import { Headers, Http, Response } from '@angular/http';
 import { ApiEndpoint } from './../app.config'
 
 import { UploadService } from './../services/upload.service'
+import { LoginService } from './../services/login.service'
 
 import { Postit } from './../interfaces/postit'
 
@@ -13,7 +14,7 @@ export class PostitService {
   private apiEndpoint = ApiEndpoint
   private headers = new Headers({ 'Content-Type': 'application/json' })
 
-  constructor(private http: Http, private uploadStore: UploadService) { }
+  constructor(private http: Http, private uploadStore: UploadService, private LoginStore: LoginService) { }
 
   getPostits(): Promise<any> {
     let url = `${this.apiEndpoint}/postits`
@@ -59,14 +60,22 @@ export class PostitService {
   }
 
   addPostit(vendor, form, file) {
-    return this.uploadStore.fileUpload(file, 'postit')
-      .then((res: string) => {
-        return this.addPostitHelper(res, form, vendor)
-          .then((postit) => {
-            return postit as Postit
-          })
-      })
-      .catch(this.handleError)
+    if (this.LoginStore.isAdmin()) {
+      return this.uploadStore.fileUpload(file, 'postit')
+        .then((res: string) => {
+          return this.addPostitHelper(res, form, vendor)
+            .then((postit) => {
+              return postit as Postit
+            })
+        })
+        .catch(this.handleError)
+    }
+    else {
+      return this.addPostitHelper(null, form, vendor)
+        .then((postit) => {
+          return postit as Postit
+        })
+    }
   }
 
   addPostitHelper(key, form, vendor) {
@@ -82,7 +91,7 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_postit.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_postit.png',
       imageKey: key
     }
 
@@ -137,7 +146,7 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_postit.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_postit.png',
       imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 

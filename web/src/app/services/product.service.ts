@@ -3,6 +3,7 @@ import { Headers, Http, Response } from '@angular/http';
 import { ApiEndpoint } from './../app.config';
 
 import { UploadService } from './../services/upload.service'
+import { LoginService } from './../services/login.service'
 
 import { Product } from './../interfaces/product'
 import { Vendor } from './../interfaces/vendor'
@@ -12,7 +13,7 @@ export class ProductService {
 
   private apiEndpoint = ApiEndpoint
 
-  constructor(private http: Http,  private uploadStore: UploadService) { }
+  constructor(private http: Http, private uploadStore: UploadService, private LoginStore: LoginService) { }
 
   getProduct(id): Promise<any> {
     let url = `${this.apiEndpoint}/products/${id}`
@@ -26,14 +27,22 @@ export class ProductService {
       .catch(this.handleError)
   }
   addProduct(vendor, form, file) {
-    return this.uploadStore.fileUpload(file, 'product')
-      .then((res: string) => {
-        return this.addProductHelper(res, form, vendor)
-          .then((product) => {
-            return product as Product
-          })
-      })
-      .catch(this.handleError)
+    if (this.LoginStore.isAdmin()) {
+      return this.uploadStore.fileUpload(file, 'product')
+        .then((res: string) => {
+          return this.addProductHelper(res, form, vendor)
+            .then((product) => {
+              return product as Product
+            })
+        })
+        .catch(this.handleError)
+    }
+    else {
+      return this.addProductHelper(null, form, vendor)
+        .then((product) => {
+          return product as Product
+        })
+    }
   }
 
   addProductHelper(key, form, vendor) {
@@ -53,7 +62,7 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_product.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_product.png',
       imageKey: key
     }
 
@@ -111,7 +120,7 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_product.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_product.png',
       imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 

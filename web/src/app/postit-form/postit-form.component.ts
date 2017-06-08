@@ -6,6 +6,7 @@ import { Postit } from './../interfaces/postit'
 import { Vendor } from './../interfaces/vendor'
 
 import { PostitService } from './../services/postit.service'
+import { LoginService } from './../services/login.service'
 
 @Component({
   selector: 'postit-form',
@@ -19,7 +20,7 @@ export class PostitFormComponent extends MzBaseModal {
   vendor: Vendor
   file: File
 
-  constructor(private store: PostitService, private fb: FormBuilder) {
+  constructor(private store: PostitService, private fb: FormBuilder, private LoginStore: LoginService) {
     super()
   }
 

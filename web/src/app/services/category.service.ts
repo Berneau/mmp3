@@ -62,7 +62,7 @@ export class CategoryService {
     let c = {
       name: form.value.name,
       typeUid: form.value.typeUid,
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_category.png',
       imageKey: key ? key : ''
     }
 
@@ -120,7 +120,7 @@ export class CategoryService {
     let c = {
       name: form.name,
       typeUid: form.typeUid,
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummy_category.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_category.png',
       imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 

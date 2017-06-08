@@ -8,6 +8,7 @@ import { Category } from './../interfaces/category'
 
 import { CategoryService } from './../services/category.service'
 import { ProductService } from './../services/product.service'
+import { LoginService } from './../services/login.service'
 
 @Component({
   selector: 'product-form',
@@ -23,7 +24,7 @@ export class ProductFormComponent extends MzBaseModal {
   @Input() product: Product
   @Input() vendor: Vendor
 
-  constructor(private store: ProductService, private fb: FormBuilder, private CategoryStore: CategoryService) {
+  constructor(private store: ProductService, private fb: FormBuilder, private CategoryStore: CategoryService, private LoginStore: LoginService) {
     super()
   }
 
