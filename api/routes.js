@@ -61,7 +61,6 @@ router.use(function(req, res, next) {
 })
 
 // admin routes
-require('./routes/admin/product.routes')(router)
 require('./routes/admin/user.routes')(router)
 require('./routes/admin/vendor.routes')(router)
 require('./routes/admin/category.routes')(router)

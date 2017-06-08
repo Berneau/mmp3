@@ -93,6 +93,7 @@ export class ProductFormComponent extends MzBaseModal {
           Materialize.toast('Hinzufügen fehlgeschlagen.', 2000)
           return
         }
+        this.store.getVendorProducts(this.vendor._id)
         Materialize.toast('Produkt gespeichert.', 2000)
       })
   }
@@ -104,6 +105,7 @@ export class ProductFormComponent extends MzBaseModal {
           Materialize.toast('Bearbeitung fehlgeschlagen.', 2000)
           return
         }
+        this.store.getVendorProducts(this.vendor._id)
         Materialize.toast('Änderungen gespeichert.', 2000)
       })
   }

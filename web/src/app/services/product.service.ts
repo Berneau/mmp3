@@ -27,7 +27,7 @@ export class ProductService {
       .catch(this.handleError)
   }
   addProduct(vendor, form, file) {
-    if (this.LoginStore.isAdmin()) {
+    if (this.LoginStore.isAdmin() && file) {
       return this.uploadStore.fileUpload(file, 'product')
         .then((res: string) => {
           return this.addProductHelper(res, form, vendor)
@@ -62,7 +62,7 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_product.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_product.jpg',
       imageKey: key
     }
 
@@ -70,7 +70,6 @@ export class ProductService {
       .post(url, JSON.stringify(p), { headers: authHeaders })
       .toPromise()
       .then((res: Response) => {
-        this.getVendorProducts(vendor._id)
         return res.json().product as Product
       })
       .catch(this.handleError)
@@ -93,14 +92,22 @@ export class ProductService {
   }
 
   updateProduct(vendor, product, form, file) {
-    return this.uploadStore.fileUpload(file, 'product')
-      .then((res: string) => {
-        return this.updateProductHelper(vendor, product, form, res)
-          .then((product) => {
-            return product as Product
-          })
-      })
-      .catch(this.handleError)
+    if (this.LoginStore.isAdmin() && file) {
+      return this.uploadStore.fileUpload(file, 'product')
+        .then((res: string) => {
+          return this.updateProductHelper(vendor, product, form, res)
+            .then((product) => {
+              return product as Product
+            })
+        })
+        .catch(this.handleError)
+    }
+    else {
+      return this.updateProductHelper(vendor, product, form, null)
+        .then((product) => {
+          return product as Product
+        })
+    }
   }
 
   updateProductHelper(vendor, product, form, key) {
@@ -120,7 +127,7 @@ export class ProductService {
         toPeriod: form.toPeriod,
         toMonth: form.toMonth
       },
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_product.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_product.jpg',
       imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 

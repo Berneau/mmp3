@@ -60,7 +60,7 @@ export class PostitService {
   }
 
   addPostit(vendor, form, file) {
-    if (this.LoginStore.isAdmin()) {
+    if (this.LoginStore.isAdmin() && file) {
       return this.uploadStore.fileUpload(file, 'postit')
         .then((res: string) => {
           return this.addPostitHelper(res, form, vendor)
@@ -91,7 +91,7 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_postit.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_postit.jpg',
       imageKey: key
     }
 
@@ -123,14 +123,22 @@ export class PostitService {
   }
 
   updatePostit(vendor, postit, form, file) {
-    return this.uploadStore.fileUpload(file, 'postit')
-      .then((res: string) => {
-        return this.updatePostitHelper(vendor, postit, form, res)
-          .then((postit) => {
-            return postit as Postit
-          })
-      })
-      .catch(this.handleError)
+    if (this.LoginStore.isAdmin() && file) {
+      return this.uploadStore.fileUpload(file, 'postit')
+        .then((res: string) => {
+          return this.updatePostitHelper(vendor, postit, form, res)
+            .then((postit) => {
+              return postit as Postit
+            })
+        })
+        .catch(this.handleError)
+    }
+    else {
+      return this.updatePostitHelper(vendor, postit, form, null)
+        .then((postit) => {
+          return postit as Postit
+        })
+    }
   }
 
   updatePostitHelper(vendor, postit, form, key) {
@@ -146,7 +154,7 @@ export class PostitService {
       vendorId: vendor ? vendor._id : null,
       description: form.description,
       location: form.location,
-      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_postit.png',
+      imageUrl: key ? `https://lungau.s3.eu-central-1.amazonaws.com/${key}` : form.imageUrl ? form.imageUrl : 'https://lungau.s3.eu-central-1.amazonaws.com/dummies/dummy_postit.jpg',
       imageKey: key ? key : form.imageKey ? form.imageKey : ''
     }
 
